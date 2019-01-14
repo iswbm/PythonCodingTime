@@ -1,0 +1,336 @@
+7.6 Docker：存储与多主机
+========================
+
+--------------
+
+一、关于存储
+------------
+
+1.1 两种存储方式
+~~~~~~~~~~~~~~~~
+
+根据数据的持久性，可以分为两类
+
+::
+
+   1. 非持久化：Storage Driver
+   存储在镜像层或者容器层
+
+   2. 持久化：Data Volume
+   在 host 上会保留着一份数据。容器再挂载这个文件或者目录。
+
+Storage Driver
+
+::
+
+   Docker支持很多Driver，有 AUFS、Device Mapper、Btrfs、OverlayFS、VFS 和 ZFS。
+
+   Docker 建议使用Docker 默认的Driver，这几个什么区别，还需要了解下。
+   1. ReHat/CentOS 系列，网上说默认使用 Device Mapper，但是我的为什么是OverlayFS，通过 docker info 查看
+   2. Ubuntu ，默认使用 AUFS
+
+
+   （前面在镜像那章已经讨论过）
+   分层结构使镜像和容器的创建、共享以及分发变得非常高效，而这些都要归功于 Docker Storage Driver。正是 Storage Driver 实现了多层数据的堆叠并为用户提供一个单一的合并之后的统一视图。
+
+       - 新数据会直接存放在最上面的容器层。
+       - 修改现有数据会先从镜像层将数据复制到容器层，修改后的数据直接保存在容器层中，镜像层保持不变。
+       - 如果多个层中有命名相同的文件，用户只能看到最上面那层中的文件。
+
+   适用场景
+   适用那些无状态的容器，也就是工具类的容器，无需持久化数据。
+
+Data Volume
+
+::
+
+   Data Volume 也分两种
+   1. bind mount
+       创建时，需要指定挂载源。
+       在创建的时候指定，创建后无法更改。
+       
+   2. docker managed volume
+       创建时，无需指定挂载源，会指定随机命令的文件名作为路径。
+
+1.2 两种Data Volume
+~~~~~~~~~~~~~~~~~~~
+
+**bind mount**
+
+.. code:: shell
+
+   # 创建时需要指定挂载源和挂载点
+   # 如果没挂载源这个路径，会自己创建
+   # 默认是可读可写，还可以指定只读：-v ~/htdocs:/usr/local/apache2/htdocs:ro
+   $ docker run -d -p 80:80 -v ~/htdocs:/usr/local/apache2/htdocs httpd
+   $ echo "update new page" >~/htdocs/index.html
+
+   $ curl 127.0.0.1:80/index.html
+   update new page
+
+   # 删除容器的时候，并不会删除这些文件。
+   # 在容器创建的时候，挂载的路径就已经固定，这限制了容器移植的灵活性
+
+**docker managed volume**
+
+.. code:: shell
+
+   # 无需自己指定挂载源，会自动生成。
+   $ docker run -d -p 8080:80 -v /usr/local/apache2/htdocs httpd
+
+   # 查看mount的源路径，比如我的是/var/lib/docker/volumes/1ab45061435b8ecba1c1d70b877831d003a590797f086442052f467198656be0/_data
+   # 1ab45061435b8ecba1c1d70b877831d003a590797f086442052f467198656be0 是container id，是docker随机生成的。
+   # 在这个路径下，你就可以放你要放的文件，容器里都可以访问到。
+   # 容器里/usr/local/apache2/htdocs 原有文件会被拷贝到volumns
+
+   $ docker inspect <container id> 
+   $ curl 127.0.0.1:8080
+   <html><body><h1>It works!</h1></body></html>
+
+   # 查看 volume 列表，使用bind mount 是没有的
+   $ docker volume ls
+   DRIVER              VOLUME NAME
+   local               1ab45061435b8ecba1c1d70b877831d003a590797f086442052f467198656be0
+
+   # 查询该volume具体信息
+   $ docker volume inspect 1ab45061435b8ecba1c1d70b877831d003a590797f086442052f467198656be0
+
+   [
+       {
+           "CreatedAt": "2017-12-29T18:00:15-05:00",
+           "Driver": "local",
+           "Labels": null,
+           "Mountpoint": "/var/lib/docker/volumes/1ab45061435b8ecba1c1d70b877831d003a590797f086442052f467198656be0/_data",
+           "Name": "1ab45061435b8ecba1c1d70b877831d003a590797f086442052f467198656be0",
+           "Options": {},
+           "Scope": "local"
+       }
+   ]
+
+二者对比 |image0|
+
+相关命令
+
+::
+
+   $ docker inspect <contain id>
+   $ docker volume ls
+   $ docker volume inspect <contain id>
+
+1.3 实现数据的共享
+~~~~~~~~~~~~~~~~~~
+
+根据共享的位置，可以分为两种
+
+::
+
+   1. host
+   2. date-packed volume
+
+**host** 虽然 ``docker managed volume``
+可移植性好，但是在实现多个容器数据共享，就要稍微麻烦点。
+
+由于 ``docker managed volume``
+的volume路径是随机生成的，所以，要实现共享，必须在创建后再把我们的数据拷贝至该文件夹里。
+
+而 ``bind mount``
+就相当方便了，只要多个容器在创建的时候使用同一挂载源就可以了，更方便的还可以使用
+``volume container``
+
+::
+
+   1. 多个容器使用同一挂载源
+   $ docker run -d -p 1001:80 -v ~/htdocs:/usr/local/apache2/htdocs httpd
+   $ docker run -d -p 1002:80 -v ~/htdocs:/usr/local/apache2/htdocs httpd
+   $ docker run -d -p 1003:80 -v ~/htdocs:/usr/local/apache2/htdocs httpd
+
+   echo "new page" >~/htdocs/index.html
+
+   $ curl 127.0.0.1:1001
+   $ curl 127.0.0.1:1002
+   $ curl 127.0.0.1:1003
+
+   2. 使用volume container
+   # 先创建一个容器，当做模板，无需run
+   $ docker create --name vc_date\
+       -v ~/htdocs:/usr/local/apache2/htdocs\
+       -v /other/useful/tools \
+       busybox
+
+   $ docker run --name web1 --volumes-form vc_date httpd
+   $ docker run --name web2 --volumes-form vc_date httpd
+   $ docker run --name web3 --volumes-form vc_date httpd
+
+**date-packed volume** 其原理是将数据打包到镜像中，然后通过 docker
+managed volume 共享。
+
+既然是放到镜像里，那我们就要重新制作一个镜像。Dockerfile如下
+
+::
+
+   FROM busybox:latest
+   ADD htdocs /usr/local/apache2/htdocs
+   VOLUME /usr/local/apache2/htdocs
+
+然后和上面一样，要先制作一个镜像模板。
+
+::
+
+   $ docker build -t datepacked .
+   $ docker create --name vc_date datepacked
+
+然后以这个为模板，创建容器
+
+::
+
+   $ docker run --name web1 --volumes-form vc_date httpd
+   $ docker run --name web2 --volumes-form vc_date httpd
+   $ docker run --name web3 --volumes-form vc_date httpd
+
+1.4 管理volume生命周期
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   1. 创建
+   $ docker run -d -p 80:80 -v /container/dir --name <name> <image>
+   $ docker run -d -p 80:80 -v /host/dir:/container/dir --name <name> <image>
+
+   2. 共享
+   具体步骤看上面
+
+   3. 删除
+   bind mount 是不会删除挂载源的。除非host自己删除
+   docker managed volume 默认不删除volume，除非删除的时候指定 -v 
+
+   $ docker stop <container id>
+   $ docker rm -v <container id>
+
+   4. 备份
+   只需要备份volume路径下的文件即可
+
+   5. 恢复
+   只需将备份的数据拷贝到volume即可
+
+   6. 迁移
+   如果我们想使用更新版本的 Registry，这就涉及到数据迁移。
+   方法是：
+   docker stop 当前 Registry 容器。
+   启动新版本容器并 mount 原有 volume。
+
+   $ docker run -d -p 5000:5000 -v /myregistry:/var/lib/registry registry:latest
+
+二、多主机管理
+--------------
+
+2.1 安装Docker Machine
+~~~~~~~~~~~~~~~~~~~~~~
+
+`Github：Docker Machine <https://github.com/docker/machine>`__
+由于版本更新太快，所以最好按照官网的文档来。 `Install Docker
+Machine <https://docs.docker.com/machine/install-machine/>`__
+
+::
+
+   curl -L https://github.com/docker/machine/releases/download/v0.13.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+   chmod +x /tmp/docker-machine &&
+   sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+
+改用了阿里源
+
+::
+
+   curl -L https://mirrors.aliyun.com/docker-toolbox/linux/machine/0.13.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && 
+   chmod +x /tmp/docker-machine && 
+   sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+
+   chmod +x /usr/local/bin/docker-machine
+
+安装完，检查是否成功
+
+::
+
+   docker-machine version
+   docker-machine ls
+
+安装tab自动补全脚本，放在\ ``/etc/bash_completion.d``\ 目录下
+
+::
+
+   https://github.com/docker/machine/tree/master/contrib/completion/bash
+
+2.2 创建Docker Machine
+~~~~~~~~~~~~~~~~~~~~~~
+
+所以要自动再准备一个host，我这里创建了台虚拟机，IP为192.168.2.54
+并设置了双机互信
+
+::
+
+   mkdir ~/.ssh
+   chmod 700 ~/.ssh
+   cd ~/.ssh
+   # 在节点A上执行
+   ssh-keygen -t rsa
+   cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+   # 在节点B执行
+   ssh-keygen -t rsa
+   cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+   # 然后把上面两个authorized_keys文件的内容合并，并在两个节点都留有一份
+
+创建（创了好多次才成功） 参数可以参考：\ `Docker Machine
+Generic驱动 <https://www.jianshu.com/p/9b3f2407e20f>`__
+
+::
+
+   docker-machine create \
+     --driver generic \
+     --generic-ip-address 192.168.2.54 \
+     --generic-ssh-key ~/.ssh/id_rsa \
+     --generic-ssh-port 57891 \
+     bm-docker-02
+
+|image1|
+
+centos的配置文件路径如下，ubuntu的有所不同
+
+::
+
+   /etc/systemd/system/multi-user.target.wants/docker.service
+
+通过查看进程，左边是用docker-machine安装有docker，和手动安装有所不同
+红框标出的，表示，允许远程连接。 |image2|
+
+2.3 管理Docker Machine
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   # 查看环境变量
+   docker-machine env bm-docker-02
+
+   # 把环境变量为已所用，执行后，docker的所有操作都相当于在bm-docker-02操作的
+   eval $(docker-machine env bm-docker-02)
+   docker ps  # 显示的是bm-docker-02的容器列表
+
+   # 批量更新docker
+   docker-machine upgrade bm-docker-01 bm-docker-02
+
+   # 查看配置
+   docker-machine config bm-docker-02
+
+   # 传输文件
+   docker-machine scp bm-docker-01:/tmp/a bm-docker-02:/tmp/b
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+
+
+.. |image0| image:: https://i.loli.net/2017/12/30/5a473ba8f374f.png
+.. |image1| image:: https://i.loli.net/2018/01/03/5a4ce6eeaff7d.png
+.. |image2| image:: https://i.loli.net/2018/01/03/5a4ce964d3e73.png
+

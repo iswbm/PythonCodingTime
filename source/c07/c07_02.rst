@@ -1,0 +1,764 @@
+7.2 Zabbix 监控部署文档
+=======================
+
+--------------
+
+一、部署 zabbix-server
+----------------------
+
+server 端独立于所有集群之外。
+
+1. proxy的作用和server差不多，但功能较少，主要是减轻server压力。
+2. proxy和server不能在同一节点上，因为不能共用一个数据库。
+
+首先需要一台虚拟机，并配置有公网ip，来做为 ``zabbix-server`` 节点。
+
+1.1 安装MySQL
+~~~~~~~~~~~~~
+
+::
+
+   $ yum -y install mysql mysql-server mysql-devel
+   $ systemctl start mysql
+
+   # 首次登陆，密码为空
+   $ mysql -uroot -p
+
+   # 可以直接修改密码
+   $ mysqladmin -uroot password '123456'
+
+由于监控数据比较多，而且只会越来越多，所以最好指定一个分区为 MySQL
+专用。
+
+.. code:: shell
+
+   # 建立分区 vdb1
+   $ fdisk /dev/vdb
+
+   # 格式化
+   $ mkfs -t xfs /dev/vdb1
+
+   # 查看分区的uuid
+   $ blkid /dev/vdb1
+   /dev/vdb1: UUID="ef289d30-44b4-4b1f-9cae-2f4f11cd9fc5" TYPE="xfs" 
+
+   # 在 /etc/fstab 下添加
+   UUID=ef289d30-44b4-4b1f-9cae-2f4f11cd9fc5 /var/lib/mysql          xfs     defaults        0 0
+
+   # 开始挂载
+   cd /var/lib
+   mkdir mysql-bak
+
+   mv mysql/* mysql-bak/
+   mount -a
+   chown -a
+   chown mysql:mysql mysql/
+   mv mysql-bak/* mysql/
+   rm -rf mysql-bak/
+
+1.2 安装 zabbix-server
+~~~~~~~~~~~~~~~~~~~~~~
+
+一切准备好，就可以开始安装 ``zabbix-server`` 。
+
+::
+
+   rpm -i https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
+   yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent
+
+修改配置
+
+``/etc/zabbix/zabbix_server.conf``
+
+::
+
+
+   DBName=zabbix
+   DBUser=zabbix
+   ListenIP=0.0.0.0
+
+   # 添加
+   DBPassword=<password>
+
+创建数据库
+
+.. code:: shell
+
+   $ mysql -uroot -proot12#$
+   MariaDB [(none)]> create database zabbix character set utf8 collate utf8_bin;
+   MariaDB [(none)]> grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix12#$';
+   MariaDB [(none)]> quit;
+
+   # 导入数据
+   $ cd /usr/share/doc/zabbix-server-mysql-4.0.1/ ;gzip -d create.sql.gz
+   $ mysql -uroot -p<password> zabbix < *.sql
+
+修改完成后，重启服务
+
+::
+
+   systemctl start zabbix-server 
+
+1.3 配置 HTTP 并安装
+~~~~~~~~~~~~~~~~~~~~
+
+配置8080端口，\ ``vim /etc/httpd/conf/httpd.conf``
+
+::
+
+   # 可改可不改，不改就是80
+   Listen 0.0.0.0:8080
+
+修改时区，\ ``/etc/httpd/conf.d/zabbix.conf``
+
+::
+
+   php_value date.timezone Asia/Shanghai
+
+修改完成后，重启 http
+
+::
+
+   systemctl restart httpd
+
+访问：\ ``http://<ip>:8080/zabbix/``\ ，进行界面安装配置。
+
+注意数据库，这里不要选localhost，使用vip，或者使用vip绑定的域名。
+
+用默认密码进行登陆(\ ``Admin``/``zabbix``)。 登陆之后，马上修改密码。
+
+1.4 安装调试工具
+~~~~~~~~~~~~~~~~
+
+::
+
+   yum install zabbix-get -y
+
+   zabbix_get -s 172.20.20.202 -p 10050 -k"net.tcp.service[http]"
+
+二、部署 zabbix-proxy
+---------------------
+
+2.1 安装并创建数据库
+~~~~~~~~~~~~~~~~~~~~
+
+一个集群内，只可以只有一台proxy在工作中，它可以部署在控制节点上，并做高可用，随着vip的浮动而浮动。
+
+由于控制节点上，已经安装了MySQL，所以无需再次安装。
+
+安装 zabbix-proxy
+
+::
+
+   rpm -i https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
+   yum install -y zabbix-proxy zabbix-proxy-mysql
+
+   # 记得删除zabbix-proxy-pgsql
+   yum remove -y zabbix-proxy-pgsql-4.0.1-1.el7.x86_64
+
+创建数据库
+
+.. code:: shell
+
+   $ mysql -uroot -pgp9XDoGNohM7jwlB
+   MariaDB [(none)]> create database zabbix_proxy character set utf8 collate utf8_bin;
+   MariaDB [(none)]> grant all privileges on zabbix_proxy.* to zabbix@172.20.20.201 identified by 'm3O5utXSN^7j';
+   MariaDB [(none)]> grant all privileges on zabbix_proxy.* to zabbix@172.20.20.202 identified by 'm3O5utXSN^7j';
+   MariaDB [(none)]> grant all privileges on zabbix_proxy.* to zabbix@172.20.20.203 identified by 'm3O5utXSN^7j';
+
+   # 导入数据
+   $ cd /usr/share/doc/zabbix-proxy-mysql-4.0.1;gzip -d schema.sql.gz
+   $ mysql -uroot -pgp9XDoGNohM7jwlB zabbix_proxy < schema.sql
+
+   # 这一步可不要：因为proxy没有导入 data.sql，所以需要插入密码：zabbix12#$
+   MariaDB [(none)]>insert into users(userid,alias,surname,passwd,autologin,lang,refresh,type,theme,rows_per_page,name) values(1,"Admin","Administrator","73eb31de7a1f65e72b3a819853011344",1,"en_GB",30,3,"default",50,"Zabbix");
+
+然后修改下proxy的配置（现在的配置已经生成）
+
+::
+
+   Server=xxx.com               # server端的公网vip，或者域名
+   Hostname=xx.xx.xx.xx         # 和server端添加proxy_name一样
+
+   DBName=zabbix_proxy
+   DBUser=zabbix
+   DBPassword=xxxx
+
+然后记得启动服务
+
+::
+
+   systemctl start zabbix-proxy
+
+一般我们不需要访问 zabbix-proxy
+的前端，因为不需要配置什么，前端也展示不了什么数据。这里就不安装\ ``zabbix-web-mysql``\ ，也不配置\ ``httpd``\ 了。
+
+2.2 高可用设置
+~~~~~~~~~~~~~~
+
+``crm`` -> ``configure`` -> ``edit``
+
+::
+
+   primitive zabbix-proxy systemd:zabbix-proxy \
+           op start interval=0s \
+           op start timeout=60s interval=0s \
+           op stop timeout=60s interval=0s \
+           op monitor interval=30s timeout=60s \
+           meta target-role=Started priority=99
+   colocation haproxy_setup_with_vip inf: vip publicVip haproxy publicVipRoute zabbix-proxy
+   order order01 Mandatory: vip:start publicVip:start haproxy:start publicVipRoute:start zabbix-proxy:start
+
+如果要测试是否生效，可以使用
+``crm(live)resource# migrate publicVip ws_controller02``
+
+2.3 连接server端
+~~~~~~~~~~~~~~~~
+
+|image0|
+
+三、部署 zabbix-agent
+---------------------
+
+``zabbix-agent`` 可以安装在所有需要被监控的机器上。
+
+-  控制节点
+-  计算节点
+-  zabbix-server节点
+
+::
+
+   rpm -i https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
+   yum install -y zabbix-agent
+
+   # 如果出现 5432 端口数据库连接不上。
+
+修改配置：\ ``/etc/zabbix/zabbix_agentd.conf``
+
+::
+
+   DebugLevel=1
+   EnableRemoteCommands=1       # 允许远程执行脚本
+   ListenIP=172.20.20.203       # 指定本机的ip
+   Server=172.20.20.201         # proxy 的ip，确认了不能是内网/公网vip
+   ServerActive=172.20.20.200   # proxy 的ip，用内网和公网vip都可以
+
+   # Hostname=ws_controller01     # 这个在proxy模式中没用，测试过可以不指定。
+
+此时暂时不要启动 zabbix-agent 服务，因为还有一些脚本要放。
+
+五、远程执行命令
+----------------
+
+修改配置 /etc/zabbix/zabbix_agentd.conf ，允许远程执行命令
+
+::
+
+   EnableRemoteCommands = 1
+
+::
+
+   mkdir -p /usr/local/zabbix-agent/scripts
+   chown -R zabbix:zabbix /usr/local/zabbix-agent/zabbix-agent
+
+在 /etc/sudoers.d/ 新增文件：zabbix
+
+::
+
+   # allows 'zabbix' user to run all commands without password.
+   Defaults:zabbix !requiretty
+   zabbix ALL=NOPASSWD: ALL
+
+七、监控数据获取
+----------------
+
+7.1 自定义脚本获取
+~~~~~~~~~~~~~~~~~~
+
+自定义监控项，需要有一些脚本支持获取数据。
+
+以下脚本全部放在\ ``/usr/lib/zabbix/externalscripts``
+
+这些脚本将在 ``/etc/zabbix/zabbix_agentd.d/`` 使用。
+
+在此目录下，新增一个配置文件：\ ``userparameter_openstack.conf``
+
+::
+
+   UserParameter=openstack.service.status[*],sh /usr/lib/zabbix/externalscripts/isActive $1
+   UserParameter=openstack.process.status[*],sh /usr/lib/zabbix/externalscripts/isRunning $1
+
+参数说明：
+
+-  openstack.service.status：用于获取服务状态
+-  openstack.process.status：用于获取进程状态
+
+配置完后，重启agent：systemctl restart zabbix-agent
+
+八、邮件告警
+------------
+
+::
+
+   yum -y install sendmail  
+   yum -y install mailx  
+
+   systemctl enable sendmail
+   service postfix stop
+
+-  https://www.cnblogs.com/zoulongbin/p/6420239.html
+
+参考文档
+
+-  `userparameters
+   的使用文档 <https://www.zabbix.com/documentation/3.0/manual/config/items/userparameters>`__
+
+8.2 发送邮件的样式
+~~~~~~~~~~~~~~~~~~
+
+参考文章：\ `zabbix告警邮件美化 <https://www.cnblogs.com/topicjie/p/7223121.html>`__
+
+注意的是，html 中的 ``"`` 需要转义一下。
+
+.. code:: html
+
+   <table border=\"1\"  bordercolor=\"black\" cellspacing=\"0px\" cellpadding=\"4px\">
+   <tr >
+
+   <td>告警主机</td>
+   <td bgcolor=\"#FF3333\">{HOSTNAME1}</td>
+   </tr>
+
+   <tr>
+   <td>告警时间</td>
+   <td>{EVENT.DATE} {EVENT.TIME}</td>
+   </tr>
+
+   <tr>
+   <td>告警等级</td>
+   <td>{TRIGGER.SEVERITY}</td>
+   </tr>
+
+   <tr>
+   <td>告警信息</td>
+   <td>{TRIGGER.NAME}</td>
+   </tr>
+
+   <tr>
+   <td>告警项目</td>
+   <td>{TRIGGER.KEY1}</td>
+   </tr>
+   <tr >
+   <td>问题详情</td>
+   <td bgcolor=\"#FF3333\">{ITEM.NAME}:&nbsp;{ITEM.VALUE}</td>
+   </tr>
+   <tr>
+   <td>当前状态</td>
+   <td>{TRIGGER.STATUS}:&nbsp;{ITEM.VALUE1}</td>
+   </tr>
+   </table>
+
+8.2 添加告警脚本
+~~~~~~~~~~~~~~~~
+
+默认的告警脚本都存放在
+``/usr/lib/zabbix/alertscripts``\ 下（在\ ``/etc/zabbix/zabbix_server.conf``\ 中有配置）。
+
+``sendmail.sh`` 在这个脚本里，你可以自己添加你要执行的动作。
+
+并添加执行权限
+
+.. code:: bash
+
+   cd /usr/lib/zabbix/alertscripts
+   chown zabbix:zabbix sendmail.sh
+   chmod +x sendmail.sh
+
+8.2.4 添加媒介
+^^^^^^^^^^^^^^
+
+Administration - Media Types - Create media type
+
+|image1|
+
+8.2.5 添加用户邮箱
+^^^^^^^^^^^^^^^^^^
+
+Administration - Users - Admin - Media
+
+添加收件人邮箱
+
+8.2.6 定义Action
+^^^^^^^^^^^^^^^^
+
+Configuration - Actions - Create action
+
+::
+
+   {PROXY.DESCRIPTION} 
+
+八、web端
+---------
+
+8.1 添加用户
+~~~~~~~~~~~~
+
+::
+
+   Alias=vmp
+   Passwd=123456
+
+添加完用户记得添加 media
+
+里面选择 WS_Email，添加 邮箱。
+
+8.1 监控配置
+~~~~~~~~~~~~
+
+登陆 server 端 的 web 界面。
+
+导入模板。 Configuration - Templates - Import
+
+选择我们制作好的模板文件（xml格式）。
+
+点击 Aadministration - DM - Create-Proxy |image2|
+
+然后，添加 监控host 也是在 server 端，Configuration - Host。 |image3|
+
+千万记得 link 上模板，不然没有数据。
+
+九、proxy 高可用
+----------------
+
+因为要加入crm管理中，所以不用加开机自启
+
+::
+
+   # 添加下面这三个
+   primitive zabbix-agent systemd:zabbix-agent \
+           op start interval=0s timeout=60s \
+           op stop interval=0s timeout=60s \
+           op monitor interval=30s timeout=45s \
+           meta priority=10
+           
+   primitive zabbix-server systemd:zabbix-proxy \
+           op start interval=0s \
+           op start timeout=60s interval=0s \
+           op stop timeout=60s interval=0s \
+           op monitor interval=30s timeout=60s \
+           meta target-role=Started priority=100
+   clone zabbix-agent-clone zabbix-agent \
+           meta target-role=Started
+
+   # 下面这两行修改就好啦
+   colocation haproxy_setup_with_vip inf: vip publicVip haproxy publicVipRoute zabbix-proxy
+   order order01 Mandatory: vip:start publicVip:start haproxy:start publicVipRoute:start zabbix-proxy
+
+十、server 高可用
+-----------------
+
+**10.1 数据库主备**
+~~~~~~~~~~~~~~~~~~~
+
+-  `MariaDB配置主从复制备份 <https://www.helloweba.net/server/534.html>`__
+
+**主数据库配置**
+
+``/etc/my.cnf``
+
+::
+
+   [mysqld]
+   server-id=1
+   log-bin=mysql-bin
+
+重启数据库：\ ``systemctl restart mariadb``
+
+创建一个\ ``slave``\ 专用用户用来同步。
+
+.. code:: mysql
+
+   grant replication slave on *.* to 'slave'@'%' identified by 'mariadb12#$';
+   flush privileges;
+
+**备数据库备份**
+
+``/etc/my.cnf``
+
+::
+
+   server-id = 2
+   log-bin = mysql-bin
+   replicate-do-db=zabbix
+
+重启数据库：\ ``systemctl restart mariadb``
+
+进入数据库执行如下命令：
+
+::
+
+   change master to master_host='172.20.30.33',master_port=3306,master_user='slave',master_password='xxxxx',master_log_file='mysql-bin.000001',master_log_pos=22310;
+
+启动并查看状态
+
+::
+
+   start slave;
+   show slave status\G;
+
+   # 这两个必须都为Yes
+    Slave_IO_Running: Yes
+   Slave_SQL_Running: Yes
+
+若要测试，是否成功，可以在master插入一条数据，在slave查看是否同步同来。
+
+10.2 数据库主主
+~~~~~~~~~~~~~~~
+
+参考该文章
+
+-  `MySQL双主（主主）架构方案 <https://www.cnblogs.com/ygqygq2/p/6045279.html>`__
+
+10.2 zabbix-web 同步
+~~~~~~~~~~~~~~~~~~~~
+
+cp server1 web文件到server2 web目录中。
+
+-  /etc/httpd/conf.d/zabbix.conf
+-  /etc/httpd/conf/httpd.conf
+
+10.3 keepalived安装
+~~~~~~~~~~~~~~~~~~~
+
+参考文档：\ `keepalived搭建zabbix
+server双机高可用 <https://segmentfault.com/a/1190000008684320>`__
+
+.. code:: bash
+
+   # 安装
+   yum install keepalived -y
+   yum install psmisc -y
+
+   # 启动
+   /usr/sbin/keepalived -D
+   # 关闭
+   pgrep keepalived |xargs kill -15
+
+   # 启动
+   systemctl start keepalived.service
+   # 停止
+   systemctl stop keepalived.service
+
+在\ ``/etc/keepalived`` 下新增脚本 ``check.sh``
+
+.. code:: bash
+
+   #!/bin/bash
+   workers=`ps -C $1 --no-header | wc -l`
+   if [ $workers -gt 0 ];then
+       exit 0 
+   else
+       exit 1
+   fi
+
+并添加执行权限 ``chmod +x /etc/keepalived/check.sh``
+
+在 ``zabbix-01``
+（主）中添加配置文件\ ``/etc/keepalived/keepalived.conf``\ ，千万记得根据实际情况修改vip，和网卡名
+
+.. code:: bash
+
+   ! Configuration File for keepalived
+   global_defs {
+      router_id zabbix-01   #router_id 机器标识，通常为hostname，但不一定非得是hostname。故障发生时，邮件通知会用到。
+   }
+
+
+   vrrp_script chk_zabbix {
+     script "/etc/keepalived/chk_zabbix.sh"
+     interval 2
+     weight -10 
+     fall 2        #尝试两次都成功才成功
+     rise 2        #尝试两次都失败才失败
+   }
+
+
+   vrrp_instance VI_1 {              #vrrp实例定义部分
+       state MASTER                  #设置lvs的状态，MASTER和BACKUP两种，必须大写 
+       interface eth1                #设置对外服务的接口
+       virtual_router_id 88          #设置虚拟路由标示，这个标示是一个数字，同一个vrrp实例使用唯一标示 
+       priority 100                  #定义优先级，数字越大优先级越高，在一个vrrp——instance下，master的优先级必须大于backup
+       nopreempt
+       advert_int 1                  #设定master与backup负载均衡器之间同步检查的时间间隔，单位是秒
+       authentication {              #设置验证类型和密码
+           auth_type PASS            #主要有PASS和AH两种
+           auth_pass 2345            #验证密码，同一个vrrp_instance下MASTER和BACKUP密码必须相同
+       }
+       virtual_ipaddress {         #设置虚拟ip地址，可以设置多个，每行一个
+           219.157.114.206/24 dev eth1 label eth1:0
+       }
+       track_script {
+           chk_zabbix
+       }
+   notify_master "service zabbix-server start"         #指定当切换到master时，执行的脚本
+   notify_backup "service zabbix-server stop"          #指定当切换到backup时，执行的脚本
+   }
+
+在 ``zabbix-02 （备）中添加配置文件``/etc/keepalived/keepalived.conf\`
+
+.. code:: bash
+
+   ! Configuration File for keepalived
+   global_defs {
+      router_id zabbix-02     #router_id 机器标识，通常为hostname，但不一定非得是hostname。故障发生时，邮件通知会用到。
+   }
+
+
+   vrrp_script chk_zabbix {
+     script "/etc/keepalived/chk_zabbix.sh"
+     interval 2
+     weight -10 
+     fall 2        #尝试两次都成功才成功
+     rise 2        #尝试两次都失败才失败
+   }
+
+   vrrp_instance VI_1 {           #vrrp实例定义部分
+       state BACKUP               #设置lvs的状态，MASTER和BACKUP两种，必须大写 
+       interface eth1             #设置对外服务的接口
+       virtual_router_id 88      #设置虚拟路由标示，这个标示是一个数字，同一个vrrp实例使用唯一标示 
+       priority 95                #定义优先级，数字越大优先级越高，在一个vrrp——instance下，master的优先级必须大于backup
+       advert_int 1               #设定master与backup负载均衡器之间同步检查的时间间隔，单位是秒
+       authentication {           #设置验证类型和密码
+           auth_type PASS         #主要有PASS和AH两种
+           auth_pass 2345          #验证密码，同一个vrrp_instance下MASTER和BACKUP密码必须相同
+       }
+       virtual_ipaddress {         #设置虚拟ip地址，可以设置多个，每行一个
+           219.157.114.206/24 dev eth1 label eth1:0 
+       }
+       track_script {
+           chk_zabbix
+       }
+   notify_master "service zabbix-server start"         #指定当切换到master时，执行的脚本
+   notify_backup "service zabbix-server stop"          #指定当切换到backup时，执行的脚本
+   }
+
+**设置日志输出文件**
+
+``keepalived`` 默认是没有输出日志的，需要配置一下。
+
+修改keepalived配置文件 ``/etc/sysconfig/keepalived``\ ，如下
+
+::
+
+   KEEPALIVED_OPTIONS="-D -d -S 0"
+
+修改\ ``rsyslog`` 配置文件 ``/etc/rsyslog.conf``
+
+::
+
+   # keepalived -S 0 
+   local0.*                                                /var/log/keepalived.log
+
+重启服务
+
+.. code:: bash
+
+   systemctl restart rsyslog
+   systemctl restart keepalived
+
+**脚本文件**
+
+chk_zabbix.sh
+
+放置于 ``/etc/keepalived``\ ，注意脚本里vip的网卡名要正确填写。
+
+.. code:: bash
+
+   #!/bin/bash
+   workers=`ps -C zabbix_server --no-header | wc -l`
+   is_vip=`ifconfig eth0:0 | grep inet | wc -l`
+   if [ $workers == 0 -a $is_vip == 1 ];then
+       /bin/systemctl restart zabbix-server.service
+       sleep 1
+       workers=`ps -C zabbix_server --no-header | wc -l`
+       if [ $workers == 0 -a $is_vip == 1 ];then
+           exit 1
+       fi
+       exit 0
+   else
+       exit 0
+   fi
+
+这个脚本保证了，两个节点上，始终只会有一个节点运行zabbix-server。防止zabbix的数据库脑裂。
+
+主要有以下两种情况
+
+-  单台节点宕机（可以关闭keepalived服务模拟，也可以关机）
+-  双台节点宕机（不管是哪一台先启）
+
+十一、高效运维
+--------------
+
+--------------
+
+11.1 节点自动发现注册
+~~~~~~~~~~~~~~~~~~~~~
+
+节点自动发现注册，即是当某一点上部署了\ ``zabbix-agent``
+后，\ ``zabbix-server`` 能够自动感知并注册到server
+中，且添加好相应的监控模板。这样，我们就不需要每次都登陆 web
+界面进行新增节点了。
+
+使用自动注册的，主要有以下两种场景：
+
+-  集群新注册
+-  计算节点新增
+
+具体配置方法如下：
+
+**1、开启自动发现**
+
+``Configuration`` -> ``Discovery`` -> ``Create discovery rule``
+
+通过 检测 zabbix-agent 端口（10050）来发现。
+
+**2、设置Action**
+
+判断条件是，只要hostname 包含有\ ``ws_compute`` 或者 ``ws_controller``
+就可以执行相关操作。
+
+具体执行什么操作呢？
+
+-  新增host
+-  链接模板
+-  发送消息
+
+11.2 自动发现服务
+~~~~~~~~~~~~~~~~~
+
+可以实现在节点上新增一个服务后，自动在模板里添加相应的监控项和触发器。
+
+-  `ZABBIX
+   自动发现服务 <http://blog.51cto.com/dyc2005/2178939?source=dra>`__
+
+附录：参考文章
+--------------
+
+-  `ZABBIX数据库表结构解析 <https://www.cnblogs.com/wumingxiaoyao/p/7412312.html>`__
+-  `ZABBIX配置详解 <http://blog.51cto.com/lookingdream/1839558>`__
+-  `rsync部署 <https://www.cnblogs.com/skyflask/p/7501104.html>`__
+-  `zabbix客户端自动注册 <http://www.ttlsa.com/zabbix/zabbix-active-agent-auto-registration>`__
+-  `Download and install
+   Zabbix <https://www.zabbix.com/download?zabbix=3.4&os_distribution=centos&os_version=7&db=MySQL>`__
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+
+
+.. |image0| image:: https://i.loli.net/2018/12/06/5c090d38123c6.png
+.. |image1| image:: https://i.loli.net/2018/11/20/5bf3b81b98367.png
+.. |image2| image:: https://i.loli.net/2018/11/02/5bdc290ae056e.png
+.. |image3| image:: https://i.loli.net/2018/11/02/5bdc295997325.png
+

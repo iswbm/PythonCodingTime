@@ -1,0 +1,1170 @@
+1.10 Python 冷知识 32 讲
+========================
+
+--------------
+
+01. 省略号也是对象
+------------------
+
+``...`` 这是省略号，在Python中，一切皆对象。它也不例外。
+
+在 Python 中，它叫做 Ellipsis 。
+
+在 Python 3 中你可以直接写…来得到这玩意。
+
+.. code:: python
+
+   >>> ...
+   Ellipsis
+   >>> type(...)
+   <class 'ellipsis'>
+
+而在 2 中没有…这个语法，只能直接写Ellipsis来获取。
+
+.. code:: python
+
+   >>> Ellipsis
+   Ellipsis
+   >>> type(Ellipsis)
+   <type 'ellipsis'>
+   >>>
+
+它转为布尔值时为真
+
+.. code:: python
+
+   >>> bool(...)
+   True
+
+最后，这东西是一个单例。
+
+.. code:: python
+
+   >>> id(...)
+   4362672336
+   >>> id(...)
+   4362672336
+
+这东西有啥用呢？据说它是Numpy的语法糖，不玩 Numpy
+的人，可以说是没啥用的。
+
+在网上只看到这个 用 ``...`` 代替 pass ，稍微有点用，但又不是必须使用的。
+
+::
+
+   try:
+       1/0
+   except ZeroDivisionError:
+       ...
+
+02. 类首字母不一定是大写
+------------------------
+
+在正常情况下，我们所编写的所见到的代码，好像都默许了类名首字母大写，而实例用小写的这一准则。但这并不是强制性的，即使你反过来的也没有关系。
+
+但有一些内置的类，首字母都是小写，而实例都是大写。
+
+比如 bool 是类名，而 True，False 是其实例； 比如 ellipsis
+是类名，Ellipsis是实例； 还有 int，string，float，list，tuple，dict
+等一系列数据类型都是类名，它们都是小写。
+
+03. 增量赋值的性能更好
+----------------------
+
+诸如 ``+=`` 和 ``*=`` 这些运算符，叫做 增量赋值运算符。
+
+这里使用用 += 举例，以下两种写法，在效果上是等价的。
+
+::
+
+   # 第一种
+   a = 1 ; a += 1
+
+   # 第二种
+   a = 1; a = a + 1
+
+``+=`` 其背后使用的魔法方法是
+\__iadd__，如果没有实现这个方法则会退而求其次，使用 \__add_\_ 。
+
+这两种写法有什么区别呢？
+
+用列表举例 a += b，使用 \__add_\_ 的话就像是使用了a.extend(b),如果使用
+\__add_\_ 的话，则是 a =
+a+b,前者是直接在原列表上进行扩展，而后者是先从原列表中取出值，在一个新的列表中进行扩展，然后再将新的列表对象返回给变量，显然后者的消耗要大些。
+
+所以在能使用增量赋值的时候尽量使用它。
+
+04. and 和 or 的取值顺序
+------------------------
+
+and 和 or
+是我们再熟悉不过的两个逻辑运算符。而我们通常只用它来做判断，很少用它来取值。
+
+如果一个or表达式中所有值都为真，Python会选择第一个值，而and表达式则会选择第二个。
+
+::
+
+   >>>(2 or 3) * (5 and 7)
+   14  # 2*7
+
+05. 如何修改解释器提示符
+------------------------
+
+这个当做今天的一个小彩蛋吧。应该算是比较冷门的，估计知道的人很少了吧。
+
+正常情况下，我们在 终端下 执行Python 命令是这样的。
+
+::
+
+   >>> for i in range(2):
+   ...     print (i)
+   ...
+   0
+   1
+
+你是否想过 ``>>>`` 和 ``...`` 这两个提示符也是可以修改的呢？
+
+::
+
+   >>> import sys                      
+   >>> sys.ps1                         
+   '>>> '                              
+   >>> sys.ps2                         
+   '... '                              
+   >>>                                 
+   >>> sys.ps2 = '---------------- '                 
+   >>> sys.ps1 = 'Python编程时光>>>'       
+   Python编程时光>>>for i in range(2):     
+   ----------------    print (i)                    
+   ----------------                                 
+   0                                   
+   1                                   
+
+06. 默认参数最好不为可变对象
+----------------------------
+
+函数的参数分三种 - 可变参数 - 默认参数 - 关键字参数
+
+这三者的具体区别，和使用方法在 廖雪峰的教程
+里会详细的解释。这里就不搬运了。
+
+今天要说的是，传递默认参数时，新手很容易踩雷的一个坑。
+
+先来看一个示例
+
+::
+
+   def func(item, item_list=[]):
+       item_list.append(item)
+       print(item_list)
+
+   func('iphone')
+   func('xiaomi', item_list=['oppo','vivo'])
+   func('huawei')
+
+在这里，你可以暂停一下，思考一下会输出什么？
+
+思考过后，你的答案是否和下面的一致呢
+
+::
+
+   ['iphone']
+   ['oppo', 'vivo', 'xiaomi']
+   ['iphone', 'huawei']
+
+如果是，那你可以跳过这部分内容，如果不是，请接着往下看，这里来分析一下。
+
+Python 中的 def
+语句在每次执行的时候都初始化一个函数对象，这个函数对象就是我们要调用的函数，可以把它当成一个一般的对象，只不过这个对象拥有一个可执行的方法和部分属性。
+
+对于参数中提供了初始值的参数，由于 Python
+中的函数参数传递的是对象，也可以认为是传地址，在第一次初始化 def
+的时候，会先生成这个可变对象的内存地址，然后将这个默认参数 item_list
+会与这个内存地址绑定。在后面的函数调用中，如果调用方指定了新的默认值，就会将原来的默认值覆盖。如果调用方没有指定新的默认值，那就会使用原来的默认值。
+
+|image0|
+
+07. 访问类中的私有方法
+----------------------
+
+大家都知道，类中可供直接调用的方法，只有公有方法（protected类型的方法也可以，但是不建议）。也就是说，类的私有方法是无法直接调用的。
+
+这里先看一下例子
+
+::
+
+   class Kls():
+       def public(self):
+           print('Hello public world!')
+           
+       def __private(self):
+           print('Hello private world!')
+           
+       def call_private(self):
+           self.__private()
+
+   ins = Kls()
+
+   # 调用公有方法，没问题
+   ins.public()
+
+   # 直接调用私有方法，不行
+   ins.__private()
+
+   # 但你可以通过内部公有方法，进行代理
+   ins.call_private()
+
+既然都是方法，那我们真的没有方法可以直接调用吗？
+
+当然有啦，只是建议你千万不要这样弄，这里只是普及，让你了解一下。
+
+.. code:: python
+
+   # 调用私有方法，以下两种等价
+   ins._Kls__private()
+   ins.call_private()
+
+08. 时有时无的切片异常
+----------------------
+
+这是个简单例子
+
+.. code:: python
+
+   my_list = [1, 2, 3, 4, 5]
+   print(my_list[5])
+
+执行一下，和我们预期的一样，会抛出索引异常。
+
+::
+
+   Traceback (most recent call last):
+     File "F:/Python Script/test.py", line 2, in <module>
+       print(my_list[5])
+   IndexError: list index out of range
+
+但是今天要说的肯定不是这个，而是一个你可能会不知道的冷知识。
+
+来看看，如下这种写法就不会报索引异常，执行my_list[5:]，会返回一个新list：[]。
+
+.. code:: python
+
+   my_list = [1, 2, 3]
+   print(my_list[5:])
+
+09. 哪些情况下不需要续行符
+--------------------------
+
+在写代码时，为了代码的可读性，代码的排版是尤为重要的。
+
+为了实现高可读性的代码，我们常常使用到的就是续行符 ``\``\ 。
+
+::
+
+   >>> a = 'talk is cheap,'\
+   ...     'show me the code.'
+   >>>
+   >>> print(a)
+   talk is cheap,show me the code.
+
+那有哪些情况下，是不需要写续行符的呢？
+
+经过总结，在这些符号中间的代码换行可以省略掉续行符：\ ``[]``,\ ``()``,\ ``{}``
+
+::
+
+   >>> my_list=[1,2,3,
+   ...          4,5,6]
+
+   >>> my_tuple=(1,2,3,
+   ...           4,5,6)
+
+   >>> my_dict={"name": "MING",
+   ...          "gender": "male"}
+
+另外还有，在多行文本注释中 ``'''`` ，续行符也是可以不写的。
+
+::
+
+   >>> text = '''talk is cheap,
+   ...           show me the code'''
+
+上面只举了一些简单的例子。
+
+但你要学会举一反三。一样的，在以下这些场景也同样适用
+
+-  类，和函数的定义。
+-  列表推导式，字典推导式，集合推导式，生成器表达式
+
+10. Py2 也可以使用 print()
+--------------------------
+
+我相信应该有不少人，思维定式，觉得只有 Py3 才可以使用 print()，而 Py2
+只能使用print ’’。
+
+今天，小明要为 Py2 正名一次。
+
+在Python 2.6之前，只支持
+
+.. code:: python
+
+   print "hello"
+
+在Python 2.6和2.7中，可以支持如下三种
+
+.. code:: python
+
+   print "hello"
+   print("hello")
+   print ("hello")
+
+在Python3.x中，可以支持如下两种
+
+.. code:: python
+
+   print("hello")
+   print ("hello")
+
+11. 奇怪的字符串
+----------------
+
+示例一
+
+::
+
+   # Python2.7
+   >>> a = "Hello_Python"
+   >>> id(a)
+   32045616
+   >>> id("Hello" + "_" + "Python")
+   32045616
+
+   # Python3.7
+   >>> a = "Hello_Python"
+   >>> id(a)
+   38764272
+   >>> id("Hello" + "_" + "Python")
+   32045616
+
+示例二
+
+::
+
+   >>> a = "MING"
+   >>> b = "MING"
+   >>> a is b
+   True
+
+   # Python2.7
+   >>> a, b = "MING!", "MING!"
+   >>> a is b
+   True
+
+   # Python3.7
+   >>> a, b = "MING!", "MING!"
+   >>> a is b
+   False
+
+示例三
+
+::
+
+   # Python2.7
+   >>> 'a' * 20 is 'aaaaaaaaaaaaaaaaaaaa'
+   True
+   >>> 'a' * 21 is 'aaaaaaaaaaaaaaaaaaaaa'
+   False
+
+   # Python3.7
+   >>> 'a' * 20 is 'aaaaaaaaaaaaaaaaaaaa'
+   True
+   >>> 'a' * 21 is 'aaaaaaaaaaaaaaaaaaaaa'
+   True
+
+详细解释这么不多说了（比较多），感兴趣的朋友，可以加我微信交流。
+
+12. 两次 return
+---------------
+
+我们都知道，try…finally…
+语句的用法，不管try里面是正常执行还是报异常，最终都能保证finally能够执行。
+
+同时，我们又知道，一个函数里只要遇到 return 函数就会立马结束。
+
+基于以上这两点，我们来看看这个例子，到底运行过程是怎么样的？
+
+::
+
+   >>> def func():
+   ...     try:
+   ...         return 'try'
+   ...     finally:
+   ...         return 'finally'
+   ...
+   >>> func()
+   'finally'
+
+惊奇的发现，在\ ``try``\ 里的return居然不起作用。
+
+原因是，在try…finally…语句中，try中的return会被直接忽视，因为要保证finally能够执行。
+
+13. for 死循环
+--------------
+
+for 循环可以说是 基础得不能再基础的知识点了。
+
+但是如果让你用 for 写一个死循环，你会写吗？（问题来自群友 陈**）
+
+这是个开放性的问题，在往下看之前，建议你先尝试自己思考，你会如何解答。
+
+好了，如果你还没有思路，那就来看一下 一个海外 MIT 群友的回答:
+
+::
+
+   for i in iter(int, 1):pass
+
+是不是懵逼了。iter 还有这种用法？这为啥是个死循环？
+
+这真的是个冷知识，关于这个知识点，你如果看中文网站，可能找不到相关资料。
+
+还好你可以通过 IDE 看py源码里的注释内容，介绍了很详细的使用方法。
+
+原来iter有两种使用方法，通常我们的认知是第一种，将一个列表转化为一个迭代器。
+
+而第二种方法，他接收一个 callable对象，和一个sentinel
+参数。第一个对象会一直运行，直到它返回 sentinel 值才结束。
+
+那\ ``int`` 呢，这又是一个知识点，int
+是一个内建方法。通过看注释，可以看出它是有默认值0的。你可以在终端上输入
+``int()`` 看看是不是返回0。
+
+由于int() 永远返回0，永远返回不了1，所以这个 for
+循环会没有终点。一直运行下去。
+
+这些问题和答案都源自于群友的智慧。如果你也想加入我们的讨论中，请到公众号后台，添加我个人微信。
+
+14. 小整数池
+------------
+
+先看例子。
+
+::
+
+   >>> a = -6
+   >>> b = -6
+   >>> a is b
+   False
+
+   >>> a = 256
+   >>> b = 256
+   >>> a is b
+   True
+
+   >>> a = 257
+   >>> b = 257
+   >>> a is b
+   False
+
+   >>> a = 257; b = 257
+   >>> a is b
+   True
+
+为避免整数频繁申请和销毁内存空间，Python 定义了一个小整数池 [-5, 256]
+这些整数对象是提前建立好的，不会被垃圾回收。
+
+以上代码请在
+终端Python环境下测试，如果你是在IDE中测试，并不是这样的效果。
+
+那最后一个示例，为啥又是True？
+
+因为当你在同一行里，同时给两个变量赋同一值时，解释器知道这个对象已经生成，那么它就会引用到同一个对象。如果分成两成的话，解释器并不知道这个对象已经存在了，就会重新申请内存存放这个对象。
+
+15. intern机制
+--------------
+
+字符串类型作为Python中最常用的数据类型之一，Python解释器为了提高字符串使用的效率和使用性能，做了很多优化.
+
+例如：Python解释器中使用了
+intern（字符串驻留）的技术来提高字符串效率，什么是intern机制？就是同样的字符串对象仅仅会保存一份，放在一个字符串储蓄池中，是共用的，当然，肯定不能改变，这也决定了字符串必须是不可变对象。
+
+::
+
+   >>> s1="hello"
+   >>> s2="hello"
+   >>> s1 is s2
+   True
+
+   # 如果有空格，默认不启用intern机制
+   >>> s1="hell o"
+   >>> s2="hell o"
+   >>> s1 is s2
+   False
+
+   # 如果一个字符串长度超过20个字符，不启动intern机制
+   >>> s1 = "a" * 20
+   >>> s2 = "a" * 20
+   >>> s1 is s2
+   True
+
+   >>> s1 = "a" * 21
+   >>> s2 = "a" * 21
+   >>> s1 is s2
+   False
+
+   >>> s1 = "ab" * 10
+   >>> s2 = "ab" * 10
+   >>> s1 is s2
+   True
+
+   >>> s1 = "ab" * 11
+   >>> s2 = "ab" * 11
+   >>> s1 is s2
+   False
+
+16. 交互式“_”操作符
+-------------------
+
+对于 ``_`` ，我想很多人都非常熟悉。
+
+给变量取名好艰难，用 ``_``\ ； 懒得长长的变量名，用 ``_``\ ；
+无用的垃圾变量，用 ``_``\ ；
+
+以上，我们都很熟悉了，今天要介绍的是他在交互式中使用。
+
+.. code:: python
+
+   >>> 3 + 4
+   7
+   >>> _
+   7
+   >>> name='ming'
+   >>> name
+   'ming'
+   >>> _
+   'ming'
+
+它可以返回上一次的运行结果。
+
+但是，如果是print函数打印出来的就不行了。
+
+.. code:: python
+
+   >>> 3 + 4
+   7
+   >>> _
+   7
+   >>> print("ming")
+   ming
+   >>> _
+   7
+
+我自己写了个例子，验证了下，用\ ``__repr__``\ 输出的内容可以被获取到的。
+首先，在我们的目录下，写一个文件 ming.py。内容如下
+
+.. code:: python
+
+   # ming.py
+   class mytest():
+       def __str__(self):
+           return "hello"
+
+       def __repr__(self):
+           return "world"
+
+然后在这个目录下进入交互式环境。
+
+.. code:: python
+
+   >>> import ming
+   >>> mt=ming.mytest()
+   >>> mt
+   world
+   >>> print(mt)
+   hello
+   >>> _
+   world
+
+知道这两个魔法方法的人，一看就明白了。
+
+17. 反转字符串/列表最优雅的方式
+-------------------------------
+
+反转序列并不难，但是如何做到最优雅呢？
+
+先来看看，正常是如何反转的。
+
+最简单的方法是使用列表自带的reverse()方法。
+
+.. code:: python
+
+   >>> ml = [1,2,3,4,5]
+   >>> ml.reverse()
+   >>> ml
+   [5, 4, 3, 2, 1]
+
+但如果你要处理的是字符串，reverse就无能为力了。你可以尝试将其转化成list，再reverse，然后再转化成str。转来转去，也太麻烦了吧？需要这么多行代码（后面三行是不能合并成一行的），一点都Pythonic。
+
+.. code:: python
+
+   mstr1 = 'abc'
+   ml1 = list(mstr1)
+   ml1.reverse()
+   mstr2 = str(ml1)
+
+对于字符串还有一种稍微复杂一点的，是自定义递归函数来实现。
+
+.. code:: python
+
+   def my_reverse(str):
+       if str == "":
+           return str
+       else:
+           return my_reverse(str[1:]) + str[0]
+
+在这里，介绍一种最优雅的反转方式，使用切片，不管你是字符串，还是列表，简直通杀。
+
+.. code:: python
+
+   >>> mstr = 'abc'
+   >>> ml = [1,2,3]
+   >>> mstr[::-1]
+   'cba'
+   >>> ml[::-1]
+   [3, 2, 1]
+
+18. 改变默认递归次数限制
+------------------------
+
+上面才提到递归，大家都知道使用递归是有风险的，递归深度过深容易导致堆栈的溢出。如果你这字符串太长啦，使用递归方式反转，就会出现问题。
+
+那到底，默认递归次数限制是多少呢？
+
+.. code:: python
+
+   >>> import sys
+   >>> sys.getrecursionlimit()
+   1000
+
+可以查，当然也可以自定义修改次数，退出即失效。
+
+.. code:: python
+
+   >>> sys.setrecursionlimit(2000)
+   >>> sys.getrecursionlimit()
+   2000
+
+19. 一行代码实现FTP服务器
+-------------------------
+
+搭建FTP，或者是搭建网络文件系统，这些方法都能够实现Linux的目录共享。但是FTP和网络文件系统的功能都过于强大，因此它们都有一些不够方便的地方。比如你想快速共享Linux系统的某个目录给整个项目团队，还想在一分钟内做到，怎么办？很简单，使用Python中的SimpleHTTPServer。
+
+SimpleHTTPServer是Python
+2自带的一个模块，是Python的Web服务器。它在Python
+3已经合并到http.server模块中。具体例子如下，如不指定端口，则默认是8000端口。
+
+.. code:: python
+
+   # python2
+   python -m SimpleHTTPServer 8888
+
+   # python3
+   python3 -m http.server 8888
+
+|image1|
+
+SimpleHTTPServer有一个特性，如果待共享的目录下有index.html，那么index.html文件会被视为默认主页；如果不存在index.html文件，那么就会显示整个目录列表。
+
+20. 让你晕头转向的 else 用法
+----------------------------
+
+if else
+用法可以说最基础的语法表达式之一，但是今天不是讲这个的，一定要讲点不一样的。
+
+if else 早已烂大街，但可能有很多人都不曾见过 for else 和 try else
+的用法。为什么说它曾让我晕头转向，因为它不像 if else
+那么直白，非黑即白，脑子经常要想一下才能才反应过来代码怎么走。反正我是这样的。
+
+先来说说，for else
+
+.. code:: python
+
+   def check_item(source_list, target):
+       for item in source_list:
+           if item == target:
+               print("Exists!")
+               break
+
+       else:
+           print("Does not exist")
+
+在往下看之前，你可以思考一下，什么情况下才会走 else。是循环被
+break，还是没有break？
+
+给几个例子，你体会一下。
+
+.. code:: python
+
+   check_item(["apple", "huawei", "oppo"], "oppo")
+   # Exists!
+
+   check_item(["apple", "huawei", "oppo"], "vivo")
+   # Does not exist
+
+可以看出，没有被 break 的程序才会正常走else流程。
+
+再来看看，try else 用法。
+
+.. code:: python
+
+   def test_try_else(attr1 = None):
+       try:
+           if attr1:
+               pass
+           else:
+               raise
+       except:
+           print("Exception occurred...")
+       else:
+           print("No Exception occurred...")
+
+同样来几个例子。当不传参数时，就抛出异常。
+
+.. code:: python
+
+   test_try_else()
+   # Exception occurred...
+
+   test_try_else("ming")
+   # No Exception occurred...
+
+可以看出，没有 try 里面的代码块没有抛出异常的，会正常走else。
+
+总结一下，for else 和 try else 相同，只要代码正常走下去不被
+break，不抛出异常，就可以走else。
+
+21. 空字符串计数
+----------------
+
+求一个字符串里，某子字符（串）出现的次数。在Python中使用 count()
+函数，就可以轻松实现。
+
+比如下面几个常规例子
+
+::
+
+   >>> "aabb".count("a")
+   2
+   >>> "aabb".count("b")
+   2
+   >>> "aabb".count("ab")
+   1
+
+但是如果使用空字符串呢，你可能想不到会是这样的结果。
+
+::
+
+   >>> "aabb".count("")
+   5
+
+具体原因，我不敢妄下结论。
+
+由此我还衍生出另一个想法，实验了下。不知道空字符串，是一种什么样的存在，难道字母与字母之间
+“缝隙” 也算吗？
+
+::
+
+   >>> "" in ""
+   True
+   >>> "" in "ab"
+   True
+
+有兴趣的可以去看看CPython的源码实现。如果有结论，还请后台回复一下。不胜感激。
+
+22. 负负得正
+------------
+
+从初中开始，我们就开始接触了\ ``负数``
+这个概念。知道了\ ``负负得正``\ ，这和武侠世界里的\ ``以毒功毒``\ ，有点神似。
+
+Python
+作为一门高级语言，它的编写符合人类的思维逻辑，这其中也包括\ ``负负得正``\ 这个思想。
+
+.. code:: python
+
+   >>> 5-3
+   2
+   >>> 5--3
+   8
+   >>> 5+-3
+   2
+   >>> 5++3
+   8
+   >>> 5---3
+   2
+
+23. 数值与字符串的比较
+----------------------
+
+在 Python2 中，数字可以与字符串直接比较。结果是数值永远比字符串小。
+
+::
+
+   >>> 100000000 < ""
+   True
+   >>> 100000000 < "ming"
+   True
+
+但在 Python3 中，却不行。
+
+::
+
+   >>> 100000000 < ""
+   TypeError: '<' not supported between instances of 'int' and 'str'
+
+24. 循环中的局部变量泄露
+------------------------
+
+在Python 2中x的值在一个循环执行之后被改变了。
+
+::
+
+   # Python2
+   >>> x = 1
+   >>> [x for x in range(5)]
+   [0, 1, 2, 3, 4]
+   >>> x
+   4
+
+不过在Python3 中这个问题已经得到解决了。
+
+::
+
+   # Python3
+   >>> x = 1
+   >>> [x for x in range(5)]
+   [0, 1, 2, 3, 4]
+   >>> x
+   1
+
+25. 字典可排序
+--------------
+
+字典不可排序的思想，似乎已经根深蒂固。
+
+::
+
+   # Python2.7.10
+   >>> mydict = {str(i):i for i in range(5)}
+   >>> mydict
+   {'1': 1, '0': 0, '3': 3, '2': 2, '4': 4}
+
+在 Python3 中字典已经是有序的。
+
+::
+
+   # Python3.6.7
+   >>> mydict = {str(i):i for i in range(5)}
+   >>> mydict
+   {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4}
+
+26. 链式比较
+------------
+
+先给看一个示例
+
+::
+
+   >>> False == False == True
+   False
+
+你知道这个表达式会返回 False 吗？
+
+我再给你举个例子，你可能就懂了。
+
+::
+
+   f 18 < age < 60:
+       print("young man")
+
+如果还不明白，再给你整个等价写法。
+
+::
+
+   >>> False == False and False == True
+   False
+
+27. 奇怪的字母
+--------------
+
+直接看下列例子。
+
+在Python 2.x 中
+
+::
+
+   >>> value = 11
+   >>> valuе = 32
+     File "<stdin>", line 1
+       valuе = 32
+           ^
+   SyntaxError: invalid syntax
+
+在Python 3.x 中
+
+::
+
+   >>> value = 11
+   >>> valuе = 32
+   >>> value
+   11
+
+我相信你一开始看到这里，一定是目瞪口呆。你可以在自己的电脑上尝试一下，你会发现你不管在哪个版本的
+Python 里运行都没有问题。
+
+如果你想重现我这个场景，你可能复制我上面的代码粘贴至自己的命令行中即可。
+
+在这里，也不卖关子了，上面代码中第二行的 ``е`` 和 第一行的 ``e``
+是不一样的。
+
+第二行的 ``e`` 是 Cyrillic（西里尔）字母，而不是我们熟悉的英文字母。
+
+::
+
+   >>> ord('е') # cyrillic 'e' (Ye)
+   1077
+   >>> ord('e') # latin 'e', as used in English and typed using standard keyboard
+   101
+   >>> 'е' == 'e'
+   False
+
+细思恐极，平时可千万不要得罪同事们，万一辞职的时候，把你项目里的 ``e``
+全局替换成 ``e``\ ，到时候连错都不知道错哪了哈哈。
+
+28. x == +x 吗？
+----------------
+
+在大多数情况下，这个等式是成立的。
+
+::
+
+   >>> n1 = 10086
+   >>> n2 = +n1
+   >>>
+   >>> n1 == n2
+   True
+
+什么情况下，这个等式会不成立呢？
+
+由于Counter的机制，\ ``+`` 用于两个 Counter
+实例相加，而相加的结果如果元素的个数 ``<=`` 0，就会被丢弃。
+
+::
+
+   >>> from collections import Counter
+   >>> ct = Counter('abcdbcaa')
+   >>> ct
+   Counter({'a': 3, 'b': 2, 'c': 2, 'd': 1})
+   >>> ct['c'] = 0
+   >>> ct['d'] = -2
+   >>>
+   >>> ct
+   Counter({'a': 3, 'b': 2, 'c': 0, 'd': -2})
+   >>>
+   >>> +ct
+   Counter({'a': 3, 'b': 2})
+
+29. 有趣的import
+----------------
+
+import 是 Python 导包的方式。
+
+你知道 Python 中内置了一些很有（wu）趣（liao）的包吗？
+
+**Hello World**
+
+::
+
+   >>> import __hello__
+   Hello World!
+
+**Python之禅**
+
+::
+
+   >>> import this
+
+   The Zen of Python, by Tim Peters
+
+   Beautiful is better than ugly.
+   Explicit is better than implicit.
+   Simple is better than complex.
+   Complex is better than complicated.
+   Flat is better than nested.
+   Sparse is better than dense.
+   Readability counts.
+   Special cases aren't special enough to break the rules.
+   Although practicality beats purity.
+   Errors should never pass silently.
+   Unless explicitly silenced.
+   In the face of ambiguity, refuse the temptation to guess.
+   There should be one-- and preferably only one --obvious way to do it.
+   Although that way may not be obvious at first unless you're Dutch.
+   Now is better than never.
+   Although never is often better than *right* now.
+   If the implementation is hard to explain, it's a bad idea.
+   If the implementation is easy to explain, it may be a good idea.
+   Namespaces are one honking great idea -- let's do more of those!
+
+**反地心引力漫画**
+
+在 cmd 窗口中导入\ ``antigravity``
+
+::
+
+   >>> import antigravity
+
+就会自动打开一个网页。 |image2|
+
+30. 局部/全局变量分不清？
+-------------------------
+
+在开始讲之前，你可以试着运行一下下面这小段代码。
+
+::
+
+   a = 1
+
+   def func01():
+       a += 1
+       
+   func01()
+
+看似没有毛病，但实则已经犯了一个很基础的问题，这个报错相当常见吧？
+
+.. code:: python
+
+   >>> func01()
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "<stdin>", line 2, in func01
+   UnboundLocalError: local variable 'a' referenced before assignment
+
+回顾一下，什么是局部变量？在非全局下定义声明的变量都是局部变量。
+
+当程序运行到 ``a += 1`` 时，Python 解释器就认为在函数内部要给 ``a``
+这个变量赋值，当然就把 ``a`` 当做局部变量了，报错是理所应当的。
+
+理解了上面的例子，给你留个思考题。为什么下面的代码不会报错呢？
+
+::
+
+   a = 1
+
+   def func02():
+       print(a)
+       
+   func02()
+
+31. 不能使用单:raw-latex:`\结尾`
+--------------------------------
+
+``\`` 是转义字符，可以将普通字符转化为有特殊含义的字符。
+
+.. code:: python
+
+   >>> str1='\nhello'　　＃换行
+   >>> print(str1)
+
+   hello
+   >>> str2='\thello'　　＃tab
+   >>> print(str2)
+       hello
+
+如果你用单\ ``\``\ 结尾是会报语法错误。
+
+.. code:: python
+
+   >>> str3="\"
+     File "<stdin>", line 1
+       str3="\"
+              ^
+   SyntaxError: EOL while scanning string literal
+   >>>
+   >>>
+   >>> str3=r"\"
+     File "<stdin>", line 1
+       str3=r"\"
+               ^
+   SyntaxError: EOL while scanning string literal
+
+32. 字符串分割
+--------------
+
+.. code:: python
+
+   >>> str = "a\nb\n"
+   >>> print(str)
+   a
+   b
+
+   >>> str.split('\n')
+   ['a', 'b', '']
+   >>>
+
+   >>>
+   >>> str.splitlines()
+   ['a', 'b']
+
+33. 中文变量
+------------
+
+使用 python3.7
+
+.. code:: python
+
+   __builtins__.我们来运行下这行代码看看=“666”
+    
+   #!/usr/bin/env python
+   # encoding: utf-8
+   def _666(_666):
+       print(_666)
+   我们来运行下这行代码看看
+   _666(f’是不是非常的_666’)
+
+34. 更新字典
+~~~~~~~~~~~~
+
+通常我们更新字典的方式是这样的
+
+.. code:: python
+
+   >>> dict1 = {'age':24}
+   >>> dict1.update({'age':30})
+   >>> dict1
+   {'age': 30}
+
+除此之外还有另外一种方式，你可能比较陌生
+
+::
+
+   >>> dict1 = {'namne':'ming', 'gender':'male', 'age':24}
+   >>> dict2 = {'namne':'jane', 'gender':'male'}
+   >>> dict3 = {**dict1, **dict2}
+   >>> dict3
+   {'namne': 'jane', 'gender': 'male', 'age': 24}
+
+附录：参考文章
+--------------
+
+-  `wtfpython <https://github.com/satwikkansal/wtfpython>`__
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+
+
+.. |image0| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7gsxkm4j20o007576y.jpg
+.. |image1| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7e76gnjj20u00m3wkq.jpg
+.. |image2| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7f9yuwgj20ko0kpdqj.jpg
+

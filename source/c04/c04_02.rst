@@ -1,0 +1,175 @@
+4.2 Xshell的高效使用手册
+========================
+
+--------------
+
+做为一名开发人员，我们难免都会与服务器打交道。
+
+有时候是公司的线上生产环境，你需要上去部署公司的项目。
+有时候是在阿里上买的云主机，想自己搭个博客来写写文章。
+
+就像我，是从事云计算相关的，每天远程登陆的服务器都有几十台。
+
+这时候，掌握一些远程登陆工具的使用技巧是相当有必要的，会大大增加你使用的便利性和愉悦性。
+
+优秀的远程工具有很多，Xshell，SecureCRT，PuTTY等等。
+
+由于小明是个很注重工具顔值的人，所以一开始就选择了Xshell。本篇也只会介绍Xshell的使用技巧，但是快捷键在其他工具上部分是通用的。
+
+快捷入口
+--------
+
+**快速命令**
+
+查看 -> 快速命令
+
+双击底部自定义快速命令。 |image0|
+
+**使用收藏栏**
+
+点击最左侧按按钮添加收藏。 |image1|
+
+**快捷设置**
+
+工具 -> 选项 -> 键盘和鼠标
+
+① 右键粘贴 ② 双击分隔符 ③ 选中即复制
+
+|image2|
+
+**设置Meta键**
+
+文件 -> 属性 -> 键盘
+
+一定要打钩，这是后面诸多快捷使用的前提。 |image3|
+
+移动光标
+--------
+
+::
+
+   Ctrl+f    向后移动一个字符
+   Ctrl+b    向前移动一个字符
+
+   Ctrl+a    将光标移至输入行头，相当于Home键
+   Ctrl+e    将光标移至输入行末，相当于End键
+
+   Alt+f     以单词为单位，向前移动
+   Alt+b     以单词为单位，向前移动
+
+   Shift+PgUp   将终端显示向上滚动
+   Shift+PgDn   将终端显示向下滚动
+
+删除元素
+--------
+
+::
+
+   Ctrl+u    删除到行首
+   Ctrl+k    删除到行末
+
+   Ctrl+y   粘贴上次Ctrl+u/k的字符
+   Ctrl+d   删除当前字符，等同于Del
+
+   Alt+Backspace   向前删除一个单词，和 Ctrl+w 一样
+
+切换标签
+--------
+
+::
+
+   Alt+n            n为1-9数字，快速切换标签页
+   Ctrl+Tab       向右切换标签
+
+   Ctrl+Shift+Tab   向右切换标签
+   Shift+Tab            两个窗口来回切换
+
+屏幕模式
+--------
+
+::
+
+   Alt+s          切换到简单版模式
+   Alt+Enter   切换至全屏
+
+快速操作
+--------
+
+.. code:: shell
+
+   Alt+.    取得上次命令的参数，并粘贴
+   Ctrl+r   在历史命令中查找，回车执行
+   Ctrl+o   放在命令后执行，可重复执行
+
+
+   Alt+u   以单词为单位，将光标处到单词结尾的字符转化为大写
+   Alt+l   以单词为单位，将光标处到单词结尾的字符转化为小写
+
+   Alt+Shift+#  注释当前命令，相当于ctrl-a,#,enter
+
+辅助命令
+--------
+
+::
+
+   Ctrl+s     锁住终端,可用来停留在当前屏
+   Ctrl+q      解锁终端，恢复刷屏
+   Ctrl+d      键盘输入结束或退出终端
+
+
+   Ctrl+s   暂停当前程序，暂停后按下任意键恢复运行
+   Ctrl+z   将当前程序放到后台运行，恢复到前台为命令fg
+
+   Ctrl+Shift+r   重新连接
+
+   Ctrl+Insert    复制
+   Shift+Insert   粘贴
+
+以我日常使用到的，暂时就这么些了，以后有用更多的使用技巧和快捷键再来补充。
+
+配色方案
+--------
+
+新建一个文件\ ``ubuntu.xcs``
+
+::
+
+   [ubuntu]
+   text(bold)=ffffff
+   magenta(bold)=ad7fa8
+   text=ffffff
+   white(bold)=eeeeec
+   green=4e9a06
+   red(bold)=ef2929
+   green(bold)=8ae234
+   black(bold)=555753
+   red=cc0000
+   blue=3465a4
+   black=000000
+   blue(bold)=729fcf
+   yellow(bold)=fce94f
+   cyan(bold)=34e2e2
+   yellow=c4a000
+   magenta=75507b
+   background=300a24
+   white=d3d7cf
+   cyan=06989a
+   [Names]
+   count=1
+   name0=ubuntu
+
+然后在xshell配色方案中导入即可
+
+附上一个更全的帖子：\ `Xshell快捷键汇总 <https://www.cnblogs.com/zhoushihui/p/5404392.html>`__
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+
+
+.. |image0| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7ufv5q7j20bc00vt8t.jpg
+.. |image1| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7vlhtfjj20b700xt8t.jpg
+.. |image2| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7w4nnp9j20cu09ojtv.jpg
+.. |image3| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7wybscyj20fo0dojwj.jpg
+

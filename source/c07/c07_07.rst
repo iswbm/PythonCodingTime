@@ -1,0 +1,421 @@
+7.7 SaltStack 入门指南
+======================
+
+--------------
+
+一、安装SaltStack
+-----------------
+
+1.1 准备工作
+~~~~~~~~~~~~
+
+准备两台机器，一台做master，一台做minion。 保证两台的内网可通信。
+
+这个master和minion都要设定。才能安装。
+
+导入yum源认证的公钥
+
+::
+
+   rpm --import https://repo.saltstack.com/yum/redhat/7/x86_64/latest/SALTSTACK-GPG-KEY.pub
+
+安装yum源
+
+::
+
+   # $vim /etc/yum.repos.d/saltstack.repo
+
+   [saltstack-repo]
+   name=SaltStack repo for RHEL/CentOS $releasever
+   baseurl=https://repo.saltstack.com/yum/redhat/$releasever/$basearch/latest
+   enabled=1
+   gpgcheck=1
+   gpgkey=https://repo.saltstack.com/yum/redhat/$releasever/$basearch/latest/SALTSTACK-GPG-KEY.pub
+
+1.2 master
+~~~~~~~~~~
+
+安装salt-master
+
+::
+
+   yum install -y salt-master
+
+设定开机自启，并启动salt-master
+
+::
+
+   chkconfig salt-master on
+   service salt-master start
+
+开启端口
+
+::
+
+   firewall-cmd --permanent --zone=public --add-port=4505-4506/tcp
+   firewall-cmd --reload
+
+1.3 minion
+~~~~~~~~~~
+
+安装salt-minion
+
+::
+
+   yum install -y salt-minion
+
+修改配置 ``vim /etc/salt/minion``
+
+::
+
+   # 填写master的ip
+   master: 192.168.1.80
+
+   # 设定client的id/name，这里以hostname为例
+   id: nfs-server
+
+开启firewalld端口
+
+::
+
+   service firewalld start
+   firewall-cmd --permanent --zone=public --add-port=4505-4506/tcp
+
+设定iptables
+
+::
+
+   # 如果没有安装iptables，需要先安装 
+   yum install iptables-services
+
+   iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 4505 -j ACCEPT 
+   iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 4506 -j ACCEPT
+
+   service iptables save 
+
+设定开机自启，并启动salt-minion
+
+::
+
+   chkconfig salt-minion on
+   service salt-minion restart
+
+二、认证工作
+------------
+
+重启minion的服务后，在master上执行\ ``salt-key -L``\ 可以查看所有认证相关信息列表，\ ``salt-key -A``\ 可以通过所有认证。
+
+其他相关命令还有
+
+::
+
+   salt-key -L              ## 查看所有minion-key
+   salt-key -a <key-name>   ## 接受某个minion-key
+   salt-key -d <key-name>   ## 删除某个minion-key
+   salt-key -A              ## 接受所有的minion-key
+   salt-key -D              ## 删除所有的minion-key
+
+三、模块介绍
+------------
+
+3.1 Jinjia2模板
+~~~~~~~~~~~~~~~
+
+在介绍各种模块之前先提一下jinjia模板
+
+我们可以在sls文件里使用Jinjia2模板语言
+
+关于Jinjia2模板语言可以参看 http://jinja.pocoo.org/docs/2.10/
+
+在Jinjia2模板里，我们使用salt的各种基础组件来获取变量，通常使用的有\ ``salt``,\ ``grains``,\ ``pillar``\ 三种
+
+3.2 State
+~~~~~~~~~
+
+**state功能** state是Saltstack最核心的功能，通过预先定制好的sls（salt
+state
+file）文件对被控制主机进行状态管理，支持包括程序包（pkg）、文件（file）、网络配置（network）、系统服务（service）、系统用户（user）等。
+
+**state的定义**
+state的定义是通过sls文件进行描述的，支持YAML语法，定义规则如下：
+
+::
+
+   $ID: # 定义state名称，若是文件，可以文件名命名，若是服务，可以服务名命名等等
+     $state: # 须管理对象的类型:pkg,service,file,network,user
+       - $state: states # 定制对象的状态，不同类型的状态不一样
+
+服务/软件管理
+
+::
+
+   apache:
+     pkg:
+       - installed
+     service:
+       - running
+       - require:
+         - pkg: apache
+   # -------------或者这么写-------------------------
+   # <state_module>.<function>
+
+   apache:
+     pkg.installed: []
+     service.running:
+       - require:
+         - pkg: apache
+
+pkg要执行的方法：install，如未安装就进行安装，后面\ ``pkg.installed: []``\ 没有指定安装包，就会以name
+``apache``\ 为准。 否则就应该是这样,会要求安装\ ``iptables-services``
+
+::
+
+   unzip_VmpControllerRpmPackages:
+       pkg.installed:
+           - pkgs:
+             - iptables-services
+
+service要执行的方法：running，如未运行就进行启动
+关键字require，确保apache服务只有在成功安装软件包后才会启动
+
+来看一个复杂一点的例子
+
+::
+
+   apache:
+     pkg.installed: []
+     service.running:
+       - watch:
+         - pkg: apache
+         - file: /etc/httpd/conf/httpd.conf
+         - user: apache
+     user.present:
+       - uid: 87
+       - gid: 87
+       - home: /var/www/html
+       - shell: /bin/nologin
+       - require:
+         - group: apache
+     group.present:
+       - gid: 87
+       - require:
+         - pkg: apache
+
+   /etc/httpd/conf/httpd.conf:
+     file.managed:
+       - source: salt://apache/httpd.conf
+       - user: root
+       - group: root
+       - mode: 644
+
+这里新增了一个\ ``watch``\ ，它是做什么用的。顾名思义，监听。
+它会时刻监听\ ``pkg:apache``
+这个包若有更新，或者配置文件\ ``file: /etc/httpd/conf/httpd.conf``
+有更改，又或者用户uid ``user: apache``
+有变化，只要前面三个条件有一个变更了都会触发\ ``service.running``\ 执行
+
+执行远程脚本
+
+::
+
+   unzip_VmpControllerRpmPackages:
+       cmd.script:
+           - source: salt://controller/openstack-controller/files/VmpControllerInsttall.sh
+           - user: root
+
+推送文件
+
+::
+
+   /etc/neutron/plugin.ini:
+       file.managed:
+           - name: /etc/neutron/plugin.ini
+           - source: salt://controller/openstack-controller/files/plugin.ini
+           - user: neutron
+           - group: neutron
+           - mode: 640
+           - template: jinja
+
+3.3 Grains
+~~~~~~~~~~
+
+::
+
+   # 查看nfs-server这一台的grains变量，如果要查看所有就换成 *
+   salt 'nfs-server' grains.items
+
+   # 我们也可以自定义pillar，后面的文件名可以自已命名
+   # 自定义完需要同步一下，salt '*' saltutil.sync_all   
+   vim /etc/salt/minion.d/mygrains.conf
+
+   grains:
+       cloud:
+           int-iface: eth1
+           out-iface: eth0
+
+grains函数：\ `salt.modules.grains <https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.grains.html>`__
+
+3.4 Pillar
+~~~~~~~~~~
+
+在\ ``/srv/pillar`` 目录下
+
+::
+
+   # /srv/pillar目录是在哪里定义的，下面是默认的
+   # vim /etc/salt/master
+   pillar_roots:
+     base:
+       - /srv/pillar
+
+有一个top.sls这是入口 我们自己写一个common.sls文件，里面自定义我们的变量
+
+::
+
+   # 简单点
+   apache: httpd
+
+   # 复杂点
+   host_ip: {{ grains['ip4_interfaces'][grains['cloud']['int-iface']] }}
+
+   # 使用jinjia模板语言
+   {% if grains['os'] == 'CentOS' %}
+   apache: httpd
+   git: git 
+   {% elif grains['os'] == 'Debian' %}
+   apache: apache2
+   git: git-core
+   {% endif %}
+
+查看pillar变量
+
+::
+
+   salt '*' pillar.items
+   salt 'nfs-server' pillar.items 或者 salt 'nfs-server' pillar.data
+   salt 'nfs-server' pillar.get host_ip
+   salt 'nfs-server' pillar.get host_ip:private
+
+   # 在master上修改Pilla文件后，需要用以下命令刷新minion上的数据
+   salt 'nfs-server' saltutil.refresh_pillar
+
+salt.pillar函数：\ `salt.modules.pillar <https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.pillar.html>`__
+
+在state中如何调用pillar变量
+
+::
+
+   1. {{ pillar['apache']}}
+   2. {{ salt['pillar.get']('apache') }} 或者指定默认值 {{ salt['pillar.get']('apache', 'httpd') }} 
+
+四、目录结构
+------------
+
+主目录/srv/salt/ ``salt://`` == ``/srv/salt/``
+在这里配置\ ``vim /etc/salt/master``
+
+::
+
+   file_roots:
+     base:
+       - /srv/salt
+
+配置多环境
+
+::
+
+   file_roots:
+     base:
+       - /srv/salt/base
+     dev:
+       - /srv/salt/dev
+     prod:
+       - /srv/salt/prod
+     test:
+       - /srv/salt/test
+
+state.sls 和 state.highstate 有什么区别
+
+::
+
+   salt.modules.state.sls(mods,saltenv='base',test=None,exclude=None,queue=False,env=None,concurrent=False,**kwargs)
+
+从上面可以看出， state.sls 默认的运行环境是 base,另外通过查看了下
+saltstack 的 google groups ，发现绿肥也对这个解答了下， state.sls
+并不读取 top.sls，所以 state.sls 需要单独执行哪些 sls
+的话，需要你自定义。
+
+salt的sls调用是怎样的结构
+
+top.sls是入口文件
+
+::
+
+   # cat top.sls
+   base:
+       "*":
+           - nfs-server
+
+我们需要自己创建nfs-server工程（暂且叫工程吧）结构如下
+
+::
+
+   ├── nfs-server
+   │   ├── files
+   │   └── init.sls
+   └── top.sls
+
+   # -------或者--------
+
+   ├── nfs-server.sls
+   ├── nfs-server-files
+   └── top.sls
+
+   files和nfs-server-files是文件夹，里面放所有所需文件：文件/脚本/安装包
+
+五、其他命令
+------------
+
+salt命令格式
+
+::
+
+   salt '<target>' <function> [arguments]
+
+   <target>可以是以下内容：
+   1. 正则表达式
+   salt -E 'Minion*' test.ping  #主机名以Minion开通
+   2. 列表匹配
+   salt -L Minion,Minion1 test.ping
+   3. Grians匹配
+   salt -G 'os:CentOS' test.ping
+   4. 组匹配
+   salt -N groups test.ping
+   如，在master新建/etc/salt/master.d/nodegroups.conf ，yaml格式
+   5. 复合匹配
+   salt -C 'G@os:CentOS or L@Minion' test.ping
+   6. Pillar值匹配
+   salt -I 'key:value' test.ping
+   7. CIDR匹配
+   salt -S '10.252.137.0/24' test.ping
+
+常用命令
+
+::
+
+   # 检测网络
+   salt '*' test.ping
+
+   # 远程执行命令
+   salt '*' cmd.run 'ls -al'
+
+   # 同步
+   salt '*' saltutil.sync_all
+   salt minion01 saltutil.sync_all     # 同步所有模块
+   salt minion01 saltutil.sync_grains  # 只同步grains
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+

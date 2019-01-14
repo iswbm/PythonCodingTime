@@ -1,0 +1,353 @@
+1.7 15个Pythonic的代码示例
+==========================
+
+--------------
+
+Python由于语言的简洁性，让我们以人类思考的方式来写代码，新手更容易上手，老鸟更爱不释手。
+
+要写出
+Pythonic（优雅的、地道的、整洁的）代码，还要平时多观察那些大牛代码，Github
+上有很多非常优秀的源代码值得阅读，比如：requests、flask、tornado，这里小明收集了一些常见的
+Pythonic 写法，帮助你养成写优秀代码的习惯。
+
+01. 变量交换
+------------
+
+Bad
+
+.. code:: python
+
+   tmp = a
+   a = b
+   b = tmp
+
+Pythonic
+
+.. code:: python
+
+   a,b = b,a
+
+02. 列表推导
+------------
+
+Bad
+
+.. code:: python
+
+   my_list = []
+   for i in range(10):
+       my_list.append(i*2)
+
+Pythonic
+
+.. code:: python
+
+   my_list = [i*2 for i in range(10)]
+
+03. 单行表达式
+--------------
+
+虽然列表推导式由于其简洁性及表达性，被广受推崇。
+
+但是有许多可以写成单行的表达式，并不是好的做法。
+
+Bad
+
+.. code:: python
+
+   print 'one'; print 'two'
+
+   if x == 1: print 'one'
+
+   if <complex comparison> and <other complex comparison>:
+       # do something
+
+Pythonic
+
+.. code:: python
+
+   print 'one'
+   print 'two'
+
+   if x == 1:
+       print 'one'
+
+   cond1 = <complex comparison>
+   cond2 = <other complex comparison>
+   if cond1 and cond2:
+       # do something
+
+04. 带索引遍历
+--------------
+
+Bad
+
+.. code:: python
+
+   for i in range(len(my_list)):
+       print(i, "-->", my_list[i])
+
+Pythonic
+
+.. code:: python
+
+   for i,item in enumerate(my_list):
+       print(i, "-->",item)
+
+05. 序列解包
+------------
+
+Pythonic
+
+.. code:: python
+
+   a, *rest = [1, 2, 3]
+   # a = 1, rest = [2, 3]
+
+   a, *middle, c = [1, 2, 3, 4]
+   # a = 1, middle = [2, 3], c = 4
+
+06. 字符串拼接
+--------------
+
+Bad
+
+.. code:: python
+
+   letters = ['s', 'p', 'a', 'm']
+   s=""
+   for let in letters:
+       s += let
+
+Pythonic
+
+.. code:: python
+
+   letters = ['s', 'p', 'a', 'm']
+   word = ''.join(letters)
+
+07. 真假判断
+------------
+
+Bad
+
+.. code:: python
+
+   if attr == True:
+       print 'True!'
+
+   if attr == None:
+       print 'attr is None!'
+
+Pythonic
+
+.. code:: python
+
+   if attr:
+       print 'attr is truthy!'
+
+   if not attr:
+       print 'attr is falsey!'
+
+   if attr is None:
+       print 'attr is None!'
+
+08. 访问字典元素
+----------------
+
+Bad
+
+.. code:: python
+
+   d = {'hello': 'world'}
+   if d.has_key('hello'):
+       print d['hello']    # prints 'world'
+   else:
+       print 'default_value'
+
+Pythonic
+
+.. code:: python
+
+   d = {'hello': 'world'}
+
+   print d.get('hello', 'default_value') # prints 'world'
+   print d.get('thingy', 'default_value') # prints 'default_value'
+
+   # Or:
+   if 'hello' in d:
+       print d['hello']
+
+09. 操作列表
+------------
+
+Bad
+
+.. code:: python
+
+   a = [3, 4, 5]
+   b = []
+   for i in a:
+       if i > 4:
+           b.append(i)
+
+Pythonic
+
+.. code:: python
+
+   a = [3, 4, 5]
+   b = [i for i in a if i > 4]
+   # Or:
+   b = filter(lambda x: x > 4, a)
+
+Bad
+
+.. code:: python
+
+   a = [3, 4, 5]
+   for i in range(len(a)):
+       a[i] += 3
+
+Pythonic
+
+.. code:: python
+
+   a = [3, 4, 5]
+   a = [i + 3 for i in a]
+   # Or:
+   a = map(lambda i: i + 3, a)
+
+10. 文件读取
+------------
+
+Bad
+
+.. code:: python
+
+   f = open('file.txt')
+   a = f.read()
+   print a
+   f.close()
+
+Pythonic
+
+.. code:: python
+
+   with open('file.txt') as f:
+       for line in f:
+           print line
+
+11. 代码续行
+------------
+
+Bad
+
+.. code:: python
+
+   my_very_big_string = """For a long time I used to go to bed early. Sometimes, \
+       when I had put out my candle, my eyes would close so quickly that I had not even \
+       time to say “I’m going to sleep.”"""
+
+   from some.deep.module.inside.a.module import a_nice_function, another_nice_function, \
+       yet_another_nice_function
+
+Pythonic
+
+.. code:: python
+
+   my_very_big_string = (
+       "For a long time I used to go to bed early. Sometimes, "
+       "when I had put out my candle, my eyes would close so quickly "
+       "that I had not even time to say “I’m going to sleep.”"
+   )
+
+   from some.deep.module.inside.a.module import (
+       a_nice_function, another_nice_function, yet_another_nice_function)
+
+12. 显式代码
+------------
+
+Bad
+
+.. code:: python
+
+   def make_complex(*args):
+       x, y = args
+       return dict(**locals())
+
+Pythonic
+
+.. code:: python
+
+   def make_complex(x, y):
+       return {'x': x, 'y': y}
+
+13. 使用占位符
+--------------
+
+Pythonic
+
+.. code:: python
+
+   filename = 'foobar.txt'
+   basename, _, ext = filename.rpartition('.')
+
+14. 链式比较
+------------
+
+Bad
+
+.. code:: python
+
+   if age > 18 and age < 60:
+       print("young man")
+
+Pythonic
+
+.. code:: python
+
+   if 18 < age < 60:
+       print("young man")
+
+理解了链式比较操作，那么你应该知道为什么下面这行代码输出的结果是 False
+
+::
+
+   >>> False == False == True 
+   False
+
+15. 三目运算
+------------
+
+这个保留意见。随使用习惯就好。
+
+Bad
+
+.. code:: python
+
+   if a > 2:
+       b = 2
+   else:
+       b = 1
+   #b = 2
+
+Pythonic
+
+.. code:: python
+
+   a = 3   
+    
+   b = 2 if a > 2 else 1
+   #b = 2
+
+参考文档
+--------
+
+-  http://docs.python-guide.org/en/latest/writing/style/
+-  https://foofish.net/idiomatic_part2.html
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+

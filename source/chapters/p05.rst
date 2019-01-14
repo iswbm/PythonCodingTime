@@ -1,0 +1,27 @@
+=============================
+第五章：算法教程
+=============================
+
+这一章将开始我的算法之路，希望对你也有所帮助。
+
+参考文档：
+
+- `Algorithms and Data Structures using Python <http://interactivepython.org/courselib/static/pythonds/index.html>`_
+- `bubkoo 排序算法全解 <http://bubkoo.com/tags/algorithm/>`_ 
+- `算法珠玑 -- Using Java <https://soulmachine.gitbooks.io/algorithm-essentials/java/sorting/bucket-sort/index.html>`_
+- `Python -八大排序算法速度比较 <https://www.cnblogs.com/woider/p/6835466.html>`_
+- `图解排序算法(一)之3种简单排序(选择，冒泡，直接插入) <https://www.cnblogs.com/chengxiao/p/6103002.html>`_
+- `图解排序算法(二)之希尔排序 <https://www.cnblogs.com/chengxiao/p/6104371.html>`_
+- `Python - 堆排序 <http://blog.51cto.com/jx610/1702260>`_
+- `基数排序原理图解 <https://cloud.tencent.com/developer/article/1081001>`_
+
+
+本章节，会持续更新，敬请关注…
+
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   ../c05/*
