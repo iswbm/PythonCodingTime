@@ -894,6 +894,19 @@ Linux的分区的过程经历以下几个步骤
    # 删除分区前，先确认有没有挂载点，有的话需要先umount卸载
    $ fdisk /dev/vdb  然后再按d,w
 
+挂载分区 fstab
+
+::
+
+   # 当fstab的根分区被注释后，所有的文件都是只读的。连fstab文件也是，无法取消注释
+   mount -o remount,rw / 
+
+格化化分区
+
+::
+
+   mkfs.ext4 /dev/sdb1
+
 2.3 进程管理
 ~~~~~~~~~~~~
 
@@ -1229,7 +1242,7 @@ Linux上，硬件的设备驱动（如硬盘）和特殊设备文件（如\ ``/d
 例行性任务（crontab）
 ^^^^^^^^^^^^^^^^^^^^^
 
-参考以下文字 1.
+参考以下文章 1.
 `每天一个linux命令（50）：crontab命令 <http://www.cnblogs.com/peida/archive/2013/01/08/2850483.html>`__
 2. `鸟哥的私房菜 <http://linux.vbird.org/linux_basic/0430cron.php>`__
 
@@ -1253,6 +1266,21 @@ Linux上，硬件的设备驱动（如硬盘）和特殊设备文件（如\ ``/d
 
    # 删除任务(当前用户)，当然也可以指定用户
    $ crontab -r [-u user]
+
+除了以上，例行性任务还有可能在 /etc/cron.daily/ ,/etc/cron.hourly/,
+/etc/cron.monthly/, /etc/cron.weekly/ 下面。
+
+如果messages 不能正常回滚，可以考虑加个参数 ``-f``
+
+::
+
+   /usr/sbin/logrotate  -f /etc/logrotate.conf
+
+如果还不行，检查一下 ``/etc/logrotate.d/syslog``
+
+::
+
+   chmod 644  /etc/logrotate.d/syslog
 
 三、用户/权限管理
 -----------------
@@ -1417,6 +1445,14 @@ CentOS
    s：   保密性地删除文件或目录，即硬盘空间被全部收回。
    u：   与s相反，当设定为u时，数据内容其实还存在磁盘中，可以用于undeletion.
 
+切换用户执行命令
+
+::
+
+   $ su - zabbix -s /bin/bash
+
+   # 退出的话，使用exit
+
 四、网络管理
 ------------
 
@@ -1478,8 +1514,16 @@ CentOS
 3.
 `iptables详解 <http://blog.chinaunix.net/uid-26495963-id-3279216.html>`__
 
-4.2 开放端口
+4.2 端口相关
 ~~~~~~~~~~~~
+
+查询端口占用情况
+
+::
+
+   lsof -i:10051
+
+开放端口
 
 ::
 
@@ -1495,8 +1539,7 @@ CentOS
    # 检测是否开启完成
    $ netstat -tunl|grep 8500
 
-4.3 端口转发
-~~~~~~~~~~~~
+端口转发
 
 ::
 
@@ -1511,6 +1554,34 @@ CentOS
 
    # 测试一下，在浏览器输入 36.250.x.x:8500
    # 就可以看到我们的内容了。
+
+4.3 路由相关
+~~~~~~~~~~~~
+
+路由转发：snat
+
+::
+
+
+   # 1、开启转发
+   # vim /etc/sysctl.conf，sysctl -p 该命令可以查看是否修改成功
+   net.ipv4.ip_forwaed=1
+
+   # 或者可以执行下面这两条命令其中一条
+   echo 1 > /proc/sys/net/ipv4/ip_forward
+   sysctl -w net.ipv4.ip_forward=1 
+
+   # 2、在网关节点的 /etc/sysconfig/iptables 加上规则。
+   *nat
+   :PREROUTING ACCEPT [4730:370403]
+   :INPUT ACCEPT [501:29436]
+   :OUTPUT ACCEPT [3563:214910]
+   :POSTROUTING ACCEPT [3564:214973]
+   -A POSTROUTING -s 172.20.20.0/24 -o eth0 -j SNAT --to-source 58.xx.xx.xx
+   COMMIT
+
+   # 重启iptables
+   systemctl restart iptables
 
 4.4 ip 命令
 ~~~~~~~~~~~
