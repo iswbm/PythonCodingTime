@@ -362,3 +362,9 @@ arguments）。
    modules， "--mode", '-m'，只可选'init', 'config', 'final'处理函数：main_modules
    query，  "--name", '-n'，处理函数：main_query
    single，"--name", '-n'，--frequency，module_args，处理函数：main_single
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+
