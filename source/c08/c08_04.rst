@@ -7,24 +7,33 @@
 8.4.1.1 全虚拟化
 ~~~~~~~~~~~~~~~~
 
-**全虚拟化（英语：Full
-virtualization）**\ 是硬件虚拟化的一种，允许\ **未经修改**\ 的客操作系统（英语：Guest
+**全虚拟化（英语：Full virtualization）**\ 是硬件虚拟化的一种。
+
+通俗点讲，全虚拟化就是说，虚拟机的所有操作（CPU，内存，网络等）都需要经过一个运行在物理机上的虚拟化软件转发给物理机内核。而这个虚拟化软件，在windows上你常见且熟悉的有vmware，virtualbox。
+
+允许\ **未经修改**\ 的客操作系统（英语：Guest
 OS）隔离运行。在全虚拟化环境中，任何可以运行在裸机上的软件（通常是操作系统）都可以未经修改地运行在虚拟机中。
 
-虽然适应性较强，但是由于完全依赖软件模拟硬件接口，性能较低，不如半虚拟化。
+虽然适应性较强，但是由于完全依赖软件模拟硬件接口，全虚拟化的运行速度要快于硬件模拟，但是性能方面不如裸机，因为Hypervisor需要占用一些资源。不如半虚拟化。
+
+|image0|
 
 代表：VMWare(1998年)
 
-.. _全虚拟化-1:
+半虚拟化
+~~~~~~~~
 
-8.4.1.2 全虚拟化
-~~~~~~~~~~~~~~~~
+半虚拟化(英语：\ **Paravirtualization**)是另一种类似于全虚拟化的热门技术。
 
-半虚拟化(英语：\ **Paravirtualization**)是另一种类似于全虚拟化的热门技术。它在HOST上使用Hpervisor（虚拟机管理程序）提供便利的接口，使得Guest
+通俗点讲，半虚拟化对比全虚拟化，就是有一些可以直接操作物理内核空间，而不需要全部经过虚拟化软件。这就大大提高了虚拟机的性能。
+
+它在HOST上使用Hpervisor（虚拟机管理程序）提供便利的接口，使得Guest
 OS能够调用接口访问虚拟硬件。而条件是，Guest OS
 内部需要部署安装相应的驱动和软件逻辑，需要对操作系统进行修改。
 
 半虚拟化系统性能可以接近在裸机上的性能。
+
+|image1|
 
 代表：Xen（2006）
 
@@ -34,13 +43,13 @@ OS能够调用接口访问虚拟硬件。而条件是，Guest OS
 -  Xen是由一个后台守护进程维护的，叫做xend，要运行虚拟系统，必须先将它开启。
 -  Xen的配置工具有许多，我使用的是virt-manager（GUI）、virt-install和xm。第一个用于管理和安装系统，第二个只用于安装系统，第三个用于启动系统。
 
-8.4.1.3 硬件辅助虚拟化
-~~~~~~~~~~~~~~~~~~~~~~
+硬件辅助虚拟化
+~~~~~~~~~~~~~~
 
 硬件辅助虚拟化（英语：\ **Hardware-assisted
 virtualization**\ ），直接从硬件层面开始支持虚拟化。由硬件支持并提供多个虚拟硬件设备接口，这些设备由虚拟机内核驱动传递给虚拟机使用。使用这种方式，虚拟机能获得和宿主机一样的硬件功能，性能也和宿主机相近，同时原生操作系统本来就支持这项技术，因此无需对操作系统进行修改。
 
-缺点就是，硬件要支持虚拟化功能，但是随着虚拟化技术的发展，越来越多的硬件都已经支持虚拟化，成本也越来越低，所以硬件辅助虚拟化是目前最流行，使用最广泛的虚拟化技术。
+缺点就是，硬件要支持虚拟化功能，在以前这可能是缺点，但是现在随着虚拟化技术的发展，越来越多的硬件都已经支持虚拟化，成本也越来越低，所以硬件辅助虚拟化是目前最流行，使用最广泛的虚拟化技术。
 
 代表：KVM（2009）
 
@@ -54,3 +63,293 @@ kvm 的 内核模块：
 需要安装的软件
 
 -  qemu-kvm
+
+8.4.2 虚拟化技术
+----------------
+
+KVM
+^^^
+
+KVM(Kernel-based Virtual Machine)，意思是基于内核的虚拟机。
+
+KVM是集成到Linux内核的Hypervisor，是X86架构且硬件支持虚拟化技术（Intel
+VT或AMD-V）的Linux的全虚拟化解决方案。它是Linux的一个很小的模块，利用Linux做大量的事，如任务调度、内存管理与硬件设备交互等。
+
+Xen
+^^^
+
+Xen是第一类运行在裸机上的虚拟化管理程序。它支持全虚拟化和半虚拟化,Xen支持hypervisor和虚拟机互相通讯，而且提供在所有Linux版本上的免费产品，包括Red
+Hat Enterprise Linux和SUSE Linux Enterprise
+Server。Xen最重要的优势在于半虚拟化，此外未经修改的操作系统也可以直接在xen上运行(如Windows)，能让虚拟机有效运行而不需要仿真，因此虚拟机能感知到hypervisor，而不需要模拟虚拟硬件，从而能实现高性能。
+
+QEMU
+^^^^
+
+QEMU是一套由Fabrice
+Bellard所编写的模拟处理器的自由软件。Qemu，其中关键字emu，全称emulator，模拟器，所以单纯使用qemu是采用的完全虚拟化的模式。
+
+**那QEMU有什么用？它和KVM是什么关系呢？**
+
+准确来说，KVM是Linux
+kernel的一个模块。可以用命令modprobe去加载KVM模块。加载了模块后，才能进一步通过其他工具创建虚拟机。
+
+但仅有KVM模块是
+远远不够的，KVM是最底层的hypervisor，它仅用来模拟CPU的运行，缺少了对network和周边I/O的支持，所以我们是没法直接用它的。
+
+而QEMU-KVM就是一个完整的模拟器，它是基于KVM构建的，提供了完整的网络和I/O支持。
+
+说到了QEMU，其实它也是一个虚拟化软件。作用是什么呢，它相当于一个路由器，当Guest
+OS的内核想要操作物理硬件时，必须先经由Qemu转发，将操作指令转给真实的硬件。由于所有的指令都要从Qemu里面过一手，因而性能比较差。
+
+|image2|
+
+**总结**
+
+1. KVM 和 Xen 都是免费的。
+2. KVM 需要硬件支持（Intel
+   VT或AMD-V），集成在内核中，而Xen可在所有的Linux上运行，不需要硬件支持。
+
+libvirt
+^^^^^^^
+
+要解释libvirt是什么，只要知道为什么会需要libvirt就好了。
+
+-  虚拟化的底层可能是KVM，也可能是Xen，或者是其他市面上的Hypervisor，种类之繁多，如果没有一个统一的接口来管理它们，就太乱了，移植性非常差。
+-  Hypervisor ，以 qemu-kvm
+   为例，它的命令行虚拟机管理工具参数众多，难于使用。需要有一个工具将这些参数进行封装。
+
+这些都是在内核空间层做的事情，而我们用户创建、销毁虚拟机都是在用户空间层操作，这就尴尬了，我们没有权限。
+
+这下该 libvirt 出场了，libvirt分为服务端各客户端。
+
+服务端是libvirtd，而你所熟悉的virt，virt-install，virt-manager，virt-viewer
+等都是libvirt的客户端。
+
+目前，libvirt
+已经成为使用最为广泛的对各种虚拟机进行管理的工具和应用程序接口（API），而且一些常用的虚拟机管理工具（如virsh、virt-install、virt-manager等）和云计算框架平台（如OpenStack、OpenNebula、Eucalyptus等）都在底层使用libvirt的应用程序接口。
+
+|image3|
+
+8.4.3 KVM工具
+-------------
+
+-  Virsh：基于 libvirt 的 命令行工具 （CLI）
+
+-  Virt-Manager：基于 libvirt 的 GUI 工具
+
+-  virt-v2v：虚机格式迁移工具
+
+-  virt-\* 工具：包括 Virt-install （创建KVM虚机的命令行工具），
+   Virt-viewer
+   （连接到虚机屏幕的工具），Virt-clone（虚机克隆工具），virt-top 等
+
+-  libguestfs-tools：一组 Linux 下的 C 语言的 API
+   ，用来访问/修改虚拟机的磁盘映像文件。
+
+|image4|
+
+8.4.4 创建虚拟机
+----------------
+
+手工创建
+^^^^^^^^
+
+虚拟机的本质是宿主机上的一个进程，当你用OpenStack在界面，或者使用CLI创建了一个虚拟机时。你可以登陆到计算节点去，使用\ ``ps -ef|grep kvm``
+看下这个虚拟机的进程，是下面这样子的。
+
+天呐，参数多得让人头皮发麻。这要是没有通过 OpenStack
+创建，我得写这么长一串命令才能创建一台虚拟机。瞬间觉得 OpenStack
+牛逼了不少。
+
+.. code:: shell
+
+   $ /usr/libexec/qemu-kvm \
+   -name guest=instance-00000035, debug-threads=on \
+   -S -object secret,id=masterKey0,format=raw,file=/var/lib/libvirt/qemu/domain-216-instance-00000035/master-key.aes \
+   -machine pc-i440fx-rhel7.5.0,accel=kvm,usb=off,dump-guest-core=off \
+   -cpu host \
+   -m 16384 \
+   -realtime mlock=off \
+   -smp 2,maxcpus=32,sockets=2,cores=16,threads=1 \
+   -uuid 31d70882-194f-469b-855e-fcfa6736550d \
+   -smbios type=1,manufacturer=RDO,product=OpenStack Compute,version=0.0.1-1.el7.centos,serial=bc147bfe8a204d06a09f98387e46b890,uuid=31d70882-194f-469b-855e-fcfa6736550d,family=Virtual Machine \
+   -display none \
+   -no-user-config -nodefaults \
+   -chardev socket,id=charmonitor,path=/var/lib/libvirt/qemu/domain-216-instance-00000035/monitor.sock,server,nowait \
+   -mon chardev=charmonitor,id=monitor,mode=control \
+   -rtc base=utc,driftfix=slew \
+   -global kvm-pit.lost_tick_policy=delay \
+   -no-hpet -no-shutdown -boot strict=on \
+
+   -device piix3-usb-uhci,id=usb,bus=pci.0,addr=0x1.0x2 -drive file=/dev/hdd-volumes/31d70882-194f-469b-855e-fcfa6736550d_disk,format=raw,if=none,id=drive-virtio-disk0,cache=none,aio=native -device virtio-blk-pci,scsi=off,bus=pci.0,addr=0x4,drive=drive-virtio-disk0,id=virtio-disk0,bootindex=1 -drive file=/var/lib/nova/instances/31d70882-194f-469b-855e-fcfa6736550d/disk.config,format=raw,if=none,id=drive-ide0-0-0,readonly=on,cache=writeback \
+   -device ide-cd,bus=ide.0,unit=0,drive=drive-ide0-0-0,id=ide0-0-0 \
+   -netdev tap,fds=28:35,id=hostnet0,vhost=on,vhostfds=36:37 \
+   -device virtio-net-pci,mq=on,vectors=6,netdev=hostnet0,id=net0,mac=fa:16:3e:69:63:18,bus=pci.0,addr=0x3 -chardev pty,id=charserial0 -device isa-serial,chardev=charserial0,id=serial0 -device qxl-vga,id=video0,ram_size=67108864,vram_size=67108864,vram64_size_mb=0,vgamem_mb=16,max_outputs=1,bus=pci.0,addr=0x2 \
+   -device virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x5 -msg timestamp=on
+
+virsh 创建
+^^^^^^^^^^
+
+使用OpenStack创建的前提是你发搭建好OpenStack环境，由于这个环境部署比较复杂。所以你也可以使用virsh
+命令来创建。
+
+使用virsh
+创建之前，你需要准备好一个镜像（可以qcow2格式的，也可以是raw格式的）。
+
+然后你要准备一个xml文件，并写入你的虚拟机配置。
+
+.. code:: xml
+
+   <domain type='kvm' id='200'>
+     <name>ws_controller01</name>
+     <uuid>9f9424b1-57ea-4281-b650-8fb4de03fc68</uuid>
+     <memory unit='KiB'>12582912</memory>
+     <currentMemory unit='KiB'>12582912</currentMemory>
+     <vcpu placement='static'>6</vcpu>
+     <numatune>
+       <memory mode='strict' nodeset='0-1'/>
+       <memnode cellid='0' mode='strict' nodeset='0'/>
+       <memnode cellid='1' mode='strict' nodeset='1'/>
+     </numatune>
+     <resource>
+       <partition>/machine</partition>
+     </resource>
+     <os>
+       <type arch='x86_64' machine='pc-i440fx-rhel7.0.0'>hvm</type>
+       <boot dev='hd'/>
+       <boot dev='cdrom'/>
+     </os>
+     <features>
+       <acpi/>
+       <apic/>
+     </features>
+     <cpu mode='host-passthrough' check='none'>
+       <topology sockets='2' cores='3' threads='1'/>
+       <numa>
+         <cell id='0' cpus='0-2' memory='6291456' unit='KiB'/>
+         <cell id='1' cpus='3-5' memory='6291456' unit='KiB'/>
+       </numa>
+     </cpu>
+     <clock offset='utc'>
+       <timer name='rtc' tickpolicy='catchup'/>
+       <timer name='pit' tickpolicy='delay'/>
+       <timer name='hpet' present='no'/>
+     </clock>
+     <on_poweroff>destroy</on_poweroff>
+     <on_reboot>restart</on_reboot>
+     <on_crash>restart</on_crash>
+     <pm>
+       <suspend-to-mem enabled='no'/>
+       <suspend-to-disk enabled='no'/>
+     </pm>
+     <devices>
+       <emulator>/usr/libexec/qemu-kvm</emulator>
+       <disk type='file' device='disk'>
+         <driver name='qemu' type='qcow2'/>
+         <source file='/home/Vmp2.0-Cluster-dep/ws_controller01.qcow2'/>
+         <backingStore/>
+         <target dev='hda' bus='virtio'/>
+         <alias name='virtio-disk0'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x08' function='0x0'/>
+       </disk>
+       <controller type='pci' index='0' model='pci-root'>
+         <alias name='pci.0'/>
+       </controller>
+       <controller type='ide' index='0'>
+         <alias name='ide'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x1'/>
+       </controller>
+       <controller type='virtio-serial' index='0'>
+         <alias name='virtio-serial0'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
+       </controller>
+       <controller type='usb' index='0' model='piix3-uhci'>
+         <alias name='usb'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x2'/>
+       </controller>
+       <interface type='bridge'>
+         <mac address='52:54:00:d2:81:b0'/>
+         <source bridge='br0-ovs'/>
+         <virtualport type='openvswitch'>
+           <parameters interfaceid='abc10709-ebff-4d0f-8761-4b7fdaba0dc0'/>
+         </virtualport>
+         <bandwidth>
+           <inbound average='50000'/>
+           <outbound average='50000'/>
+         </bandwidth>
+         <target dev='vnet0'/>
+         <model type='virtio'/>
+         <alias name='net0'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+       </interface>
+       <interface type='bridge'>
+         <mac address='52:54:00:5e:91:38'/>
+         <source bridge='br0-ovs'/>
+         <virtualport type='openvswitch'>
+           <parameters interfaceid='cceb5703-185a-4f6f-b2ce-a7e273e52bdc'/>
+         </virtualport>
+         <bandwidth>
+           <inbound average='50000'/>
+           <outbound average='50000'/>
+         </bandwidth>
+         <target dev='vnet1'/>
+         <model type='virtio'/>
+         <alias name='net1'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
+       </interface>
+       <interface type='bridge'>
+         <mac address='52:54:00:b2:77:07'/>
+         <source bridge='br0-ovs'/>
+         <virtualport type='openvswitch'>
+           <parameters interfaceid='674716ab-243d-4137-bc01-aa2c33cca21a'/>
+         </virtualport>
+         <target dev='vnet6'/>
+         <model type='virtio'/>
+         <alias name='net2'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x09' function='0x0'/>
+       </interface>
+       <console type='pty' tty='/dev/pts/4'>
+         <source path='/dev/pts/4'/>
+         <target type='virtio' port='0'/>
+         <alias name='console0'/>
+       </console>
+       <input type='mouse' bus='ps2'>
+         <alias name='input0'/>
+       </input>
+       <input type='keyboard' bus='ps2'>
+         <alias name='input1'/>
+       </input>
+       <sound model='ich6'>
+         <alias name='sound0'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+       </sound>
+       <video>
+         <model type='qxl' ram='65536' vram='65536' vgamem='16384' heads='1' primary='yes'/>
+         <alias name='video0'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+       </video>
+       <memballoon model='virtio'>
+         <alias name='balloon0'/>
+         <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
+       </memballoon>
+     </devices>
+     <seclabel type='dynamic' model='dac' relabel='yes'>
+       <label>+0:+0</label>
+       <imagelabel>+0:+0</imagelabel>
+     </seclabel>
+   </domain>
+
+附录：参考文档
+--------------
+
+-  `libguestfs-tools工具常用命令 <https://blog.csdn.net/wenwenxiong/article/details/52223731>`__
+-  `libvirt 介绍 Libvrit for
+   KVM/QEMU <https://www.cnblogs.com/sammyliu/p/4558638.html>`__
+-  `我是虚拟机内核我困惑？ <https://mp.weixin.qq.com/s?__biz=MzI1NzYzODk4OQ==&mid=2247483820&idx=1&sn=8a44b992491aea03e55eefb4815a1958&chksm=ea15168edd629f98e622dcb94e64fbb4a75055da98d620e7c83071b5d6d428904fa5c8e9c4ad&scene=21#wechat_redirect>`__
+
+.. |image0| image:: http://image.python-online.cn/FqDTXLAxlDdtrsGndSurNeIEtehl
+.. |image1| image:: http://image.python-online.cn/FjJKZqDYDnrQrdk22fAWgYbKEneK
+.. |image2| image:: http://image.python-online.cn/FjlPaQLTiYCde92WhurWsRx6z8CK
+.. |image3| image:: https://i.loli.net/2019/02/25/5c73e070ef9e4.jpg
+.. |image4| image:: https://i.loli.net/2019/02/25/5c73e6160764a.png
+

@@ -137,7 +137,7 @@ aggregate管理
      private PROVIDER_NETWORK_CIDR
 
    # 创建子网，更多选项可以查看 neutron subnet-create -h
-   neutron subnet-create --name 192.168.2.0/24 --allocation-pool start=192.168.2.200,end=192.168.2.230 --gateway 192.168.2.253 --dns-nameserver 114.114.114.114 --disable-dhcp private 192.168.2.0、24
+   neutron subnet-create --name 192.168.2.0/24 --allocation-pool start=192.168.2.200,end=192.168.2.230 --gateway 192.168.2.253 --dns-nameserver 114.114.114.114 --disable-dhcp private 192.168.2.0/24
 
    # 查看网络
    $ neutron net-show <net_name>
@@ -260,7 +260,7 @@ aggregate管理
 1.2 virsh命令
 ~~~~~~~~~~~~~
 
-.. code:: shell
+::
 
    # 查看虚拟机的网卡信息
    $ virsh domiflist VM1
@@ -277,6 +277,19 @@ aggregate管理
    # 开机自启
    virsh autostart <vm_name>
    virsh list --autostart
+
+热增加网卡:\ ``virsh attach-device ws_controller01 ./tmp.xml --persistent --live``
+
+.. code:: xml
+
+   <interface type='bridge'>
+        <source bridge='br0-ovs'/>
+        <virtualport type='openvswitch'>
+        </virtualport>
+        <target dev='vnet4'/>
+        <model type='virtio'/>
+        <alias name='net1'/>
+   </interface>
 
 1.2 LVM管理
 ~~~~~~~~~~~

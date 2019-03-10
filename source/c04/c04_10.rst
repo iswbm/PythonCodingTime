@@ -507,6 +507,33 @@ limit子句：限制返回数据的量。
 
 |image23|
 
+六、系统查询
+------------
+
+--------------
+
+**查询各库的使用量**
+
+.. code:: mysql
+
+   select TABLE_SCHEMA, concat(truncate(sum(data_length)/1024/1024,2),' MB') as data_size,
+   concat(truncate(sum(index_length)/1024/1024,2),' MB') as index_size
+   from information_schema.tables
+   group by TABLE_SCHEMA
+   order by data_length desc;
+
+**查询一个库中各个表的使用量**
+
+.. code:: mysql
+
+   SELECT CONCAT(table_schema,'.',table_name) AS 'Table Name',
+    CONCAT(ROUND(table_rows/1000000,4),'M') AS 'Number of Rows', 
+    CONCAT(ROUND(data_length/(1024*1024*1024),4),'G') AS 'Data Size', 
+    CONCAT(ROUND(index_length/(1024*1024*1024),4),'G') AS 'Index Size', 
+    CONCAT(ROUND((data_length+index_length)/(1024*1024*1024),4),'G') AS 'Total' 
+   FROM information_schema.TABLES 
+   WHERE table_schema LIKE '%zabbix%' ORDER BY Total desc;
+
 --------------
 
 .. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg

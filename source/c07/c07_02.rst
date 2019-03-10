@@ -710,6 +710,23 @@ chk_zabbix.sh
 -  单台节点宕机（可以关闭keepalived服务模拟，也可以关机）
 -  双台节点宕机（不管是哪一台先启）
 
+10.4 数据清理
+~~~~~~~~~~~~~
+
+.. code:: mysql
+
+   # 查询各监控项的占用情况
+   select items.name,history.count from (select itemid,count(itemid) as count from history_uint group by itemid) as history,items where items.itemid=history.itemid;
+
+   # 查询zabbix库表的占用情况
+   SELECT CONCAT(table_schema,'.',table_name) AS 'Table Name',
+    CONCAT(ROUND(table_rows/1000000,4),'M') AS 'Number of Rows', 
+    CONCAT(ROUND(data_length/(1024*1024*1024),4),'G') AS 'Data Size', 
+    CONCAT(ROUND(index_length/(1024*1024*1024),4),'G') AS 'Index Size', 
+    CONCAT(ROUND((data_length+index_length)/(1024*1024*1024),4),'G') AS 'Total' 
+   FROM information_schema.TABLES 
+   WHERE table_schema LIKE '%zabbix%' ORDER BY Total desc;
+
 十一、高效运维
 --------------
 

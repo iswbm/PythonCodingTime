@@ -1,0 +1,131 @@
+8.5 OpenStack 源码剖析
+======================
+
+虚拟机是如何创建出来的？
+------------------------
+
+rpc 是如何调用的？
+------------------
+
+创建快照代码解读？
+------------------
+
+虚拟机状态
+----------
+
+vm_state 描述虚拟机当前的稳定状态，其值可以在
+``nova/compute/vm_states.py``\ 看到
+
+::
+
+   ACTIVE
+   BUILDING
+   PAUSED
+   SUSPENDED
+   STOPPED
+   RESCUED
+   RESIZED
+   SOFT_DELETED
+   DELETED
+   ERROR
+   SHELVED
+
+power_state
+描述的是从hypervisor传过来的状态，其值可在\ ``nova/compute/power_state.py``
+
+::
+
+   NOSTATE
+   RUNNING
+   PAUSED
+   SHUTDOWN
+   CRASHED
+   SUSPENDED
+
+task_state 描述的是中间任务状态，
+
+::
+
+   spawning
+   networking
+   scheduling
+   block_device_mapping
+
+在创建虚拟机时，会有几次会产生虚拟机状态（vm_state和task_state）的上报（到ceilomet
+er）。
+
+nova
+提供了一个配置项：notify_on_state_change，本意是想，如果配置\ ``vm_state``\ 就只在vm_state
+
+第一次，在\ ``manager.py:2050``\ 的函数
+``_do_build_and_run_instance``\ 里，看instance.save()大
+
+快照镜像
+--------
+
+入口函数在：\ ``nova/virt/libvirt/driver.py:snapshot()``
+
+会先获取imagebackend的类型，然后找到对应的backend
+
+.. code:: python
+
+   disk_path, source_format = libvirt_utils.find_disk(virt_dom)
+   source_type = libvirt_utils.get_disk_type_from_path(disk_path)
+   ...
+   snapshot_backend = self.image_backend.snapshot(instance,
+                                                  disk_path,
+                                                  image_type=source_type)
+
+接下来，会调用对应的imagebackend的\ ``snapshot_extract`` 方法。
+
+|image0|
+
+``snapshot_extract``
+方法最终会调用\ ``nova/virt/images.py:_convert_image()``
+，可以看出其实底层调用的是 ``qemu-img`` 提供的\ ``convert`` 接口。
+
+|image1|
+
+如果是qcow2的backend，不是调用这边，而是调用
+``nova/virt/libvirt/utils.py:extract_snapshot()``
+
+.. figure:: C:\Users\wangbm\AppData\Roaming\Typora\typora-user-images\1551944122412.png
+   :alt: 1551944122412
+
+   1551944122412
+
+如果要查询镜像压缩的时间，可以在compute上执行这个命令
+
+::
+
+   grep -E "Start executing commands|End executing commands" /var/log/nova/nova-compute.log
+
+以上，就是整个镜像创建的过程。
+
+独立磁盘模式的暂时不支持，原因分析如下。
+
+在\ ``libvirt_utils.get_disk_type_from_path``
+里没有相应的修改，导致返回的是lvm。
+
+|image2|
+
+后面的imagebackend也相应的变成 lvm的
+
+|image3|
+
+然后会进入 lvm这个backend的init函数。由于\ ``path`` 是\ ``/dev/sdb``
+并不是一个lv，所以这边会报错。
+
+.. figure:: C:\Users\wangbm\AppData\Roaming\Typora\typora-user-images\1551940635806.png
+   :alt: 1551940635806
+
+   1551940635806
+
+下次修改方法：一个是最开始获取\ ``source_type``\ 时判断为isolate，一个是后面
+``isolate``\ 的\ ``extract_snapshot`` 也要和lvm一样实现一下。
+
+.. |image0| image:: http://image.python-online.cn/FhRPy4B1xEI9SfoD2RcunJl15ZE3
+.. |image1| image:: http://image.python-online.cn/FuyMWZS6HF4g3rPwTlLcereZxg4L
+.. |image2| image:: http://image.python-online.cn/FnJA8RNIvJN2lAEXbKtJDpOLg1vg
+.. |image3| image:: http://image.python-online.cn/FnGyI8jCQFLCGi0pGVmI3SV6pDrv
+
