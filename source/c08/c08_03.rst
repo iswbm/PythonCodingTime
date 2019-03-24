@@ -3,29 +3,29 @@
 
 --------------
 
-这里仅以Ubuntu系统为例，其他系统也是类似。可以自行判断。
+这里仅以Ubuntu系统为例，其他系统也是类似，部分不同的地方会给出标注。
 
-一、准备工作
-------------
+8.3.1 准备工作
+--------------
 
 --------------
 
-1.1 下载iso文件
-~~~~~~~~~~~~~~~
+8.3.1.1 下载iso文件
+~~~~~~~~~~~~~~~~~~~
 
-下载链接：\ https://www.ubuntu.com/download/desktop
+下载链接
+
+-  ubuntu： https://www.ubuntu.com/download/desktop
+-  centos：\ `archive.kernel.org/centos-vault/ <archive.kernel.org/centos-vault/>`__
 
 .. code:: shell
 
    wget http://releases.ubuntu.com/16.04.3/ubuntu-16.04.3-server-amd64.iso
 
-1.2 安装原始系统
-~~~~~~~~~~~~~~~~
+8.3.1.2 安装原始系统
+~~~~~~~~~~~~~~~~~~~~
 
-1.2.1 准备工作
-^^^^^^^^^^^^^^
-
-主要有两点： 1. raw系统盘 2. xml文件
+步骤主要有两点： 1. raw系统盘 2. xml文件
 
 **raw系统盘**
 既然是安装系统，那就必须给系统一个地方放置系统，对于虚拟机来说，其系统盘在宿主机上就是一个文件。我们要先创建这个文件，然后在xml里指定，这就是它的系统盘，把系统安装在这里就行了。
@@ -103,8 +103,8 @@
     </devices>
    </domain>
 
-1.3 启动虚拟机
-~~~~~~~~~~~~~~
+8.3.1.3 启动虚拟机
+~~~~~~~~~~~~~~~~~~
 
 .. code:: shell
 
@@ -114,8 +114,8 @@
    # 查看 vnc spice 端口，比如是5909
    virsh dumpxml ubuntu-iso|grep spice
 
-1.4 安装系统
-~~~~~~~~~~~~
+8.3.1.4 安装系统
+~~~~~~~~~~~~~~~~
 
 安装系统需要可视化图形界面，而我们通常都是使用ssh连接到服务器端，这是没有可视化图形界面的。
 
@@ -146,11 +146,11 @@
 
 这样我们所安装的系统就已经存放在 ``ubuntu-16.04.raw`` 这个文件里。
 
-二、自定义镜像内容
-------------------
+8.3.2 自定义镜像内容
+--------------------
 
-2.1 转换镜像格式
-~~~~~~~~~~~~~~~~
+8.3.2.1 转换镜像格式
+~~~~~~~~~~~~~~~~~~~~
 
 还记得我们之前的镜像是 ``raw`` 格式的吧？ ``raw``
 文件，有一特点是你创建多大的盘，这个文件就有多大，而不是按需分配的。我们之前创建的是
@@ -164,8 +164,8 @@
 
 .. _启动虚拟机-1:
 
-2.2 启动虚拟机
-~~~~~~~~~~~~~~
+8.3.2.2 启动虚拟机
+~~~~~~~~~~~~~~~~~~
 
 上面得到的qcow2文件，这时候就要用起来了。用这个镜像文件启动一个虚拟机。
 
@@ -267,41 +267,34 @@
    virsh start ubuntu-16.04
    virsh console ubuntu-16.04
 
-2.3 设置ip地址
-~~~~~~~~~~~~~~
+8.3.2.3 设置ip地址
+~~~~~~~~~~~~~~~~~~
 
 由于我们后面安装东西需要联网。所以我们这边先设置下ip地址，保证虚拟机可以上网。
 
-.. code:: shell
+为了方便和不留下历史ip数据，我推荐使用命令来临时配置ip和网关，而不推荐使用配置文件。
 
-   1. 设置ip地址
-   vim /etc/network/interfaces
-   -------------------------
-   auto ens3
-   iface ens3 inet static
-   address 192.168.2.57
-   gateway 192.168.2.253
-   netmask 255.255.255.0
-   -------------------------
+::
 
-   2.设置dns
-   vim /etc/resolvconf/resolv.conf.d/base
-   -------------------------
+   # 配置ip
+   ifconfig ens3 172.20.20.122 up
+
+   # 配置网关，这个网关会做snat转发，所以可以上网
+   route add default gw 172.20.20.200 ens3
+
+检查并设置一下 dns ， 不然会装不了包。
+
+``ubuntu`` : ``/etc/resolvconf/resolv.conf.d/base``
+
+``centos`` : ``cat /etc/resolv.conf``
+
+::
+
    nameserver 8.8.8.8
-   nameserver 8.8.4.4
-   -------------------------
+   nameserver 114.114.114.114
 
-   3.刷新配置文件
-   resolvconf -u
-
-   4. 启用网卡
-   ifconfig ens3 up
-
-   5. 重启网络服务
-   /etc/init.d/networking restart
-
-2.4 ssh安装并设置
-~~~~~~~~~~~~~~~~~
+8.3.2.4 ssh安装并设置
+~~~~~~~~~~~~~~~~~~~~~
 
 纯净的系统，是没有 ``openssh`` 的，我们需要手动安装
 
@@ -324,17 +317,19 @@ ssh目录
    mkdir -p /root/.ssh
    chmod 700 /root/.ssh
 
-2.5 安装cloud-init
-~~~~~~~~~~~~~~~~~~
+8.3.2.5 安装cloud-init
+~~~~~~~~~~~~~~~~~~~~~~
 
-安装相关软件包
+**安装软件包**
 
 .. code:: shell
 
    sudo apt-get install cloud-init -y
    sudo apt-get install  acpid -y
 
-加入开机自启：
+**加入开机自启**
+
+ubuntu的命令如下
 
 .. code:: shell
 
@@ -343,7 +338,80 @@ ssh目录
    # 若要关闭开机自启：
    sudo update-rc.d -f acpid remove
 
-设置boot启动命令，可让 nova console-log 获取虚拟机启动日志
+centos命令如下
+
+::
+
+   chkconfig acpid on
+
+配置cloud-init: ``/etc/cloud/cloud.cfg``
+
+.. code:: sehll
+
+   # 允许root登陆
+   disable_root: false
+
+   # 开启ssh
+   ssh_pwauth:   1
+
+如果有自定义的模块，可以放在
+``/usr/lib/python2.7/site-packages/cloudinit/config`` 目录下
+
+然后在cloud-init 的配置文件里相应的配置上这个模块即可。
+
+就比如，我写了一个自定义的模块：\ ``cc_ws_virt_network_dep.py``
+
+那我就在 ``/etc/cloud/cloud.cfg`` 的 ``cloud_final_modules``
+阶段配置中写入
+
+::
+
+    - ws_virt_network_dep
+
+8.3.2.6 实现系统盘自动扩容
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+原文：\ `OpenStack CentOS
+镜像根分区自动扩展 <https://xiexianbin.cn/openstack/2016/12/14/centos-root-partition-auto-grow>`__
+
+-  centos5：太老不支持
+
+-  centos6：CentOS 6
+   要实现分区自动扩展，要安装以下三个包，通过yum安装可能安装不了，可以通过下载离线rpm包来安装：\ `cloud-utils-growpart <https://centos.pkgs.org/6/epel-x86_64/cloud-utils-growpart-0.27-10.el6.x86_64.rpm.html>`__\ ，\ `dracut-modules-growroot <https://centos.pkgs.org/6/epel-x86_64/dracut-modules-growroot-0.20-2.el6.noarch.rpm.html>`__
+
+   ::
+
+      yum install cloud-init cloud-utils-growpart dracut-modules-growroot
+
+   生新生成 initramfs
+
+   ::
+
+      dracut -f
+
+-  centos7：CentOS 7 使用的是 3.10 ( > 3.8 ) 的内核，所以并不需要
+   dracut-modules-growroot 包 ( 源里面也并没有这个包 )。
+   只安装以下两个包就可以了。
+
+   ::
+
+      yum install cloud-init cloud-utils-growpart
+
+8.3.2.7 开启console
+~~~~~~~~~~~~~~~~~~~
+
+原文参考：\ `CentOS 配置
+console登录 <https://opstrip.com/2017/01/09/open-console-on-centos6-centos7/>`__
+
+如果确认虚拟机grub已经设置了，就是xml的问题。将virtio 改成 serial
+
+::
+
+   <console type='pty'>
+     <target type='serial' port='0'/>
+   </console>
+
+Ubuntu16.04
 
 .. code:: shell
 
@@ -353,9 +421,59 @@ ssh目录
    # 重新生成配置
    grub-mkconfig -o /boot/grub/grub.cfg
 
-关闭防火墙
+CentOS 6.X
 
 ::
+
+   1. 添加ttyS0的许可，允许root登录
+   # echo "ttyS0" >> /etc/securetty
+
+   2. 修改 /etc/grub.conf 文件
+   在/etc/grub.conf文件中kernel行末尾追加console=ttyS0
+
+   3. 修改/etc/inittab文件（可省略）
+   在/etc/inittab中加入
+   S0:12345:respawn:/sbin/agetty ttyS0 115200
+
+   4. 重启
+   # reboot
+
+CentOS 7.X
+
+::
+
+   1. 编辑文件/etc/sysconfig/grub，或者/etc/default/grub 文件
+   在GRUB_CMD_LINELINUX行末尾添加console=ttyS0，类似以下这样：
+
+   GRUB_TIMEOUT=5
+   GRUB_DEFAULT=saved
+   GRUB_DISABLE_SUBMENU=true
+   GRUB_TERMINAL_OUTPUT="console"
+   GRUB_CMDLINE_LINUX="rd.lvm.lv=centos/root rd.lvm.lv=centos/swap crashkernel=auto rhgb quiet console=ttyS0"
+   GRUB_DISABLE_RECOVERY="true"
+
+   2. 并以root权限运行以下命令：
+   stty -F /dev/ttyS0 speed 9600
+   grub2-mkconfig -o /boot/grub2/grub.cfg 或者 grub-mkconfig -o /boot/grub/grub.cfg
+   systemctl start getty@ttyS0
+
+   完成后验证。
+
+8.3.2.8 其他自定义的选项
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+CentOS6 创建快照前需要先删除\ ``75-persistent-net-generator.rules``
+文件，不然网卡会往上叠加。
+
+可以使用如下方法解决
+
+::
+
+   ln -s /dev/null /etc/udev/rules.d/70-persistent-net.rules
+
+关闭防火墙
+
+.. code:: shell
 
    # 先安装工具
    sudo apt-get install selinux-utils 
@@ -369,11 +487,7 @@ ssh目录
 
 设置cloud-init参数
 
-::
-
-   vim /etc/cloud/cloud.cfg
-   # >>> disable_root: false
-   # >>> ssh_pwauth:   1
+.. code:: shell
 
 若有其他要修改的地方，可自行修改。然后关机虚拟机
 
@@ -390,6 +504,10 @@ ssh目录
    镜像制作示例 <http://docs.ocselected.org/openstack-manuals/kilo/image-guide/content/ubuntu-image.html>`__
 -  `OpenStack
    虚拟机镜像制作指南 <http://docs.ocselected.org/openstack-manuals/kilo/image-guide/content/index.html>`__
+-  `OpenStack CentOS
+   镜像根分区自动扩展 <https://xiexianbin.cn/openstack/2016/12/14/centos-root-partition-auto-grow>`__
+-  `CentOS 配置
+   console登录 <https://opstrip.com/2017/01/09/open-console-on-centos6-centos7/>`__
 
 --------------
 

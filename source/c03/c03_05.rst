@@ -1,56 +1,126 @@
 3.5 源码解读：Flask上下文与代理模式
 ===================================
 
-在 Flask 中有三个非常重要的对象，你肯定不会感到陌生。
+在上一节中，我跟大家一起深入了解了一下Python的「上下文管理器
+」。而今天呢，还是和上下文有关的话题。只不过这里的上下文和上一节的内容有点不一样，上下文管理器是管理代码块级别的上下文，而今天要讲的上下文是工程项目中的上下文。
+
+可能你现在对\ **上下文**\ 这个概念，还是不太清楚。这里再简单说明一下
+
+一段程序或函数的运行，很多情况下，是需要依赖程序外的变量才能够运行的，一旦脱离了这些变量，程序就没法正常工作。这些外部变量，按照常规的做法，是将这些变量做为函数的参数，一个一个地传入进去。这是一种做法，对于简单的小程序完全没有问题，一旦在较大的工程项目中，还采用这样的做法，就显得过于笨重，不灵活了。
+
+一个较好的做法是，将这些项目全局中需要频繁用到的变量值整合在一起，而这些值的集合就是上下文。只要在需要的时候，从这个上下文中取就好了。
+
+在 Flask 中，有两种上下文
+
+-  application context
+-  request context
+
+``application context`` 会存储一个 app 里可以全局共享里的变量。而
+``request context`` 会存储一个从外部发起的请求的所有信息。
+
+一个 Flask 项目里，可以有多个 app， 而在一个 app 里会有多个
+request。这是它们之间的对应关系。
+
+上面说了，上下文可以实现 ``信息共享``\ ，但同时有一点很重要，就是
+``信息隔离`` 。在多个 app 同时运行的时候，要能保证一个 app
+不能访问和改变到另一个 app 的变量。这个很重要。
+
+那么具体是如何做到 ``信息隔离`` 的呢？
+
+接下来，就要提到在 Flask 中三个很常见的对象，你应该不会感到陌生。
 
 -  Local
 -  LocalProxy
 -  LocalStack
 
-今天就要来理解一下这三个都是什么，他们在 Flask
-中所担任的角色，以及和这三者息息相关的上下文机制。
+这三个对象都是 ``werkzeug`` 里提供的，定义的 ``local.py`` 里。
 
 3.5.1 Local
 -----------
 
-首先来讲一下\ ``Local``
-，记得在以前的「并发编程系列」的第五篇有讲过线程的\ ``信息隔离``\ 。和这里的\ ``Local``\ 是一个作用
+首先是 ``Local`` ，记得在以前的「并发编程系列」的第五篇线程的
+``信息隔离`` 的时候，提过了 ``threading.local``
+，它是专门用来存储当前线程的变量的。
 
-什么是\ ``信息隔离``\ 呢？比如说现有两个线程，线程A里的运行环境，和线程B里运行环境变量不能共享。这就是\ ``信息隔离``\ 。
+而 Flask 里的 Local 和这它的是一个作用。
 
-在线程中，是通过\ ``threading``
-模块自带的\ ``local``\ 对象来存储的。但有一个问题是这个\ ``local``\ 的隔离是线程级别的。
+Local 的代码并不多，需要注意的就两点：
 
-而在web开发中，线程级别的隔离已经不能满足要求了，因为多个请求是很有可能会跑在同一个线程中的。在web应用里中，我们需要的是请求级别的隔离。这个时候\ ``werkzeug``
-的\ ``Local``\ 就派上用场了，它就是用来实现请求级别变量的隔离。一个请求会对应一个Local
-对象。
+1. 变量是存储在\ ``__storage__`` 里的。这个玩意是个嵌套字典。
 
-Local
-是请求级别的对象，当一个请求结束时，需要有更高一层的管理器对这个请求的数据做一些清理回收。这个管理器就叫做：\ ``LocalManager``\ ，除此之外，还可以通过
-``local_manager.locals.append(local)`` 动态添加local对象。
+   .. code:: python
 
-下面是一个精简示例，\ ``make_middleware`` 函数是主角。
+      # 0 和 1 是线程 id
+      self.__storage__['0'][key] = value
+      self.__storage__['1'][key] = value
+
+2. local 是需要被 ``localmanager`` 管理的，在请求结束后，会调用
+   ``localmanager.cleanup()`` 函数，其实是调用
+   ``local.__release_local__``
+   进行数据清理。是如何做到的呢，看下面这段代码。
+
+   .. code:: python
+
+      from werkzeug.local import Local, LocalManager
+
+      local = Local()
+      local_manager = LocalManager([local])
+
+      def application(environ, start_response):
+          local.request = request = Request(environ)
+          ...
+
+      # make_middleware会确保当request结束时，所有存储于local中的对象的reference被清除
+      application = local_manager.make_middleware(application)
+
+以下就是 ``Local`` 的代码：
 
 .. code:: python
 
-   from werkzeug.local import Local, LocalManager
+   class Local(object):
+       __slots__ = ('__storage__', '__ident_func__')
 
-   local = Local()
-   local_manager = LocalManager([local])
+       def __init__(self):
+           object.__setattr__(self, '__storage__', {})
+           object.__setattr__(self, '__ident_func__', get_ident)
 
-   def application(environ, start_response):
-       local.request = request = Request(environ)
-       ...
+       def __iter__(self):
+           return iter(self.__storage__.items())
 
-   # make_middleware会确保当request结束时，所有存储于local中的对象的reference被清除
-   application = local_manager.make_middleware(application)
+       def __call__(self, proxy):
+           """Create a proxy for a name."""
+           return LocalProxy(self, proxy)
+
+       def __release_local__(self):
+           self.__storage__.pop(self.__ident_func__(), None)
+
+       def __getattr__(self, name):
+           try:
+               return self.__storage__[self.__ident_func__()][name]
+           except KeyError:
+               raise AttributeError(name)
+
+       def __setattr__(self, name, value):
+           ident = self.__ident_func__()
+           storage = self.__storage__
+           try:
+               storage[ident][name] = value
+           except KeyError:
+               storage[ident] = {name: value}
+
+       def __delattr__(self, name):
+           try:
+               del self.__storage__[self.__ident_func__()][name]
+           except KeyError:
+               raise AttributeError(name)
 
 3.5.2 LocalStack
 ----------------
 
 ``LocalStack``
-，从命名上，可以知道，他是一个栈结构的对象。它存储的主要有两种上下文，\ ``AppContext``
-和 ``RequestContext``\ 。
+，从命名上，可以知道，他是一个栈结构的对象。它的作用就是用来存储
+``Local`` 对象的。的主要有两种上下文，\ ``AppContext`` 和
+``RequestContext``\ 。
 
 当一个请求发起后，flask会把RequestContext推入一个LocalStack中（\ ``_request_ctx_stack``\ ），而在推入之前，其实它会去检测另一个LocalStack（\ ``_app_ctx_stack``\ ）是否为空，如果为空就先将app的上下文信息push到\ ``_app_ctx_stack``\ ，然后再去把请求的上下文信息push到\ ``_request_ctx_stack``
 里。
