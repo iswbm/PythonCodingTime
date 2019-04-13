@@ -1,5 +1,5 @@
-4.15 PyCharm 高效使用手册
-=========================
+4.15 10个 PyCharm 小技巧
+========================
 
 刚开始做公众号的时候，更新频率正常是一周两到三篇。老读者应该有注意到，以前都是写系列教程，对于读者而言，系列教程会更加友好，学习起来会更容易深入浅出，而对于作者来说，写系列教程，更有一种使命感，而这种使命感是维持更新一大动力。
 
@@ -140,6 +140,10 @@ command + 鼠标左键
    Command + F11    打上书签
    Shift + F11      展示所有书签
 
+   在windows上可以使用
+   F11              删除书签
+   Ctrl + Shift + 1  添加“1”序号的标签
+
 在你要打书签的位置，按下 ``Command`` + ``F11``
 ，你可以给这个位置加个序号，可以是数字也可以是字母，假如在下面这个位置
 加了 ``1`` 这个序号，下次你就可以使用 ``Control`` + ``1``
@@ -149,6 +153,159 @@ command + 鼠标左键
 
 当然你也可以不加，不加的话就是匿名书签了。你可以使用 ``Shift`` + ``F11``
 展示所有的书签，再进行跳转。
+
+4.15.6 神一样的调试技巧
+-----------------------
+
+假如我们在一个爬虫的项目中，会使用到 正则表达式
+来匹配我们想要抓取的内容。正则这种东西，有几个人能够一步到位的呢，通常都需要经过很多次的调试才能按预期匹配。在我们改了一次正则后，运行了下，需要重新向网站抓取请求，才能发现没有匹配上，然后又改了一版，再次运行同样需要发起请求，结果还是发现还是没有匹配上，往往复复，正则不好的同学可能要进行几十次的尝试。
+
+（上面这个例子可能不太贴切，毕竟是有很多种方法实现不用重新发请求，只是列举了一种很笨拙且低效的调试过程，你看看就好了）
+
+而我们在这几十次的调试中，向同一网站发起请求都是没有意义的重复工作。如果在
+Pycharm 中可以像 IPython Shell 和 Jupyter Notebook
+那样，可以记住运行后所有的变量信息，可以在不需要重新运行项目或脚本，就可以通过执行命令表达式，来调整我们的代码，进行我们的正则调试。
+
+答案当然是有。
+
+假如我在调试如下几行简单的代码。在第 3 行处打了个断点。然后点击图示位置
+``Show Python Prompt`` 按钮。
+
+|image12|
+
+就进入了 ``Python Shell`` 的界面，这个Shell
+环境和我们当前运行的程序环境是打通的，变量之间可以互相访问，这下你可以轻松地进行调试了。
+
+|image13|
+
+上面我们打了个断点，是为了方便说明这个效果。并不是说一定要打断点。如果不打断点，在脚本执行完成后，也仍然可以在这个界面查看并操作所有变量。
+
+|image14|
+
+现在我们已经可以满足我们的调试的需求，但是每次运行脚本，都要手动点击
+``Show Python Prompt``
+，有点麻烦。嗯？其实这个有地方可以设置默认打开的。这个开关还比较隐秘，一般人还真发现不了。
+
+你需要点击图示位置 ``Edit Configurations`` 处。
+
+|image15|
+
+然后在这里打勾选中。
+
+|image16|
+
+设置上之后，之后你每次运行后脚本后，都会默认为你存储所有变量的值，并为你打开
+console 命令行调试界面。
+
+除了上面这种方法，其实还有一种方法可以在调试过程中，执行命令表达式，而这种大家可能比较熟悉了，这边也提一下，就当是汇总一下。但是从功能上来说，是没有上面这种方法来得方便易用的。因为这种方法，必须要求你使用
+debug 模式运行项目，并打断点。
+
+使用方法就是，在你打了断点后，在图示位置处，点击右键使用
+``Evaluate Expression``
+
+|image17|
+
+就弹出了一个 ``Evaluate Expression`` 窗口，这里
+可以运行命令表达式，直接操作变量。
+
+|image18|
+
+4.15.7 指定参数执行脚本
+-----------------------
+
+你在 Pycharm 运行你的项目，通常是怎么执行的？我的做法是，右键，然后点击
+``Run``\ ，或者使用快捷键 ``Shift + F10`` 。
+
+有时候，在运行/调试脚本的时候，我们需要指定一些参数，这在命令行中，直接指定即可。
+
+假设在命令行中，运行脚本的命令是这样
+
+.. code:: shell
+
+   python main.py init --local
+
+对于刚使用 Pycharm 的同学，可能并不知道 Pycharm
+也是可以指定参数的。点击下图位置
+
+|image19|
+
+进入设置面板，在 ``Script parameters`` 中填入参数即可。
+
+|image20|
+
+同时在上图的底部，你可以看到，这里可以很方便的切换
+解释器，比你跑到这边来要容易得多吧
+
+|image21|
+
+4.15. 8 搜索时过滤测试文件
+--------------------------
+
+接下来，介绍一个，我看框架源码的时的一个小技巧，可能只适用一小部分人吧。
+
+我平时会看的框架是 OpenStack ，我不知道其他框架是怎样的，但在 OpenStack
+里面带有大量（真的很多）的单元测试文件。这给我在使用 ``Find in Path``
+时带来了不小的困扰，你可以从下图的搜索结果中感受一下，搜索一个函数，test
+文件里的结果比 正常文件要多很多。
+
+|image22|
+
+这些测试文件的搜索结果，对于我们看源代码不仅没有任何帮助的，更重要的是还干扰视线。于是我就研究了一下，从文件名入手，只要在
+``File mask`` 里填写 ``!test*``
+可以将这些test文件过滤掉。搜索结果一下子清晰很多。
+
+|image23|
+
+4.15.9 关闭烦人的灯泡提示
+-------------------------
+
+本来没有想写这个的，但是知乎上有一位朋友有这个需求，那我研究了下。
+
+|image24|
+
+先来说下这个灯泡提示是什么，有什么用？
+
+当我们在代码里面有语法错误，或者代码编写不符合 pep8
+代码规范时，鼠标选择有问题的代码，就会自动弹出小灯泡，这个灯泡是有颜色之分的，如果是红灯泡，一般都是语法问题，如果不处理会影响代码运行。而如果是黄灯泡，就只是一个提示，提示你代码不规范等，并不会影响程序的运行。
+
+虽然这个灯泡，是出于善意之举，但我认为它确实有点多余（可能是我个人没有使用它的习惯），要是语法错误会有红色波浪线提示。你可能会说灯泡不仅起到提示的作用，它还可以自动纠正代码，我个人感觉并没有人工校正来得效率，来得精准。
+
+基于有时还会像知乎上这个朋友说的这样，会挡住我们的代码，会经常误点，这确实也是一个烦恼。
+
+我研究了下，Pycharm
+（2018版本）里是有开关按钮的，将下图中的这个选项（\ ``Show intention bulb``\ ）取消勾选，就可以关闭这个功能。
+
+|image25|
+
+4.15.10 关闭碍眼的波浪线
+------------------------
+
+下面我先给出了一小段代码示例，思考一下，为什么name，my_name
+不会有波浪线，而 myname 和 wangbm 会有波浪线呢？
+
+|image26|
+
+Pycharm
+本身会实时地对变量名进行检查，如果变量名不是一个已存在的英文单词，就会出现一条波浪线，当一个变量里有多个单词时，Python
+推荐的写法是用下划线来分隔（其他语言可能会习惯使用\ ``驼峰式命名法``
+，但 Python 是使用下划线），所以在 Pycharm 看来 my_name 是规范的，而
+myname 会被当成是一个单词对待，由于它在单词库里并没有它，所以 myname
+是不规范的。
+
+每个人的变量命名习惯不一样，如何你在项目里大量使用了 myname
+这种风格的变量命名方法，像下面这样（随便找了一段 cloudinit
+的代码），是让人挺不舒服的，总有一种代码有 bug 的错觉。
+
+|image27|
+
+那么如何关闭这个非语法级别的波浪线呢？很简单，它的开关就在你的右下角那个像
+人头像 一样的按钮
+
+|image28|
+
+然后选择 ``Syntax`` 级别的即可。同样一段代码，效果如下，干净了很多。
+
+|image29|
 
 --------------
 
@@ -168,4 +325,22 @@ command + 鼠标左键
 .. |image9| image:: https://i.loli.net/2019/03/23/5c965275bf0d7.gif
 .. |image10| image:: https://i.loli.net/2019/03/23/5c9653e1b757a.gif
 .. |image11| image:: http://image.python-online.cn/20190324111429.png
+.. |image12| image:: http://image.python-online.cn/Fi3N02x9OeOPatGdaReam_icn9G_
+.. |image13| image:: http://image.python-online.cn/Fj1W53Txj0iFs5eYhFYh_dHlPtIL
+.. |image14| image:: http://image.python-online.cn/FlMsB7B1x6ET9mLOgydTWuTEXuOe
+.. |image15| image:: http://image.python-online.cn/FmfL3r0iWx_srT_xMASBEp1ZaaId
+.. |image16| image:: http://image.python-online.cn/FiNCYpVlI93gk1zhOdQn4c0A8FMX
+.. |image17| image:: http://image.python-online.cn/FrAq1tVRM7Bz948wRqZFzU2PQnI0
+.. |image18| image:: http://image.python-online.cn/Fo2aEraqbj_2KqDt44EzJTVe8pEf
+.. |image19| image:: http://image.python-online.cn/FmfL3r0iWx_srT_xMASBEp1ZaaId
+.. |image20| image:: http://image.python-online.cn/FujczKwTUPa8l5EEmS0eoh-zL1Nk
+.. |image21| image:: http://image.python-online.cn/Fq60WOdcRJopqV6MVoRcIuZclYKx
+.. |image22| image:: http://image.python-online.cn/FlXynbyxh8tTrCpc4tVLqycL7JQm
+.. |image23| image:: http://image.python-online.cn/FiD91PR1hUu0Ruc6cmZ7EGNM6Be_
+.. |image24| image:: http://image.python-online.cn/FhkX5Ko3LVZL_p7YfitDsTDxvHmL
+.. |image25| image:: http://image.python-online.cn/FuSSVa-aMqkfCaf62sbUoX2PLaYM
+.. |image26| image:: http://image.python-online.cn/FtFPI89AOKmPLNpNxf-jdkn1BDLW
+.. |image27| image:: http://image.python-online.cn/FiKyU6tjQauWXfaVfKLhwi3NkXBf
+.. |image28| image:: http://image.python-online.cn/FsAM-8HyzSrLWZJ_lg3ofw84_ibf
+.. |image29| image:: http://image.python-online.cn/FgJCtNYkjPfBaTbRxwb3Z6icHqkf
 

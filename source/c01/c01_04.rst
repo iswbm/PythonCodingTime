@@ -1,3 +1,70 @@
-1.4 什么是猴子补丁？
-================================
+1.4 什么是猴子补丁?
+===================
+
+也许你没用过猴子补丁，但是你必须知道，在Python/Ruby
+这类脚本语言中，有一种用法叫 Monkey Patch 。
+
+这名字挺好玩的哈。在网上，关于这个名称的来源，大致有如下两种说法：
+
+1、第一种说法。这个用法，原本叫“Guerrilla Patch”，Guerrilla
+意为「游击队」，理解起来，就是这个补丁，哪里需要它，它就会出现在哪里，和运行状态打补丁这个功能可以说很形象了。后来老外发现，Guerrilla
+和 Gorilla 读音是几乎一样的，说着说着就说成了Gorilla Patch，Gorilla
+是大猩猩的意思，有点吓人，那干脆就叫 Monkey Patch 吧。
+
+2、在英文中，\ ``monkeying about``\ 这个词意为
+顽皮的，而猴子补丁这种用法
+将原来的代码弄乱了，跟猴子一样调皮，有异曲同工之妙，所以这才将这种用法叫
+做猴子补丁。
+
+.. _什么是猴子补丁-1:
+
+1.4.1 什么是猴子补丁
+--------------------
+
+在程序运行时给代码加补丁的方法被称为 Monkey Patch 。
+
+用法大概就是如下面这样
+
+::
+
+   from SomeOtherProduct.SomeModule import SomeClass
+
+   def speak(self):
+       print（"ok!"）
+
+   SomeClass.speak = speak
+
+它从代码中可以看出，它可以在需要的时候（运行时），给外部模块（内建，第三方模块，自定义模块）
+添加/替换 方法。
+
+-  在运行时替换方法、属性等
+-  在不修改第三方代码的情况下增加原来不支持的功能
+-  在运行时为内存中的对象增加patch而不是在磁盘的源代码中增加
+
+1.4.2 实例讲解
+--------------
+
+这里举一个添加方法的例子
+
+::
+
+   import pandas as pd
+   def just_foo_cols(self):
+       """Get a list of column names containing the string 'foo'
+
+       """
+       return [x for x in self.columns if 'foo' in x]
+
+   pd.DataFrame.just_foo_cols = just_foo_cols # monkey-patch the DataFrame class
+   df = pd.DataFrame([list(range(4))], columns=["A","foo","foozball","bar"])
+   df.just_foo_cols()
+   del pd.DataFrame.just_foo_cols # you can also remove the new method
+
+在openstack中的例子
+
+|image0|
+
+还有就是gevent中也有用到。
+
+.. |image0| image:: http://image.python-online.cn/20190404215330.png
 
