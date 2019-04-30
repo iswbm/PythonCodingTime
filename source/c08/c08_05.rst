@@ -1,17 +1,17 @@
 8.5 OpenStack 源码剖析
 ======================
 
-虚拟机是如何创建出来的？
+8.5.1 虚拟机是如何创建出来的？
+------------------------------
+
+8.5.2 rpc 是如何调用的？
 ------------------------
 
-rpc 是如何调用的？
-------------------
+8.5.3 创建快照代码解读？
+------------------------
 
-创建快照代码解读？
-------------------
-
-虚拟机状态
-----------
+8.5.4 虚拟机状态
+----------------
 
 vm_state 描述虚拟机当前的稳定状态，其值可以在
 ``nova/compute/vm_states.py``\ 看到
@@ -60,8 +60,8 @@ nova
 第一次，在\ ``manager.py:2050``\ 的函数
 ``_do_build_and_run_instance``\ 里，看instance.save()大
 
-快照镜像
---------
+8.5.5 快照镜像如何实现？
+------------------------
 
 入口函数在：\ ``nova/virt/libvirt/driver.py:snapshot()``
 
@@ -124,8 +124,8 @@ nova
 下次修改方法：一个是最开始获取\ ``source_type``\ 时判断为isolate，一个是后面
 ``isolate``\ 的\ ``extract_snapshot`` 也要和lvm一样实现一下。
 
-资源上报
---------
+8.5.6 宿主机资源采集上报
+------------------------
 
 compute的资源上报，是在
 ``nova/compute/resource_tracker.py:_init_compute_node`` 里。
@@ -140,108 +140,87 @@ compute的资源上报，是在
 从数据库获取旧数据
 ``self.compute_node = self._get_compute_node(context)``
 
-cloud-init
-----------
+8.5.7 资源主机调度实现
+----------------------
 
-cloud-init 是 linux 的一个工具，当系统启动时，cloud-init 可从 nova
-metadata 服务或者 config drive 中获取
-metadata，完成一些虚拟机的初始化工作，这些工作有可能是每台虚拟机例行的动作，如配置ip，也有可能是定制化动作，如注入密码等。
+一般情况下一个 OpenStack
+中，会部署有许多个计算节点。当我们创建一个虚拟机时，OpenStack
+如何决定要将我们的虚拟机创建在哪里呢？这就是 openstack-nova-scheduler
+要做的事，顾名思义，它是对集群内的所有计算节点的资源情况进行比较，从而选出一台最适合我们当前虚拟机创建的节点，再把请求发到
+这一台节点上的 openstack-nova-compute 去进行真正的创建过程。
 
-为了实现 instance 定制工作，cloud-init 会按 4 个阶段执行任务：
-
-1. local
-2. init
-3. config
-4. final
-
-一开始，我很疑惑这些任务是如何执行的，cloud-init
-既没有服务，也没有加入rc.local
-中。直到某天我意外地执行了\ ``chkconfig --list``\ ，
-原来这些脚本也可以以这样的方式开机自启。
+从源代码中看，最开始是 nova-conductor （nova/conductor/manager.py）在给
+nova-compute 发创建请求前，会先让 nova-scheduler
+选出一台资源充足的计算节点。
 
 |image5|
 
-当然这几个阶段你也可以通过执行命令来手动执行
-
-1. cloud-init init –local 或者 cloud-init init -l
-2. cloud-init init 或者 cloud-init modules -m init
-3. cloud-init modules -m config
-4. cloud-init modules -m final
-
-除了这几个命令之外，还有几个
-
--  cloud-init query -n [name]
--  cloud-init single -n [name] –frequency
-
-以上，这些命令都是看源码我才得知的，以下是对应阶段处理的函数
-
--  ``init``\ ：main_init
--  ``modules``\ ：main_modules
--  ``query``\ ：main_query
--  ``single``\ ：main_single
-
-在 init
-阶段，有一个非常重要的步骤是配置网络，接下来就来源码解读一下这个流程在代码里是如何进行的。
-
-首先当然是入口文件，如果是 比较早期的版本，入口文件是在
-``/usr/bin/cloud-init`` 如果是较新的版本，入口文件是在
-``cloudinit/cmd/main.py`` ，函数调用如下图
+nova-scheduler 的调度主要由两部分组成
 
 |image6|
 
-其中 ``on_first_boot`` 是在cloudinit
-判断为新虚拟机时才会执行。也就是说，这个部署网络的步骤在一个虚拟机生命周期里，只会执行一次，如果要二次执行，可执行
-``rm -rf /var/lib/cloud`` ，将缓存数据删除。
+-  过滤器：filter，将不满足条件（硬性条件，比如内存，cpu，磁盘，pci设备等）的计算节点，直接过滤掉。意义：从过滤器出来的那些计算节点，理论上都可以创建虚拟机。
+-  称重器：weigher，对满足硬性条件的众多主机按照一定的规则进行权重配比。意义：经过称重器计算，选出你更希望在哪台节点上创建虚拟机。
 
-而在 ``get_data`` 里，会先创建一个临时目录，将 ``/dev/sr0`` 挂载过来
+不管是过滤器，还是称重器，它们都需要两个参数
 
-|image7|
+-  hosts：多个 host_state
+   的集合，包含有当前可用的计算节点信息（资源，ip等）。其中单个元素是
+   HostState
+   （nova/scheduler/host_manager.py）类的实例。如果你想添加其他原来没有的信息，比如
+   compute 的 id，可以在 ``_update_from_compute_node``
+   函数中添加。它会从compute_nodes 表中取得你想要的信息。
 
-然后从 ``ConfigDrive`` 里读取数据，而后将读取的数据存入
-``/var/lib/cloud/instance/obj.pkl``\ ，
-而后续执行都将从这里反序列化，提高速度。
+   |image7|
 
-而如果从 ``ConfigDrive``
-获取不到数据，则会跳过网卡配置，将扫描出来的第一块网卡配置成 dhcp
-模式。。这是非常关键的一步，只有当网卡正确配置后，才能获取到 metadata。
+-  spec_obj：你所要请求创建的虚拟机信息（模板，镜像等）。它是从
+   objects.RequestSpec.from_primitives 中取得的
 
-如果是按照旧虚拟机创建新的快照镜像，然后使用这个镜像创建新的虚拟机，有可能会在同一块网卡上出现新旧两个ip，这是因为虚拟机在启动过程中，会先读取原网络配置配置ip，然后才会运行
-cloud-init 进行新ip的配置，而新ip的配置是使用 ``ifup``
-这个命令\ |image8|
+   |image8|
 
-使用这种方式并不会将第一次配置的旧ip给清除掉。\ |image9|
+过滤器，它的代码如下：
 
-这个问题，目前我只在CentOS6 中遇到过。通过先 ``ifdown`` 再 ``ifup``
-就可以解决这个问题。
+|image9|
 
-.. code:: python
+称重器，它的规则主要看这段代码。
 
-       def _bring_up_interface(self, device_name):
-           cmd_down = ['ifdown', device_name]
-           cmd_up = ['ifup', device_name]
+|image10|
 
-           LOG.debug("Attempting to run bring up interface %s using command %s",
-                      device_name, cmd_up)
-           try:
-               (_out, err) = util.subp(cmd_down)
-               if len(err):
-                   LOG.warn("Running %s resulted in stderr output: %s", cmd_down, err)
-               (_out, err) = util.subp(cmd_up)
-               if len(err):
-                   LOG.warn("Running %s resulted in stderr output: %s", cmd_up, err)
-               return True
-           except util.ProcessExecutionError:
-               util.logexc(LOG, "Running interface command %s failed", cmd_up)
-               return False
+我在代码中，加了几段日志。从左到右，三个不同颜色的内容分别为，原始权值，配重系数（越高说明越占比越大，越影响最终结果），经过
+nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮点数）。
+
+|image11|
+
+那最终的权值如何计算呢？
+
+1. 先计算每一个称重器后的权重： weights \* multipier
+2. 最后按不同的compute 将权重相加起来。
+
+8.5.8 手动引入上下文环境
+------------------------
+
+有两种方式可以生成context
+
+1. 如果有请求req（在nova-api里），可以使用这种
+
+|image12|
+
+2. 其他地方可以使用这种
+
+|image13|
 
 .. |image0| image:: http://image.python-online.cn/FhRPy4B1xEI9SfoD2RcunJl15ZE3
 .. |image1| image:: http://image.python-online.cn/FuyMWZS6HF4g3rPwTlLcereZxg4L
 .. |image2| image:: http://image.python-online.cn/FnJA8RNIvJN2lAEXbKtJDpOLg1vg
 .. |image3| image:: http://image.python-online.cn/FnGyI8jCQFLCGi0pGVmI3SV6pDrv
 .. |image4| image:: http://image.python-online.cn/FrbE6oEZ3vtTWwDfMNQ16MGi6SWr
-.. |image5| image:: http://image.python-online.cn/FvK6li1P4mPIZv9RsZ1J4kV6cgFF
-.. |image6| image:: http://image.python-online.cn/FntUO_tNeRLN21uu_PowFhZ_wyBu
-.. |image7| image:: http://image.python-online.cn/FpqcyL4hWwpaAGzsdreQwXvH4Rx8
-.. |image8| image:: http://image.python-online.cn/Fp1TeHSiIMIQoZygbW9VSfAagB_d
-.. |image9| image:: http://image.python-online.cn/Fh-5SQ8qYjhJEKovI6LmIpabSy2c
+.. |image5| image:: http://image.python-online.cn/20190424212211.png
+.. |image6| image:: http://image.python-online.cn/20190424213430.png
+.. |image7| image:: http://image.python-online.cn/20190424214653.png
+.. |image8| image:: http://image.python-online.cn/20190424214540.png
+.. |image9| image:: http://image.python-online.cn/20190424221602.png
+.. |image10| image:: http://image.python-online.cn/20190424215735.png
+.. |image11| image:: http://image.python-online.cn/20190424220008.png
+.. |image12| image:: http://image.python-online.cn/20190426153322.png
+.. |image13| image:: http://image.python-online.cn/20190426152148.png
 

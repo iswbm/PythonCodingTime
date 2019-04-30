@@ -278,6 +278,9 @@ aggregate管理
    virsh autostart <vm_name>
    virsh list --autostart
 
+   # 修改虚拟机密码，需要虚拟机内部安装 qga：qemu-guest-agent
+   virsh set-user-password instance-00000444 root "root12#$"
+
 热增加网卡:\ ``virsh attach-device ws_controller01 ./tmp.xml --persistent --live``
 
 .. code:: xml

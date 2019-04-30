@@ -1,0 +1,80 @@
+8.7 OpenStack 实现GPU直通
+=========================
+
+8.7.1
+-----
+
+检查是否有 GPU 设备：\ ``lspci | grep NVIDIA``
+
+|image0|
+
+此时查看，驱动是 nvidia
+
+|image1|
+
+::
+
+   [root@ws_compute11 ~]# lspci -nnk -d 10de:1bb3
+   03:00.0 3D controller [0302]: NVIDIA Corporation Device [10de:1bb3] (rev a1)
+       Subsystem: NVIDIA Corporation Device [10de:11d8]
+       Kernel driver in use: nvidia
+   04:00.0 3D controller [0302]: NVIDIA Corporation Device [10de:1bb3] (rev a1)
+       Subsystem: NVIDIA Corporation Device [10de:11d8]
+       Kernel driver in use: nvidia
+
+修改内核，开启直通，在\ ``/etc/default/grub`` 文件里
+``GRUB_CMDLINE_LINUX`` 行，添加 ``intel_iommu=on``
+
+未创建虚拟机
+
+|image2|
+
+创建gpu虚拟机成功，driver 由 nvidia 变为 vfio-pci
+
+|image3|
+
+删除虚拟机成功
+
+|image4|
+
+在P版之前，创建gpu直通的虚拟机，在虚拟机内部能NIVIDIA显卡的驱动是能检测到自己是跑在虚拟机里的（如下图，先安装
+``cpuid`` 再执行\ ``cpuid |grep hypervisor_id``
+，显示KVM），如果在虚拟机里驱动就会出错，所以我们需要对显卡驱动隐藏hypervisor
+id。
+
+|image5|
+
+在P版之前，需要开发者自己修改xml ，在 feature 标签里添加这段
+
+.. code:: xml
+
+       <kvm>
+         <hidden state='on'/>
+       </kvm>
+
+然后destroy再start一下虚拟机，在虚拟机内部执行
+
+|image6|
+
+在OpenStack的Pike版本中的Glance
+镜像引入了img_hide_hypervisor_id=true的property，所以可以对镜像执行如下的命令隐藏hupervisor
+id。
+
+::
+
+   openstack image set IMG-UUID --property img_hide_hypervisor_id=true
+
+.. code:: xml
+
+   <kvm>
+     <hidden state='on'/>
+   </kvm>
+
+.. |image0| image:: http://image.python-online.cn/20190419144135.png
+.. |image1| image:: http://image.python-online.cn/20190419144044.png
+.. |image2| image:: http://image.python-online.cn/20190422201117.png
+.. |image3| image:: http://image.python-online.cn/20190422201041.png
+.. |image4| image:: http://image.python-online.cn/20190422201117.png
+.. |image5| image:: http://image.python-online.cn/20190422205222.png
+.. |image6| image:: http://image.python-online.cn/20190422204755.png
+

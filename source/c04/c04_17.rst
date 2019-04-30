@@ -1,0 +1,250 @@
+4.17 23种设计模式
+=================
+
+4.17.1 策略模式
+---------------
+
+完成一项任务往往有多种方式，我们将其称之为策略。
+
+比如，超市做活动，如果你的购物积分满1000，就可以按兑换现金抵用券10元，如果购买同一商品满10件，就可以打9折，如果如果购买的金额超过500，就可以享受满减50元的优惠。这是三个不同的促销策略。
+
+再比如，联系朋友、同学，可以打电话，也可以发短信，可以发微信，也可以发邮件，这是四个不同的联系策略。
+
+再比如，去外出旅游，我们可以选择火车，也可以选择公共汽车，可以选择飞机，也可以选择自驾游。这又是四个不同的出行策略。
+
+以上这些真实场景，都有策略选择模型的影子，可以考虑使用策略模式。
+
+经典的策略模式，是由三部分组成
+
+-  Context：上下文环境类
+-  Stragety：策略基类
+-  ConcreteStragety：具体策略
+
+|image0|
+
+以第一个超市做活动的场景来举个例子。
+
+-  Context：Order类，订单信息，包括商品，价格和数量，以为购买者等
+-  Stragety：Promotion类，抽象基类，包含一个抽象方法（计算折扣）
+-  ContreteStragety：分三个类，FidelityPromo，BulkItemPromo，LargeOrderPromo，实现具体的折扣计算方法。
+
+首先是 Order 类：
+
+.. code:: python
+
+   class Item:
+       def __init__(self, issue, price, quantity):
+           self.issue = issue
+           self.price = price
+           self.quantity = quantity
+
+       def total(self):
+           return self.price * self.quantity
+
+   class Order:
+       def __init__(self, customer, promotion=None):
+           self.cart = []
+           self.customer = customer
+           self.promotion = promotion
+
+       def add_to_cart(self, *items):
+           for item in items:
+               self.cart.append(item)
+
+       def total(self):
+           total = 0
+           for item in self.cart:
+               total += item.total()
+
+           return total
+
+       def due(self):
+           if not self.promotion:
+               discount = 0
+           else:
+               discount  = self.promotion.discount(self)
+           return (self.total() - discount)
+
+然后是积分兑换现金券的策略，为了保证我们的代码具有良好的可扩展性及维护性，我会先写一个策略类，它是一个抽象基类，它的子类都是一个具体的策略，都必须实现
+``discount`` 方法，就比如咱们的积分兑换现金策略。
+
+.. code:: python
+
+   from abc import ABC, abstractmethod
+
+   class Promotion(ABC):
+       @abstractmethod
+       def discount(self, order):
+           pass
+
+
+   class FidelityPromo(Promotion):
+       '''
+       如果积分满1000分，就可以兑换10元现金券
+       '''
+       def discount(self, order):
+           return 10 if order.customer.fidelity >1000 else 0
+
+假设现在小明去商场买了一件衣服（600块），两双鞋子（200*2），他的购物积分有1500点。
+
+在平时，商场一般都没有活动，但是长年都有积分换现金抵用券的活动。
+
+.. code:: python
+
+   >>> from collections import namedtuple
+
+   # 定义两个字段：名字，购物积分
+   >>> Customer = namedtuple('Customer', 'name fidelity')
+   >>> xm = Customer('小明', 1500)
+   >>> item1 = Item('鞋子', 200, 3)
+   >>> item2 = Item('衣服', 600, 1)
+   >>> order = Order(xm, FidelityPromo())
+   >>> order.add_to_cart(item1, item2)
+
+   # 原价 1200，用上积分后，只要1190
+   >>> order
+   <Order Total:1200 due:1190>
+
+眼看着，五一节也快了，商场准备大搞促销
+
+-  只要单项商品购买10件，即可9折。
+-  如果订单总金额大于等于500，就可以立减50。
+
+有了此前我们使用 ``策略模式``
+打下的基础，我们并不是使用硬编码的方式来配置策略，所以不需要改动太多的源码，只要直接定义五一节的两个促销策略类即可（同样继承自
+Promotion 抽象基类），就像插件一样，即插即用。
+
+.. code:: python
+
+   class BulkItemPromo(Promotion):
+       '''
+       如果单项商品购买10件，即可9折。
+       '''
+       def discount(self, order):
+           discount = 0
+           for item in order.cart:
+               if item.quantity >= 10:
+                   discount += item.total() * 0.1
+           return discount
+
+   class LargeOrderPromo(Promotion):
+       '''
+       如果订单总金额大于等于500，就可以立减50
+       '''
+       def discount(self, order):
+           discount = 0
+           if order.total() >= 500:
+               discount = 50
+
+           return discount
+
+看到商场活动如此给力，小明的钱包也鼓了起来，开始屯起了生活用品。
+
+如果使用了第一个策略，原价600，只需要花 580
+
+.. code:: python
+
+   >>> from collections import namedtuple
+   >>> Customer = namedtuple('Customer', 'name fidelity')
+
+   >>> xm = Customer('小明', 300)
+
+   >>> item1 = Item('纸巾', 20, 10)
+   >>> item2 = Item('食用油', 50, 4)
+   >>> item3 = Item('牛奶', 50, 4)
+
+
+   >>> order = Order(xm, BulkItemPromo())
+   >>> order.add_to_cart(item1, item2, item3)
+
+   >>> order
+   <Order Total:600 due:580.0>
+
+如果使用了第二个策略，原价600，只需要花550
+
+.. code:: python
+
+   >>> from collections import namedtuple
+   >>> Customer = namedtuple('Customer', 'name fidelity')
+
+   >>> xm = Customer('小明', 300)
+
+   >>> item1 = Item('纸巾', 20, 10)
+   >>> item2 = Item('食用油', 50, 4)
+   >>> item3 = Item('牛奶', 50, 4)
+
+
+   >>> order = Order(xm, LargeOrderPromo())
+   >>> order.add_to_cart(item1, item2, item3)
+
+   >>> order
+   <Order Total:600 due:550>
+
+两个策略即插即用，只需要在前台下订单时，选择对应的策略即可，原业务逻辑无需改动。
+
+.. code:: python
+
+   >>> order = Order(xm, BulkItemPromo())
+   >>> order = Order(xm, LargeOrderPromo())
+
+但是问题很快又来了，商场搞活动，却让顾客手动选择使用哪个优惠策略，作为一个良心的商家，应该要能自动对比所有策略得出最优惠的价格来给到顾客。这就要求后台代码要能够找出当前可用的全部策略，并一一比对折扣。
+
+.. code:: python
+
+   # 找出所有的促销策略
+   all_promotion = [globals()[name] for name in globals() if name.endswith('Promo') and name != 'BestPromo']
+
+   # 实现一个最优策略类
+   class BestPromo(Promotion):
+       def discount(self, order):
+           # 找出当前文件中所有的策略
+           all_promotion = [globals()[name] for name in globals() if name.endswith('Promo') and name != 'BestPromo']
+
+           # 计算最大折扣
+           return max([promo().discount(order) for promo in all_promotion])
+
+在前台下订单的时候，就会自动计算所有的优惠策略，直接告诉顾客最便宜的价格。
+
+.. code:: python
+
+   # 直接选择这个最优策略
+   >>> order = Order(xm, BestPromo())
+   >>> order.add_to_cart(item1, item2, item3)
+
+   >>> order
+   <Order Total:600 due:550>
+
+通过以上例子，可以总结出使用\ ``策略模式``\ 的好处
+
+1. 扩展性优秀，移植方便，使用灵活。可以很方便扩展策略；
+2. 各个策略可以自由切换。这也是依赖抽象类设计接口的好处之一；
+
+但同时，策略模式 也会带来一些弊端。
+
+1. 项目比较庞大时，策略可能比较多，不便于维护；
+2. 策略的使用方必须知道有哪些策略，才能决定使用哪一个策略，这与迪米特法则是相违背的。
+
+对于以上的例子，仔细一想，其实还有不少可以优化的地方。
+
+比如，为了实现经典的模式，我们先要定义一个抽象基类，再实现具体的策略类。对于上面这样一个简单的计算折扣价格逻辑来说，其实可以用函数来实现，然后在实例化
+Order
+类时指定这个策略函数即可，大可不必将类给搬出来。这样就可以避免在下订单时，不断的创建策略对象，减少多余的运行时消耗。这里就不具体写出代码了。
+
+所以学习设计模式，不仅要知道如何利用这样的模式组织代码，更要领会其思想，活学活用，灵活变通。
+
+以上，就是今天关于 ``策略模式``
+的一些个人分享，如有讲得不到位的，还请后台留言指正！
+
+参考文档
+--------
+
+-  《流畅的Python》
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+
+
+.. |image0| image:: http://image.python-online.cn/20190414144511.png
+

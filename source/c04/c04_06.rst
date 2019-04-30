@@ -371,6 +371,30 @@ add/commit 前撤销对文件的修改
 
 配置完后我们就可以进行clone线上代码了。 |image2|
 
+7.3 使用 SourceTree
+~~~~~~~~~~~~~~~~~~~
+
+Git 的使用全都是命令行的，由于没有那么直观，所以很容易就会误操作。
+
+在这里，我推荐使用 SourceTree 这个Git可视化管理工具（Github出品的Github
+Desktop真心觉得不好用）。
+
+可以点击这里下载：https://cn.atlassian.com/software/sourcetree
+
+在Mac 上安装很方便，在 Windows 上可能会需要你安装 `.net Framwork
+4.7.2 <https://www.microsoft.com/net/download/dotnet-framework-runtime/net472?utm_source=getdotnet&utm_medium=referral>`__
+。
+
+下载安装完后，进入初始界面，需要登陆一下https://bitbucket.org/（没有的话就注册一下
+）。
+
+然后你可以将你的本地仓库直接拖进来管理，也可以直接连接github。
+
+需要注意的是，使用它需要你进行一步操作。在 7.2
+章节，我在机器上生成了一对私钥和公钥，在这里需要配置一下才能正常访问和提交我们的Github仓库。
+
+|image3|
+
 --------------
 
 .. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
@@ -380,4 +404,5 @@ add/commit 前撤销对文件的修改
 .. |image0| image:: https://i.loli.net/2018/04/15/5ad2c06e8893d.png
 .. |image1| image:: https://i.loli.net/2018/04/15/5ad2c14727198.png
 .. |image2| image:: https://i.loli.net/2018/04/15/5ad2c2a9813b9.png
+.. |image3| image:: http://image.python-online.cn/20190430235625.png
 

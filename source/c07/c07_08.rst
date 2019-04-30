@@ -1,5 +1,5 @@
 7.8 Keepalived 部署文档
-~~~~~~~~~~~~~~~~~~~~~~~
+=======================
 
 参考文档：\ `keepalived搭建zabbix
 server双机高可用 <https://segmentfault.com/a/1190000008684320>`__

@@ -126,7 +126,7 @@ Zabbix Proxy 是一个数据收集器，它不计算触发器、不处理事件�
    $ mysql -uroot -p<password> zabbix < *.sql
 
    # 若要导出数据库
-   $ mysqldump -P 63751 -u zabbix -h 219.157.114.200 -p "ZABBIXdev0409!@#$" zabbix > zabbix.sql
+   $ mysqldump -P $port -u zabbix -h $host -p'$passwd' zabbix > zabbix.sql
 
 修改完成后，重启服务
 
@@ -462,7 +462,7 @@ agent或者proxy，或者server执行都可以，非常灵活。
 |image15|
 
 7.2.3.5 配置发件人
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 Zabbix 要能发送邮件，需要配置邮箱发送方。这里以163邮箱为例（可自行调整）
 
@@ -477,8 +477,23 @@ vim /etc/mail.rc
 
    echo "zabbix test mail" |mail -s "zabbix" yyy@163.com
 
+如果标题和正文有中文，发送的邮件可能会出现乱码或者正文会在outlook里会以
+outlook 的形式展现。
+
+为了解决这个问题，可以使用下面这个 ``sendmail.sh``
+
+.. code:: bash
+
+   #!/bin/bash
+   touch /tmp/mailtmp.txt
+   FILE=/tmp/mailtmp.txt 
+   echo "$3" >$FILE
+   dos2unix -k $FILE
+   mailx -s "$2" "$1" < $FILE
+   rm -rf /tmp/mailtmp.txt
+
 7.2.3.6 配置收件人
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 上面我们一直说发邮件，那发给谁呢？这个需要我们来配置一下。
 
@@ -693,7 +708,7 @@ float ，log， text 等，所以计算存在一定的误差，需留有冗余�
 .. |image14| image:: http://image.python-online.cn/20190404205837.png
 .. |image15| image:: http://image.python-online.cn/20190404212423.png
 .. |image16| image:: http://image.python-online.cn/20190411205822.png
-.. |image17| image:: https://i.loli.net/2018/11/20/5bf3b81b98367.png
+.. |image17| image:: http://image.python-online.cn/20190417202834.png
 .. |image18| image:: http://image.python-online.cn/20190404204534.png
 .. |image19| image:: http://image.python-online.cn/20190409103417.png
 .. |image20| image:: http://image.python-online.cn/20190409104026.png
