@@ -1,8 +1,8 @@
 8.7 OpenStack 实现GPU直通
 =========================
 
-8.7.1
------
+8.7.1 环境准备
+--------------
 
 检查是否有 GPU 设备：\ ``lspci | grep NVIDIA``
 
@@ -69,6 +69,12 @@ id。
    <kvm>
      <hidden state='on'/>
    </kvm>
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.python-online.cn/20190419144135.png
 .. |image1| image:: http://image.python-online.cn/20190419144044.png

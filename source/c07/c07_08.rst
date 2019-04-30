@@ -166,3 +166,9 @@ chk_zabbix.sh
 
 -  单台节点宕机（可以关闭keepalived服务模拟，也可以关机）
 -  双台节点宕机（不管是哪一台先启）
+
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+

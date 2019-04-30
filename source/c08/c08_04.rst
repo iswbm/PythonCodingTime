@@ -343,6 +343,12 @@ virsh 创建
    KVM/QEMU <https://www.cnblogs.com/sammyliu/p/4558638.html>`__
 -  `我是虚拟机内核我困惑？ <https://mp.weixin.qq.com/s?__biz=MzI1NzYzODk4OQ==&mid=2247483820&idx=1&sn=8a44b992491aea03e55eefb4815a1958&chksm=ea15168edd629f98e622dcb94e64fbb4a75055da98d620e7c83071b5d6d428904fa5c8e9c4ad&scene=21#wechat_redirect>`__
 
+--------------
+
+.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+   :alt: 关注公众号，获取最新干货！
+
+
 .. |image0| image:: http://image.python-online.cn/FqDTXLAxlDdtrsGndSurNeIEtehl
 .. |image1| image:: http://image.python-online.cn/FjJKZqDYDnrQrdk22fAWgYbKEneK
 .. |image2| image:: http://image.python-online.cn/FjlPaQLTiYCde92WhurWsRx6z8CK
