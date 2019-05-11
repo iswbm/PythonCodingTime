@@ -66,5 +66,11 @@
 
 还有就是gevent中也有用到。
 
+--------------
+
+.. figure:: http://image.python-online.cn/20190511161447.png
+   :alt: 关注公众号，获取最新干货！
+
+
 .. |image0| image:: http://image.python-online.cn/20190404215330.png
 

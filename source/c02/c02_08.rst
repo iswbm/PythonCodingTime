@@ -359,6 +359,6 @@ from后面加上可迭代对象，他可以把可迭代对象里的每个元素�
 
 --------------
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+.. figure:: http://image.python-online.cn/20190511161447.png
    :alt: 关注公众号，获取最新干货！
 

@@ -251,7 +251,99 @@ emmmm，这很NB。。。
    [WARNING]: the function say() is running...
    say hello!
 
-3.1.7 内置装饰器：property
+3.1.7 wrapper 装饰器有啥用？
+----------------------------
+
+在 functools 标准库中有提供一个 wrapper
+装饰器，你应该也经常见过，那他有啥用呢？
+
+先来看一个例子
+
+.. code:: python
+
+   def wrapper(func):
+       def inner_function():
+           pass
+       return inner_function
+
+   @wrapper
+   def wrapped():
+       pass
+
+   print(wrapped.__name__)
+   #inner_function
+
+为什么会这样子？不是应该返回 ``func`` 吗？
+
+这也不难理解，因为上边执行\ ``func`` 和下边 ``decorator(func)``
+是等价的，所以上面 ``func.__name__``
+是等价于下面\ ``decorator(func).__name__`` 的，那当然名字是
+``inner_function``
+
+.. code:: python
+
+   def wrapper(func):
+       def inner_function():
+           pass
+       return inner_function
+
+   def wrapped():
+       pass
+
+   print(wrapper(wrapped).__name__)
+   #inner_function
+
+那如何避免这种情况的产生？方法是使用 functools .wrapper
+装饰器，它的作用就是将 **被修饰的函数(wrapped)** 的一些属性值赋值给
+**修饰器函数(wrapper)** ，最终让属性的显示更符合我们的直觉。
+
+.. code:: python
+
+   from functools import wraps
+
+   def wrapper(func):
+       @wraps(func) 
+       def inner_function():
+           pass
+       return inner_function
+
+   @wrapper
+   def wrapped():
+       pass
+
+   print(wrapped.__name__)
+   # wrapped
+
+准确点说，wrapper 其实是一个偏函数对象（partial），源码如下
+
+.. code:: python
+
+   def wraps(wrapped,
+             assigned = WRAPPER_ASSIGNMENTS,
+             updated = WRAPPER_UPDATES):
+       return partial(update_wrapper, wrapped=wrapped,
+                      assigned=assigned, updated=updated)
+
+可以看到wraps其实就是调用了一个函数\ ``update_wrapper``\ ，知道原理后，我们改写上面的代码，在不使用
+wraps的情况下，也可以让 ``wrapped.__name__`` 打印出 wrapped，代码如下：
+
+.. code:: python
+
+   from functools import update_wrapper
+
+   def wrapper(func):
+       def inner_function():
+           pass
+       update_wrapper(func, inner_function)
+       return inner_function
+
+   def wrapped():
+       pass
+
+   print(wrapped.__name__)
+   # wrapped
+
+3.1.8 内置装饰器：property
 --------------------------
 
 以上，我们介绍的都是自定义的装饰器。
@@ -369,7 +461,7 @@ emmmm，这很NB。。。
 ``@age.deleter``
 使得我们可以使用\ ``del XiaoMing.age``\ 这样的方式来删除属性。
 
-3.1.8 其他装饰器：装饰器实战
+3.1.9 其他装饰器：装饰器实战
 ----------------------------
 
 读完并理解了上面的内容，你可以说是Python高手了。别怀疑，自信点，因为很多人都不知道装饰器有这么多用法呢。
@@ -407,6 +499,6 @@ emmmm，这很NB。。。
 
 --------------
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+.. figure:: http://image.python-online.cn/20190511161447.png
    :alt: 关注公众号，获取最新干货！
 

@@ -63,9 +63,23 @@ nova
 8.5.5 快照镜像如何实现？
 ------------------------
 
-入口函数在：\ ``nova/virt/libvirt/driver.py:snapshot()``
+nova-api 的入口如下
 
-会先获取imagebackend的类型，然后找到对应的backend
+|image0|
+
+接着会调用 nova/compute/api.py
+
+|image1|
+
+在nova-compute 层面：nova/compute/manager.py:_snapshot_instance()
+
+|image2|
+
+接下来会调用 ``nova/virt/libvirt/driver.py:snapshot()``
+
+|image3|
+
+先获取imagebackend的类型，然后找到对应的backend
 
 .. code:: python
 
@@ -78,13 +92,13 @@ nova
 
 接下来，会调用对应的imagebackend的\ ``snapshot_extract`` 方法。
 
-|image0|
+|image4|
 
 ``snapshot_extract``
 方法最终会调用\ ``nova/virt/images.py:_convert_image()``
 ，可以看出其实底层调用的是 ``qemu-img`` 提供的\ ``convert`` 接口。
 
-|image1|
+|image5|
 
 如果是qcow2的backend，不是调用这边，而是调用
 ``nova/virt/libvirt/utils.py:extract_snapshot()``
@@ -107,11 +121,11 @@ nova
 在\ ``libvirt_utils.get_disk_type_from_path``
 里没有相应的修改，导致返回的是lvm。
 
-|image2|
+|image6|
 
 后面的imagebackend也相应的变成 lvm的
 
-|image3|
+|image7|
 
 然后会进入 lvm这个backend的init函数。由于\ ``path`` 是\ ``/dev/sdb``
 并不是一个lv，所以这边会报错。
@@ -135,7 +149,7 @@ compute的资源上报，是在
 其调用的函数是\ ``virt/libvirt/driver.py`` 里的
 ``get_available_resource`` 函数
 
-|image4|
+|image8|
 
 从数据库获取旧数据
 ``self.compute_node = self._get_compute_node(context)``
@@ -153,11 +167,11 @@ compute的资源上报，是在
 nova-compute 发创建请求前，会先让 nova-scheduler
 选出一台资源充足的计算节点。
 
-|image5|
+|image9|
 
 nova-scheduler 的调度主要由两部分组成
 
-|image6|
+|image10|
 
 -  过滤器：filter，将不满足条件（硬性条件，比如内存，cpu，磁盘，pci设备等）的计算节点，直接过滤掉。意义：从过滤器出来的那些计算节点，理论上都可以创建虚拟机。
 -  称重器：weigher，对满足硬性条件的众多主机按照一定的规则进行权重配比。意义：经过称重器计算，选出你更希望在哪台节点上创建虚拟机。
@@ -171,25 +185,25 @@ nova-scheduler 的调度主要由两部分组成
    compute 的 id，可以在 ``_update_from_compute_node``
    函数中添加。它会从compute_nodes 表中取得你想要的信息。
 
-   |image7|
+   |image11|
 
 -  spec_obj：你所要请求创建的虚拟机信息（模板，镜像等）。它是从
    objects.RequestSpec.from_primitives 中取得的
 
-   |image8|
+   |image12|
 
 过滤器，它的代码如下：
 
-|image9|
+|image13|
 
 称重器，它的规则主要看这段代码。
 
-|image10|
+|image14|
 
 我在代码中，加了几段日志。从左到右，三个不同颜色的内容分别为，原始权值，配重系数（越高说明越占比越大，越影响最终结果），经过
 nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮点数）。
 
-|image11|
+|image15|
 
 那最终的权值如何计算呢？
 
@@ -203,30 +217,34 @@ nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮
 
 1. 如果有请求req（在nova-api里），可以使用这种
 
-|image12|
+|image16|
 
 2. 其他地方可以使用这种
 
-|image13|
+|image17|
 
 --------------
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+.. figure:: http://image.python-online.cn/20190511161447.png
    :alt: 关注公众号，获取最新干货！
 
 
-.. |image0| image:: http://image.python-online.cn/FhRPy4B1xEI9SfoD2RcunJl15ZE3
-.. |image1| image:: http://image.python-online.cn/FuyMWZS6HF4g3rPwTlLcereZxg4L
-.. |image2| image:: http://image.python-online.cn/FnJA8RNIvJN2lAEXbKtJDpOLg1vg
-.. |image3| image:: http://image.python-online.cn/FnGyI8jCQFLCGi0pGVmI3SV6pDrv
-.. |image4| image:: http://image.python-online.cn/FrbE6oEZ3vtTWwDfMNQ16MGi6SWr
-.. |image5| image:: http://image.python-online.cn/20190424212211.png
-.. |image6| image:: http://image.python-online.cn/20190424213430.png
-.. |image7| image:: http://image.python-online.cn/20190424214653.png
-.. |image8| image:: http://image.python-online.cn/20190424214540.png
-.. |image9| image:: http://image.python-online.cn/20190424221602.png
-.. |image10| image:: http://image.python-online.cn/20190424215735.png
-.. |image11| image:: http://image.python-online.cn/20190424220008.png
-.. |image12| image:: http://image.python-online.cn/20190426153322.png
-.. |image13| image:: http://image.python-online.cn/20190426152148.png
+.. |image0| image:: http://image.python-online.cn/20190508110723.png
+.. |image1| image:: http://image.python-online.cn/20190508111109.png
+.. |image2| image:: http://image.python-online.cn/20190508095028.png
+.. |image3| image:: http://image.python-online.cn/20190508111527.png
+.. |image4| image:: http://image.python-online.cn/FhRPy4B1xEI9SfoD2RcunJl15ZE3
+.. |image5| image:: http://image.python-online.cn/FuyMWZS6HF4g3rPwTlLcereZxg4L
+.. |image6| image:: http://image.python-online.cn/FnJA8RNIvJN2lAEXbKtJDpOLg1vg
+.. |image7| image:: http://image.python-online.cn/FnGyI8jCQFLCGi0pGVmI3SV6pDrv
+.. |image8| image:: http://image.python-online.cn/FrbE6oEZ3vtTWwDfMNQ16MGi6SWr
+.. |image9| image:: http://image.python-online.cn/20190424212211.png
+.. |image10| image:: http://image.python-online.cn/20190424213430.png
+.. |image11| image:: http://image.python-online.cn/20190424214653.png
+.. |image12| image:: http://image.python-online.cn/20190424214540.png
+.. |image13| image:: http://image.python-online.cn/20190424221602.png
+.. |image14| image:: http://image.python-online.cn/20190424215735.png
+.. |image15| image:: http://image.python-online.cn/20190424220008.png
+.. |image16| image:: http://image.python-online.cn/20190426153322.png
+.. |image17| image:: http://image.python-online.cn/20190426152148.png
 

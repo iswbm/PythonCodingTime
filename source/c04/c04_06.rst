@@ -397,12 +397,12 @@ Desktop真心觉得不好用）。
 
 --------------
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+.. figure:: http://image.python-online.cn/20190511161447.png
    :alt: 关注公众号，获取最新干货！
 
 
 .. |image0| image:: https://i.loli.net/2018/04/15/5ad2c06e8893d.png
-.. |image1| image:: https://i.loli.net/2018/04/15/5ad2c14727198.png
+.. |image1| image:: http://image.python-online.cn/20190511163855.png
 .. |image2| image:: https://i.loli.net/2018/04/15/5ad2c2a9813b9.png
 .. |image3| image:: http://image.python-online.cn/20190430235625.png
 

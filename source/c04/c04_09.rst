@@ -705,7 +705,7 @@ SO，如果是提交的是英文的话，不会有冲突。因为都是一个字
 
 --------------
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+.. figure:: http://image.python-online.cn/20190511161447.png
    :alt: 关注公众号，获取最新干货！
 
 

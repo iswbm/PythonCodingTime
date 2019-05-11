@@ -36,10 +36,7 @@
 
 show image
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9cr6hjxj20c7084q3q.jpg
-   :alt: 折线图
-
-   折线图
+|image0|
 
 02. 散点图
 ----------
@@ -59,7 +56,7 @@ show image
    plt.plot(x, x, 'r--', x, x**2, 'bs', x, x**3, 'g^')
    plt.show()
 
-show image |散点图|
+show image |image1|
 
 03. 直方图
 ----------
@@ -101,10 +98,7 @@ show image |散点图|
 
 show image
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9f1id9aj20ck07zq40.jpg
-   :alt: 直方图
-
-   直方图
+|image2|
 
 04. 柱状图
 ----------
@@ -140,10 +134,7 @@ show image
 
 show image
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9fv44tnj20bo07a0t1.jpg
-   :alt: 并列柱状图
-
-   并列柱状图
+|image3|
 
 4.2 叠加柱状图
 ~~~~~~~~~~~~~~
@@ -170,7 +161,7 @@ show image
    plt.grid(True)
    plt.show()
 
-show image |叠加柱状图|
+show image |image4|
 
 05. 饼图
 --------
@@ -196,7 +187,7 @@ show image |叠加柱状图|
 
    plt.show()
 
-show image |饼图|
+show image |image5|
 
 5.2 嵌套饼图
 ~~~~~~~~~~~~
@@ -230,7 +221,7 @@ show image |饼图|
    plt.axis('equal') 
    plt.show()
 
-show image .\ |嵌套饼图|
+show image |image6|
 
 5.3 极轴饼图
 ~~~~~~~~~~~~
@@ -262,7 +253,7 @@ show image .\ |嵌套饼图|
 
    plt.show()
 
-show image |极轴饼图|
+show image |image7|
 
 06. 三维图
 ----------
@@ -290,7 +281,7 @@ show image |极轴饼图|
    ax.set_xlabel('X')
    plt.show()
 
-show image |三维散点图|
+show image |image8|
 
 6.2 绘制三维平面图
 ~~~~~~~~~~~~~~~~~~
@@ -314,19 +305,22 @@ show image |三维散点图|
 
    plt.show()
 
-show image |绘制三维平面图|
+show image |image9|
 
 --------------
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+.. figure:: http://image.python-online.cn/20190511161447.png
    :alt: 关注公众号，获取最新干货！
 
 
-.. |散点图| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9e684uoj20cm080aam.jpg
-.. |叠加柱状图| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9gfrev6j20b607ht9c.jpg
-.. |饼图| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9gzk8qpj20ao06pjs5.jpg
-.. |嵌套饼图| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9ir1rnnj209w06ut9f.jpg
-.. |极轴饼图| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9jc59g6j209y07ugn1.jpg
-.. |三维散点图| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9junouuj20ly0dk12v.jpg
-.. |绘制三维平面图| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyj9kfd08gj20re0h6qe0.jpg
+.. |image0| image:: http://image.python-online.cn/20190511164738.png
+.. |image1| image:: http://image.python-online.cn/20190511164753.png
+.. |image2| image:: http://image.python-online.cn/20190511164802.png
+.. |image3| image:: http://image.python-online.cn/20190511164814.png
+.. |image4| image:: http://image.python-online.cn/20190511164825.png
+.. |image5| image:: http://image.python-online.cn/20190511164835.png
+.. |image6| image:: http://image.python-online.cn/20190511164843.png
+.. |image7| image:: http://image.python-online.cn/20190511164852.png
+.. |image8| image:: http://image.python-online.cn/20190511164900.png
+.. |image9| image:: http://image.python-online.cn/20190511164915.png
 

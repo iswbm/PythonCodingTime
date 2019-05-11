@@ -127,47 +127,55 @@ Bios，更改顺序。但是我这里不想这么麻烦，因为安装完后又�
 分区完成后，一定要注意如下这二个红框，选择安装启动引导器的设备为
 我们刚刚设置的efi分区。检查无误后，就可以点击「现在安装」。 |image7|
 
-接下来就是 选择时区 - 配置键盘。 |选择时区|
+接下来就是 选择时区 - 配置键盘。 |image8|
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi89t69q1j20jj0ipgnx.jpg
-   :alt: 配置键盘
+|image9|
 
-   配置键盘
-
-到了这里，你应该可以长舒第一口气了。成功了一半了。 |image9|
+到了这里，你应该可以长舒第一口气了。成功了一半了。 |image10|
 
 如果你和我一样使用 SSD
 ，应该不出5分钟系统就可以安装完毕。弹出如下界面。点击现在重启。
-|image10|
+|image11|
 
 重启的过程，记住还是一样按住你的快捷键，我这里仍然是
 F11，看到没有，已经有一个叫
 ubuntu的启动设备。就它了，选择进入系统。接下来，就是选择要以哪种模式进入ubuntu，你根据需要去选吧。
-|image11|
+|image12|
 
 4.5.6 效果展示
 --------------
 
 由于默认的Ubuntu主题也是丑得可以，经过一个晚上的美化，它变成如下这般帅气逼人。
 
-https://www.jianshu.com/p/16b36b912b02
+|image13|
+
+|image14|
+
+|image15|
+
+|image16|
 
 --------------
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+.. figure:: http://image.python-online.cn/20190511161447.png
    :alt: 关注公众号，获取最新干货！
 
 
-.. |image0| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi876yfb2j20mi0f7k5i.jpg
-.. |image1| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi87yu95mj20ix0fkaf2.jpg
-.. |image2| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi885fqgzj20ku076772.jpg
-.. |image3| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi88gwzuoj20le0ftk12.jpg
-.. |image4| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi88xywp1j20f00dxabl.jpg
-.. |image5| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi894tqeuj20lt0ga77x.jpg
-.. |image6| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi89df34mj20pb0hd0zh.jpg
-.. |image7| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi89ns0l9j20rd0kqaso.jpg
-.. |选择时区| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi8aflvq7j20je0ilwhc.jpg
-.. |image9| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi8apjj1pj20je0e57ci.jpg
-.. |image10| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi8dad24hj20jk03qwfh.jpg
-.. |image11| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi8douz7ij20r80kaqfq.jpg
+.. |image0| image:: http://image.python-online.cn/20190511163441.png
+.. |image1| image:: http://image.python-online.cn/20190511163457.png
+.. |image2| image:: http://image.python-online.cn/20190511163510.png
+.. |image3| image:: http://image.python-online.cn/20190511163520.png
+.. |image4| image:: http://image.python-online.cn/20190511163531.png
+.. |image5| image:: http://image.python-online.cn/20190511163542.png
+.. |image6| image:: http://image.python-online.cn/20190511163550.png
+.. |image7| image:: http://image.python-online.cn/20190511163559.png
+.. |image8| image:: http://image.python-online.cn/20190511163612.png
+.. |image9| image:: http://image.python-online.cn/20190511163633.png
+.. |image10| image:: http://image.python-online.cn/20190511163700.png
+.. |image11| image:: http://image.python-online.cn/20190511163711.png
+.. |image12| image:: http://image.python-online.cn/20190511163722.png
+.. |image13| image:: http://image.python-online.cn/20190511163731.png
+.. |image14| image:: http://image.python-online.cn/20190511163750.png
+.. |image15| image:: http://image.python-online.cn/20190511163757.png
+.. |image16| image:: http://image.python-online.cn/20190511163805.png
 

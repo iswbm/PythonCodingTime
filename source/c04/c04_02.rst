@@ -3,6 +3,8 @@
 
 --------------
 
+|image0|
+
 做为一名开发人员，我们难免都会与服务器打交道。
 
 有时候是公司的线上生产环境，你需要上去部署公司的项目。
@@ -23,11 +25,11 @@
 
 查看 -> 快速命令
 
-双击底部自定义快速命令。 |image0|
+双击底部自定义快速命令。 |image1|
 
 **使用收藏栏**
 
-点击最左侧按按钮添加收藏。 |image1|
+点击最左侧按按钮添加收藏。 |image2|
 
 **快捷设置**
 
@@ -35,13 +37,13 @@
 
 ① 右键粘贴 ② 双击分隔符 ③ 选中即复制
 
-|image2|
+|image3|
 
 **设置Meta键**
 
 文件 -> 属性 -> 键盘
 
-一定要打钩，这是后面诸多快捷使用的前提。 |image3|
+一定要打钩，这是后面诸多快捷使用的前提。 |image4|
 
 移动光标
 --------
@@ -164,12 +166,13 @@
 
 --------------
 
-.. figure:: https://ws1.sinaimg.cn/large/8f640247gy1fyi60fxos4j20u00a8tdz.jpg
+.. figure:: http://image.python-online.cn/20190511161447.png
    :alt: 关注公众号，获取最新干货！
 
 
-.. |image0| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7ufv5q7j20bc00vt8t.jpg
-.. |image1| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7vlhtfjj20b700xt8t.jpg
-.. |image2| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7w4nnp9j20cu09ojtv.jpg
-.. |image3| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi7wybscyj20fo0dojwj.jpg
+.. |image0| image:: http://image.python-online.cn/20190511162815.png
+.. |image1| image:: http://image.python-online.cn/20190511162524.png
+.. |image2| image:: http://image.python-online.cn/20190511162607.png
+.. |image3| image:: http://image.python-online.cn/20190511162716.png
+.. |image4| image:: http://image.python-online.cn/20190511162730.png
 
