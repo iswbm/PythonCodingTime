@@ -41,7 +41,49 @@ type？这不是判断对象类型的函数吗？
    # 使用type来创建User类
    User = type("User", (BaseClass, ), {"name":"user", "say":say})
 
-3.2.3 理解什么是元类
+3.2.3 \__new_\_ 有什么用？
+--------------------------
+
+在没有元类的情况下，每次创建实例，在先进入 \__init_\_ 之前都会先进入
+\__new_\_ 。
+
+.. code:: python
+
+   class User:
+       def __new__(cls, *args, **kwargs):
+           print("in BaseClass")
+           return super().__new__(cls)
+
+       def __init__(self, name):
+           print("in User")
+           self.name = name
+       
+   # ======== 上下写法效果一样 ==========
+
+   class BaseClass():
+       def __new__(cls, *args, **kwargs):
+           print("in BaseClass")
+           return super().__new__(cls)
+
+   class User(BaseClass):
+       def __init__(self, name):
+           print("in User")
+           self.name = name
+
+使用如下
+
+.. code:: python
+
+   >>> u = User('wangbm')
+   in BaseClass
+   in User
+   >>> u.name
+   'wangbm'
+
+在后面元类那里，__new_\_
+会在创建类时，先在元类中进入（这是第一次进入）。
+
+3.2.4 理解什么是元类
 --------------------
 
 什么是类？可能谁都知道，类就是用来创建对象的「模板」。
@@ -120,7 +162,7 @@ type是Python在背后用来创建所有类的元类，我们熟知的类的始�
 
    user = User("wangbm")
 
-3.3.4 使用元类的意义
+3.3.5 使用元类的意义
 --------------------
 
 正常情况下，我们都不会使用到元类。但是这并不意味着，它不重要。假如某一天，我们需要写一个框架，很有可能就需要用到元类。
@@ -138,7 +180,7 @@ type是Python在背后用来创建所有类的元类，我们熟知的类的始�
 但是，这样说，你一定不会服气，到底元类用来干什么？其实元类的作用就是\ ``创建API``\ ，一个最典型的应用是
 ``Django ORM。``
 
-3.3.5 元类实战：ORM
+3.3.6 元类实战：ORM
 -------------------
 
 使用过Django ORM的人都知道，有了ORM，使得我们操作数据库，变得异常简单。
