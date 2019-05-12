@@ -1,5 +1,5 @@
 
-这是我的个人博客（ [MING's BLOG]([http://python-online.cn](http://python-online.cn/)) ），主要写关于Python的一些思考总结。
+这是我的个人博客（ [MING's BLOG](http://python-online.cn/) ），主要写关于Python的一些思考总结。
 
 关于搭建教程，感兴趣的可以查看这边：[Sphinx 搭建博客的图文教程](https://github.com/BingmingWong/MING-BLOG/blob/master/source/c04/c04_03.rst)
 

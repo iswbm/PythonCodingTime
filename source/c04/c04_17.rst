@@ -1,5 +1,5 @@
-4.17 23种设计模式
-=================
+4.17 详解 23 种设计模式
+=======================
 
 4.17.1 策略模式
 ---------------
@@ -274,6 +274,8 @@ Order
    >>> u1 is u2
    True
 
+|image1|
+
 -  使用装饰器
 
 .. code:: python
@@ -315,6 +317,49 @@ Order
    >>> u1 is u2
    True
 
+|image2|
+
+-  使用元类
+
+.. code:: python
+
+   class MetaSingleton(type):
+       def __call__(cls, *args, **kwargs):
+           print("cls:{}".format(cls.__name__))
+           print("====1====")
+           if not hasattr(cls, "_instance"):
+               print("====2====")
+               cls._instance = type.__call__(cls, *args, **kwargs)
+           return cls._instance
+
+   class User(metaclass=MetaSingleton):
+       def __init__(self, *args, **kw):
+           print("====3====")
+           for k,v in kw:
+               setattr(self, k, v)
+
+验证结果
+
+::
+
+   >>> u1 = User('wangbm1')
+   cls:User
+   ====1====
+   ====2====
+   ====3====
+   >>> u1.age = 20
+   >>> u2 = User('wangbm2')
+   cls:User
+   ====1====
+   >>> u2.age
+   20
+   >>> u1 is u2
+   True
+
+|image3|
+
+某群友由这个单例引出另一个 nb 的写法。
+
 参考文档
 --------
 
@@ -327,4 +372,7 @@ Order
 
 
 .. |image0| image:: http://image.python-online.cn/20190414144511.png
+.. |image1| image:: http://image.python-online.cn/20190512113846.png
+.. |image2| image:: http://image.python-online.cn/20190512113917.png
+.. |image3| image:: http://image.python-online.cn/20190512114028.png
 
