@@ -44,12 +44,12 @@
 
    Ctrl+{ 或者 Ctrl+}  定位跳转到代码块（类和函数）的首末位置
 
-   Ctrl+E    最近编辑的文件列表
+   Ctrl+e    最近编辑的文件列表
    Ctrl+p    显示参数列表
 
    Alt+shift+c  查看最近修改的记录
 
-   ctrl+shift+A 万能键
+   ctrl+shift+a 万能键
    ctrl+alt+L   格式代码
    ctrl+alt+T   添加try/catch
 
@@ -78,9 +78,9 @@
 参考文章：
 
 -  https://zhuanlan.zhihu.com/p/36147819
-
 -  https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf
 -  https://www.jetbrains.com/help/pycharm/ctrl-alt.html
+-  https://www.zhihu.com/question/37787004
 
 4.8.2 Sublime Text 3
 --------------------
