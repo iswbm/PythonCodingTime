@@ -1,4 +1,4 @@
-4.15 10个 PyCharm 小技巧
+4.15 15个 PyCharm 小技巧
 ========================
 
 刚开始做公众号的时候，更新频率正常是一周两到三篇。老读者应该有注意到，以前都是写系列教程，对于读者而言，系列教程会更加友好，学习起来会更容易深入浅出，而对于作者来说，写系列教程，更有一种使命感，而这种使命感是维持更新一大动力。
@@ -540,6 +540,15 @@ q（Mac暂时未找到对应快捷键），在当前页面就可以快速预览 
 
 这两个快捷键比起使用 Ctrl + 鼠标左键
 跳进源代码来说，更加方便，，就像微信小程序一样，用完即焚，不会新产生一个标签页，也不需要来回跳转页面。
+
+附录
+----
+
+-  `PyCharm 快捷键 Mac
+   版 <https://resources.jetbrains.com/storage/products/pycharm/docs/PyCharm_ReferenceCard_mac.pdf>`__
+-  `PyCharm 快捷键 Win
+   版 <https://resources.jetbrains.com/storage/products/pycharm/docs/PyCharm_ReferenceCard.pdf>`__
+-  `PyCharm Lanyu 注册码 <http://idea.lanyus.com/>`__
 
 --------------
 

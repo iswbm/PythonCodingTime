@@ -64,11 +64,46 @@ id。
 
    openstack image set IMG-UUID --property img_hide_hypervisor_id=true
 
+由于我们当前使用的是 Newton 版本，所以需参考 P
+版的代码进行相应的改动，在生成虚拟机的xml的时候，在feature标签内添加如下一段内容
+
 .. code:: xml
 
    <kvm>
      <hidden state='on'/>
    </kvm>
+
+具体 P版的代码如何实现，主要函数是这一行
+
+|image7|
+
+8.7.2 使用说明
+--------------
+
+在环境部署好，gpu
+资源也充足的情况下，想要创建一台gpu直通的虚拟机，还需要确保以下两个步骤完成。
+
+8.7.2.1 模板配置
+~~~~~~~~~~~~~~~~
+
+GPU 作为一种硬件资源，同样需要在模板中配置，配置方式是在 flavor
+中添加Extra_spec
+
+-  “pci_passthrough:alias”=“M60:1” ： M60是上面控制节点中，在nova.conf
+   中配置的 pci_alias 别名。1 表示，需要一个gpu设备。
+-  “pci_passthrough:alias”=“P4:2” ： P4是上面控制节点中，在nova.conf
+   中配置的 pci_alias 别名。2 表示，需要两个gpu设备。
+
+::
+
+   `nova flavor-key <flavor_id> ``set` `pci_passthrough:``alias``=``'nvidia:1'`
+
+8.7.2.2 镜像配置
+~~~~~~~~~~~~~~~~
+
+::
+
+   `openstack image ``set` `<IMG-UUID> --property img_hide_hypervisor_id=``true`
 
 --------------
 
@@ -83,4 +118,5 @@ id。
 .. |image4| image:: http://image.python-online.cn/20190422201117.png
 .. |image5| image:: http://image.python-online.cn/20190422205222.png
 .. |image6| image:: http://image.python-online.cn/20190422204755.png
+.. |image7| image:: http://image.python-online.cn/20190514205605.png
 

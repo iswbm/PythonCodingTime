@@ -238,7 +238,42 @@ Order
 4.17.2 单例模式
 ---------------
 
-使用单例模式，有几个方法，这里写两个
+单例（Singleton）模式，应该是设计模式里面最好理解的一个模式。
+
+使用它，就是为了保证全局环境下只能有一个该类的实例。
+
+它的目的，我这里将其分为两类：
+
+一类是\ **必须这样做**
+
+大家在解释单例模式时，经常要提到的一个例子是 Windows
+的任务管理器。如果我们打开多个任务管理器窗口。显示的内容完全一致，如果在内部是两个一模一样的对象，那就是重复对象，就造成了内存的浪费；相反，如果两个窗口的内容不一致，那就会至少有一个窗口展示的内容是错误的，会给用户造成误解，到底哪个才是当前真实的状态呢？
+
+还有一个常见的例子是，一个网站的访问量、在线人数，在项目中是全局唯一（不考虑分布式），在这种情况下，使用单例模式是一种很好的方式。
+
+而另一类是\ **最好这样做**
+
+比如，一个项目中多个地方需要读取同一份配置文件，如果每次使用都是导入重新创建实例，读取文件，用完后再销毁，这样做的话，就造成不必要的IO浪费，可以使用单例模式只生成一份配置在内存中。
+
+从上面看来，在系统中确保某个对象的唯一性即一个类只能有一个实例有时是非常重要的。
+
+总结一下，单例模式有如下优点
+
+1、全局只有一个接入点，可以更好地进行数据同步控制，避免多重占用；
+2、由于单例模式要求在全局内只有一个实例，因而可以节省比较多的内存空间；
+3、单例可长驻内存，减少系统开销。
+
+和其他设计模式一样，单例模式有一定的适用场景，但同时它也会给我们带来一些问题。
+
+1、由于单例对象是全局共享，所以其状态维护需要特别小心。
+2、单例对象没有抽象层，扩展不便。
+3、赋于了单例以太多的职责，某种程度上违反单一职责原则（六大原则后面会讲到）;
+4、单例模式是并发协作软件模块中需要最先完成的，因而其不利于测试；
+5、单例模式在某种情况下会导致“资源瓶颈”。
+
+理论说完了，再来说说如何用 Python 写单例模式。
+
+这里介绍了三个较为常用的。
 
 -  使用 \__new_\_
 
@@ -258,21 +293,6 @@ Order
            self.name = name
 
 验证结果
-
-::
-
-   >>> u1 = User('wangbm1')
-   ===== 1 ====
-   ===== 2 ====
-   ===== 3 ====
-   >>> u1.age = 20
-   >>> u2 = User('wangbm2')
-   ===== 1 ====
-   ===== 3 ====
-   >>> u2.age
-   20
-   >>> u1 is u2
-   True
 
 |image1|
 
@@ -303,20 +323,6 @@ Order
 
 验证结果
 
-::
-
-   >>> u1 = User('wangbm1')
-   ===== 1 ====
-   ===== 2 ====
-   ===== 3 ====
-   >>> u1.age = 20
-   >>> u2 = User('wangbm2')
-   ===== 1 ====
-   >>> u2.age
-   20
-   >>> u1 is u2
-   True
-
 |image2|
 
 -  使用元类
@@ -340,25 +346,120 @@ Order
 
 验证结果
 
-::
-
-   >>> u1 = User('wangbm1')
-   cls:User
-   ====1====
-   ====2====
-   ====3====
-   >>> u1.age = 20
-   >>> u2 = User('wangbm2')
-   cls:User
-   ====1====
-   >>> u2.age
-   20
-   >>> u1 is u2
-   True
-
 |image3|
 
-某群友由这个单例引出另一个 nb 的写法。
+以上的代码，一般情况下没有问题，但在并发场景中，就会出现线程安全的问题。
+
+如下这段代码我开启10个线程来模拟
+
+.. code:: python
+
+   import time
+   import threading
+
+   class User:
+       _instance = None
+
+       def __new__(cls, *args, **kwargs):
+           if not cls._instance:
+               time.sleep(1)
+               cls._instance = super().__new__(cls)
+           return cls._instance
+
+       def __init__(self, name):
+           self.name = name
+
+   def task():
+       u = User("wangbm")
+       print(u)
+
+   for i in range(10):
+       t = threading.Thread(target=task)
+       t.start()
+
+从结果来观察，很容易就发现，单例械式失效了，在10个线程下，并发创建实例，并不能保证一个类只有一个实例。
+
+.. code:: python
+
+   <__main__.User object at 0x1050563c8>
+   <__main__.User object at 0x10551a208>
+   <__main__.User object at 0x1050563c8>
+   <__main__.User object at 0x1055a93c8>
+   <__main__.User object at 0x1050563c8>
+   <__main__.User object at 0x105527160>
+   <__main__.User object at 0x1055f4e48>
+   <__main__.User object at 0x1055e6c88>
+   <__main__.User object at 0x1055afcf8>
+   <__main__.User object at 0x105605940>
+
+这在 Java
+中，是可以使用饿汉模式（在实例化之前就将单例对象创建出来）来避免这个问题，但在
+Python 中，好像没法实现这样的饿汉模式，但是同样有解决方法，就是加锁。
+
+首先实现一个给函数加锁的装饰器
+
+.. code:: python
+
+   import threading
+
+   def synchronized(func):
+
+       func.__lock__ = threading.Lock()
+
+       def lock_func(*args, **kwargs):
+           with func.__lock__:
+               return func(*args, **kwargs)
+       return lock_func
+
+然后在实例化对象的函数上，使用这个装饰函数。
+
+.. code:: python
+
+   import time
+   import threading
+
+   class User:
+       _instance = None
+
+       @synchronized
+       def __new__(cls, *args, **kwargs):
+           if not cls._instance:
+               time.sleep(1)
+               cls._instance = super().__new__(cls)
+           return cls._instance
+
+       def __init__(self, name):
+           self.name = name
+
+   def task():
+       u = User("wangbm")
+       print(u)
+
+   for i in range(10):
+       t = threading.Thread(target=task)
+       t.start()
+
+结果如下，如预期只生成了一个实例。
+
+.. code:: python
+
+   <__main__.User object at 0x10ff503c8>
+   <__main__.User object at 0x10ff503c8>
+   <__main__.User object at 0x10ff503c8>
+   <__main__.User object at 0x10ff503c8>
+   <__main__.User object at 0x10ff503c8>
+   <__main__.User object at 0x10ff503c8>
+   <__main__.User object at 0x10ff503c8>
+   <__main__.User object at 0x10ff503c8>
+   <__main__.User object at 0x10ff503c8>
+   <__main__.User object at 0x10ff503c8>
+
+引用文章
+
+-  `Python与设计模式–单例模式 <https://yq.aliyun.com/articles/70418?utm_content=m_14908#comment>`__
+-  `python设计模式 -
+   单例模式之饿汉懒汉 <https://www.jianshu.com/p/73901db378dc>`__
+-  `Python线程安全的单例模式 <https://blog.csdn.net/lucky404/article/details/79668131>`__
 
 参考文档
 --------
