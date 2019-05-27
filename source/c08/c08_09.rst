@@ -1,5 +1,5 @@
-8.9 rpc 是如何调用的？
-======================
+8.9 OpenStack中的rpc通信机制
+============================
 
 OpenStack的通信方式有两种，一种是基于HTTP协议的RESTFul
 API方式，另一种则是RPC调用。两种通信方式的应用场景有所不同，在OpenStack中，前者主要用于各组件之间的通信（如nova与glance的通信），而后者则用于同一组件中各个不同模块之间的通信（如nova组件中nova-compute与nova-scheduler的通信）。
@@ -101,12 +101,12 @@ API不可以吗？其实原因有下面这几个：
 
    |image2|
 
--  endpoints：是可供别人远程调用对象
+-  endpoints：是可供别人远程调用的对象
 
    RPC服务器暴露出endpoint，每个 endpoint 包涵一系列的可被远程客户端通过
    transport 调用的方法。直观理解，可以参考nova-conductor创建rpc
    server的代码，这边的endpoints就是
-   nova/manager.py:ConductorManager()\ |image3|
+   ``nova/manager.py:ConductorManager()``\ |image3|
 
 -  dispatcher：分发器，这是 rpc server 才有的概念
    |image4|\ 只有它才知道server端接收到的哪些rpc调用是我要处理的，并且知道远方client端是我调用我的哪个方法？
