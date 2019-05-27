@@ -1,0 +1,275 @@
+8.9 rpc 是如何调用的？
+======================
+
+OpenStack的通信方式有两种，一种是基于HTTP协议的RESTFul
+API方式，另一种则是RPC调用。两种通信方式的应用场景有所不同，在OpenStack中，前者主要用于各组件之间的通信（如nova与glance的通信），而后者则用于同一组件中各个不同模块之间的通信（如nova组件中nova-compute与nova-scheduler的通信）。
+关于OpenStack中基于RESTFul
+API的通信方式主要是应用了WSGI，我会在以后的博文中详细讨论。这里主要还是分享一下关于RPC调用的一些理解。
+
+首先，什么是RPC呢？百度百科给出的解释是这样的：“RPC（Remote Procedure
+Call
+Protocol）——远程过程调用协议，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议”。这个概念听起来还是比较抽象，下面我会结合OpenStack中RPC调用的具体应用来具体分析一下这个协议。
+
+8.9.1 为什么要使用 RPC？
+------------------------
+
+其次，为什么要采用RPC呢？单纯的依靠RESTFul
+API不可以吗？其实原因有下面这几个：
+
+1. 由于RESTFul
+   API是基于HTTP协议的，因此客户端与服务端之间所能传输的消息仅限于文本
+2. RESTFul
+   API客户端与服务端之间采用的是同步机制，当发送HTTP请求时，客户端需要等待服务端的响应。当然对于这一点是可以通过一些技术来实现异步的机制的
+3. 采用RESTFul
+   API，客户端与服务端之间虽然可以独立开发，但还是存在耦合。比如，客户端在发送请求的时，必须知道服务器的地址，且必须保证服务器正常工作
+
+基于上面这几个原因，所以OpenStack才采用了另一种远程通信机制，这就是我们今天要讨论的鼎鼎大名的RPC。
+
+今天的话题，就是源码解读OpenStack是如何通过rpc进行远程调用的。
+
+谈到 OpenStack 的 rpc，就不得不提到 oslo_messaging 这个 OpenStack
+专用工具库，oslo_messaging只是对多种transport做了进一步封装，底层也是用到了kombu这个AMQP库，当transport是amqp时，kombu会进行环境监测判断是否安装了librabbitmq，如果安装了就使用librabbitmq，没有则使用pyamqp；因为librabbitmq是使用C编写的库，所以比pyamqp速度快很多。
+
+关于oslo_messaging库，主要提供了两种独立的API:
+
+1. oslo.messaging.rpc(实现了客户端-服务器远程过程调用）
+2. oslo.messaging.notify（实现了事件的通知机制）
+
+8.9.2 如何实现 rpc 远程调用
+---------------------------
+
+**先来讲解第一个 rpc 的远程调用。**
+
+要了解 rpc 的调用机制呢，首先要知道 oslo_messaging 的几个概念
+
+-  transport：RPC功能的底层实现方法，这里是rabbitmq的消息队列的访问路径
+
+   transport 就是定义你如何访连接消息中间件，比如你使用的是
+   Rabbitmq，那在nova.conf中应该有一行\ ``transport_url``\ 的配置，可以很清楚地看出指定了
+   rabbitmq
+   为消息中间件，并配置了连接rabbitmq的user，passwd，主机，端口。
+
+   .. code:: python
+
+      transport_url=rabbit://user:passwd@ctrl.openstack.com:5672
+
+   |image0|
+
+   .. code:: python
+
+      def get_transport(conf, url=None, allowed_remote_exmods=None):
+          return _get_transport(conf, url, allowed_remote_exmods,
+                                transport_cls=RPCTransport)
+
+   transport 的 driver 有如下几种：
+
+   1. amqp
+      ：\ https://docs.openstack.org/developer/oslo.messaging/AMQP1.0.html
+   2. fake ：测试使用，该driver将消息发送到内存中。
+   3. kafka ：experimental
+   4. kombu ：RabbitMQ Driver。openstack默认的。
+   5. pika ：successor to the existing rabbit/kombu driver。
+      https://docs.openstack.org/developer/oslo.messaging/pika_driver.html
+   6. rabbit ：RabbitMQ Driver
+   7. zmq ：通过ZeroMQ 实现了RPC和Notifer
+      API.详见：\ https://docs.openstack.org/developer/oslo.messaging/zmq_driver.html
+
+-  target：指定RPC topic交换机的匹配信息和绑定主机
+
+   target用来表述 RPC
+   服务器监听topic，server名称和server监听的exchange，是否广播fanout
+
+   .. code:: python
+
+      class Target(object):
+              def __init__(self, exchange=None, topic=None, namespace=None,
+                       version=None, server=None, fanout=None,
+                       legacy_namespaces=None):
+              self.exchange = exchange
+              self.topic = topic
+              self.namespace = namespace
+              self.version = version
+              self.server = server
+              self.fanout = fanout
+              self.accepted_namespaces = [namespace] + (legacy_namespaces or [])
+
+   rpc server 要获取消息，需要定义target，就像一个门牌号一样。
+
+   |image1|
+
+   rpc client 要发送消息，也需要有target，说明消息要发到哪去。
+
+   |image2|
+
+-  endpoints：是可供别人远程调用对象
+
+   RPC服务器暴露出endpoint，每个 endpoint 包涵一系列的可被远程客户端通过
+   transport 调用的方法。直观理解，可以参考nova-conductor创建rpc
+   server的代码，这边的endpoints就是
+   nova/manager.py:ConductorManager()\ |image3|
+
+-  dispatcher：分发器，这是 rpc server 才有的概念
+   |image4|\ 只有它才知道server端接收到的哪些rpc调用是我要处理的，并且知道远方client端是我调用我的哪个方法？
+
+   在client端，是这样指定要调用哪个方法的。
+
+   |image5|
+
+   而在server端，是如何知道要执行这个方法的呢？这就是dispatcher
+   要干的事，它从 endpoint 里找到这个方法，然后执行，最后返回。
+
+   |image6|
+
+-  Serializer：在 python 对象和message(notification)
+   之间数据做序列化或是反序列化的基类。
+
+   主要方法有四个：
+
+   1. deserialize_context(ctxt) ：对字典变成 request contenxt.
+   2. deserialize_entity(ctxt, entity)
+      ：对entity做反序列化，其中ctxt是已经deserialize过的，entity是要处理的。
+   3. serialize_context(ctxt) ：将Request context变成字典类型
+   4. serialize_entity(ctxt, entity)
+      ：对entity做序列化，其中ctxt是已经deserialize过的，entity是要处理的。
+
+-  executor：服务的运行方式，单线程或者多线程
+
+   每个notification
+   listener都和一个executor绑定，来控制收到的notification如何分配。默认情况下，使用的是blocking
+   executor(具体特性参加executor一节）
+
+   .. code:: python
+
+      oslo_messaging.get_notification_listener(transport, targets, endpoints, executor=’blocking’, serializer=None, allow_requeue=False, pool=None)
+
+rpc server 和rpc client 的四个重要方法
+
+1. ``reset()``\ ：Reset service.
+2. ``start()``\ ：该方法调用后，server开始poll,从transport中接收message,然后转发给dispatcher.该message处理过程一直进行，直到stop方法被调用。executor决定server的IO处理策略。可能会是用一个新进程、新协程来做poll操作，或是直接简单的在一个循环中注册一个回调。同样，executor也决定分配message的方式，是在一个新线程中dispatch或是…..
+   \*
+3. ``stop()``:当调用stop之后，新的message不会被处理。但是，server可能还在处理一些之前没有处理完的message,并且底层driver资源也还一直没有释放。
+4. ``wait()``\ ：在stop调用之后，可能还有message正在被处理，使用wait方法来阻塞当前进程，直到所有的message都处理完成。之后，底层的driver资源会释放。
+
+**简单的 rpc client**
+
+.. code:: python
+
+   import oslo_messaging
+   from oslo_config import cfg
+
+   transport = messaging.get_transport(cfg.CONF)
+   target = messaging.Target(topic='test', version='2.0')
+   client = messaging.RPCClient(transport, target)
+   client.call(ctxt, 'test', arg=arg)
+
+**简单的rpc server**
+
+.. code:: python
+
+   from oslo_config import cfg
+   import oslo_messaging
+   import time
+
+   # 定义endpoint类
+   class ServerControlEndpoint(object):
+       target = oslo_messaging.Target(namespace='control',
+                                      version='2.0')
+
+       def __init__(self, server):
+           self.server = server
+
+       def stop(self, ctx):
+           if self.server:
+               self.server.stop()
+
+               
+   class TestEndpoint(object):
+
+       def test(self, ctx, arg):
+           return arg
+
+       
+   # 创建rpc server
+   transport = oslo_messaging.get_transport(cfg.CONF)
+   target = oslo_messaging.Target(topic='test', server='server1')
+   endpoints = [
+       ServerControlEndpoint(None),
+       TestEndpoint(),
+   ]
+   server = oslo_messaging.get_rpc_server(transport, target, endpoints,
+                                          executor='blocking')
+   try:
+       server.start()
+       while True:
+           time.sleep(1)
+   except KeyboardInterrupt:
+       print("Stopping server")
+
+   server.stop()
+   server.wait()
+
+8.5.3 如何实现 rpc 事件通知
+---------------------------
+
+说完了 rpc 调用，\ **再来了解它的事件通知机制**\ ，这个比较简单。
+
+如果你不想用现成的
+``notification_event_types``\ ，而想新定义一个，可以这样做
+
+首先在这里先定义合法的
+``notification_event_types``\ ，相当于添加白名单。
+
+|image7|
+
+然后在调用处，使用 ``rpc.get_notifier`` 来发送消息给ceilometer。
+
+|image8|
+
+继续查看 ``rpc.get_notifier`` 做了什么事？如何实现直接info
+就能发送消息的。
+
+|image9|
+
+当你使用的event_types 不在白名单内，或者是异常信息。就会给打印warn日志
+
+|image10|
+
+在rabbit里查看队列，notification 是 topic
+
+|image11|
+
+而 debug ，info 等是event priority
+
+|image12|
+
+参考文章：
+
+-  `OpenStack之RPC调用（一） <https://blog.csdn.net/qiuhan0314/article/details/42671965>`__
+-  `openstack oslo_messaging
+   译文 <https://blog.csdn.net/youyou1543724847/article/details/71169501>`__
+-  `模仿OpenStack写自己的RPC <https://www.cnblogs.com/goldsunshine/p/10205058.html>`__
+-  `python 64式: 第1式
+   编写rpc的call和cast <https://blog.csdn.net/qingyuanluofeng/article/details/80546961>`__
+-  `Openstack RPC
+   通信原理 <https://www.ibm.com/developerworks/cn/cloud/library/1403_renmm_opestackrpc/>`__
+
+--------------
+
+.. figure:: http://image.python-online.cn/20190511161447.png
+   :alt: 关注公众号，获取最新干货！
+
+
+.. |image0| image:: http://image.python-online.cn/20190526182125.png
+.. |image1| image:: http://image.python-online.cn/20190526184854.png
+.. |image2| image:: http://image.python-online.cn/20190526185217.png
+.. |image3| image:: http://image.python-online.cn/20190526221219.png
+.. |image4| image:: http://image.python-online.cn/20190526220809.png
+.. |image5| image:: http://image.python-online.cn/20190527220820.png
+.. |image6| image:: http://image.python-online.cn/20190527220012.png
+.. |image7| image:: http://image.python-online.cn/20190526172514.png
+.. |image8| image:: http://image.python-online.cn/20190526172725.png
+.. |image9| image:: http://image.python-online.cn/20190526173314.png
+.. |image10| image:: http://image.python-online.cn/20190526175100.png
+.. |image11| image:: http://image.python-online.cn/20190526180708.png
+.. |image12| image:: http://image.python-online.cn/20190526181433.png
+

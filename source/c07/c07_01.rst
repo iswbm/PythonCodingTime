@@ -787,6 +787,13 @@ Linux上的压缩格式比Windows上多很多，在 Windows 上最常见的不�
    $ cat /proc/cpuinfo
    $ numactk -H
 
+
+   # ubuntu 查看更新有哪些是安全更新
+   $ apt-get -s --no-download dist-upgrade -V | grep "^Inst.*security.*$" | cut -d " " -f 2
+
+   # ubuntu 登陆时，显示的安全更新是如何来的，内容：/etc/update-motd.d/90-updates-available
+   /usr/lib/update-notifier/apt-check --human-readable
+
 时间查询
 ^^^^^^^^
 

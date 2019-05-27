@@ -23,9 +23,11 @@
 3.1.2 入门用法：日志打印器
 --------------------------
 
-首先是\ **日志打印器**\ 。 实现的功能：
->在函数执行前，先打印一行日志告知一下主人，我要执行函数了。
->在函数执行完，也不能拍拍屁股就走人了，咱可是有礼貌的代码，再打印一行日志告知下主人，我执行完啦。
+首先是\ **日志打印器**\ 。
+
+实现的功能： -
+在函数执行前，先打印一行日志告知一下主人，我要执行函数了。 -
+在函数执行完，也不能拍拍屁股就走人了，咱可是有礼貌的代码，再打印一行日志告知下主人，我执行完啦。
 
 .. code:: python
 
@@ -65,8 +67,7 @@
 3.1.3 入门用法：时间计时器
 --------------------------
 
-再来看看 **时间计时器** 实现功能：
->顾名思义，就是计算一个函数的执行时长。
+再来看看 **时间计时器** 实现功能：顾名思义，就是计算一个函数的执行时长。
 
 .. code:: python
 
@@ -83,7 +84,7 @@
            print("花费时间：{}秒".format(cost_time))
        return wrapper
 
-假如，我们的函数是要睡眠10秒（冏~，小明实在不知道要举什么例子了）。这样也能更好的看出这个计算时长到底靠不靠谱。
+假如，我们的函数是要睡眠10秒。这样也能更好的看出这个计算时长到底靠不靠谱。
 
 .. code:: python
 
@@ -95,11 +96,11 @@
 
    want_sleep(10)
 
-来看看，输出。真的是2秒耶。真历害！！！
+来看看，输出。真的是10秒耶。真历害！！！
 
 ::
 
-   花费时间：2.0073800086975098秒
+   花费时间：10.0073800086975098秒
 
 3.1.4 进阶用法：带参数的函数装饰器
 ----------------------------------
@@ -323,7 +324,45 @@ Python工匠：使用装饰器的小技巧）
    >>> add.func # 实现实例方法
    <function add at 0x107bef1e0>
 
-3.1.7 wrapper 装饰器有啥用？
+3.1.8 如何写能装饰类的装饰器？
+------------------------------
+
+用 Python
+写单例模式的时候，常用的有三种写法。其中一种，是用装饰器来实现的。
+
+以下便是我自己写的装饰器版的单例写法。
+
+.. code:: python
+
+   instances = {}
+
+   def singleton(cls):
+       def get_instance(*args, **kw):
+           cls_name = cls.__name__
+           print('===== 1 ====')
+           if not cls_name in instances:
+               print('===== 2 ====')
+               instance = cls(*args, **kw)
+               instances[cls_name] = instance
+           return instances[cls_name]
+       return get_instance
+
+   @singleton
+   class User:
+       _instance = None
+
+       def __init__(self, name):
+           print('===== 3 ====')
+           self.name = name
+
+可以看到我们用singleton 这个装饰函数来装饰 User
+这个类。装饰器用在类上，并不是很常见，但只要熟悉装饰器的实现过程，就不难以实现对类的装饰。在上面这个例子中，装饰器就只是实现对类实例的生成的控制而已。
+
+其实例化的过程，你可以参考我这里的调试过程，加以理解。
+
+|image0|
+
+3.1.9 wrapper 装饰器有啥用？
 ----------------------------
 
 在 functools 标准库中有提供一个 wrapper
@@ -415,8 +454,8 @@ wraps的情况下，也可以让 ``wrapped.__name__`` 打印出 wrapped，代码
    print(wrapped.__name__)
    # wrapped
 
-3.1.8 内置装饰器：property
---------------------------
+3.1.10 内置装饰器：property
+---------------------------
 
 以上，我们介绍的都是自定义的装饰器。
 
@@ -533,15 +572,141 @@ wraps的情况下，也可以让 ``wrapped.__name__`` 打印出 wrapped，代码
 ``@age.deleter``
 使得我们可以使用\ ``del XiaoMing.age``\ 这样的方式来删除属性。
 
-3.1.9 其他装饰器：装饰器实战
-----------------------------
+property 的底层实现机制是「描述符」，为此我还写过一篇文章。
+
+这里也介绍一下吧，正好将这些看似零散的文章全部串起来。
+
+如下，我写了一个类，里面使用了 property 将 math 变成了类实例的属性
+
+.. code:: python
+
+   class Student:
+       def __init__(self, name):
+           self.name = name
+
+       @property
+       def math(self):
+           return self._math
+
+       @math.setter
+       def math(self, value):
+           if 0 <= value <= 100:
+               self._math = value
+           else:
+               raise ValueError("Valid value must be in [0, 100]")
+
+为什么说 property 底层是基于描述符协议的呢？通过 PyCharm 点击进入
+property
+的源码，很可惜，只是一份类似文档一样的伪源码，并没有其具体的实现逻辑。
+
+不过，从这份伪源码的魔法函数结构组成，可以大体知道其实现逻辑。
+
+这里我自己通过模仿其函数结构，结合「描述符协议」来自己实现类
+``property`` 特性。
+
+代码如下：
+
+.. code:: python
+
+   class TestProperty(object):
+
+       def __init__(self, fget=None, fset=None, fdel=None, doc=None):
+           self.fget = fget
+           self.fset = fset
+           self.fdel = fdel
+           self.__doc__ = doc
+
+       def __get__(self, obj, objtype=None):
+           print("in __get__")
+           if obj is None:
+               return self
+           if self.fget is None:
+               raise AttributeError
+           return self.fget(obj)
+
+       def __set__(self, obj, value):
+           print("in __set__")
+           if self.fset is None:
+               raise AttributeError
+           self.fset(obj, value)
+
+       def __delete__(self, obj):
+           print("in __delete__")
+           if self.fdel is None:
+               raise AttributeError
+           self.fdel(obj)
+
+
+       def getter(self, fget):
+           print("in getter")
+           return type(self)(fget, self.fset, self.fdel, self.__doc__)
+
+       def setter(self, fset):
+           print("in setter")
+           return type(self)(self.fget, fset, self.fdel, self.__doc__)
+
+       def deleter(self, fdel):
+           print("in deleter")
+           return type(self)(self.fget, self.fset, fdel, self.__doc__)
+
+然后 Student 类，我们也相应改成如下
+
+.. code:: python
+
+   class Student:
+       def __init__(self, name):
+           self.name = name
+
+       # 其实只有这里改变
+       @TestProperty
+       def math(self):
+           return self._math
+
+       @math.setter
+       def math(self, value):
+           if 0 <= value <= 100:
+               self._math = value
+           else:
+               raise ValueError("Valid value must be in [0, 100]")
+
+为了尽量让你少产生一点疑惑，我这里做两点说明：
+
+1. 使用\ ``TestProperty``\ 装饰后，\ ``math``
+   不再是一个函数，而是\ ``TestProperty``
+   类的一个实例。所以第二个math函数可以使用 ``math.setter``
+   来装饰，本质是调用\ ``TestProperty.setter`` 来产生一个新的
+   ``TestProperty`` 实例赋值给第二个\ ``math``\ 。
+2. 第一个 ``math`` 和第二个 ``math`` 是两个不同 ``TestProperty``
+   实例。但他们都属于同一个描述符类（TestProperty），当对 math
+   对于赋值时，就会进入 ``TestProperty.__set__``\ ，当对math
+   进行取值里，就会进入
+   ``TestProperty.__get__``\ 。仔细一看，其实最终访问的还是Student实例的
+   ``_math`` 属性。
+
+说了这么多，还是运行一下，更加直观一点。
+
+.. code:: python
+
+   # 运行后，会直接打印这一行，这是在实例化 TestProperty 并赋值给第二个math
+   in setter
+   >>>
+   >>> s1.math = 90
+   in __set__
+   >>> s1.math
+   in __get__
+   90
+
+如对上面代码的运行原理，有疑问的同学，请务必结合上面两点说明加以理解，那两点相当关键。
+
+3.1.11 其他装饰器：装饰器实战
+-----------------------------
 
 读完并理解了上面的内容，你可以说是Python高手了。别怀疑，自信点，因为很多人都不知道装饰器有这么多用法呢。
 
-在小明看来，使用装饰器，可以达到如下目的： -
-使代码可读性更高，逼格更高； - 代码结构更加清晰，代码冗余度更低；
+在我看来，使用装饰器，可以达到如下目的： - 使代码可读性更高，逼格更高；
+- 代码结构更加清晰，代码冗余度更低；
 
-刚好小明在最近也有一个场景，可以用装饰器很好的实现，暂且放上来看看。
+刚好我在最近也有一个场景，可以用装饰器很好的实现，暂且放上来看看。
 
 这是一个实现控制函数运行超时的装饰器。如果超时，则会抛出超时异常。
 
@@ -573,4 +738,7 @@ wraps的情况下，也可以让 ``wrapped.__name__`` 打印出 wrapped，代码
 
 .. figure:: http://image.python-online.cn/20190511161447.png
    :alt: 关注公众号，获取最新干货！
+
+
+.. |image0| image:: http://image.python-online.cn/20190512113917.png
 

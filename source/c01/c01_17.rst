@@ -573,13 +573,7 @@ super 的实现原理，就交由你来自己完成。
 参考文档
 --------
 
-https://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p09_define_decorators_as_classes.html
-
-https://blog.csdn.net/BF02jgtRS00XKtCx/article/details/82882622
-
-https://pyzh.readthedocs.io/en/latest/Descriptor-HOW-TO-Guide.html
-
-https://zhuanlan.zhihu.com/p/42485483
+-  `Python描述器引导(翻译) <https://pyzh.readthedocs.io/en/latest/Descriptor-HOW-TO-Guide.html#python>`__
 
 --------------
 

@@ -66,6 +66,9 @@
    $ 增加安全组规则(开放ssh)
    $ nova secgroup-add-rule default tcp <22> <22> <0.0.0.0/0>
 
+   # 设置metadata
+   nova meta xxxxxx set ws:evacuate_interval=10
+
 flavor管理
 ^^^^^^^^^^
 
@@ -384,6 +387,11 @@ aggregate管理
    rabbitmqctl add_user openstack openstack12#$
    rabbitmqctl set_permissions -p / openstack ".*" ".*" ".*"
    rabbitmqctl set_user_tags openstack administrator
+
+::
+
+   # 指定节点执行命令
+   rabbitmq -n rabbit@ws_controller02 [command]
 
 --------------
 
