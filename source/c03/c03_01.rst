@@ -23,9 +23,7 @@
 3.1.2 入门用法：日志打印器
 --------------------------
 
-首先是\ **日志打印器**\ 。
-
-实现的功能： -
+首先是\ **日志打印器**\ 。 实现的功能： -
 在函数执行前，先打印一行日志告知一下主人，我要执行函数了。 -
 在函数执行完，也不能拍拍屁股就走人了，咱可是有礼貌的代码，再打印一行日志告知下主人，我执行完啦。
 
@@ -96,11 +94,11 @@
 
    want_sleep(10)
 
-来看看，输出。真的是10秒耶。真历害！！！
+来看看，输出。真的是2秒.
 
 ::
 
-   花费时间：10.0073800086975098秒
+   花费时间：2.0073800086975098秒
 
 3.1.4 进阶用法：带参数的函数装饰器
 ----------------------------------
@@ -123,10 +121,10 @@
 
 .. code:: python
 
-   def american():
+   def chinese():
        print("我来自中国。")
 
-   def chinese():
+   def american():
        print("I am from America.")
 
 在给他们俩戴上装饰器的时候，就要跟装饰器说，这个人是哪国人，然后装饰器就会做出判断，打出对应的招呼。
@@ -136,11 +134,11 @@
 .. code:: python
 
    @say_hello("china")
-   def american():
+   def chinese():
        print("我来自中国。")
 
    @say_hello("america")
-   def chinese():
+   def american():
        print("I am from America.")
 
 万事俱备，只差帽子了。来定义一下，这里需要两层嵌套。
@@ -362,10 +360,10 @@ Python工匠：使用装饰器的小技巧）
 
 |image0|
 
-3.1.9 wrapper 装饰器有啥用？
-----------------------------
+3.1.9 wraps 装饰器有啥用？
+--------------------------
 
-在 functools 标准库中有提供一个 wrapper
+在 functools 标准库中有提供一个 wraps
 装饰器，你应该也经常见过，那他有啥用呢？
 
 先来看一个例子
@@ -404,18 +402,22 @@ Python工匠：使用装饰器的小技巧）
    print(wrapper(wrapped).__name__)
    #inner_function
 
-那如何避免这种情况的产生？方法是使用 functools .wrapper
+那如何避免这种情况的产生？方法是使用 functools .wraps
 装饰器，它的作用就是将 **被修饰的函数(wrapped)** 的一些属性值赋值给
 **修饰器函数(wrapper)** ，最终让属性的显示更符合我们的直觉。
 
 .. code:: python
 
-   from functools import wraps
+   from functools import update_wrapper
+
+   WRAPPER_ASSIGNMENTS = ('__module__', '__name__', '__qualname__', '__doc__',
+                          '__annotations__')
 
    def wrapper(func):
-       @wraps(func) 
        def inner_function():
            pass
+
+       update_wrapper(inner_function, func, assigned=WRAPPER_ASSIGNMENTS)
        return inner_function
 
    @wrapper
@@ -423,9 +425,8 @@ Python工匠：使用装饰器的小技巧）
        pass
 
    print(wrapped.__name__)
-   # wrapped
 
-准确点说，wrapper 其实是一个偏函数对象（partial），源码如下
+准确点说，wraps 其实是一个偏函数对象（partial），源码如下
 
 .. code:: python
 
@@ -448,6 +449,7 @@ wraps的情况下，也可以让 ``wrapped.__name__`` 打印出 wrapped，代码
        update_wrapper(func, inner_function)
        return inner_function
 
+   @wrapper
    def wrapped():
        pass
 
