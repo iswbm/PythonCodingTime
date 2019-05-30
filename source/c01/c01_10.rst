@@ -1132,7 +1132,7 @@ import 是 Python 导包的方式。
    _666(f’是不是非常的_666’)
 
 34. 更新字典
-~~~~~~~~~~~~
+------------
 
 通常我们更新字典的方式是这样的
 
@@ -1152,6 +1152,44 @@ import 是 Python 导包的方式。
    >>> dict3 = {**dict1, **dict2}
    >>> dict3
    {'namne': 'jane', 'gender': 'male', 'age': 24}
+
+35. 嵌套上下文管理的另类写法
+----------------------------
+
+当我们要写一个嵌套的上下文管理器时，可能会这样写
+
+.. code:: python
+
+   import contextlib
+
+   @contextlib.contextmanager
+   def test_context(name):
+       print('enter, my name is {}'.format(name))
+
+       yield
+
+       print('exit, my name is {}'.format(name))
+
+   with test_context('aaa'):
+       with test_context('bbb'):
+           print('========== in main ============')
+
+输出结果如下
+
+.. code:: python
+
+   enter, my name is aaa
+   enter, my name is bbb
+   ========== in main ============
+   exit, my name is bbb
+   exit, my name is aaa
+
+除此之外，你可知道，还有另一种嵌套写法
+
+.. code:: python
+
+   with test_context('aaa'), test_context('bbb'):
+       print('========== in main ============')
 
 附录：参考文章
 --------------

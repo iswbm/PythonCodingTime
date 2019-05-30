@@ -242,6 +242,9 @@ rpc server 和rpc client 的四个重要方法
 
 |image12|
 
+`nova
+event机制分析 <https://blog.csdn.net/epugv/article/details/44872583>`__
+
 参考文章：
 
 -  `OpenStack之RPC调用（一） <https://blog.csdn.net/qiuhan0314/article/details/42671965>`__

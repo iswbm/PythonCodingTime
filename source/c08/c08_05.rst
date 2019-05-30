@@ -12,6 +12,47 @@
 这个函数，只有在 ``spawn`` 、\ ``_hard_reboot`` 和 ``finish_migration``
 才会执行。
 
+通过libvirt的接口创建虚拟机
+
+|image1|
+
+8.5.2 同步虚机电源状态
+----------------------
+
+虚拟机在 hypervisor 的真实状态和 OpenStack 数据库管理的状态可能有出入。
+
+比如客户可能在虚拟机内部自己执行 ``shutdown -h now``
+，那么虚机就进入合理正常的关机状态了，可这个状态并不是由 OpenStack
+触发的，所以OpenStack 需要定时任务去检查真实的电源状态，并实时更新。
+
+这个定时任务是利用 ``eventlet`` 这个库去做的
+
+.. code:: python
+
+   class ComputeManager(manager.Manager):
+       def __init__(self, compute_driver=None, *args, **kwargs):
+           # CONF.sync_power_state_pool_size 默认是 1000
+           self._sync_power_pool = eventlet.GreenPool(
+               size=CONF.sync_power_state_pool_size)
+           self._syncs_in_progress = {}
+
+默认是 600s，就是10分钟同步一次数据库的状态。
+
+|image2|
+
+具体的函数是在这个 ``_sync_instance_power_state``
+
+|image3|
+
+注意这个函数只有两个地方会调用
+
+一个是上面 时间间隔 10分钟 的定时任务，时间明显有点长。
+
+还有一个是由 libvirt 触发的\ ``lifecycle event``
+事件，这个只要在虚拟机在hypervisor层发生状态变动时，就会调用。
+
+|image4|
+
 8.5.3 创建快照代码解读？
 ------------------------
 
@@ -70,19 +111,19 @@ nova
 
 nova-api 的入口如下
 
-|image1|
+|image5|
 
 接着会调用 nova/compute/api.py
 
-|image2|
+|image6|
 
 在nova-compute 层面：nova/compute/manager.py:_snapshot_instance()
 
-|image3|
+|image7|
 
 接下来会调用 ``nova/virt/libvirt/driver.py:snapshot()``
 
-|image4|
+|image8|
 
 先获取imagebackend的类型，然后找到对应的backend
 
@@ -97,13 +138,13 @@ nova-api 的入口如下
 
 接下来，会调用对应的imagebackend的\ ``snapshot_extract`` 方法。
 
-|image5|
+|image9|
 
 ``snapshot_extract``
 方法最终会调用\ ``nova/virt/images.py:_convert_image()``
 ，可以看出其实底层调用的是 ``qemu-img`` 提供的\ ``convert`` 接口。
 
-|image6|
+|image10|
 
 如果是qcow2的backend，不是调用这边，而是调用
 ``nova/virt/libvirt/utils.py:extract_snapshot()``
@@ -126,11 +167,11 @@ nova-api 的入口如下
 在\ ``libvirt_utils.get_disk_type_from_path``
 里没有相应的修改，导致返回的是lvm。
 
-|image7|
+|image11|
 
 后面的imagebackend也相应的变成 lvm的
 
-|image8|
+|image12|
 
 然后会进入 lvm这个backend的init函数。由于\ ``path`` 是\ ``/dev/sdb``
 并不是一个lv，所以这边会报错。
@@ -154,7 +195,7 @@ compute的资源上报，是在
 其调用的函数是\ ``virt/libvirt/driver.py`` 里的
 ``get_available_resource`` 函数
 
-|image9|
+|image13|
 
 从数据库获取旧数据
 ``self.compute_node = self._get_compute_node(context)``
@@ -172,11 +213,11 @@ compute的资源上报，是在
 nova-compute 发创建请求前，会先让 nova-scheduler
 选出一台资源充足的计算节点。
 
-|image10|
+|image14|
 
 nova-scheduler 的调度主要由两部分组成
 
-|image11|
+|image15|
 
 -  过滤器：filter，将不满足条件（硬性条件，比如内存，cpu，磁盘，pci设备等）的计算节点，直接过滤掉。意义：从过滤器出来的那些计算节点，理论上都可以创建虚拟机。
 -  称重器：weigher，对满足硬性条件的众多主机按照一定的规则进行权重配比。意义：经过称重器计算，选出你更希望在哪台节点上创建虚拟机。
@@ -190,25 +231,25 @@ nova-scheduler 的调度主要由两部分组成
    compute 的 id，可以在 ``_update_from_compute_node``
    函数中添加。它会从compute_nodes 表中取得你想要的信息。
 
-   |image12|
+   |image16|
 
 -  spec_obj：你所要请求创建的虚拟机信息（模板，镜像等）。它是从
    objects.RequestSpec.from_primitives 中取得的
 
-   |image13|
+   |image17|
 
 过滤器，它的代码如下：
 
-|image14|
+|image18|
 
 称重器，它的规则主要看这段代码。
 
-|image15|
+|image19|
 
 我在代码中，加了几段日志。从左到右，三个不同颜色的内容分别为，原始权值，配重系数（越高说明越占比越大，越影响最终结果），经过
 nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮点数）。
 
-|image16|
+|image20|
 
 那最终的权值如何计算呢？
 
@@ -222,11 +263,11 @@ nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮
 
 1. 如果有请求req（在nova-api里），可以使用这种
 
-|image17|
+|image21|
 
 2. 其他地方可以使用这种
 
-|image18|
+|image22|
 
 8.5.9 指定ip时检查allocation_pools
 ----------------------------------
@@ -238,16 +279,16 @@ nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮
 
 先来看看，port 是如何创建的
 
-|image19|
+|image23|
 
 若要解决这个问题，可以参考原生代码中，在为子网添加allocation_pool时，验证是否合法的的逻辑，代码如下
 
-|image20|
+|image24|
 
 然后在 ``neutron\neutron\db\ipam_pluggable_backend.py``
 文件中添加我们检查 ip是否在 allocation_pools 中的逻辑代码。
 
-|image21|
+|image25|
 
 .. code:: python
 
@@ -270,17 +311,17 @@ nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮
 
 然后还要定义一个异常类型
 
-|image22|
+|image26|
 
 若指定的ip在allocation pool 里，则正常创建，若不在allocation 里，就会在
 nova-compute 日志中报错。
 
-|image23|
+|image27|
 
 可以发现我们的ip 172.20.22.64 并不在子网的allocation
 pool，理所当然在nova的日志中可以看到相应的报错。
 
-|image24|
+|image28|
 
 8.5.10 attach port时ip占用提示
 ------------------------------
@@ -300,7 +341,7 @@ IpAddressAlreadyAllocated，而在 neutronclient 只有 IpAddressInUseClient
 的异常，并不匹配，在neutronclient 端与neutron 对应的异常应该为
 IpAddressAlreadyAllocatedClient 。
 
-|image25|
+|image29|
 
 如何让nova-api能够返回具体的错误信息呢？
 
@@ -311,50 +352,42 @@ IpAddressAlreadyAllocatedClient 异常。
 
 并且在nova 创建port的代码处，捕获这个异常
 
-|image26|
+|image30|
 
 这种要改两个组件，而且要将neutronclient 的代码也管理起来，较为麻烦
 
 一种是，只改neutron，在neutron/ipam/exceptions.py 添加一个与
 neutronclient 相对应的异常。
 
-|image27|
+|image31|
 
 然后修改 neutron/ipam/drivers/neutrondb_ipam/drivers.py 修改异常类型
 
-|image28|
+|image32|
 
 通过 postman 进行模拟，已经可以返回具体的信息
 
-|image29|
+|image33|
 
 另附：neutron 是如何判断ip是否已经占用？代码如下
 
-|image30|
+|image34|
 
 8.5.11 nova的各项服务服务是如何启动的？
 ---------------------------------------
 
-nova 里有不少服务，比如
-nova-compute，nova-api，nova-conductor，nova-scheduler 等。
+8.5.13 支持指定子网和指定ip
+---------------------------
 
-这些服务如何都是如何启动的呢？他们其实都是用同一套代码，所以只要分析一个就行，这里以nova-compute为例来了解一下。
+在 nova-api 接收请求处。
 
-从 /usr/bin/nova-compute 这个文件可以了解到nova-compute的入口是
-``nova.cmd.compute:main()``
+|image35|
 
-|image31|
+|image36|
 
-从这个入口进去，会开启一个 ``nova-compute`` 的服务。
+对 network_info 进行解析，然后塞给 request 对象返回。
 
-|image32|
-
-当调用 service.Service.create 时，实际是返回实际化 service.Service
-对象。当没有传入 manager 时，就以binary 里的为准。比如binary
-是\ ``nova-compute``\ ，那manager_cls 就是
-``compute_manager``\ ，对应的manager 导入路径，就会从配置里读取。
-
-|image33|
+|image37|
 
 --------------
 
@@ -363,37 +396,41 @@ nova-compute，nova-api，nova-conductor，nova-scheduler 等。
 
 
 .. |image0| image:: http://image.python-online.cn/20190526144846.png
-.. |image1| image:: http://image.python-online.cn/20190508110723.png
-.. |image2| image:: http://image.python-online.cn/20190508111109.png
-.. |image3| image:: http://image.python-online.cn/20190508095028.png
-.. |image4| image:: http://image.python-online.cn/20190508111527.png
-.. |image5| image:: http://image.python-online.cn/FhRPy4B1xEI9SfoD2RcunJl15ZE3
-.. |image6| image:: http://image.python-online.cn/FuyMWZS6HF4g3rPwTlLcereZxg4L
-.. |image7| image:: http://image.python-online.cn/FnJA8RNIvJN2lAEXbKtJDpOLg1vg
-.. |image8| image:: http://image.python-online.cn/FnGyI8jCQFLCGi0pGVmI3SV6pDrv
-.. |image9| image:: http://image.python-online.cn/FrbE6oEZ3vtTWwDfMNQ16MGi6SWr
-.. |image10| image:: http://image.python-online.cn/20190424212211.png
-.. |image11| image:: http://image.python-online.cn/20190424213430.png
-.. |image12| image:: http://image.python-online.cn/20190424214653.png
-.. |image13| image:: http://image.python-online.cn/20190424214540.png
-.. |image14| image:: http://image.python-online.cn/20190424221602.png
-.. |image15| image:: http://image.python-online.cn/20190424215735.png
-.. |image16| image:: http://image.python-online.cn/20190424220008.png
-.. |image17| image:: http://image.python-online.cn/20190426153322.png
-.. |image18| image:: http://image.python-online.cn/20190426152148.png
-.. |image19| image:: http://image.python-online.cn/20190526141815.png
-.. |image20| image:: http://image.python-online.cn/20190526142453.png
-.. |image21| image:: http://image.python-online.cn/20190526134519.png
-.. |image22| image:: http://image.python-online.cn/20190526141226.png
-.. |image23| image:: http://image.python-online.cn/20190526134543.png
-.. |image24| image:: http://image.python-online.cn/20190526134618.png
-.. |image25| image:: http://image.python-online.cn/20190526140213.png
-.. |image26| image:: http://image.python-online.cn/20190526140301.png
-.. |image27| image:: http://image.python-online.cn/20190526140315.png
-.. |image28| image:: http://image.python-online.cn/20190526140336.png
-.. |image29| image:: http://image.python-online.cn/20190526140410.png
-.. |image30| image:: http://image.python-online.cn/20190526143235.png
-.. |image31| image:: http://image.python-online.cn/20190526205152.png
-.. |image32| image:: http://image.python-online.cn/20190526165007.png
-.. |image33| image:: http://image.python-online.cn/20190526204328.png
+.. |image1| image:: http://image.python-online.cn/20190529135942.png
+.. |image2| image:: http://image.python-online.cn/20190530204839.png
+.. |image3| image:: http://image.python-online.cn/20190530204505.png
+.. |image4| image:: http://image.python-online.cn/20190530210912.png
+.. |image5| image:: http://image.python-online.cn/20190508110723.png
+.. |image6| image:: http://image.python-online.cn/20190508111109.png
+.. |image7| image:: http://image.python-online.cn/20190508095028.png
+.. |image8| image:: http://image.python-online.cn/20190508111527.png
+.. |image9| image:: http://image.python-online.cn/FhRPy4B1xEI9SfoD2RcunJl15ZE3
+.. |image10| image:: http://image.python-online.cn/FuyMWZS6HF4g3rPwTlLcereZxg4L
+.. |image11| image:: http://image.python-online.cn/FnJA8RNIvJN2lAEXbKtJDpOLg1vg
+.. |image12| image:: http://image.python-online.cn/FnGyI8jCQFLCGi0pGVmI3SV6pDrv
+.. |image13| image:: http://image.python-online.cn/FrbE6oEZ3vtTWwDfMNQ16MGi6SWr
+.. |image14| image:: http://image.python-online.cn/20190424212211.png
+.. |image15| image:: http://image.python-online.cn/20190424213430.png
+.. |image16| image:: http://image.python-online.cn/20190424214653.png
+.. |image17| image:: http://image.python-online.cn/20190424214540.png
+.. |image18| image:: http://image.python-online.cn/20190424221602.png
+.. |image19| image:: http://image.python-online.cn/20190424215735.png
+.. |image20| image:: http://image.python-online.cn/20190424220008.png
+.. |image21| image:: http://image.python-online.cn/20190426153322.png
+.. |image22| image:: http://image.python-online.cn/20190426152148.png
+.. |image23| image:: http://image.python-online.cn/20190526141815.png
+.. |image24| image:: http://image.python-online.cn/20190526142453.png
+.. |image25| image:: http://image.python-online.cn/20190526134519.png
+.. |image26| image:: http://image.python-online.cn/20190526141226.png
+.. |image27| image:: http://image.python-online.cn/20190526134543.png
+.. |image28| image:: http://image.python-online.cn/20190526134618.png
+.. |image29| image:: http://image.python-online.cn/20190526140213.png
+.. |image30| image:: http://image.python-online.cn/20190526140301.png
+.. |image31| image:: http://image.python-online.cn/20190526140315.png
+.. |image32| image:: http://image.python-online.cn/20190526140336.png
+.. |image33| image:: http://image.python-online.cn/20190526140410.png
+.. |image34| image:: http://image.python-online.cn/20190526143235.png
+.. |image35| image:: http://image.python-online.cn/20190529203441.png
+.. |image36| image:: http://image.python-online.cn/20190529215953.png
+.. |image37| image:: http://image.python-online.cn/20190529215825.png
 

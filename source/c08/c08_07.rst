@@ -25,6 +25,16 @@
 修改内核，开启直通，在\ ``/etc/default/grub`` 文件里
 ``GRUB_CMDLINE_LINUX`` 行，添加 ``intel_iommu=on``
 
+然后重启宿主机。
+
+8.7.2 功能验证
+--------------
+
+8.7.2.1 Driver 变化
+~~~~~~~~~~~~~~~~~~~
+
+**下面将观察创建虚拟机前后 driver 的变化**
+
 未创建虚拟机
 
 |image2|
@@ -37,14 +47,17 @@
 
 |image4|
 
-在P版之前，创建gpu直通的虚拟机，在虚拟机内部能NIVIDIA显卡的驱动是能检测到自己是跑在虚拟机里的（如下图，先安装
+8.7.2.2 隐藏虚拟机标识
+~~~~~~~~~~~~~~~~~~~~~~
+
+创建gpu直通的虚拟机，在虚拟机内部NIVIDIA显卡的驱动是能检测到自己是跑在虚拟机里的（如下图，先安装
 ``cpuid`` 再执行\ ``cpuid |grep hypervisor_id``
-，显示KVM），如果在虚拟机里驱动就会出错，所以我们需要对显卡驱动隐藏hypervisor
+，显示KVM），一旦跑在虚拟机里，就会出错，所以我们需要对显卡驱动隐藏hypervisor
 id。
 
 |image5|
 
-在P版之前，需要开发者自己修改xml ，在 feature 标签里添加这段
+如何隐藏 hypervisor id，只需要在xml的feature加上这段。
 
 .. code:: xml
 
@@ -52,20 +65,20 @@ id。
          <hidden state='on'/>
        </kvm>
 
-然后destroy再start一下虚拟机，在虚拟机内部执行
+然后destroy再start一下虚拟机，在虚拟机内部再次查看。
 
 |image6|
 
-在OpenStack的Pike版本中的Glance
-镜像引入了img_hide_hypervisor_id=true的property，所以可以对镜像执行如下的命令隐藏hupervisor
-id。
+在Pike 版本，OpenStack
+已经可以根据镜像里是否有\ ``img_hide_hypervisor_id=true``
+的property，来选择是否加上隐藏hypervisor_id的xml。
 
 ::
 
    openstack image set IMG-UUID --property img_hide_hypervisor_id=true
 
-由于我们当前使用的是 Newton 版本，所以需参考 P
-版的代码进行相应的改动，在生成虚拟机的xml的时候，在feature标签内添加如下一段内容
+如果你和我们一样使用比Pike 版本还旧的版本（ 如Newton ），需要开发者参考
+Pike 版本自己修改OpenStack 的源码，在xml里加上这段。
 
 .. code:: xml
 
@@ -73,17 +86,41 @@ id。
      <hidden state='on'/>
    </kvm>
 
-具体 P版的代码如何实现，主要函数是这一行
+具体 Pike版的代码如何实现，主要函数是这段
 
 |image7|
 
-8.7.2 使用说明
+记得在镜像meta里添加 img_hide_hypervisor_id 的字段
+
+|image8|
+
+8.7.2.3. 是否直通成功
+~~~~~~~~~~~~~~~~~~~~~
+
+在虚拟机内部执行 nvidia-smi\ |image9|
+
+8.7.2.4 称重器
+~~~~~~~~~~~~~~
+
+由于 GPU 资源较为稀缺，若普通类型的虚拟机被大量创建在 GPU 的机器上，那
+GPU
+就会成为一种浪费。为了避免出现这种情况，应该尽量让普通类型的虚拟机都调度到非
+GPU 的宿主机上。
+
+因此，需要增加一个称重器，，当创建普通类型的虚拟机时，含 GPU
+（通过pci_device
+设备数来决定）的宿主机的权重为最低，为了保证这点，这个称重器的权重系数应最大，暂定为200（可以通过配置项
+ws_gpu_weight_multiplier 设置）。
+
+|image10|
+
+8.7.3 使用说明
 --------------
 
 在环境部署好，gpu
 资源也充足的情况下，想要创建一台gpu直通的虚拟机，还需要确保以下两个步骤完成。
 
-8.7.2.1 模板配置
+8.7.3.1 模板配置
 ~~~~~~~~~~~~~~~~
 
 GPU 作为一种硬件资源，同样需要在模板中配置，配置方式是在 flavor
@@ -98,7 +135,7 @@ GPU 作为一种硬件资源，同样需要在模板中配置，配置方式是�
 
    `nova flavor-key <flavor_id> ``set` `pci_passthrough:``alias``=``'nvidia:1'`
 
-8.7.2.2 镜像配置
+8.7.3.2 镜像配置
 ~~~~~~~~~~~~~~~~
 
 ::
@@ -118,5 +155,8 @@ GPU 作为一种硬件资源，同样需要在模板中配置，配置方式是�
 .. |image4| image:: http://image.python-online.cn/20190422201117.png
 .. |image5| image:: http://image.python-online.cn/20190422205222.png
 .. |image6| image:: http://image.python-online.cn/20190422204755.png
-.. |image7| image:: http://image.python-online.cn/20190514205605.png
+.. |image7| image:: http://image.python-online.cn/20190528105408.png
+.. |image8| image:: http://image.python-online.cn/20190528105021.png
+.. |image9| image:: http://image.python-online.cn/20190528114526.png
+.. |image10| image:: http://image.python-online.cn/20190528141106.png
 

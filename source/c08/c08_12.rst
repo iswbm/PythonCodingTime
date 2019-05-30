@@ -1,0 +1,121 @@
+8.12 从nova-api的启动理解wsgi
+=============================
+
+nova 里有不少服务，比如
+nova-compute，nova-api，nova-conductor，nova-scheduler 等。
+
+这些服务如何都是如何启动的呢？他们其实都是用同一套代码，所以只要分析一个就行，这里以nova-compute为例来了解一下。
+
+从 /usr/bin/nova-compute 这个文件可以了解到nova-compute的入口是
+``nova.cmd.compute:main()``
+
+|image0|
+
+从这个入口进去，会开启一个 ``nova-compute`` 的服务。
+
+|image1|
+
+当调用 service.Service.create 时（create
+是一个工厂函数），实际是返回实例化的 service.Service 对象。当没有传入
+manager 时，就以binary 里的为准。比如binary
+是\ ``nova-compute``\ ，那manager_cls 就是
+``compute_manager``\ ，对应的manager 导入路径，就会从配置里读取。
+
+|image2|
+
+通过了解了上面 nova-compute 的启动过程，nova-api
+也是相同的思路，它的入口是\ ``nova.cmd.api:main()``\ ，不过和nova-compute不一样的是，nova-compute没有对外接口，而nova-api
+有，所以它会启动一个 wsgi 服务器。
+
+接下来，我们就来一起看看是 OpenStack Nova 是如何启动一个 WSGI 服务器的。
+
+在如下的黄框里，可以看到在这里启动了一个 server，就是我们所说的的 wsgi
+server
+
+|image3|
+
+|image4|
+
+再进入 wsgi.py 可以看到这里使用了 eventlet
+这个并发库，它开启了一个绿色线程池，从配置里可以看到这个wsgi
+服务器可以接收的请求并发量是 1000 。
+
+|image5|
+
+你接下来感兴趣的应该是，这个线程池里的每个线程都是啥？是如何接收请求的？
+
+通过对源码的阅读，可以得知是通过socket接收请求的。
+
+由于代码较多，我把提取了主要的代码，精简如下
+
+.. code:: python
+
+   # 创建绿色线程池
+   self._pool = eventlet.GreenPool(self.pool_size)
+
+   # 创建 socket：有监听的ip，端口
+   bind_addr = (host, port)
+   self._socket = eventlet.listen(bind_addr, family, backlog=backlog)
+   dup_socket = self._socket.dup()
+
+   # 整理孵化协程所需的各项参数
+   wsgi_kwargs = {
+       'func': eventlet.wsgi.server,
+       'sock': dup_socket,
+       'site': self.app, # 这个就是 wsgi 的 application 函数
+       'protocol': self._protocol,
+       'custom_pool': self._pool,
+       'log': self._logger,
+       'log_format': CONF.wsgi.wsgi_log_format,
+       'debug': False,
+       'keepalive': CONF.wsgi.keep_alive,
+       'socket_timeout': self.client_socket_timeout
+   }
+
+   # 孵化协程
+   self._server = utils.spawn(**wsgi_kwargs)
+
+|image6|
+
+我们都知道 wsgi 要传入一个
+application，用来处理接收到的请求，是我们整个服务的关键入口，那这里的
+app 是哪个呢？其实在上面代码中我有注释： self.app 。
+
+下面这行就是 self.app 的来源，通过查看我打印的 DEBUG 内容得知 config_url
+和 app name 的值
+
+|image7|
+
+再往代码中看，其实这个 app
+不是直接写死成一个具体的函数对象，而是通过解析 paste.ini
+配置文件来取得具体的 application 路径，然后导入。
+
+而 paste.ini 文件的解析是通过 Python 的第三方库 ``paste``
+
+下图我截取了其主要的代码
+
+|image8|
+
+通过上面DEBUG日志，我们知道了 ``uri =/etc/nova/api-paste.ini`` ，查看
+``/etc/nova/api-paste.ini`` ，果然可以找到 ``osapi_compute``
+这个app，从这个路由表，可以得到 application 的的路径（对于 paste.ini
+可以查阅这篇文章：\ `python
+中paste.ini文件使用说明 <https://blog.csdn.net/hzrandd/article/details/10834381>`__
+），是\ ``nova.api.openstack.compute`` 这个模块下的 APIRouterV21 类
+的factory方法。
+
+.. code:: shell
+
+   [app:osapi_compute_app_v21]
+   paste.app_factory = nova.api.openstack.compute:APIRouterV21.factory
+
+.. |image0| image:: http://image.python-online.cn/20190526205152.png
+.. |image1| image:: http://image.python-online.cn/20190526165007.png
+.. |image2| image:: http://image.python-online.cn/20190526204328.png
+.. |image3| image:: http://image.python-online.cn/20190530212557.png
+.. |image4| image:: http://image.python-online.cn/20190530212753.png
+.. |image5| image:: http://image.python-online.cn/20190530212956.png
+.. |image6| image:: http://image.python-online.cn/20190530214820.png
+.. |image7| image:: http://image.python-online.cn/20190530221101.png
+.. |image8| image:: http://image.python-online.cn/20190530220957.png
+
