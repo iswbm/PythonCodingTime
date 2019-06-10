@@ -522,6 +522,10 @@ Script parameters。
 
 |image18|
 
+在创建用户的时候，要指定用户组，要注意这个用户组的权限一定要有相应主机组的权限，否则无法发送告警邮件。
+
+|image19|
+
 配置好收件人后 ，发件人呢？
 
 发件人需要你在 Zabbix Server 所在的服务器上安装并正确配置好 smtp
@@ -538,12 +542,12 @@ Script parameters。
 具体你可以参考这篇文章：\ `zabbix
 服务器设置邮件报警 <https://www.cnblogs.com/zoulongbin/p/6420239.html>`__
 
-7.2.6 监控数据库
+7.2.4 监控数据库
 ----------------
 
 zabbix 自带 mysql 的监控模板，监控项不多，只有 14 项。
 
-|image19|
+|image20|
 
 这个模板在使用前，需要进行两个配置。
 
@@ -573,7 +577,7 @@ zabbix 自带 mysql 的监控模板，监控项不多，只有 14 项。
 能够及时将配置文件路径修改过来就行。如下图所示，你只要修改下方 ``HOME``
 变量值。
 
-|image20|
+|image21|
 
 然后记得去 web界面在 该host主机上link到 ``Template DB MySQL``
 这个模板上。
@@ -684,6 +688,8 @@ float ，log， text 等，所以计算存在一定的误差，需留有冗余�
 -  `zabbix客户端自动注册 <http://www.ttlsa.com/zabbix/zabbix-active-agent-auto-registration>`__
 -  `Download and install
    Zabbix <https://www.zabbix.com/download?zabbix=3.4&os_distribution=centos&os_version=7&db=MySQL>`__
+-  `zabbix
+   自带宏作用域 <https://www.zabbix.com/documentation/4.0/manual/appendix/macros/supported_by_location>`__
 
 --------------
 
@@ -710,6 +716,7 @@ float ，log， text 等，所以计算存在一定的误差，需留有冗余�
 .. |image16| image:: http://image.python-online.cn/20190411205822.png
 .. |image17| image:: http://image.python-online.cn/20190417202834.png
 .. |image18| image:: http://image.python-online.cn/20190404204534.png
-.. |image19| image:: http://image.python-online.cn/20190409103417.png
-.. |image20| image:: http://image.python-online.cn/20190409104026.png
+.. |image19| image:: http://image.python-online.cn/20190605173956.png
+.. |image20| image:: http://image.python-online.cn/20190409103417.png
+.. |image21| image:: http://image.python-online.cn/20190409104026.png
 

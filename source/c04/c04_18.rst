@@ -1,0 +1,38 @@
+4.18 Mac 高效工具
+=================
+
+4.18.1 iTerm2
+-------------
+
+介绍一下快捷键
+
+::
+
+   # 分窗口操作
+   shift + command + d（横切）command + d（竖切） 
+
+   2、历史信息查找和粘贴：command + f，呼出查找功能，找到后 tab 键可以选中找到的文本，通过option + 回车粘贴。 
+   3、自动完成：command + ; ，呼出自动完成窗口，根据上下文提供内容选择项 
+   # 粘贴历史
+   shift + command + h 
+   # 回放功能
+   option + command + b 
+   # 光标去哪了？
+   command + / 
+
+   # Expose Tabs：
+   option + command + e 
+
+4.18.2 Finder
+-------------
+
+::
+
+   command + up   # 文件夹后退
+   command + down # 文件夹前进
+
+--------------
+
+.. figure:: http://image.python-online.cn/20190511161447.png
+   :alt: 关注公众号，获取最新干货！
+

@@ -6,6 +6,8 @@
 
 检查是否有 GPU 设备：\ ``lspci | grep NVIDIA``
 
+(若没有lspci命令，则安装 yum install pciutils -y)
+
 |image0|
 
 此时查看，驱动是 nvidia
@@ -54,6 +56,8 @@
 ``cpuid`` 再执行\ ``cpuid |grep hypervisor_id``
 ，显示KVM），一旦跑在虚拟机里，就会出错，所以我们需要对显卡驱动隐藏hypervisor
 id。
+
+（若没有cpuid，则安装 yum install -y cpuid）
 
 |image5|
 
@@ -158,5 +162,5 @@ GPU 作为一种硬件资源，同样需要在模板中配置，配置方式是�
 .. |image7| image:: http://image.python-online.cn/20190528105408.png
 .. |image8| image:: http://image.python-online.cn/20190528105021.png
 .. |image9| image:: http://image.python-online.cn/20190528114526.png
-.. |image10| image:: http://image.python-online.cn/20190528141106.png
+.. |image10| image:: http://image.python-online.cn/20190606185531.png
 

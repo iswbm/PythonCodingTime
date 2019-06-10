@@ -408,16 +408,12 @@ Python工匠：使用装饰器的小技巧）
 
 .. code:: python
 
-   from functools import update_wrapper
-
-   WRAPPER_ASSIGNMENTS = ('__module__', '__name__', '__qualname__', '__doc__',
-                          '__annotations__')
+   from functools import wraps
 
    def wrapper(func):
+       @wraps(func)
        def inner_function():
            pass
-
-       update_wrapper(inner_function, func, assigned=WRAPPER_ASSIGNMENTS)
        return inner_function
 
    @wrapper
@@ -425,6 +421,7 @@ Python工匠：使用装饰器的小技巧）
        pass
 
    print(wrapped.__name__)
+   # wrapped
 
 准确点说，wraps 其实是一个偏函数对象（partial），源码如下
 
@@ -443,10 +440,14 @@ wraps的情况下，也可以让 ``wrapped.__name__`` 打印出 wrapped，代码
 
    from functools import update_wrapper
 
+   WRAPPER_ASSIGNMENTS = ('__module__', '__name__', '__qualname__', '__doc__',
+                          '__annotations__')
+
    def wrapper(func):
        def inner_function():
            pass
-       update_wrapper(func, inner_function)
+
+       update_wrapper(inner_function, func, assigned=WRAPPER_ASSIGNMENTS)
        return inner_function
 
    @wrapper
@@ -454,7 +455,6 @@ wraps的情况下，也可以让 ``wrapped.__name__`` 打印出 wrapped，代码
        pass
 
    print(wrapped.__name__)
-   # wrapped
 
 3.1.10 内置装饰器：property
 ---------------------------

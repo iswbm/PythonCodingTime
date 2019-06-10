@@ -133,11 +133,12 @@ aggregate管理
    $ neutron net-create --provider:physical_network phynet1 --provider:network_type flat private
 
    # 创建子网 全
-   $ neutron subnet-create [--name ming-subnet(通常不写自动生成)] \
-     private 192.168.2.0/24 \
-     --allocation-pool start=192.168.2.200,end=192.168.2.230 \
-     --gateway 192.168.2.253 \
-     private PROVIDER_NETWORK_CIDR
+   $neutron subnet-create --name public\
+    --allocation-pool start=172.20.20.100,end=172.20.20.199 \
+    --gateway 172.20.20.200 \
+    --enable_dhcp=False \
+    --dns_nameserver 114.114.114.114 \
+    public 172.20.20.0/24
 
    # 创建子网，更多选项可以查看 neutron subnet-create -h
    neutron subnet-create --name 192.168.2.0/24 --allocation-pool start=192.168.2.200,end=192.168.2.230 --gateway 192.168.2.253 --dns-nameserver 114.114.114.114 --disable-dhcp private 192.168.2.0/24
@@ -165,7 +166,7 @@ aggregate管理
    https://docs.openstack.org/project-install-guide/baremetal/draft/configure-glance-images.html
 
    # 上传镜像 (具体看哪glance help image-create)
-   $ glance  image-create --name centos6.5-old --visibility public --disk-format qcow2 --container-format bare --property ws:predownload=True --file /home/
+   $ glance image-create --name centos6.5-old --visibility public --disk-format qcow2 --container-format bare --property ws:predownload=True --file /home/
 
 1.4 keystone
 ~~~~~~~~~~~~

@@ -4,7 +4,7 @@ import commands
 import subprocess
 
 
-blog_path = 'F:\MyGit\PythonCodingTime/source'
+blog_path = '/Users/MING/Github/PythonCodingTime/source'
 
 file_list = os.listdir(blog_path)
 
@@ -24,11 +24,11 @@ for folder in dir_list:
         convert_cmd = 'pandoc -V mainfont="SimSun" -f markdown -t rst {md_file} -o {rst_file}'.format(
             md_file=filename+'.md', rst_file=filename+'.rst'
         )
-        # status, output = commands.getstatusoutput(convert_cmd)
-        retcode = subprocess.call(convert_cmd)
-        # if status != 0:
-        #     print(output)
-        if retcode == 0:
+        status, output = commands.getstatusoutput(convert_cmd)
+        #retcode = subprocess.call(convert_cmd)
+        if status != 0:
+            print(output)
+        if status == 0:
             print(file + ' 处理完成')
         else:
             print(file + '处理失败')
