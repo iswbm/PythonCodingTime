@@ -163,6 +163,9 @@ add/commit 前撤销对文件的修改
    $ git reset --hard HEAD^ #HEAD是当前版本，HEAD^是上一个版本，HEAD^^是上上个版本，HEAD~100是前100个版本
 
    #第二种方法
+   $ git revert HEAD # 会生成一次新的提交，提交重新会有三次提交
+   $ git reset HEAD  # 直接将指针指向上一次提交之前，会有 0 次提交
+
    $ git reset --hard 04c632e244 
    # hard后面这一串字符是commit id（版本号），只要前面几位就ok，但是如果我们关掉git,想恢复到之前的新版本，但是不知道id了，那就要用第三种方法了
 

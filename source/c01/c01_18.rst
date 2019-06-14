@@ -1,0 +1,85 @@
+1.18 Mac上安装MySQL-python
+==========================
+
+这玩意实在是太难装了，为了以防后面再踩坑，这里还是记录一下吧。
+
+以下是我成功安装后的总结，别看总结起来很顺利，其实中间经过很痛苦的挣扎。
+
+遇到各种各样的错误，幸亏自己对于这些错误还有一定的辨识处理能力。
+
+首先，要顺利安装 MySQL-python，请先保证你的环境是干净的（MySQL）
+
+因为在我准备安装 MySQL-python 之前，我电脑上使用的MySQL，是
+*XAMPP*\ 这个功能强大的建站集成软件包自带的，安装它，就会自动安装一些开发常用的软件
+如 Apache，MySQL，PHP，PERL。
+
+使用它的话，MySQL会装在 /Applications/XAMPP/xamppfiles/
+下，与我们正常使用brew
+安装的路径不一样，所以经常会有各种使用问题，因此为了不必要的麻烦，保证环境的干净，请先卸载所有其他安装来源的
+mysql。
+
+除了 XAMPP 之外，如果之前使用 brew 安装过
+mysql，这时也请将其卸载再重新安装吧。
+
+.. code:: shell
+
+   brew remove mysql
+
+什么？没有用过 brew？这么好用的包管理器，必须安利你用起来。
+
+由于后面安装mysql也将使用 brew，所以你必须安装。方法如下
+
+.. code:: shell
+
+   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+由于默认的 brew 源是国外的，非常非常地慢，建议换成国内的源，方法如下
+
+.. code:: shell
+
+   cd "$(brew --repo)"
+   git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+
+   cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+   git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+
+   brew update
+
+卸载掉所有的 mysql 和
+替换源成功后，就可以开始mysql了，这里我还是选择安装的 5.7 版本的。
+
+.. code:: shell
+
+   brew install mysql@5.7
+
+经过漫长的等待后，mysql 终于安装成功
+
+|image0|
+
+这时候，再 执行 pip install MySQL-python，发现还是报错。
+
+|image1|
+
+有经验的我，立马知道了 ``mysql_config``
+这个文件的路径可能没有在环境变量中。
+
+|image2|
+
+然后，我又重新执行 ``pip install MySQL-python`` ，发现还是报错。
+
+|image3|
+
+但是这个错误相对比较明显，明眼人一看就知道是权限不足。
+
+那我就以 root 权限去安装好了。
+
+|image4|
+
+终于安装成功，折腾了两个晚上（主要是网速慢）。。
+
+.. |image0| image:: http://image.python-online.cn/20190615001340.png
+.. |image1| image:: http://image.python-online.cn/20190615001414.png
+.. |image2| image:: http://image.python-online.cn/20190615001633.png
+.. |image3| image:: http://image.python-online.cn/20190615001706.png
+.. |image4| image:: http://image.python-online.cn/20190615001908.png
+
