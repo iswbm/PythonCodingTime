@@ -1,6 +1,10 @@
-1.18 Mac上安装MySQL-python
-==========================
+1.18 MySQL 使用总结
+===================
 
+1.18.1 安装MySQL-python
+-----------------------
+
+MySQL-python
 这玩意实在是太难装了，为了以防后面再踩坑，这里还是记录一下吧。
 
 以下是我成功安装后的总结，别看总结起来很顺利，其实中间经过很痛苦的挣扎。
@@ -75,11 +79,80 @@ mysql，这时也请将其卸载再重新安装吧。
 
 |image4|
 
-终于安装成功，折腾了两个晚上（主要是网速慢）。。
+终于安装成功，折腾了两个晚上（主要是网速慢）。
+
+1.18.2 Mac 启动MySQL服务
+------------------------
+
+使用 brew 安装 mysql 成功后，又陷入了一个坑。。
+
+就是无法通过正常的 ``mysqld start`` 去启动，也无法使用图形界面去启动。
+
+我原以为是旧数据的影响，然后把所有的旧数据清空后发现，仍然无法启动，从错误日志中没有发现可行的解决方案。
+
+最后我才认定这是安装方法导致的启动方式的差异。使用brew
+安装的mysql也需要使用brew启动myql
+
+.. code:: shell
+
+   # 启动 mysql, 并设置为开机启动
+   brew services start mysql
+   # 关闭 mysql
+   brew services stop mysql
+   # 重启 mysql
+   brew services restart mysql
+
+启动后，如何设置初始化密码呢？
+
+.. code:: shell
+
+   cd /usr/local/Cellar/mysql@5.7/5.7.25/bin
+   ./mysql_secure_installation
+
+选择密码强度，视情况而写，我这边选最强的，长度大于8，有数字，有大小写，有特殊字符。
+
+|image5|
+
+接下来还会问你，是否删除其他匿名用户，是否删除 test
+数据库，是否允许远程使用root登陆（安全起见我选不允许）。
+
+一切设置完成后，就可以直接使用 root 登陆数据库。
+
+.. code:: shell
+
+   mysql -uroot -p
+
+1.18.3 Win上忘记密码
+--------------------
+
+.. code:: shell
+
+
+   # 先将mysql服务停掉，可以通过命令行，也可以通过“服务”图形界面关闭
+   net stop mysql；
+
+   # 切换到 mysql 的 bin 目录下
+   cd E:\Program Files\MySQL\MySQL Server 5.6\bin
+
+   # 开启免密服务
+   mysqld --defaults-file="E:\ProgramData\MySQL\MySQL Server 5.6\my.ini" --skip-grant-tables
+
+   # 再开一个cmd窗口
+   mysql -uroot -p  # 直接回车
+
+   # 修改密码
+   >use mysql;
+   >UPDATE user SET Password=PASSWORD('123456') where USER='root' and Host='localhost';
+   >FLUSH PRIVILEGES;
+   >quit
+
+   # 再重新登陆，用新的密码登陆，发现可以生效
+   mysql -uroot -p
 
 .. |image0| image:: http://image.python-online.cn/20190615001340.png
 .. |image1| image:: http://image.python-online.cn/20190615001414.png
 .. |image2| image:: http://image.python-online.cn/20190615001633.png
 .. |image3| image:: http://image.python-online.cn/20190615001706.png
 .. |image4| image:: http://image.python-online.cn/20190615001908.png
+.. |image5| image:: http://image.python-online.cn/20190615112422.png
 
