@@ -6,16 +6,16 @@
 # 博客目录：
 
 ## 第一章：基础知识
-- 1.1 [13条Python2.x和3.x的区别？](http://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_01.html)
-- 1.2 [Python的自省机制](http://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_02.html)
-- 1.3 [谈谈深贝和浅拷贝的区别](http://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_03.html)
-- 1.4 [什么是猴子补丁？](http://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_04.html)
-- 1.5 [深入理解闭包与变量作用域](http://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_05.html)
-- 1.6 [深入理解元组存在的意义](http://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_07.html)
-- 1.7 [15个Pythonic的代码示例](https://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_06.html)
-- 1.8 [新式类和经典类的区别？](https://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_08.html)
-- 1.9 [多继承与Mixin设计模式](https://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_09.html)
-- 1.10 [盘点 Python 中那些冷知识](https://mings-blog.readthedocs.io/zh_CN/latest/c01/c01_10.html)
+- 1.1 [13条Python2.x和3.x的区别？](http://python-online.cn/zh_CN/latest/c01/c01_01.html)
+- 1.2 [Python的自省机制](http://python-online.cn/zh_CN/latest/c01/c01_02.html)
+- 1.3 [谈谈深贝和浅拷贝的区别](http://python-online.cn/zh_CN/latest/c01/c01_03.html)
+- 1.4 [什么是猴子补丁？](http://python-online.cn/zh_CN/latest/c01/c01_04.html)
+- 1.5 [深入理解闭包与变量作用域](http://python-online.cn/zh_CN/latest/c01/c01_05.html)
+- 1.6 [深入理解元组存在的意义](http://python-online.cn/zh_CN/latest/c01/c01_07.html)
+- 1.7 [15个Pythonic的代码示例](https://python-online.cn/zh_CN/latest/c01/c01_06.html)
+- 1.8 [新式类和经典类的区别？](https://python-online.cn/zh_CN/latest/c01/c01_08.html)
+- 1.9 [多继承与Mixin设计模式](https://python-online.cn/zh_CN/latest/c01/c01_09.html)
+- 1.10 [盘点 Python 中那些冷知识](https://python-online.cn/zh_CN/latest/c01/c01_10.html)
 - 1.11 [正则表达式必知必会](http://python-online.cn/zh_CN/latest/c01/c01_11.html)
 - 1.12 [搞懂字符编码的前世今生](http://python-online.cn/zh_CN/latest/c01/c01_12.html)
 - 1.13 [Python几个高阶函数](http://python-online.cn/zh_CN/latest/c01/c01_13.html)
@@ -23,34 +23,36 @@
 - 1.15 [提升Python性能的7个习惯](http://python-online.cn/zh_CN/latest/c01/c01_15.html)
 - 1.16 [泛型函数怎么写？](http://python-online.cn/zh_CN/latest/c01/c01_16.html)
 - 1.17 [深入理解「描述符」](http://python-online.cn/zh_CN/latest/c01/c01_17.html)
+- 1.18 [MySQL使用总结](http://python-online.cn/zh_CN/latest/c01/c01_18.html)
 
 ## 第二章：并发编程
-- 2.1 [从性能角度来初探并发编程](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_01.html)
-- 2.2 [创建多线程的几种方法](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_02.html)
-- 2.3 [谈谈线程中的“锁机制”](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_03.html)
-- 2.4 [线程消息通信机制任务协调](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_04.html)
-- 2.5 [线程中的信息隔离](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_05.html)
-- 2.6 [消息队列补充及如何创建线程池](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_06.html)
-- 2.7 [从生成器使用入门协程](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_07.html)
-- 2.8 [深入理解yield from语法](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_08.html)
-- 2.9 [初识异步IO框架：asyncio 上篇](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_09.html)
-- 2.10 [学习异步IO框架：asyncio 中篇](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_10.html)
-- 2.11 [实战异步IO框架：asyncio 下篇](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c02_11.html)
+- 2.1 [从性能角度来初探并发编程](http://python-online.cn/zh_CN/latest/c02/c02_01.html)
+- 2.2 [创建多线程的几种方法](http://python-online.cn/zh_CN/latest/c02/c02_02.html)
+- 2.3 [谈谈线程中的“锁机制”](http://python-online.cn/zh_CN/latest/c02/c02_03.html)
+- 2.4 [线程消息通信机制任务协调](http://python-online.cn/zh_CN/latest/c02/c02_04.html)
+- 2.5 [线程中的信息隔离](http://python-online.cn/zh_CN/latest/c02/c02_05.html)
+- 2.6 [消息队列补充及如何创建线程池](http://python-online.cn/zh_CN/latest/c02/c02_06.html)
+- 2.7 [从生成器使用入门协程](http://python-online.cn/zh_CN/latest/c02/c02_07.html)
+- 2.8 [深入理解yield from语法](http://python-online.cn/zh_CN/latest/c02/c02_08.html)
+- 2.9 [初识异步IO框架：asyncio 上篇](http://python-online.cn/zh_CN/latest/c02/c02_09.html)
+- 2.10 [学习异步IO框架：asyncio 中篇](http://python-online.cn/zh_CN/latest/c02/c02_10.html)
+- 2.11 [实战异步IO框架：asyncio 下篇](http://python-online.cn/zh_CN/latest/c02/c02_11.html)
 - 2.12 [生成器与协程，你分清了吗？](http://python-online.cn/zh_CN/latest/c02/c02_12.html)
 
 ## 第三章：高级编程
-- 3.1 [装饰器从入门到高阶](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c03_01.html)
-- 3.2 [学会使用元类定制类](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c03_02.html)
-- 3.3 [学会使用socket网络编程](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c03_03.html)
+- 3.1 [装饰器从入门到高阶](http://python-online.cn/zh_CN/latest/c02/c03_01.html)
+- 3.2 [学会使用元类定制类](http://python-online.cn/zh_CN/latest/c02/c03_02.html)
+- 3.3 [学会使用socket网络编程](http://python-online.cn/zh_CN/latest/c02/c03_03.html)
 - 3.4 [Django+Uwsgi部署网站](http://python-online.cn/zh_CN/latest/c03/c03_04.html)
 - 3.5 [源码解读：Flask上下文与代理模式](http://python-online.cn/zh_CN/latest/c03/c03_05.html)
+- 3.6 [Web开发者必看：理解WSGI](http://python-online.cn/zh_CN/latest/c03/c03_06.html)
 
 ## 第四章：开发工具
-- 4.1 [虚拟环境的搭建与使用](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c04_01.html)
-- 4.2 [Xshell的高效使用手册](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c04_02.html)
-- 4.3 [30分钟教你搭建顔值超高的博客](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c04_03.html)
-- 4.4 [Jupyter NoteBook 的使用指南](https://mings-blog.readthedocs.io/zh_CN/latest/c04/c04_04.html)
-- 4.5 [Win10 + Ubuntu 双系统安装指南](https://mings-blog.readthedocs.io/zh_CN/latest/c04/c04_05.html)
+- 4.1 [虚拟环境的搭建与使用](http://python-online.cn/zh_CN/latest/c02/c04_01.html)
+- 4.2 [Xshell的高效使用手册](http://python-online.cn/zh_CN/latest/c02/c04_02.html)
+- 4.3 [30分钟教你搭建顔值超高的博客](http://python-online.cn/zh_CN/latest/c02/c04_03.html)
+- 4.4 [Jupyter NoteBook 的使用指南](https://python-online.cn/zh_CN/latest/c04/c04_04.html)
+- 4.5 [Win10 + Ubuntu 双系统安装指南](https://python-online.cn/zh_CN/latest/c04/c04_05.html)
 - 4.6 [我的 Git 使用指南](http://python-online.cn/zh_CN/latest/c04/c04_06.html)
 - 4.7 [ Hexo 搭建博客教程](http://python-online.cn/zh_CN/latest/c04/c04_07.html)
 - 4.8[珍惜生命，远离鼠标](http://python-online.cn/zh_CN/latest/c04/c04_08.html)
@@ -63,16 +65,21 @@
 - 4.15 [15个 PyCharm 小技巧](http://python-online.cn/zh_CN/latest/c04/c04_15.html)
 - 4.16 [Python 开发技巧集合](http://python-online.cn/zh_CN/latest/c04/c04_16.html)
 - 4.17 [Python 实现 23 种设计模式](http://python-online.cn/zh_CN/latest/c04/c04_17.html)
+- 4.18 [Mac 高效工具](http://python-online.cn/zh_CN/latest/c04/c04_18.html)
+- 4.19 [程序员编码必学：Vim](http://python-online.cn/zh_CN/latest/c04/c04_19.html)
 
 ## 第五章：算法教程
-- 5.1 [图解九大经典排序算法（一）](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c05_01.html)
-- 5.2 [图解九大经典排序算法（二）](http://mings-blog.readthedocs.io/zh_CN/latest/c02/c05_02.html)
+- 5.1 [图解九大经典排序算法](http://python-online.cn/zh_CN/latest/c02/c05_01.html)
+- 5.2 [递归算法：走楼梯会思考的题](http://python-online.cn/zh_CN/latest/c04/c04_18.html)
+- 5.3 [哈希算法：安全方面的算法](http://python-online.cn/zh_CN/latest/c04/c04_18.html)
 
 ## 第六章：数据分析
-- 6.1 [一张图带你入门matplotlib](https://mings-blog.readthedocs.io/zh_CN/latest/c06/c06_01.html)
-- 6.2 [详解六种可视化图表](https://mings-blog.readthedocs.io/zh_CN/latest/c06/c06_02.html)
-- 6.3 [如何绘制正余弦函数图象](https://mings-blog.readthedocs.io/zh_CN/latest/c06/c06_03.html)
-- 6.4 [子图与子区 难点突破](https://mings-blog.readthedocs.io/zh_CN/latest/c06/c06_04.html)
+- 6.1 [一张图带你入门matplotlib](https://python-online.cn/zh_CN/latest/c06/c06_01.html)
+- 6.2 [详解六种可视化图表](https://python-online.cn/zh_CN/latest/c06/c06_02.html)
+- 6.3 [如何绘制正余弦函数图象](https://python-online.cn/zh_CN/latest/c06/c06_03.html)
+- 6.4 [子图与子区 难点突破](https://python-online.cn/zh_CN/latest/c06/c06_04.html)
+- 6.5 [绘制酷炫的gif动图](http://python-online.cn/zh_CN/latest/c06/c06_05.html)
+- 6.6 [自动生成图像视频](http://python-online.cn/zh_CN/latest/c06/c06_06.html)
 
 ## 第七章：运维人生
 
@@ -84,6 +91,7 @@
 - 7.6 [Docker：存储与多主机](http://python-online.cn/zh_CN/latest/c07/c07_06.html)
 - 7.7 [SaltStack 入门指南](http://python-online.cn/zh_CN/latest/c07/c07_07.html)
 - 7.8 [Keepalived 部署文档](http://python-online.cn/zh_CN/latest/c07/c07_08.html)
+- 7.9 [Ansible使用总结](http://python-online.cn/zh_CN/latest/c07/c07_09.html)
 
 ## 第八章：OpenStack
 
@@ -94,10 +102,13 @@
 - 8.5 [OpenStack 源码剖析](http://python-online.cn/zh_CN/latest/c08/c08_05.html)
 - 8.6 [深度解读Cloud-init源码](http://python-online.cn/zh_CN/latest/c08/c08_06.html)
 - 8.7 [OpenStack 实现GPU直通](http://python-online.cn/zh_CN/latest/c08/c08_07.html)
+- 8.8 [OpenStack 如何使用DHCP？](http://python-online.cn/zh_CN/latest/c08/c08_08.html)
+- 8.9 [全面理解RPC远程调用](http://python-online.cn/zh_CN/latest/c08/c08_09.html)
+- 8.11 [OpenStack问题排查](http://python-online.cn/zh_CN/latest/c08/c08_11.html)
 
 ## LeetCode Challenge
 
-- [NO.1-10](http://mings-blog.readthedocs.io/zh_CN/latest/lc01/1-10.html)
+- [NO.1-10](http://python-online.cn/zh_CN/latest/lc01/1-10.html)
 
 ---
 ![关注公众号，获取最新干货！](http://image.python-online.cn/20190511161447.png)
