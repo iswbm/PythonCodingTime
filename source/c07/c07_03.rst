@@ -113,7 +113,7 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
    2. exec -it 进入交互模式
 
    # 查看日志输出
-   docker log [-f] <contain id>   # -f 和 tail -f 一样时时输出
+   docker logs [-f] <contain id>   # -f 和 tail -f 一样时时输出
 
    # 更名
    docker rename <contain id> <new name>
@@ -177,7 +177,7 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
 3.4 blkio配额
 ~~~~~~~~~~~~~
 
-**``Block IO`` 限制不同容器的读写资源分配** Block IO
+``Block IO`` 限制不同容器的读写资源分配 Block IO
 指的是磁盘的读写，docker 可通过设置权重、限制 bps 和 iops
 的方式控制容器读写磁盘的带宽。
 默认情况下，所有容器能平等地读写磁盘，可以通过设置 ``--blkio-weight``
