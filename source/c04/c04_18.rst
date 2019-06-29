@@ -31,6 +31,13 @@
    command + up   # 文件夹后退
    command + down # 文件夹前进
 
+4.18.3 截图工具
+---------------
+
+1.Xnip：取色+丰富的标注功能+滚动截屏； 2.Snip：小巧轻量+滚动截屏：；
+3.QQ：截屏+录屏+OCR文字识别； 4.Snipaste：贴屏功能； 5.ScreenShot
+PSD：psd 文件，每种元素都有单独的图层。
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png
