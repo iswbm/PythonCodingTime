@@ -441,7 +441,7 @@ Qpid，RabbitMQ等。
    ：binding是用来描述exchange和queue之间的关系的概念，一个exchang可以绑定多个队列，这些关系由binding建立。前面说的binding
    key /binding pattern也是在binding中给出。
 
-在网上找了个图，可以很清晰地描述几个名词的关系。
+为了让你明白这几者的关系，我画了一张模型图。
 
 |image6|
 
@@ -451,6 +451,65 @@ Qpid，RabbitMQ等。
 2. 一个队列可以有多个receiver，队列里的一个消息只能发给一个receiver。
 3. 一个消息可以被发送到一个队列中，也可以被发送到多个多列中。多队列情况下，一个消息可以被多个receiver收到并处理。Openstack
    RPC中这两种情况都会用到。
+
+在 Python 中如何发送消息，并接收消息呢？
+
+这边写个demo
+
+首先是生产者
+
+.. code:: python
+
+   # coding:utf-8
+   import sys,time
+   import pika
+
+
+   credentials = pika.PlainCredentials('account', 'password')
+
+   def productor():
+       connection = pika.BlockingConnection(
+           pika.ConnectionParameters('ctrl.openstack.com',5672,'/',credentials))#建立一个最基本的socket
+       chanel = connection.channel()#声明一个管道
+
+       chanel.queue_declare(queue='name')#给管道创建一个队列，参数是管道队列名。
+
+       chanel.basic_publish(exchange='',
+                            routing_key='name',
+                            body ='Hello World!')#要发送的消息。
+       connection.close()
+
+再者是消息费
+
+.. code:: python
+
+   # coding:utf-8
+   import sys,time
+   import pika
+
+
+   credentials = pika.PlainCredentials('account', 'password')
+
+   def consumer():
+       consumer = pika.BlockingConnection\
+           (pika.ConnectionParameters('ctrl.openstack.com',5672,'/',credentials))#创建socket连接
+       channel = consumer.channel()#创建管道
+       channel.queue_declare(queue='name')
+
+       def backcall(ch,method,properties,body):#参数body是发送过来的消息。
+           print '已接收到消息！'
+           sys.exit()
+           
+   #backcall 回调函数 执行结束后立即执行另外一个函数返回给发送端是否执行完毕。
+   #no_ack=True 不会告知服务端我是否收到消息。一般注释。
+
+       channel.basic_consume(backcall,
+                             queue='name',
+                             no_ack=True
+                              )#如果注释掉，对方没有收到消息的话不会将消息丢失，始终在队列里等待下次发送。
+
+
+       channel.start_consuming()#启动后进入死循环。一直等待消息。
 
 8.9.5 OpenStack中如何使用RPC？
 ------------------------------
@@ -719,6 +778,7 @@ rpc server 和rpc client 的四个重要方法
    规范(中文版) <https://colobu.com/2016/09/05/benchmarks-of-popular-rpc-frameworks/>`__
 -  `nova
    event机制分析 <https://blog.csdn.net/epugv/article/details/44872583>`__
+-  `RabbitMQ 三种Exchange <https://melin.iteye.com/blog/691265>`__
 
 --------------
 
@@ -732,7 +792,7 @@ rpc server 和rpc client 的四个重要方法
 .. |image3| image:: http://image.python-online.cn/20190623155955.png
 .. |image4| image:: http://image.python-online.cn/20190623162725.png
 .. |image5| image:: http://image.python-online.cn/20190623191042.png
-.. |image6| image:: http://image.python-online.cn/20190623205052.png
+.. |image6| image:: http://image.python-online.cn/20190630160025.png
 .. |image7| image:: http://image.python-online.cn/20190623201427.png
 .. |image8| image:: http://image.python-online.cn/20190526182125.png
 .. |image9| image:: http://image.python-online.cn/20190526184854.png

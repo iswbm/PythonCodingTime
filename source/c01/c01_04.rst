@@ -66,6 +66,53 @@
 
 还有就是gevent中也有用到。
 
+1.4.3 如何使用猴子补丁？
+------------------------
+
+为实例绑定对象(扩展__slot__)
+
+.. code:: python
+
+   import types
+   import logging
+
+
+   def get_logger():
+       logger = logging.getLogger(__name__)
+       logger.setLevel(logging.INFO)
+       handler = logging.FileHandler('monkey_patch.log')
+       handler.setLevel(logging.INFO)
+
+       formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+       handler.setFormatter(formatter)
+
+       logger.addHandler(handler)
+       return logger
+
+
+   LOG = get_logger()
+
+
+   def info(self, msg, *args, **kwargs):
+       print(msg)
+
+       INFO = 20
+       if self.isEnabledFor(INFO):
+           self._log(INFO, msg, args, **kwargs)
+
+   # 重点
+   LOG.info = types.MethodType(info, LOG)
+
+   LOG.info('hello, world')
+
+给函数添加装饰器
+
+.. code:: python
+
+   func = importutils.import_class("%s.%s" % (module, key))
+   setattr(sys.modules[module], key,
+           decorator("%s.%s" % (module, key), func))
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png

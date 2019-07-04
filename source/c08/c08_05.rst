@@ -406,6 +406,157 @@ manager 时，就会以binary 里的为准。比如binary
 
 |image40|
 
+8.5.14 HTTP 状态码
+------------------
+
+在 标准库 WebOB 中
+
+::
+
+   Exception
+     HTTPException
+       HTTPOk
+         * 200 - :class:`HTTPOk`
+         * 201 - :class:`HTTPCreated`
+         * 202 - :class:`HTTPAccepted`
+         * 203 - :class:`HTTPNonAuthoritativeInformation`
+         * 204 - :class:`HTTPNoContent`
+         * 205 - :class:`HTTPResetContent`
+         * 206 - :class:`HTTPPartialContent`
+       HTTPRedirection
+         * 300 - :class:`HTTPMultipleChoices`
+         * 301 - :class:`HTTPMovedPermanently`
+         * 302 - :class:`HTTPFound`
+         * 303 - :class:`HTTPSeeOther`
+         * 304 - :class:`HTTPNotModified`
+         * 305 - :class:`HTTPUseProxy`
+         * 307 - :class:`HTTPTemporaryRedirect`
+         * 308 - :class:`HTTPPermanentRedirect`
+       HTTPError
+         HTTPClientError
+           * 400 - :class:`HTTPBadRequest`
+           * 401 - :class:`HTTPUnauthorized`
+           * 402 - :class:`HTTPPaymentRequired`
+           * 403 - :class:`HTTPForbidden`
+           * 404 - :class:`HTTPNotFound`
+           * 405 - :class:`HTTPMethodNotAllowed`
+           * 406 - :class:`HTTPNotAcceptable`
+           * 407 - :class:`HTTPProxyAuthenticationRequired`
+           * 408 - :class:`HTTPRequestTimeout`
+           * 409 - :class:`HTTPConflict`
+           * 410 - :class:`HTTPGone`
+           * 411 - :class:`HTTPLengthRequired`
+           * 412 - :class:`HTTPPreconditionFailed`
+           * 413 - :class:`HTTPRequestEntityTooLarge`
+           * 414 - :class:`HTTPRequestURITooLong`
+           * 415 - :class:`HTTPUnsupportedMediaType`
+           * 416 - :class:`HTTPRequestRangeNotSatisfiable`
+           * 417 - :class:`HTTPExpectationFailed`
+           * 422 - :class:`HTTPUnprocessableEntity`
+           * 423 - :class:`HTTPLocked`
+           * 424 - :class:`HTTPFailedDependency`
+           * 428 - :class:`HTTPPreconditionRequired`
+           * 429 - :class:`HTTPTooManyRequests`
+           * 431 - :class:`HTTPRequestHeaderFieldsTooLarge`
+           * 451 - :class:`HTTPUnavailableForLegalReasons`
+         HTTPServerError
+           * 500 - :class:`HTTPInternalServerError`
+           * 501 - :class:`HTTPNotImplemented`
+           * 502 - :class:`HTTPBadGateway`
+           * 503 - :class:`HTTPServiceUnavailable`
+           * 504 - :class:`HTTPGatewayTimeout`
+           * 505 - :class:`HTTPVersionNotSupported`
+           * 511 - :class:`HTTPNetworkAuthenticationRequired`
+
+8.5.15 不同存储方式xml
+----------------------
+
+lvm
+
+.. code:: xml
+
+   <disk type='block' device='disk'>
+       <driver name='qemu' type='raw' cache='none' io='native'/>
+       <source dev='/dev/hdd-volumes/0fd65882-945e-4386-b2f2-5a36d62fefad_disk.eph0'/>
+       <target dev='vdb' bus='virtio'/>
+       <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
+   </disk>
+
+qcow2
+
+.. code:: xml
+
+   <disk type='file' device='disk'>
+       <driver name='qemu' type='qcow2' cache='writeback'/>
+       <source file='/var/lib/nova/instances/12522ab8-703f-4528-beb0-5ae5767a0a42/disk/disk'/>
+       <target dev='vda' bus='virtio'/>
+       <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
+   </disk>
+
+config（configdrive）
+
+.. code:: xml
+
+   <disk type='file' device='cdrom'>
+       <driver name='qemu' type='raw' cache='writeback'/>
+       <source file='/var/lib/nova/instances/12522ab8-703f-4528-beb0-5ae5767a0a42/disk.config'/>
+       <target dev='hda' bus='ide'/>
+       <readonly/>
+       <address type='drive' controller='0' bus='0' target='0' unit='0'/>
+   </disk>
+
+isolate
+
+.. code:: xml
+
+   <disk type='block' device='disk'>
+       <driver name='qemu' type='raw' cache='none' io='native'/>
+       <source dev='/dev/sdb'/>
+       <target dev='vdb' bus='virtio'/>
+       <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
+   </disk>
+
+其他都好理解，这个qcow2的类型，有一点点的不一样。
+
+他是先创建一个在LVM存储池中，创建一个LV。
+
+然后为这个LV，创建一个软连接，通过 ``df -Th`` 可以看到 这个LV 挂载到
+一个目录下。这个目录下有一个名为 disk 的qcow2文件，而这个qcow2
+文件的backing file 是指向一个 base 镜像文件（raw格式）。
+
+|image41|
+
+8.5.16 独立磁盘与LVM
+--------------------
+
+**独立磁盘**
+
+优点：虚拟机磁盘互不影响，IO不共享，不会因为一块物理盘挂了而影响所有的虚拟机。
+
+缺点：无法像 LVM
+存储池那样，做到精准而灵活的资源分配，有可能造成资源浪费或资源不足。
+
+|image42|
+
+**LVM**
+
+优点：可以根据业务或者其他条件（如介质类型），对多块物理盘组合成一个VG，实现精准而灵活的资源分配
+
+缺点：不同虚拟机之间，磁盘IO共享，不同客户之间的性能会出现争抢的情况；稳定性不好，如果一块盘坏了，有可能有多个虚拟机受到影响。
+
+8.5.17 主机组的使用
+-------------------
+
+在 flavor 上有一个 extra_spec 可以设置多个参数，nova
+本身自带了许多，当然这个参数可以自定义。
+
+这个参数有什么用呢，需要搭配主机组使用。
+
+只要在主机组上设置的metadata 的 key-value 和 extra_spec
+的key-value一样就可以实现宿主机的过滤。
+
+|image43|
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png
@@ -453,4 +604,7 @@ manager 时，就会以binary 里的为准。比如binary
 .. |image38| image:: http://image.python-online.cn/20190529203441.png
 .. |image39| image:: http://image.python-online.cn/20190529215953.png
 .. |image40| image:: http://image.python-online.cn/20190529215825.png
+.. |image41| image:: http://image.python-online.cn/20190627213044.png
+.. |image42| image:: http://image.python-online.cn/20190627213609.png
+.. |image43| image:: http://image.python-online.cn/20190627215038.png
 
