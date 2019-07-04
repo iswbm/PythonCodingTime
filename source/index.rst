@@ -17,5 +17,6 @@ Contents:
    bookmark
    chapters/*
    leetcode/*
+   thanks.rst
    aboutme
    roadmap

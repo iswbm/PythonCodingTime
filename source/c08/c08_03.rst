@@ -346,7 +346,7 @@ centos命令如下
 
 配置cloud-init: ``/etc/cloud/cloud.cfg``
 
-.. code:: sehll
+.. code:: shell
 
    # 允许root登陆
    disable_root: false
