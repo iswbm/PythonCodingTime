@@ -189,8 +189,10 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
    docker run -it --name container_A --blkio-weight 600 ubuntu   
    docker run -it --name container_B --blkio-weight 300 ubuntu
 
-**``bps`` 和 ``iops``\ 限制单个容器的读写速度** bps 是 byte per
-second，每秒读写的数据量。 iops 是 io per second，每秒 IO 的次数。
+``bps`` 和 ``iops``\ 限制单个容器的读写速度。
+
+-  bps 是 byte per second，每秒读写的数据量。
+-  iops 是 io per second，每秒 IO 的次数。
 
 ::
 
@@ -210,7 +212,7 @@ second，每秒读写的数据量。 iops 是 io per second，每秒 IO 的次�
 3.5 cgroup
 ~~~~~~~~~~
 
-``cgroup``\ 全称\ ``Control Group。Linux`` 操作系统通过 cgroup
+``cgroup``\ 全称\ ``Control Group``\ 。\ ``Linux`` 操作系统通过 cgroup
 可以设置进程使用 CPU、内存 和 IO 资源的限额。
 
 ::

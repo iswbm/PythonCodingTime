@@ -200,62 +200,6 @@ compute的资源上报，是在
 从数据库获取旧数据
 ``self.compute_node = self._get_compute_node(context)``
 
-8.5.7 资源主机调度实现
-----------------------
-
-一般情况下一个 OpenStack
-中，会部署有许多个计算节点。当我们创建一个虚拟机时，OpenStack
-如何决定要将我们的虚拟机创建在哪里呢？这就是 openstack-nova-scheduler
-要做的事，顾名思义，它是对集群内的所有计算节点的资源情况进行比较，从而选出一台最适合我们当前虚拟机创建的节点，再把请求发到
-这一台节点上的 openstack-nova-compute 去进行真正的创建过程。
-
-从源代码中看，最开始是 nova-conductor （nova/conductor/manager.py）在给
-nova-compute 发创建请求前，会先让 nova-scheduler
-选出一台资源充足的计算节点。
-
-|image14|
-
-nova-scheduler 的调度主要由两部分组成
-
-|image15|
-
--  过滤器：filter，将不满足条件（硬性条件，比如内存，cpu，磁盘，pci设备等）的计算节点，直接过滤掉。意义：从过滤器出来的那些计算节点，理论上都可以创建虚拟机。
--  称重器：weigher，对满足硬性条件的众多主机按照一定的规则进行权重配比。意义：经过称重器计算，选出你更希望在哪台节点上创建虚拟机。
-
-不管是过滤器，还是称重器，它们都需要两个参数
-
--  hosts：多个 host_state
-   的集合，包含有当前可用的计算节点信息（资源，ip等）。其中单个元素是
-   HostState
-   （nova/scheduler/host_manager.py）类的实例。如果你想添加其他原来没有的信息，比如
-   compute 的 id，可以在 ``_update_from_compute_node``
-   函数中添加。它会从compute_nodes 表中取得你想要的信息。
-
-   |image16|
-
--  spec_obj：你所要请求创建的虚拟机信息（模板，镜像等）。它是从
-   objects.RequestSpec.from_primitives 中取得的
-
-   |image17|
-
-过滤器，它的代码如下：
-
-|image18|
-
-称重器，它的规则主要看这段代码。
-
-|image19|
-
-我在代码中，加了几段日志。从左到右，三个不同颜色的内容分别为，原始权值，配重系数（越高说明越占比越大，越影响最终结果），经过
-nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮点数）。
-
-|image20|
-
-那最终的权值如何计算呢？
-
-1. 先计算每一个称重器后的权重： weights \* multipier
-2. 最后按不同的compute 将权重相加起来。
-
 8.5.8 手动引入上下文环境
 ------------------------
 
@@ -263,11 +207,11 @@ nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮
 
 1. 如果有请求req（在nova-api里），可以使用这种
 
-|image21|
+|image14|
 
 2. 其他地方可以使用这种
 
-|image22|
+|image15|
 
 8.5.9 指定ip时检查allocation_pools
 ----------------------------------
@@ -279,16 +223,16 @@ nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮
 
 先来看看，port 是如何创建的
 
-|image23|
+|image16|
 
 若要解决这个问题，可以参考原生代码中，在为子网添加allocation_pool时，验证是否合法的的逻辑，代码如下
 
-|image24|
+|image17|
 
 然后在 ``neutron\neutron\db\ipam_pluggable_backend.py``
 文件中添加我们检查 ip是否在 allocation_pools 中的逻辑代码。
 
-|image25|
+|image18|
 
 .. code:: python
 
@@ -311,17 +255,17 @@ nomalize 后的权值（只有 0 和 1，我觉得原代码这块应该要有浮
 
 然后还要定义一个异常类型
 
-|image26|
+|image19|
 
 若指定的ip在allocation pool 里，则正常创建，若不在allocation 里，就会在
 nova-compute 日志中报错。
 
-|image27|
+|image20|
 
 可以发现我们的ip 172.20.22.64 并不在子网的allocation
 pool，理所当然在nova的日志中可以看到相应的报错。
 
-|image28|
+|image21|
 
 8.5.10 attach port时ip占用提示
 ------------------------------
@@ -341,7 +285,7 @@ IpAddressAlreadyAllocated，而在 neutronclient 只有 IpAddressInUseClient
 的异常，并不匹配，在neutronclient 端与neutron 对应的异常应该为
 IpAddressAlreadyAllocatedClient 。
 
-|image29|
+|image22|
 
 如何让nova-api能够返回具体的错误信息呢？
 
@@ -352,26 +296,26 @@ IpAddressAlreadyAllocatedClient 异常。
 
 并且在nova 创建port的代码处，捕获这个异常
 
-|image30|
+|image23|
 
 这种要改两个组件，而且要将neutronclient 的代码也管理起来，较为麻烦
 
 一种是，只改neutron，在neutron/ipam/exceptions.py 添加一个与
 neutronclient 相对应的异常。
 
-|image31|
+|image24|
 
 然后修改 neutron/ipam/drivers/neutrondb_ipam/drivers.py 修改异常类型
 
-|image32|
+|image25|
 
 通过 postman 进行模拟，已经可以返回具体的信息
 
-|image33|
+|image26|
 
 另附：neutron 是如何判断ip是否已经占用？代码如下
 
-|image34|
+|image27|
 
 8.5.11 nova-compute 如何启动的？
 --------------------------------
@@ -379,11 +323,11 @@ neutronclient 相对应的异常。
 从 /usr/bin/nova-compute 这个文件可以了解到nova-compute的入口是
 ``nova.cmd.compute:main()``
 
-|image35|
+|image28|
 
 从这个入口进去，会开启一个 ``nova-compute`` 的服务。
 
-|image36|
+|image29|
 
 当调用 service.Service.create 时（create
 是一个工厂函数），实际是返回实例化的 service.Service 对象。当没有传入
@@ -391,20 +335,20 @@ manager 时，就会以binary 里的为准。比如binary
 是\ ``nova-compute``\ ，那manager_cls 就是
 ``compute_manager``\ ，对应的manager 导入路径，会从配置里读取。
 
-|image37|
+|image30|
 
 8.5.13 支持指定子网和指定ip
 ---------------------------
 
 在 nova-api 接收请求处。
 
-|image38|
+|image31|
 
-|image39|
+|image32|
 
 对 network_info 进行解析，然后塞给 request 对象返回。
 
-|image40|
+|image33|
 
 8.5.14 HTTP 状态码
 ------------------
@@ -524,7 +468,7 @@ isolate
 一个目录下。这个目录下有一个名为 disk 的qcow2文件，而这个qcow2
 文件的backing file 是指向一个 base 镜像文件（raw格式）。
 
-|image41|
+|image34|
 
 8.5.16 独立磁盘与LVM
 --------------------
@@ -536,7 +480,7 @@ isolate
 缺点：无法像 LVM
 存储池那样，做到精准而灵活的资源分配，有可能造成资源浪费或资源不足。
 
-|image42|
+|image35|
 
 **LVM**
 
@@ -555,7 +499,7 @@ isolate
 只要在主机组上设置的metadata 的 key-value 和 extra_spec
 的key-value一样就可以实现宿主机的过滤。
 
-|image43|
+|image36|
 
 --------------
 
@@ -577,34 +521,27 @@ isolate
 .. |image11| image:: http://image.python-online.cn/FnJA8RNIvJN2lAEXbKtJDpOLg1vg
 .. |image12| image:: http://image.python-online.cn/FnGyI8jCQFLCGi0pGVmI3SV6pDrv
 .. |image13| image:: http://image.python-online.cn/FrbE6oEZ3vtTWwDfMNQ16MGi6SWr
-.. |image14| image:: http://image.python-online.cn/20190424212211.png
-.. |image15| image:: http://image.python-online.cn/20190424213430.png
-.. |image16| image:: http://image.python-online.cn/20190424214653.png
-.. |image17| image:: http://image.python-online.cn/20190424214540.png
-.. |image18| image:: http://image.python-online.cn/20190424221602.png
-.. |image19| image:: http://image.python-online.cn/20190424215735.png
-.. |image20| image:: http://image.python-online.cn/20190424220008.png
-.. |image21| image:: http://image.python-online.cn/20190426153322.png
-.. |image22| image:: http://image.python-online.cn/20190426152148.png
-.. |image23| image:: http://image.python-online.cn/20190526141815.png
-.. |image24| image:: http://image.python-online.cn/20190526142453.png
-.. |image25| image:: http://image.python-online.cn/20190526134519.png
-.. |image26| image:: http://image.python-online.cn/20190526141226.png
-.. |image27| image:: http://image.python-online.cn/20190526134543.png
-.. |image28| image:: http://image.python-online.cn/20190526134618.png
-.. |image29| image:: http://image.python-online.cn/20190526140213.png
-.. |image30| image:: http://image.python-online.cn/20190526140301.png
-.. |image31| image:: http://image.python-online.cn/20190526140315.png
-.. |image32| image:: http://image.python-online.cn/20190526140336.png
-.. |image33| image:: http://image.python-online.cn/20190526140410.png
-.. |image34| image:: http://image.python-online.cn/20190526143235.png
-.. |image35| image:: http://image.python-online.cn/20190526205152.png
-.. |image36| image:: http://image.python-online.cn/20190526165007.png
-.. |image37| image:: http://image.python-online.cn/20190526204328.png
-.. |image38| image:: http://image.python-online.cn/20190529203441.png
-.. |image39| image:: http://image.python-online.cn/20190529215953.png
-.. |image40| image:: http://image.python-online.cn/20190529215825.png
-.. |image41| image:: http://image.python-online.cn/20190627213044.png
-.. |image42| image:: http://image.python-online.cn/20190627213609.png
-.. |image43| image:: http://image.python-online.cn/20190627215038.png
+.. |image14| image:: http://image.python-online.cn/20190426153322.png
+.. |image15| image:: http://image.python-online.cn/20190426152148.png
+.. |image16| image:: http://image.python-online.cn/20190526141815.png
+.. |image17| image:: http://image.python-online.cn/20190526142453.png
+.. |image18| image:: http://image.python-online.cn/20190526134519.png
+.. |image19| image:: http://image.python-online.cn/20190526141226.png
+.. |image20| image:: http://image.python-online.cn/20190526134543.png
+.. |image21| image:: http://image.python-online.cn/20190526134618.png
+.. |image22| image:: http://image.python-online.cn/20190526140213.png
+.. |image23| image:: http://image.python-online.cn/20190526140301.png
+.. |image24| image:: http://image.python-online.cn/20190526140315.png
+.. |image25| image:: http://image.python-online.cn/20190526140336.png
+.. |image26| image:: http://image.python-online.cn/20190526140410.png
+.. |image27| image:: http://image.python-online.cn/20190526143235.png
+.. |image28| image:: http://image.python-online.cn/20190526205152.png
+.. |image29| image:: http://image.python-online.cn/20190526165007.png
+.. |image30| image:: http://image.python-online.cn/20190526204328.png
+.. |image31| image:: http://image.python-online.cn/20190529203441.png
+.. |image32| image:: http://image.python-online.cn/20190529215953.png
+.. |image33| image:: http://image.python-online.cn/20190529215825.png
+.. |image34| image:: http://image.python-online.cn/20190627213044.png
+.. |image35| image:: http://image.python-online.cn/20190627213609.png
+.. |image36| image:: http://image.python-online.cn/20190627215038.png
 

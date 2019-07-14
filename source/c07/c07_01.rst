@@ -689,6 +689,16 @@ Linux上的压缩格式比Windows上多很多，在 Windows 上最常见的不�
    # 使用rpmrebuild需要依赖rpmbuild：yum install -y rpmbuild
    rpmrebuild xxx
 
+1.10 ftp工具使用
+~~~~~~~~~~~~~~~~
+
+.. code:: shell
+
+   $ ftp <ip/host> <port>
+   ftp> help
+
+|image1|
+
 二、系统管理
 ------------
 
@@ -823,7 +833,7 @@ Linux的分区的过程经历以下几个步骤
    2. 格式化：写入文件系统
    3. 挂载：将分区挂载到目录上，才能访问数据
 
-关于硬件对应的设备文件名，可以参照下图 |image1|
+关于硬件对应的设备文件名，可以参照下图 |image2|
 
 其中以硬盘为例来说明
 
@@ -1428,7 +1438,7 @@ CentOS
 **修改文件权限**
 
 文件权限有\ ``读``\ 、\ ``写``\ 、\ ``执行``\ 三种
-分别对应数字4,2,1，也就是2\ :sup:`2,2`\ 1,2^0 |image2|
+分别对应数字4,2,1，也就是2\ :sup:`2,2`\ 1,2^0 |image3|
 
 如何修改文件权限
 
@@ -1777,6 +1787,7 @@ CentOS
 
 
 .. |image0| image:: http://image.python-online.cn/17-9-20/47469030.jpg
-.. |image1| image:: http://image.python-online.cn/17-10-15/97911325.jpg
-.. |image2| image:: https://dn-anything-about-doc.qbox.me/linux_base/3-14.png/logoblackfont
+.. |image1| image:: http://image.python-online.cn/20190705182629.png
+.. |image2| image:: http://image.python-online.cn/17-10-15/97911325.jpg
+.. |image3| image:: https://dn-anything-about-doc.qbox.me/linux_base/3-14.png/logoblackfont
 
