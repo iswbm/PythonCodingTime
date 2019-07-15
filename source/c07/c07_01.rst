@@ -13,7 +13,8 @@
 
    .            ->    当前目录
    ..           ->    上一级目录
-   .file/.dir   ->    隐藏文件/文件夹
+   .file        ->    隐藏文件
+   .dir         ->    文件夹
 
 【ls】 查看指定目录文件
 ``ls``\ 命令是最常用的linux命令，要配合着选项使用。
@@ -43,6 +44,7 @@
    cd      # 家目录
    cd ..   # 上一目录
    cd !$   # 将上命令的参数做为cd 参数
+   cd ~zabbix # 进入zabbix用户的主目录
 
 【touch】：新建文件
 
@@ -266,18 +268,6 @@ more、cat file \| head等。
    # 只显示有重复的行
    uniq -d 文件名
 
-挑战题目
-^^^^^^^^
-
-::
-
-   wget http://labfile.oss.aliyuncs.com/courses/1/data1
-   # 里面是包含一些命令使用的列表
-
-   # 要求：从里面找出出现频率次数前3的命令并保存在/home/result
-
-   $ cat data1 | cut -c 8-|cut -d " " -f 1 |sort | uniq -dc | sort -r -n -k1 | head -n 3 > /home/result
-
 1.3 文字处理
 ~~~~~~~~~~~~
 
@@ -473,8 +463,7 @@ awk是一个强大的文本分析工具。
 1.6 文件查找
 ~~~~~~~~~~~~
 
-which：查询软件
-^^^^^^^^^^^^^^^
+**which：查询软件**
 
 在PATH变量指定的路径中，搜索某个系统命令（\ ``可执行文件``\ ）的位置，并且返回第一个搜索结果。
 
@@ -487,8 +476,7 @@ which：查询软件
    -w 　指定输出时栏位的宽度。
    -V 　显示版本信息
 
-grep：搜索神器
-^^^^^^^^^^^^^^
+**grep：搜索神器**
 
 搜索并筛选显示结果。 该命令经常配合管道命令来控制输出。 以下
 是常用的选项： |image0|
@@ -508,8 +496,7 @@ grep：搜索神器
    -n  显示在文件中的第几行查询到
    -I  忽略二进制文件
 
-whreris：简单快速
-^^^^^^^^^^^^^^^^^
+**whreris：简单快速**
 
 定位可执行文件、源代码文件、帮助文件在文件系统中的位置。
 个搜索很快，因为它并没有从硬盘中依次查找，而是直接从数据库中查询。
@@ -530,7 +517,7 @@ whreris：简单快速
    -M   指定搜索帮助文件的路径。
    -S   指定搜索源代码文件的路径。
 
-locate：快而全
+**locate：快而全**
 
 通过\ ``/var/lib/mlocate/mlocate.db``\ 数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行\ ``updatedb``\ 命令更新一次，所以有时候你刚添加的文件，它可能会找不到，需要手动执行一次
 ``updatedb``\ 命令（在我们的环境中必须先执行一次该命令）。
@@ -542,8 +529,7 @@ locate：快而全
 
    # 查找/etc/目录下所有以sh开头的文件
 
-find：小而细
-^^^^^^^^^^^^
+**find：小而细**
 
 `鸟哥的Linux私房菜-find <http://linux.vbird.org/linux_basic/0220filemanager.php#find>`__
 `每天一个linux命令（19）：find
@@ -1430,15 +1416,20 @@ CentOS
 
 ::
 
-   [sudo] chown 用户组:用户 文件/文件夹
+   # [sudo] chown 用户组:用户 文件/文件夹，以下两种均可
+   chown root:zabbix some.txt
+   chown root.zabbix some.txt
 
-   # 如下只更改所属用户
-   [sudo] chowm 用户 文件/文件夹
+   # 只更改所属用户,[sudo] chowm 用户 文件/文件夹
+   chown zabbix some.txt
+
+   # 只更改所属用户组，[sudo] chown .用户组 文件/文件夹
+   chown .root some.txt
 
 **修改文件权限**
 
 文件权限有\ ``读``\ 、\ ``写``\ 、\ ``执行``\ 三种
-分别对应数字4,2,1，也就是2\ :sup:`2,2`\ 1,2^0 |image3|
+分别对应数字4,2,1，也就是2\ :sup:`2,2`\ 1,2^0
 
 如何修改文件权限
 
@@ -1448,13 +1439,20 @@ CentOS
    chmod 777 文件
 
    【第二种方法】:加减的方法
-   g、o 还有 u 分别表示 group、others 和 user，+ 和 - 分别表示增加和去掉相应的权限。
+   g、o、u、a分别表示 group、others、user和all
+   +、-、= 分别表示增加、去掉和设置相应的权限。
 
    举个例子
    比如一个文件权限是：-wr-wr-wr-
    chmod go-wr 文件
 
    然后文件权限就变成：-wr-------
+
+   再设置回原来的
+   chmod ugo=wr 文件
+
+   或者将user和group改为可执行
+   chmod ug=wrx,o=wr 文件
 
 **禁止修改、删除、移动文件**
 
@@ -1789,5 +1787,4 @@ CentOS
 .. |image0| image:: http://image.python-online.cn/17-9-20/47469030.jpg
 .. |image1| image:: http://image.python-online.cn/20190705182629.png
 .. |image2| image:: http://image.python-online.cn/17-10-15/97911325.jpg
-.. |image3| image:: https://dn-anything-about-doc.qbox.me/linux_base/3-14.png/logoblackfont
 
