@@ -178,6 +178,12 @@ iptables
    iptables-save > /etc/sysconfig/iptables.bak
    iptables-restore < /etc/sysconfig/iptables.bak
 
+--------------
+
+.. figure:: http://image.python-online.cn/20190511161447.png
+   :alt: 关注公众号，获取最新干货！
+
+
 .. |image0| image:: http://image.python-online.cn/20190706114314.png
 .. |image1| image:: http://image.python-online.cn/20190706093904.png
 .. |image2| image:: http://image.python-online.cn/20190706160632.png

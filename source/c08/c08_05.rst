@@ -501,6 +501,25 @@ isolate
 
 |image36|
 
+8.5.18 生成config drive
+-----------------------
+
+|image37|
+
+|image38|
+
+::
+
+   network_metadata
+
+   inst_md.ip_info
+   # {'fixed_ip6s': [u'2001:1001::3'], 'fixed_ips': [], 'floating_ips': []}
+
+.. figure:: C:\Users\wangbm\AppData\Roaming\Typora\typora-user-images\1562565550118.png
+   :alt: 1562565550118
+
+   1562565550118
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png
@@ -544,4 +563,6 @@ isolate
 .. |image34| image:: http://image.python-online.cn/20190627213044.png
 .. |image35| image:: http://image.python-online.cn/20190627213609.png
 .. |image36| image:: http://image.python-online.cn/20190627215038.png
+.. |image37| image:: http://image.python-online.cn/20190708100902.png
+.. |image38| image:: http://image.python-online.cn/20190708103119.png
 
