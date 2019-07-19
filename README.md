@@ -24,6 +24,9 @@
 - 1.16 [泛型函数怎么写？](http://python-online.cn/zh_CN/latest/c01/c01_16.html)
 - 1.17 [深入理解「描述符」](http://python-online.cn/zh_CN/latest/c01/c01_17.html)
 - 1.18 [MySQL使用总结](http://python-online.cn/zh_CN/latest/c01/c01_18.html)
+- 1.19 [MySQL 使用总结](http://python-online.cn/zh_CN/latest/c01/c01_18.html)
+- 1.20 [静态方法其实暗藏玄机](http://python-online.cn/zh_CN/latest/c01/c01_20.html)
+- 1.21 [开发小技巧](http://python-online.cn/zh_CN/latest/c01/c01_21.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度来初探并发编程](http://python-online.cn/zh_CN/latest/c02/c02_01.html)
@@ -92,6 +95,7 @@
 - 7.7 [SaltStack 入门指南](http://python-online.cn/zh_CN/latest/c07/c07_07.html)
 - 7.8 [Keepalived 部署文档](http://python-online.cn/zh_CN/latest/c07/c07_08.html)
 - 7.9 [Ansible使用总结](http://python-online.cn/zh_CN/latest/c07/c07_09.html)
+- 7.10 [Ansible API 最全使用文档（中文）](http://python-online.cn/zh_CN/latest/c07/c07_10.html)
 
 ## 第八章：OpenStack
 
@@ -105,6 +109,9 @@
 - 8.8 [OpenStack 如何使用DHCP？](http://python-online.cn/zh_CN/latest/c08/c08_08.html)
 - 8.9 [全面理解RPC远程调用](http://python-online.cn/zh_CN/latest/c08/c08_09.html)
 - 8.11 [OpenStack问题排查](http://python-online.cn/zh_CN/latest/c08/c08_11.html)
+- 8.12 [OpenStack之主机调度](http://python-online.cn/zh_CN/latest/c08/c08_12.html)
+- 8.13 [网络知识必知必会](http://python-online.cn/zh_CN/latest/c08/c08_13.html)
+- 8.14 [OpenStack 支持 ipv6](http://python-online.cn/zh_CN/latest/c08/c08_14.html)
 
 ## LeetCode Challenge
 
