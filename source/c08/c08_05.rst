@@ -520,6 +520,14 @@ isolate
 
    1562565550118
 
+8.5.19 修改nova-api的接口
+-------------------------
+
+nova api 的接口参数是在 nova/api/openstack/compute/schemas/
+目录下，如创建虚拟机的接口如下：
+
+|image39|
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png
@@ -565,4 +573,5 @@ isolate
 .. |image36| image:: http://image.python-online.cn/20190627215038.png
 .. |image37| image:: http://image.python-online.cn/20190708100902.png
 .. |image38| image:: http://image.python-online.cn/20190708103119.png
+.. |image39| image:: http://image.python-online.cn/20190719170825.png
 

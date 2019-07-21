@@ -95,8 +95,6 @@ Python参考文档
 -  `项目推荐｜HelloGithub <https://hellogithub.com/>`__
 -  `工具集合 - MIKU <https://miku.tools/>`__
 -  `工具集合 - 小森林导航 <http://hao.xsldh.com/>`__
--  `吾皇控制台：KingFast <http://kingfast.top>`__
--  `kiwivm：VPS管理后台 <https://kiwivm.64clouds.com/main.php>`__
 -  `Rufus - 轻松创建U盘启动盘 <http://rufus.akeo.ie/?locale=zh_CN>`__
 -  `Screen To Gif - 轻松制作gif动画 <http://www.screentogif.com/?l=zh_cn>`__
 -  `USER.ME - 在线PS/CAD/PPT/EXCEL/AI/XMind/Visio <https://uzer.me/>`__
