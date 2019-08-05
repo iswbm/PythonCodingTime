@@ -1,10 +1,10 @@
-8.14 OpenStack 支持 ipv6
-========================
+8.14 支持 IPv6以及多运营商
+==========================
 
-8.14.1 如何配置 ipv6
---------------------
+8.14.1 手工如何配置 IPv6
+------------------------
 
-命令配置临时ip
+使用命令设置临时的IPv6
 
 .. code:: shell
 
@@ -14,7 +14,23 @@
    # 配置网关
    sudo route -A inet6 add ::/0 gw 2408:xx:xx::1
 
-通过配置文件
+通过配置文件永久设置IPv6
+
+.. code:: shell
+
+   DEVICE=eth0
+   BOOTPROTO=none
+   DEFROUTE=yes
+   HWADDR=fa:16:3e:4a:4f:55
+   IPV6ADDR=2408:xx:xx::4/64   # IPv6 地址
+   IPV6INIT=yes
+   IPV6_DEFAULTGW=2408:xx:xx::1
+   MTU=1500
+   ONBOOT=yes
+   TYPE=Ethernet
+   USERCTL=no
+
+一张网卡上，可以允许同时存在IPv4及IPv6，配置方法如下
 
 .. code:: shell
 
@@ -29,7 +45,29 @@
    IPV6_DEFAULTGW=2408:xx:xx::1
    IPV6ADDR_SECONDARIES="2408:xx:xx::2/120"
 
-配置好ip和网关后，如何查看效果？
+一张网卡上，也可以通过子接口的试，配置多个（>=2个）的IPv6，配置方法如下：
+
+.. code:: shell
+
+   DEVICE=eth0
+   BOOTPROTO=none
+   DEFROUTE=yes
+   HWADDR=fa:16:3e:4a:4f:55
+   IPV6ADDR=2408:xx:xx::4/64   # IPv6 地址
+   IPV6INIT=yes
+   IPV6_DEFAULTGW=2408:xx:xx::1
+   MTU=1500
+   ONBOOT=yes
+   TYPE=Ethernet
+   USERCTL=no
+
+   # 若要配置子接口（下面以配置两个子接口为例）
+   IPV6ADDR_SECONDARIES="2408:xx:xx::6/120
+   2408:xx:xx::7/120"
+
+配置好IPv6和网关后，如何查看效果呢？这和IPv4有点不一样。
+
+在IPv4中
 
 .. code:: shell
 
@@ -37,38 +75,55 @@
    ip addr
 
    # 查看网关
-   route -A inet6
+   route -n 或者 route -4
+
+   # 查看网络连通性
+   ping6 <ipv4>
+
+而在IPv6中
+
+.. code:: shell
+
+   # 查看ip
+   ip addr
+
+   # 查看网关
+   route -A inet6 或者 route -6
 
    # 查看网络连通性
    ping6 <ipv6>
 
-8.14.2 nova 使用 ipv6
----------------------
+8.14.2 Nova 如何使用 IPv6
+-------------------------
 
-通过如下代码可知
+原生的 Nova 和 Neutron 就已经支持 IPv6 了。
 
-|image0|
+对于 Nova 来说，需要在计算节点的配置中开启 IPv6
 
-OpenStack 在生成
-ConfigureDrive默认不开启ipv6，若要使用ipv6，需要在计算节点的 nova.conf
-中添加配置
-
-.. code:: shell
+.. code:: ini
 
    [default]
    use_ipv6=true
 
-使用ipv6，当然要先创建一个ipv6的子网，这里要注意，ipv6子网所属的网络，必须为flat（默认不指定就为vlan）
+才能将 IPv6 的 Port
+信息写入ConfigDrive，也只有这样cloudinit才能自动为我们配置上 IPv6 的
+ip。
+
+|image0|
+
+而对于 Neutron 来说，要使用 IPv6，当然要先创建一个 IPv6
+的子网，这里要注意，IPv6
+子网所属的网络，必须为flat，这个一定要注意，因为你不指定的话，默认就为
+vlan。
 
 .. code:: shell
 
+   # 创建网络
    neutron net-create --provider:physical_network  phynet0  --provider:network_type flat ipv6_public
 
-然后再创建一个子网
+然后再创建一个子网，创建子网的时候，要确认下自己是否要使用 dhcp
 
-创建子网的时候，要注意自己是否要使用 dhcp
-
-如果使用static，使用这条命令
+如果使用static，则使用这条命令
 
 .. code:: shell
 
@@ -89,34 +144,106 @@ ConfigureDrive默认不开启ipv6，若要使用ipv6，需要在计算节点的 
            --ipv6-address-mode dhcpv6-stateful \
            ipv6_public 2408:xx:xx:0000::/120
 
-一切都准备好了，就指定这个子网创建虚拟机了。
+一切都准备好了，就可以指定这个子网创建虚拟机了。
 
-登陆出来的虚拟机，会发现cloud-init已经将ipv6的ip配置上去了，说明cloudinit本身就支持ipv6，无需额外修改和配置。
+登陆出来的虚拟机，会发现cloud-init已经将ipv6的ip配置上去了，说明
+cloudinit 本身就支持 IPv6，无需额外修改和配置。
 
-8.14.3 单张网卡多个ip
----------------------
+8.14.3 一张网卡配置多个IP
+-------------------------
 
-接下来，要验证的一点是，nova 和 cloud-init
-是否支持在一张网卡上配置多个ip呢（一个ipv4一个ipv6）.
+有这个需求的，通常是这两种场景：
 
-nova 的http api
-接口是不能直接支持的，但是可以通过先创建一个port，在这个port上指定两个ip。
+1、要配置双线IP，比如移动和电信各一个IP
 
-然后创建虚拟机时，指定这个port去创建。
+2、要配置多个版本的IP，一个IPv4和一个IPv6
 
-登陆一下虚拟机，查看下效果，你可以发现，两个ip如预期一样配置在一张网卡上了。
+通过第一节，我们已经知道，可以通过配置直接实现。
+
+但是，在 OpenStack 中是否就已经支持这样的需求呢？
+
+经过验证可以得知
+
+**第一点：**
+
+不管哪种场景，对于 OpenStack 来说，都是一样的，就是一个 Port
+上指定两个IP，而这两个IP，是多线还是多版本，由你来定。
+
+.. code:: shell
+
+   neutron port-create --fixed-ip \
+       subnet_id=0d7f753d-3a8f-46d4-b931-2843b138388a,ip_address=175.xx.xx.11 \
+       --fixed-ip subnet_id=36cdc565-4807-44bb-b6f6-8ee3f4114193,\
+       ip_address=2408:xx.xx::11 you_network
+
+不过要注意的是，Nova 本身的 api
+接口是不支持指定一个Port上指定多个ip的，对于这种情况，有两种解决方法，一是，先创建一个多ip的Port，再指定这个
+Port 去创建虚拟机，二是，修改 nova-api 的接口，使之支持。
+
+.. code:: json
+
+   "networks":[
+       {
+           "uuid": "{{public_network}}",
+           "fixed_ip": [{"ip_address": "172.20.20.11"},{"ip_address": "2408:xx.xx::4"}]
+       }]
+
+**第二点：**
+
+在一张网卡上配置多个版本的IP（一个IPv4和一个IPv6），只在一个配置文件中配置就可以支持，因此cloudinit的处理的时候，会将同一个tap设备的归为一个同一张网卡。
 
 |image1|
 
-一张网卡一个ip 和 一张网卡多个ip 的configdrive 有什么区别呢？
-
-如果是一张网卡两个ip，那么cloudinit会将同一步tap设备的归为一个同一张网卡。
+也就是说，cloudinit本身很轻松地就可以支持单网卡多版本IP的配置。
 
 |image2|
 
-cloudinit 解析后，与每张网卡各一个ip的区别如下。
+而对于多线的IP，由于 Nova
+写入ConfigDrive时，尽管一个Port上有多个IPv4或者多个IPv6，同个版本的都会只取第一个写入，自然从cloudinit那侧就无法进一步操作。
 
-|image3|
+对于多线IP，只有通过子接口实现，不同的Linux发行版，子接口的实现不一样，不仅如此，不同版本的子接口实现方式也有所差异。总之一句话，就是cloudinit本身不支持多线ip，个人感觉是Nova不支持导致的。
+
+知道了原因后，若还是坚持要在一张网卡上配置多线IP。那就只有改 Nova
+的代码实现了。
+
+-  Nova 接口参数要改：
+
+   .. code:: json
+
+      # 多线IPv4
+      "networks":[
+          {
+              "uuid": "{{public_network}}",
+              "fixed_ip": [{"ip_address": "192.168.10.5"},{"ip_address": "172.20.22.144"}],
+              "ip_version": 4,
+              "carriers": ["dx", "yd"]
+          }],
+
+      # 多线IPv6
+      "networks":[
+          {
+              "uuid": "{{public_network}}",
+              "fixed_ip": [{"ip_address": "2408:xx.xx::3"},{"ip_address": "2408:xx.xx::4"}],
+              "ip_version": 6,
+              "carriers": ["dx", "yd"]
+          }],
+
+-  Neutron 接口可以不改，因为创建Port的接口参数中的 fixed_ips
+   是一个数组类型，所以我们可以把这些版本信息，运营商信息放进这个数组的每一个元素中。\ |image3|
+
+   所以我们只要修改Neutron 创建 Port 的代码逻辑。
+
+-  Nova 生成 ConfigDrive 的代码要改，由于Nova 只装饰每个 Port
+   的第一个ip传入ConfigDrive，所以我们要取出其他的ip，以user_data
+   的方式传入。有一点需要说明的是，这里的逻辑需要额外注意虚拟机重建的场景。
+
+-  Cloudinit 的代码要改，要新增一个读取user_user
+   来配置子接口的模块。实现虚拟机内部配置子接口。
+
+最后另外再说一点无关紧要的，cloudinit
+解析后，每张网卡一个ip与一张网卡两个ip的区别如下。
+
+|image4|
 
 --------------
 
@@ -125,7 +252,8 @@ cloudinit 解析后，与每张网卡各一个ip的区别如下。
 
 
 .. |image0| image:: http://image.python-online.cn/20190716175250.png
-.. |image1| image:: http://image.python-online.cn/20190716180952.png
-.. |image2| image:: http://image.python-online.cn/20190716180655.png
-.. |image3| image:: http://image.python-online.cn/20190716180726.png
+.. |image1| image:: http://image.python-online.cn/20190716180655.png
+.. |image2| image:: http://image.python-online.cn/20190716180952.png
+.. |image3| image:: http://image.python-online.cn/20190804110647.png
+.. |image4| image:: http://image.python-online.cn/20190716180726.png
 
