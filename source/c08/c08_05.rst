@@ -528,6 +528,22 @@ nova api 的接口参数是在 nova/api/openstack/compute/schemas/
 
 |image39|
 
+这些参数字段后面的类型是用来做参数类型的校验的。
+
+在application 函数的头部，可以发现有如下这几种装饰器，
+
+|image40|
+
+装饰器 schemas 的定义如下：
+
+|image41|
+
+比如我们使用的 novaclient 发出的请求，是 v2.3.7的，所以 create()
+顶部的五个schema
+装饰器，上面四个都会空跑，不会进行校验，只有最后一个才会进入检验逻辑。
+
+|image42|
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png
@@ -574,4 +590,7 @@ nova api 的接口参数是在 nova/api/openstack/compute/schemas/
 .. |image37| image:: http://image.python-online.cn/20190708100902.png
 .. |image38| image:: http://image.python-online.cn/20190708103119.png
 .. |image39| image:: http://image.python-online.cn/20190719170825.png
+.. |image40| image:: http://image.python-online.cn/20190730140551.png
+.. |image41| image:: http://image.python-online.cn/20190730142527.png
+.. |image42| image:: http://image.python-online.cn/20190730143003.png
 
