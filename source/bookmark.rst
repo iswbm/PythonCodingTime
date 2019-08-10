@@ -12,6 +12,8 @@ Python电子教程
 -  `RUNNOOB的Python教程 <http://www.runoob.com/python/python-tutorial.html>`__
 -  `w3school&runoob教程合集-1：囊括世面各种语言 <https://github.com/it-ebooks/w3school>`__
 -  `w3school&runoob教程合集-2：囊括世面各种语言 <https://www.w3cschool.cn/tutorial>`__
+-  `现代魔法学院：Python教室 <http://www.nowamagic.net/academy/category/13>`__
+-  `Python中文学习大本营 <http://www.pythondoc.com/>`__
 
 Linux入门
 ~~~~~~~~~~~
@@ -150,3 +152,4 @@ Python参考文档
 -  `Iconfont-阿里巴巴矢量图标库 <http://www.iconfont.cn/>`__
 -  `Icons for everything - Noun Project <https://thenounproject.com/>`__
 -  `Font Awesome，一套绝佳的图标字体库和CSS框架 <http://fontawesome.dashgame.com/>`__
+-  `iSlide：制作高大上的PPT<https://www.islide.cc/>`__
