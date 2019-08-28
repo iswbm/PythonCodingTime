@@ -137,7 +137,7 @@ aggregate管理
     --allocation-pool start=172.20.20.100,end=172.20.20.199 \
     --gateway 172.20.20.200 \
     --enable_dhcp=False \
-    --dns_nameserver 114.114.114.114 \
+    --dns-nameserver 114.114.114.114 \
     public 172.20.20.0/24
 
    # 创建子网，更多选项可以查看 neutron subnet-create -h
@@ -398,6 +398,13 @@ aggregate管理
 
    # 指定节点执行命令
    rabbitmq -n rabbit@ws_controller02 [command]
+
+3.3 pacemaker
+-------------
+
+::
+
+   pkill -9 pacemaker;service pacemaker restart
 
 --------------
 

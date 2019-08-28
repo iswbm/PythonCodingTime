@@ -485,15 +485,18 @@ CentOS6 创建快照前需要先删除\ ``75-persistent-net-generator.rules``
    service firewalld stop
    sudo update-rc.d -f firewalld remove
 
-设置cloud-init参数
-
-.. code:: shell
-
 若有其他要修改的地方，可自行修改。然后关机虚拟机
 
 ::
 
    shutdown -h now
+
+8.3.3 修改镜像的文件
+--------------------
+
+通过 guestfish 工具可以实现不用创建虚拟机就可以修改镜像里的文件内容。
+
+|image2|
 
 附录：参考文档
 --------------
@@ -517,4 +520,5 @@ CentOS6 创建快照前需要先删除\ ``75-persistent-net-generator.rules``
 
 .. |image0| image:: https://i.loli.net/2018/01/27/5a6c34714685d.png
 .. |image1| image:: https://i.loli.net/2018/01/27/5a6c34b14c6ec.png
+.. |image2| image:: http://image.python-online.cn/20190827200522.png
 

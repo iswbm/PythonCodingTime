@@ -79,7 +79,7 @@ NetworkManager后，默认情况下它的启动顺序是会在 cloudinit-local �
 3. cloud-init modules -m config
 4. cloud-init modules -m final
 
-除了这几个命令之外，还有几个
+除了这几个命令之外，还有几个：
 
 -  cloud-init query -n [name]
 -  cloud-init single -n [name] –frequency

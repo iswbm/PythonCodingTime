@@ -1227,6 +1227,12 @@ Linux上，硬件的设备驱动（如硬盘）和特殊设备文件（如\ ``/d
    # 卸载
    $ losetup -d /dev/loop0
 
+使用dd拷贝磁盘可以，但是如果想要快速生成大文件，速度就相当慢了，可以试试fallocate命令
+
+.. code:: shell
+
+   fallocate -l 100G test_file
+
 2.6 任务管理
 ~~~~~~~~~~~~
 

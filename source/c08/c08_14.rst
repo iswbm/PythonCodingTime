@@ -245,6 +245,12 @@ Port 去创建虚拟机，二是，修改 nova-api 的接口，使之支持。
 
 |image4|
 
+重装 ``openvswith.ko`` 过程
+
+.. code:: shell
+
+   ovs-dpctl del-dp ovs-system && rmmod openvswitch && insmod  ./openvswitch.ko  && service openvswitch restart && service network restart
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png

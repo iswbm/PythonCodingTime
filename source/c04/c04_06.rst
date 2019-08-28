@@ -75,6 +75,9 @@ add/commit 前撤销对文件的修改
    # 举例
    $ git clone git@github.com:BingmingWong/test.git
 
+   # 更改远程仓库地址
+   git  remote set-url origin git@<new_server>:you_repo.git
+
 1.5 GitHub合并至本地
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -397,6 +400,8 @@ Desktop真心觉得不好用）。
 章节，我在机器上生成了一对私钥和公钥，在这里需要配置一下才能正常访问和提交我们的Github仓库。
 
 |image3|
+
+如果想要用户名和密码登陆，可以将上面的 OpenSSH 改成 PuTTY/Plink就行了。
 
 --------------
 
