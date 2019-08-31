@@ -175,6 +175,14 @@ NetworkManager， ubuntu 是network-manager）才负责获取ip。
 10. 如果一个子网只有dhcp
     port，子网可以被删除，如果有其他port，则子网不能删除。
 
+11. 一个network一个ns，一个ns下面会有多个dhcp
+    server的ip，正常情况下每个subnet一个dhcp
+    server，若一个network下有多个开启了dhcp server
+    的子网，只关闭其中一个子网的dhcp，并不会立马删除这个dhcp
+    port，因为这个port还有其他人占用（感觉这块neutron处理不好，应该更新一个port的fixed_ip，把关闭dhcp
+    的子网的ip给删除掉），当一个network里没有开启dhcp的子网且没有虚拟机使用dhcp的情况下，neutron才会删除这个dhcp
+    port。
+
 8.8.5 镜像问题排查
 ------------------
 

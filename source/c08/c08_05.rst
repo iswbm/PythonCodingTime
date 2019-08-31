@@ -534,15 +534,70 @@ nova api 的接口参数是在 nova/api/openstack/compute/schemas/
 
 |image40|
 
-装饰器 schemas 的定义如下：
+装饰器里会传入一个参数，就是 schema
+的内容，通过它可以约束一个请求内的参数合法性。
+
+schemas 的文件都统一放在 ``nova\api\openstack\compute\schemas`` 目录下。
+
+对于创建虚拟机来说，它的 schemas 文件是在上面目录下的 ``servers.py``
+
+但并不是说，创建虚拟机的所有参数校验规则只在这里，nova 这边引入了
+stevedore，它是 oslo
+项目中为OpenStack其他项目提供动态加载功能的公共组件库（详细可以看这篇文章：https://blog.csdn.net/bill_xiang_/article/details/78852717）。通过它可以用添加扩展的方式，给
+servers 更新 schemas。
 
 |image41|
+
+关键在于这个 map 函数，它会循环所有的扩展（）
+
+|image42|
+
+将调用传进去的 ``self._create_extension_schema`` 将已加载到的扩展schemas
+更新到主schemas里去。
+
+::
+
+   # [ext.obj.name for ext in self.create_schema_manager.extensions]
+   ['MultipleCreate', 'BlockDeviceMapping', 'BlockDeviceMappingV1', 'AvailabilityZone', 'UserData', 'Keypairs', 'SchedulerHints', 'SecurityGroups', 'ConfigDrive']
+
+|image43|
+
+装饰器 schemas 的定义如下：
+
+|image44|
 
 比如我们使用的 novaclient 发出的请求，是 v2.3.7的，所以 create()
 顶部的五个schema
 装饰器，上面四个都会空跑，不会进行校验，只有最后一个才会进入检验逻辑。
 
-|image42|
+|image45|
+
+8.5.20 往数据库中加字段
+-----------------------
+
+先先定义好migrate 文件
+
+.. code:: python
+
+   from sqlalchemy import MetaData, Text, Table, Column
+
+
+   def upgrade(migrate_engine):
+       meta = MetaData(bind=migrate_engine)
+       instances = Table('instances', meta, autoload=True)
+
+       if not hasattr(instances.c, 'host_routes'):
+           instances.create_column(Column('host_routes', Text(), default=[]))
+
+然后在 nova/objects/instances.py 中的fields加入相应的字段。
+
+然后在 nova/db/sqlalchemy/models.py 也要加相应的 Column
+
+最后再执行这个命令，同步数据库
+
+::
+
+   nova-manage db sync
 
 --------------
 
@@ -591,6 +646,9 @@ nova api 的接口参数是在 nova/api/openstack/compute/schemas/
 .. |image38| image:: http://image.python-online.cn/20190708103119.png
 .. |image39| image:: http://image.python-online.cn/20190719170825.png
 .. |image40| image:: http://image.python-online.cn/20190730140551.png
-.. |image41| image:: http://image.python-online.cn/20190730142527.png
-.. |image42| image:: http://image.python-online.cn/20190730143003.png
+.. |image41| image:: http://image.python-online.cn/20190826210813.png
+.. |image42| image:: http://image.python-online.cn/20190826211542.png
+.. |image43| image:: http://image.python-online.cn/20190826211737.png
+.. |image44| image:: http://image.python-online.cn/20190730142527.png
+.. |image45| image:: http://image.python-online.cn/20190730143003.png
 
