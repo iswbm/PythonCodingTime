@@ -572,6 +572,29 @@ servers 更新 schemas。
 
 |image45|
 
+是不是很呐闷，为什么创建server 的接口，会知道关联上面那9个
+schemas，其实那各自代表一种资源，属于扩展资源（它们的中心是核心资源）。
+
+那这些扩展资源是如何关联到核心资源的，这是在哪定义的呢？
+
+其实就是 nova 的 setup.cfg 里定义好的。
+
+就像下面指明了 server 的 create 接口会去加载这9个扩展资源。
+
+|image46|
+
+搜索一下 server_create 方法
+
+还真的只有这 9 个资源里才会定义。
+
+|image47|
+
+这就神奇了，servers 这个核心资源是如何加载到这些资源的，看了下代码是使用
+stevedore 这个模块去动态加载，然后还会校验这些资源是否都有
+``server_create`` ，只有有这个函数，才会被正常加载进来。
+
+|image48|
+
 8.5.20 往数据库中加字段
 -----------------------
 
@@ -651,4 +674,7 @@ servers 更新 schemas。
 .. |image43| image:: http://image.python-online.cn/20190826211737.png
 .. |image44| image:: http://image.python-online.cn/20190730142527.png
 .. |image45| image:: http://image.python-online.cn/20190730143003.png
+.. |image46| image:: http://image.python-online.cn/20190830091540.png
+.. |image47| image:: http://image.python-online.cn/20190830092203.png
+.. |image48| image:: http://image.python-online.cn/20190830093613.png
 

@@ -251,6 +251,46 @@ Port 去创建虚拟机，二是，修改 nova-api 的接口，使之支持。
 
    ovs-dpctl del-dp ovs-system && rmmod openvswitch && insmod  ./openvswitch.ko  && service openvswitch restart && service network restart
 
+8.14.4 cloudinit支持
+--------------------
+
+CentOS 6.x 在使用 ipv6 方面有问题
+
+|image5|
+
+导致在网卡配置文件里的配置的ip 都为none
+
+|image6|
+
+上面的 callbak 是 这个函数
+
+|image7|
+
+centos6.x 的网络信息不是从 latest 里的 network_data.json
+里读取的，而是从 content/0000 里读取
+
+|image8|
+
+这是因为 centos 6.x 配置网络是在 local
+阶段做的，而local阶段做的话，就会从 content/0000
+
+|image9|
+
+而 centos7.x 其实也会走 on_first_boot 去配置网络，但是cloudinit
+在centos7.x 里 sources.DSMODE_PASS
+
+|image10|
+
+导致在 local 阶段，这里配置网络被pass掉，自然也就不会从 content/0000
+读取了。
+
+|image11|
+
+centos 6.x 配置网络是在 on_first_boot 函数里，这是 local
+阶段就会执行的。
+
+|image12|
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png
@@ -262,4 +302,12 @@ Port 去创建虚拟机，二是，修改 nova-api 的接口，使之支持。
 .. |image2| image:: http://image.python-online.cn/20190716180952.png
 .. |image3| image:: http://image.python-online.cn/20190804110647.png
 .. |image4| image:: http://image.python-online.cn/20190716180726.png
+.. |image5| image:: http://image.python-online.cn/20190829103805.png
+.. |image6| image:: http://image.python-online.cn/20190829104544.png
+.. |image7| image:: http://image.python-online.cn/20190829104806.png
+.. |image8| image:: http://image.python-online.cn/20190829110541.png
+.. |image9| image:: http://image.python-online.cn/20190829105558.png
+.. |image10| image:: http://image.python-online.cn/20190829112446.png
+.. |image11| image:: http://image.python-online.cn/20190829111917.png
+.. |image12| image:: http://image.python-online.cn/20190829161243.png
 
