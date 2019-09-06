@@ -68,6 +68,10 @@ server双机高可用 <https://segmentfault.com/a/1190000008684320>`__
        virtual_ipaddress {         #设置虚拟ip地址，可以设置多个，每行一个
            219.157.114.206/24 dev eth1 label eth1:0
        }
+       track_interface {
+           eth1
+       }
+
        track_script {
            chk_zabbix
        }

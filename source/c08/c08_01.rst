@@ -160,6 +160,9 @@ aggregate管理
 
    nova interface-attach b0cc47bc-25c3-48ca-a4fd-5523326b515a --port-id 8bcba4eb-ade0-403d-8f13-45ed70936f03
 
+   # 关闭port安全组
+   neutron port-update --no-security-groups --port-security-enabled=False 
+
 1.3 Glance
 ~~~~~~~~~~
 

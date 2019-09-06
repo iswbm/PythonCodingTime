@@ -291,6 +291,23 @@ centos 6.x 配置网络是在 on_first_boot 函数里，这是 local
 
 |image12|
 
+ubuntu 解析网卡配置
+
+.. code:: python
+
+   from cloudinit.net import eni
+   config=eni.parse_deb_config('/etc/network/interfaces.d/50-cloud-init.cfg')
+
+|image13|
+
+8.14.5 其他命令记录
+-------------------
+
+::
+
+   # 网络启动不来，先 flush 试一下
+   ip addr flush dev ens3
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png
@@ -310,4 +327,5 @@ centos 6.x 配置网络是在 on_first_boot 函数里，这是 local
 .. |image10| image:: http://image.python-online.cn/20190829112446.png
 .. |image11| image:: http://image.python-online.cn/20190829111917.png
 .. |image12| image:: http://image.python-online.cn/20190829161243.png
+.. |image13| image:: http://image.python-online.cn/20190906091102.png
 

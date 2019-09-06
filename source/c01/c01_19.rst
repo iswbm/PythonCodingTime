@@ -9,8 +9,8 @@
    # 登陆 xadmin 后台
    127.0.0.1:8080/xadmin
 
-   # 帐号密码
-   MING:wbm54378
+   # 测试帐号密码
+   wbm@54378@#
 
    # 更新表结构
    python manage.py  makemigrations
@@ -36,6 +36,7 @@
 
 .. code:: shell
 
+   # 测试帐号密码
    root:Wangbm@123
    wangbm:VfgiCtc42tpu
 
