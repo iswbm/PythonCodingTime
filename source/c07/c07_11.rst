@@ -1,0 +1,79 @@
+7.11 K8S：基础入门
+==================
+
+一些基础命令
+
+::
+
+   # 启动cluster
+   minikube start
+
+   # 查看集群信息
+   kubectl cluster-info
+
+   # 部署应用
+   kubectl run kubernetes-bootcamp \
+         --image=docker.io/jocatalin/kubernetes-bootcamp:v1 \
+         --port=8080
+         
+   # 查看所有的 deployments，在这里可以看到应用副本数
+   kubectl get deployments
+
+
+   # 增加副本数
+   kubectl scale deployments/kubernetes-bootcamp --replicas=3
+   # 若要 scale down，就将 replicas 数值减小
+   kubectl scale deployments/kubernetes-bootcamp --replicas=2
+
+   # 查看所有的副本
+   kubectl get pods
+
+   # 查看集群下的节点
+   kubectl get nodes
+
+   # 查看集群下的服务
+   kubectl get services
+   NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+   kubernetes            ClusterIP   10.96.0.1       <none>        443/TCP          19m
+   kubernetes-bootcamp   NodePort    10.100.191.46   <none>        8080:30141/TCP   12s
+
+   # 添加端口映射，主机上的端口是随机分配的
+   kubectl expose deployment/kubernetes-bootcamp \
+         --type="NodePort" \
+         --port 8080
+      
+   # 上面的 bootcamp 有两个副本，当我们curl访问应用时，请求会随机发到三个pod里
+   # 其中 minikube 是该主机的 hostname，30141 是上面随机分配的端口号
+   curl minikube:30141
+
+
+   # 升级应用，从上面的 v1 升级到 v2，使用 get pods 可以发现这是一个删除再创建的过程。
+   kubectl set image deployments/kubernetes-bootcamp \
+           kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+           
+   # 回退，升级后后悔了，可以再回退到 之前的 v1 版本。
+   kubectl rollout undo deployments/kubernetes-bootcamp
+
+   # 查看 namespace，kubernetes 默认创建了两个
+   # default -- 创建资源时如果不指定，将被放到这个 Namespace 中。
+   # kube-system -- Kubernetes 自己创建的系统资源将放到这个 Namespace 中。
+   kubectl get namespace
+
+K8s 角色详解
+
+|image0|
+
+其中 Controller 还分为几种：
+
+1. Deployment：最常用的 Controller
+2. ReplicaSet：实现 Pod 的多副本管理，一般不会直接使用
+3. Daemonset：用于运行 Daemon
+4. StatefuleSet：保证每个副本的名称不变及启动/更新/删除顺序
+5. Job：用于运行完即删除的应用。
+
+一个 Pod
+里可以运行一个容器（最常用），也可以运行多个容器，若运行多个容器，那这几个容器的工作必定有着紧密的联系，而且需要直接
+**共享资源**\ 。
+
+.. |image0| image:: http://image.python-online.cn/20190907162015.png
+

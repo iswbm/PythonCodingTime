@@ -672,6 +672,18 @@ stevedore 这个模块去动态加载，然后还会校验这些资源是否都�
 
    nova-manage db sync
 
+8.5.21 如何加action
+-------------------
+
+::
+
+   self._record_action_start(context, instance, instance_actions.REBOOT)
+
+8.5.22 如何生成ConfigDrive
+--------------------------
+
+|image56|
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png
@@ -734,4 +746,5 @@ stevedore 这个模块去动态加载，然后还会校验这些资源是否都�
 .. |image53| image:: http://image.python-online.cn/20190830091540.png
 .. |image54| image:: http://image.python-online.cn/20190830092203.png
 .. |image55| image:: http://image.python-online.cn/20190830093613.png
+.. |image56| image:: http://image.python-online.cn/20190912135302.png
 

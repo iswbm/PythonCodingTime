@@ -1080,7 +1080,7 @@ import 是 Python 导包的方式。
    >>> print(str2)
        hello
 
-如果你用单\ ``\``\ 结尾是会报语法错误。
+但是如果你用单\ ``\``\ 结尾是会报语法错误的
 
 .. code:: python
 
@@ -1089,8 +1089,11 @@ import 是 Python 导包的方式。
        str3="\"
               ^
    SyntaxError: EOL while scanning string literal
-   >>>
-   >>>
+
+就算你指定它是个 raw 字符串，也不行。
+
+.. code:: python
+
    >>> str3=r"\"
      File "<stdin>", line 1
        str3=r"\"
@@ -1204,6 +1207,15 @@ import 是 Python 导包的方式。
    >>> b
    [1, 2, 3, 4, 5, 6, 7, 8]
 
+36. Python 里也可以有 end
+-------------------------
+
+有不少编程语言，循环、判断代码块需要用 end
+标明结束，这样一定程序上会使代码逻辑更加清晰一点，其实这种语法在 Python
+里并没有必要，但如果你想用，也不是没有办法，具体你看下面这个例子。
+
+|image3|
+
 附录：参考文章
 --------------
 
@@ -1218,4 +1230,5 @@ import 是 Python 导包的方式。
 .. |image0| image:: http://image.python-online.cn/20190511165650.png
 .. |image1| image:: http://image.python-online.cn/20190511165716.png
 .. |image2| image:: http://image.python-online.cn/20190511165735.png
+.. |image3| image:: http://image.python-online.cn/20190915213412.png
 

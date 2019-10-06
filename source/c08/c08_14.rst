@@ -291,22 +291,35 @@ centos 6.x 配置网络是在 on_first_boot 函数里，这是 local
 
 |image12|
 
-ubuntu 解析网卡配置
+8.14.5 ubuntu禁用ipv6
+---------------------
 
-.. code:: python
-
-   from cloudinit.net import eni
-   config=eni.parse_deb_config('/etc/network/interfaces.d/50-cloud-init.cfg')
+如果你给你的ubuntu配置上了ipv6的ip，那当你使用 apt-get install
+软件包的时候，会使用ipv6去源安装，这将会使你的安装过程卡住：
 
 |image13|
 
-8.14.5 其他命令记录
--------------------
+如何解决这个问题呢？
+
+参考文章：https://ubuntuqa.com/article/1577.html
+
+我使用的方法是
+
+在终端中运行以下命令禁用IPv6，\ ``0``\ 表示已启用，而\ ``1``\ 表示已禁用。
 
 ::
 
-   # 网络启动不来，先 flush 试一下
-   ip addr flush dev ens3
+   echo 1>/proc/sys/net/ipv6/conf/all/disable_ipv6
+
+然后在终端内禁用IPv6，需要再输入以下内容：
+
+::
+
+   echo "#disable ipv6" | sudo tee -a /etc/sysctl.conf
+   echo "net.ipv6.conf.all.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf
+   echo "net.ipv6.conf.default.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf
+   echo "net.ipv6.conf.lo.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf
+   sudo sysctl -p
 
 --------------
 
@@ -327,5 +340,5 @@ ubuntu 解析网卡配置
 .. |image10| image:: http://image.python-online.cn/20190829112446.png
 .. |image11| image:: http://image.python-online.cn/20190829111917.png
 .. |image12| image:: http://image.python-online.cn/20190829161243.png
-.. |image13| image:: http://image.python-online.cn/20190906091102.png
+.. |image13| image:: http://image.python-online.cn/20190926171038.png
 

@@ -1,0 +1,119 @@
+1.23 Pythonista 学习 Js
+=======================
+
+1. JavaScript的设计者希望用\ ``null``\ 表示一个空的值，而\ ``undefined``\ 表示值未定义。事实证明，这并没有什么卵用，区分两者的意义不大。大多数情况下，我们都应该用\ ``null``\ 。\ ``undefined``\ 仅仅在判断函数参数是否传递的情况下有用。
+
+2. 在JavaScript中，使用等号\ ``=``\ 对变量进行赋值。可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用\ ``var``\ 申明一次。
+
+3. var 申明的变量不是全局变量，如果不使用 var
+   申明变量，就会变成全局变量，多个js文件会共享这个变量，互相影响。这个语言设计弊端，在
+   ECMA 推出 strict 模式后得到解决，不使用 var 申明变量的会运行出错。
+
+4. 直接操作数组的长度，或者对超出数组长度的索引赋值，可以扩容和压缩数组的大小。
+
+5. 对象之间的比较和Python差异巨大，\ ``=`` 表示值的比较，\ ``===``
+   表示对象类型的比较，主要分为下面三种情况：
+
+   .. code:: javascript
+
+      // 1. 对于string,number等【基础类型】，==和===是有区别的。
+      // 如果是不同类型，== 会将两边转化成同一类型再看值是否相等
+      // 如果是相同类型，直接对值进行比较。
+      alert('1'==1);//结果是true
+      alert('1'===1);//结果是false
+
+
+      // 2. 如果是 Array,Object等高级类型，==和===是没有区别的。
+      // 直接比较指针地址。，跟 Python 里的 is 等同。
+
+
+      // 3. 基础类型与高级类型，==和===是有区别的。
+      // 对于==，将高级转化为基础类型，进行“值”比较。
+      // 因为类型不同，===结果为false。
+      var a = new String('1');//定义一个string的高级类型
+      var b = '1';//定一个基础类型字符串
+      alert(b==a);//为true
+      alert(b===a);//为false
+
+6. 定义一个函数，其参数个数可以少于传入的参数个数，基于可以不定义参数，还可以传入参数。那传入的多余的参数如何获取呢？可以使用
+   arguments 这个变量取得所有的参数，但这个变量仅在参数内起作用。
+
+   .. code:: python
+
+      function foo(a, b, ...rest) {
+          console.log('a = ' + a);
+          console.log('b = ' + b);
+          console.log(rest);
+      }
+
+7. JavaScript的函数定义有个特点，它会先扫描整个函数体的语句，把所有申明的变量“提升”到函数顶部，但是并不会提前为变量赋值。
+
+   .. code:: javascript
+
+      'use strict';
+
+      function foo() {
+          var x = 'Hello, ' + y;
+          console.log(x);
+          var y = 'Bob';
+      }
+
+      foo();
+
+      // 对于 javascript 引擎，看到代码相当于
+      function foo() {
+          var y; // 提升变量y的申明，此时y为undefined
+          var x = 'Hello, ' + y;
+          console.log(x);
+          y = 'Bob';
+      }
+
+8. This有个巨坑，需要新手注意。
+
+   如下，当没有 ``var that = this;``
+   这句时，函数内部的函数里的this指向的是 window 对象。
+
+   .. code:: javascript
+
+      'use strict';
+
+      var xiaoming = {
+          name: '小明',
+          birth: 1990,
+          age: function () {
+              var that = this; // 在方法内部一开始就捕获this
+              function getAgeFromBirth() {
+                  var y = new Date().getFullYear();
+                  return y - that.birth; // 用that而不是this
+              }
+              return getAgeFromBirth();
+          }
+      };
+
+      xiaoming.age(); // 25
+
+   或者，可以用 apply 的方法来解决这个问题，apply
+   的第一个参数是人该函数要绑定的对象，第二个参数是一个列表，装的是要传递给这个函数据参数。
+
+   .. code:: javascript
+
+      function getAge() {
+          var y = new Date().getFullYear();
+          return y - this.birth;
+      }
+
+      var xiaoming = {
+          name: '小明',
+          birth: 1990,
+          age: getAge
+      };
+
+      xiaoming.age(); // 29
+      getAge.apply(xiaoming, []); // 29, this指向xiaoming, 参数为空
+
+   假如，不想绑定给任何对象，第一个参数可以用 null。如
+
+   .. code:: javascript
+
+      Math.max.apply(null, [3, 5, 4]); // 5
+      Math.max.call(null, 3, 5, 4); // 5
