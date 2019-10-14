@@ -62,7 +62,7 @@ exclude_patterns = []
 
 html_theme = 'default'
 
-#html_static_path = ['_static']
+html_static_path = ['_static']
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'Python-Time BLOG'
@@ -137,3 +137,7 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 
 _exts = "../exts"
 sys.path.append(os.path.abspath(_exts))
+
+html_js_files = [
+    'js/readmore.js',
+]
