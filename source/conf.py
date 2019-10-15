@@ -128,4 +128,5 @@ sys.path.append(os.path.abspath(_exts))
 
 html_js_files = [
     'js/readmore.js',
+    'js/baidutongji.js',
 ]
