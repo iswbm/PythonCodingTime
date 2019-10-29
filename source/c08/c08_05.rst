@@ -387,18 +387,52 @@ manager 时，就会以binary 里的为准。比如binary
 
 |image37|
 
+8.5.12 往 spec_obj 里添加对象
+-----------------------------
+
+在 nova-scheduler 里的 过滤器里，有俩非常重要的对象。
+
+-  host_state：包含每台 host 的所有信息
+-  spec_obj：包含创建虚拟机请求的所有信息
+
+|image38|
+
+有时候，spec_obj 里并没有我们想要的信息（比如虚拟机的
+metadata），这时候，我们就要手动添加。
+
+这里我以 metadata 为例，来讲一下这个添加过程。
+
+首先第一点要清楚的是，spec_obj 其实是 RequestSpec
+对象：nova/objects/request_spec.py，所以下面的修改都是在这个文件里进行。
+
+要往这个对象加属性，第一步是要定义这个字段。
+
+|image39|
+
+往 instance_fields 追加属性名，完了后，这个属性会出现在
+``request_spec['instance_properties']`` 里
+
+|image40|
+
+最后在 ``from_primitives`` 这个函数里，把这个新属性赋值给 request_spec
+对象。
+
+.. code:: python
+
+   spec.metadata = request_spec['instance_properties'].get('metadata', {})
+
 8.5.13 支持指定子网和指定ip
 ---------------------------
 
 在 nova-api 接收请求处。
 
-|image38|
+|image41|
 
-|image39|
+|image42|
 
 对 network_info 进行解析，然后塞给 request 对象返回。
 
-|image40|
+|image43|
 
 8.5.14 HTTP 状态码
 ------------------
@@ -518,7 +552,7 @@ isolate
 一个目录下。这个目录下有一个名为 disk 的qcow2文件，而这个qcow2
 文件的backing file 是指向一个 base 镜像文件（raw格式）。
 
-|image41|
+|image44|
 
 8.5.16 独立磁盘与LVM
 --------------------
@@ -530,7 +564,7 @@ isolate
 缺点：无法像 LVM
 存储池那样，做到精准而灵活的资源分配，有可能造成资源浪费或资源不足。
 
-|image42|
+|image45|
 
 **LVM**
 
@@ -549,14 +583,14 @@ isolate
 只要在主机组上设置的metadata 的 key-value 和 extra_spec
 的key-value一样就可以实现宿主机的过滤。
 
-|image43|
+|image46|
 
 8.5.18 生成config drive
 -----------------------
 
-|image44|
+|image47|
 
-|image45|
+|image48|
 
 ::
 
@@ -576,13 +610,13 @@ isolate
 nova api 的接口参数是在 nova/api/openstack/compute/schemas/
 目录下，如创建虚拟机的接口如下：
 
-|image46|
+|image49|
 
 这些参数字段后面的类型是用来做参数类型的校验的。
 
 在application 函数的头部，可以发现有如下这几种装饰器，
 
-|image47|
+|image50|
 
 装饰器里会传入一个参数，就是 schema
 的内容，通过它可以约束一个请求内的参数合法性。
@@ -596,11 +630,11 @@ stevedore，它是 oslo
 项目中为OpenStack其他项目提供动态加载功能的公共组件库（详细可以看这篇文章：https://blog.csdn.net/bill_xiang_/article/details/78852717）。通过它可以用添加扩展的方式，给
 servers 更新 schemas。
 
-|image48|
+|image51|
 
 关键在于这个 map 函数，它会循环所有的扩展（）
 
-|image49|
+|image52|
 
 将调用传进去的 ``self._create_extension_schema`` 将已加载到的扩展schemas
 更新到主schemas里去。
@@ -610,17 +644,17 @@ servers 更新 schemas。
    # [ext.obj.name for ext in self.create_schema_manager.extensions]
    ['MultipleCreate', 'BlockDeviceMapping', 'BlockDeviceMappingV1', 'AvailabilityZone', 'UserData', 'Keypairs', 'SchedulerHints', 'SecurityGroups', 'ConfigDrive']
 
-|image50|
+|image53|
 
 装饰器 schemas 的定义如下：
 
-|image51|
+|image54|
 
 比如我们使用的 novaclient 发出的请求，是 v2.3.7的，所以 create()
 顶部的五个schema
 装饰器，上面四个都会空跑，不会进行校验，只有最后一个才会进入检验逻辑。
 
-|image52|
+|image55|
 
 是不是很呐闷，为什么创建server 的接口，会知道关联上面那9个
 schemas，其实那各自代表一种资源，属于扩展资源（它们的中心是核心资源）。
@@ -631,19 +665,19 @@ schemas，其实那各自代表一种资源，属于扩展资源（它们的中�
 
 就像下面指明了 server 的 create 接口会去加载这9个扩展资源。
 
-|image53|
+|image56|
 
 搜索一下 server_create 方法
 
 还真的只有这 9 个资源里才会定义。
 
-|image54|
+|image57|
 
 这就神奇了，servers 这个核心资源是如何加载到这些资源的，看了下代码是使用
 stevedore 这个模块去动态加载，然后还会校验这些资源是否都有
 ``server_create`` ，只有有这个函数，才会被正常加载进来。
 
-|image55|
+|image58|
 
 8.5.20 往数据库中加字段
 -----------------------
@@ -682,7 +716,17 @@ stevedore 这个模块去动态加载，然后还会校验这些资源是否都�
 8.5.22 如何生成ConfigDrive
 --------------------------
 
-|image56|
+|image59|
+
+8.5.23 创建时修改虚拟机密码
+---------------------------
+
+使用下面这条命令，输入你要的密码，可以生成一串加密过字符，将这串字符传cloudinit，原封不动地放入
+/etc/shadow 就可以实现密码设置。
+
+.. code:: shell
+
+   python -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw,crypt.METHOD_SHA512) if (pw==getpass.getpass("Confirm: ")) else exit())'
 
 --------------
 
@@ -728,23 +772,26 @@ stevedore 这个模块去动态加载，然后还会校验这些资源是否都�
 .. |image35| image:: http://image.python-online.cn/20190526205152.png
 .. |image36| image:: http://image.python-online.cn/20190526165007.png
 .. |image37| image:: http://image.python-online.cn/20190526204328.png
-.. |image38| image:: http://image.python-online.cn/20190529203441.png
-.. |image39| image:: http://image.python-online.cn/20190529215953.png
-.. |image40| image:: http://image.python-online.cn/20190529215825.png
-.. |image41| image:: http://image.python-online.cn/20190627213044.png
-.. |image42| image:: http://image.python-online.cn/20190627213609.png
-.. |image43| image:: http://image.python-online.cn/20190627215038.png
-.. |image44| image:: http://image.python-online.cn/20190708100902.png
-.. |image45| image:: http://image.python-online.cn/20190708103119.png
-.. |image46| image:: http://image.python-online.cn/20190719170825.png
-.. |image47| image:: http://image.python-online.cn/20190730140551.png
-.. |image48| image:: http://image.python-online.cn/20190826210813.png
-.. |image49| image:: http://image.python-online.cn/20190826211542.png
-.. |image50| image:: http://image.python-online.cn/20190826211737.png
-.. |image51| image:: http://image.python-online.cn/20190730142527.png
-.. |image52| image:: http://image.python-online.cn/20190730143003.png
-.. |image53| image:: http://image.python-online.cn/20190830091540.png
-.. |image54| image:: http://image.python-online.cn/20190830092203.png
-.. |image55| image:: http://image.python-online.cn/20190830093613.png
-.. |image56| image:: http://image.python-online.cn/20190912135302.png
+.. |image38| image:: http://image.python-online.cn/20191008173211.png
+.. |image39| image:: http://image.python-online.cn/20191008174046.png
+.. |image40| image:: http://image.python-online.cn/20191008210127.png
+.. |image41| image:: http://image.python-online.cn/20190529203441.png
+.. |image42| image:: http://image.python-online.cn/20190529215953.png
+.. |image43| image:: http://image.python-online.cn/20190529215825.png
+.. |image44| image:: http://image.python-online.cn/20190627213044.png
+.. |image45| image:: http://image.python-online.cn/20190627213609.png
+.. |image46| image:: http://image.python-online.cn/20190627215038.png
+.. |image47| image:: http://image.python-online.cn/20190708100902.png
+.. |image48| image:: http://image.python-online.cn/20190708103119.png
+.. |image49| image:: http://image.python-online.cn/20190719170825.png
+.. |image50| image:: http://image.python-online.cn/20190730140551.png
+.. |image51| image:: http://image.python-online.cn/20190826210813.png
+.. |image52| image:: http://image.python-online.cn/20190826211542.png
+.. |image53| image:: http://image.python-online.cn/20190826211737.png
+.. |image54| image:: http://image.python-online.cn/20190730142527.png
+.. |image55| image:: http://image.python-online.cn/20190730143003.png
+.. |image56| image:: http://image.python-online.cn/20190830091540.png
+.. |image57| image:: http://image.python-online.cn/20190830092203.png
+.. |image58| image:: http://image.python-online.cn/20190830093613.png
+.. |image59| image:: http://image.python-online.cn/20190912135302.png
 

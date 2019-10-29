@@ -1118,29 +1118,7 @@ import 是 Python 导包的方式。
    >>> str.splitlines()
    ['a', 'b']
 
-33. 更新字典
-------------
-
-通常我们更新字典的方式是这样的
-
-.. code:: python
-
-   >>> dict1 = {'age':24}
-   >>> dict1.update({'age':30})
-   >>> dict1
-   {'age': 30}
-
-除此之外还有另外一种方式，你可能比较陌生
-
-::
-
-   >>> dict1 = {'namne':'ming', 'gender':'male', 'age':24}
-   >>> dict2 = {'namne':'jane', 'gender':'male'}
-   >>> dict3 = {**dict1, **dict2}
-   >>> dict3
-   {'namne': 'jane', 'gender': 'male', 'age': 24}
-
-34. 嵌套上下文管理的另类写法
+33. 嵌套上下文管理的另类写法
 ----------------------------
 
 当我们要写一个嵌套的上下文管理器时，可能会这样写
@@ -1178,7 +1156,7 @@ import 是 Python 导包的方式。
    with test_context('aaa'), test_context('bbb'):
        print('========== in main ============')
 
-35. += 不等同于=+
+34. += 不等同于=+
 -----------------
 
 对列表 进行\ ``+=`` 操作相当于 extend，而使用 ``=+``
@@ -1207,7 +1185,7 @@ import 是 Python 导包的方式。
    >>> b
    [1, 2, 3, 4, 5, 6, 7, 8]
 
-36. Python 里也可以有 end
+35. Python 里也可以有 end
 -------------------------
 
 有不少编程语言，循环、判断代码块需要用 end
@@ -1215,6 +1193,173 @@ import 是 Python 导包的方式。
 里并没有必要，但如果你想用，也不是没有办法，具体你看下面这个例子。
 
 |image3|
+
+36. 花样更新字典的技巧
+----------------------
+
+常规的更新字典的方式是这样的
+
+.. code:: python
+
+   >>> profile={'name': 'wangbm'}
+   >>> extra={'age': 25, 'gender': 'male'}
+   >>> profile.update(extra)
+   >>> profile
+   {'gender': 'male', 'age': 25, 'name': 'wangbm'}
+
+今天明哥来集中讲下字典的更新方式
+
+.. code:: python
+
+   >>> profile={'name': 'wangbm'}
+   >>> extra=[('age', 25), ('gender', 'male')]
+   >>> profile.update(extra)
+   >>> profile
+   {'gender': 'male', 'age': 25, 'name': 'wangbm'}
+
+如果你见过上面这种，那接下来这种我保证大部分人都没用过
+
+.. code:: python
+
+   >>> profile={'name': 'wangbm'}
+   >>> profile.update(age=25, gender='male')
+   >>> profile
+   {'gender': 'male', 'age': 25, 'name': 'wangbm'}
+
+37. 被低估的 print
+------------------
+
+print 很多人只用来执行简单的打印功能。
+
+print 作为一个函数，本身也附有各种各样的参数，只是很多人不知道。
+
+你一定知道 join 这种很高效的字符串拼接方式。
+
+.. code:: python
+
+   >>> alist = ['a', 'b', 'c']
+   >>> ','.join(alist)
+   'a,b,c'
+
+当如果 alist 里有非字符串的元素时，join 就会抛错。
+
+.. code:: python
+
+   >>> alist = ['a', 'b', 3]
+   >>> ','.join(alist)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: sequence item 2: expected str instance, int found
+
+如果要解决这个问题，可能要提前将数值转化成字符串类型。
+
+.. code:: python
+
+   >>> alist = ['a', 'b', 3]
+   >>> blist = [str(i) for i in alist]
+   >>> blist
+   ['a', 'b', '3']
+   >>> ','.join(blist)
+   'a,b,3'
+
+这里再介绍一种更简洁的方法，就是使用 print
+来实现，但这种有局限，好像只能在命令行模式下使用，毕竟 print
+标准输出，无法进行赋值。
+
+下面我使用 ``_`` 来获取上一次的返回值，再赋值给 blist。
+
+.. code:: python
+
+   >>> print(*alist, sep=',')
+   a,b,3
+   >>> blist = _
+   >>> blist
+   'a,b,3'
+
+既然说到了 print，那么再说一点print 的神技巧。
+
+很多初学者，喜欢使用 print 来进行调试追踪。
+
+一点不好的地方是，普通的 print 是输出到终端屏幕，而不能将保持在文件中。
+
+其实 print 是支持将输出重定向到文件中的，不过说实话，个人感觉还不如使用
+logging 模块呢，或者直接 f.write()。
+
+.. code:: python
+
+   >>> with open('test.log', mode='w') as f:
+   ...     print('hello, python', file=f, flush=True)
+   >>> exit()
+
+   $ cat test.log
+   hello, python
+
+以上两点，学习自董伟明的文章：\ `一些你不知道的Python
+Tips <https://mp.weixin.qq.com/s/KTLRwzCM7lOvBF4IEGuBPg>`__
+
+::
+
+           <style>
+             #locker .mask {
+               height: 240px;
+               width: 100%;
+               background: -webkit-gradient(linear, 0 top, 0 bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+           }
+
+           #locker .info {
+               background: white;
+               height: 400px;
+               padding-bottom: 50px;
+           }
+
+           .lock {
+               position: relative;
+               overflow: hidden;
+               padding-bottom: 30px;
+           }
+           .text-center {
+               text-align: center
+           }
+           #locker {
+               position: absolute;
+               left: 0;
+               bottom: 0;
+               width: 100%;
+           }
+            </style>
+            <div id="locker">
+             <div class="mask">
+             </div>
+             <div class="info">
+              <div>
+               <p class="text-center">
+                扫码或搜索：
+                <span style="color: #E9405A; font-weight: bold;">
+                 Python编程时光
+                </span>
+               </p>
+               <p class="text-center">
+                <span>
+                 发送
+                </span>
+                <span class="token" style="color: #e9415a; font-weight: bold; font-size: 17px; margin-bottom: 45px;">
+                </span>
+               </p>
+               <p class="text-center">
+                即可
+                <span style="color: #e9415a; font-weight: bold;">
+                 立即永久
+                </span>
+                解锁本站全部文章
+               </p>
+              </div>
+              <div class="text-center" id="mycode">
+               <img class="code-img" src="http://image.python-online.cn/20190920004120.png" style="width: 300px"/>
+              </div>
+             </div>
+             <div>
+             </div>
+            </div>
 
 附录：参考文章
 --------------

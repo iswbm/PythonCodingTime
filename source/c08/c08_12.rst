@@ -16,6 +16,9 @@
 nova-conductor，这时候 nova-conductor 才会去调用 nova-compute
 去进行真正的创建过程。
 
+8.12.1 过滤器和称重器
+---------------------
+
 接下来，我会从源码的角度来分析一下这个过程。
 
 从源代码中看，最开始是 nova-conductor （nova/conductor/manager.py）在给
@@ -74,6 +77,13 @@ nova-scheduler 选择到主机后，在日志中会打印三条DEBUG信息，可
    LOG.debug("Weighed %(hosts)s", {'hosts': weighed_hosts})
    LOG.debug("Selected host: %(host)s", {'host': chosen_host})
 
+8.12.2 指定宿主机创建
+---------------------
+
+当指定宿主机进行虚拟机的创建后，以上所有的过滤器都会无效（不会走代码）。
+
+|image7|
+
 --------------
 
 .. figure:: http://image.python-online.cn/20190511161447.png
@@ -87,4 +97,5 @@ nova-scheduler 选择到主机后，在日志中会打印三条DEBUG信息，可
 .. |image4| image:: http://image.python-online.cn/20190424221602.png
 .. |image5| image:: http://image.python-online.cn/20190424215735.png
 .. |image6| image:: http://image.python-online.cn/20190424220008.png
+.. |image7| image:: http://image.python-online.cn/20191011103832.png
 
