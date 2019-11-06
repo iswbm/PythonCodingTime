@@ -44,6 +44,9 @@
    command + up   # 文件夹后退
    command + down # 文件夹前进
 
+   # 最大化窗口与取消
+   command + ctrl + f
+
 4.18.4 系统设置
 ---------------
 
@@ -134,6 +137,16 @@ Snipaste：截图工具
 Macs Fan Control：控制风扇转速，加快散热
 
 ShortCat：在系统栏也可以搜索聚焦
+
+Coffee
+Buzz：阻止电脑休眠，三种模式：永不休眠、屏幕熄灭但电脑不休眠、跟随系统节能设置。（限免已拿到）
+
+Pretty Regular Expressions：正则表达式测试工具（限免已拿到）
+
+Vicinity：环境白噪音（限免已拿到）
+
+QSpace：\ `finder
+的增强版 <https://mp.weixin.qq.com/s/BRBZZfx0bGc8X8WueS37Xg>`__\ ，可分屏整理文件（1块钱购买）
 
 参考文章
 --------

@@ -1,7 +1,43 @@
 7.9 Ansible 入门指南使用手册
 ============================
 
+7.9.1 有用的小技巧
+------------------
+
+1. 只输出错误的信息
+~~~~~~~~~~~~~~~~~~~
+
+如何让 ansible 只输出错误的信息。
+
+1、修改配置：只对 playbook 有效
+
+.. code:: ini
+
+   [defaults]
+   bin_ansible_callbacks=True
+
+2、添加环境变量：对 ad-hoc 命令有效
+
+.. code:: shell
+
+   export ANSIBLE_LOAD_CALLBACK_PLUGINS=1
+
+具体示例
+
+.. code:: shell
+
+   ANSIBLE_LOAD_CALLBACK_PLUGINS=1 ANSIBLE_STDOUT_CALLBACK=actionable ansible all -m ping
+
+2. 如何批量推送文件
+~~~~~~~~~~~~~~~~~~~
+
 ::
 
    # 批量推送文件
    ansible ws_compute01 -m copy -a 'src=<src> dest=<dest>'
+
+快速传送门
+----------
+
+1. `Ansible
+   配置全解 <https://docs.ansible.com/ansible/2.6/reference_appendices/config.html#ansible-configuration-settings>`__
