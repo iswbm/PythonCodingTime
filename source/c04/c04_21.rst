@@ -1,45 +1,34 @@
-4.21 Python-pip 使用详解
-========================
+4.21 最全的 pip 使用指南，50% 你可能没用过
+==========================================
 
 所有的 Python 开发者都清楚，Python
-之所以如此受欢迎，正是由于语法简单，上手容易，能够以最快的速度开发出一个满足基本需要的项目。
+之所以如此受欢迎，能够在众多高级语言中，脱颖而出，除了语法简单，上手容易之外，更多还要归功于
+Python 生态的完备，有数以万计的 Python 爱好者愿意以 Python
+为基础封装出各种有利于开发的第三方工具包。
 
-能够在 众多高级语言中，脱颖而出，除了 Python
-语言本身的特色之外，更多还要归功于有很多很多的 Python 爱好者愿意以
-Python
-为基础封装出各种有利于开发的第三方工具包。拿来即用，不用重复造轮子。
+这才使用我们能够以最快的速度开发出一个满足基本需要的项目，而不是每次都重复造轮子。
 
 Python
 从1991年诞生到现在，已经过去28个年头了，这其间产生了数以万计的第三方包，且每个包都会不断更新，会有越来越多的版本。
 
 当你在一个复杂的项目环境中，如果没有一个有效的依赖包管理方案，项目的维护将会是一个大问题。
 
-pip 是官方推荐的包管理工具，在大多数开发者眼里，pip 几乎是 python
+pip 是官方推荐的包管理工具，在大多数开发者眼里，pip 几乎是 Python
 的标配。
 
 当然也有其他的包管理工具
 
--  distutils：仅用于打包和安装，严格来讲不算是包管理工具
+-  **distutils**\ ：仅用于打包和安装，严格来讲不算是包管理工具
 
--  setuptools：
-   distutils的增强版，扩展了distutils，提供更多的功能，引入包依赖的管理，easy_install就是它的一个命令行工具，引入了
+-  **setuptools**\ ：distutils的增强版，扩展了distutils，提供更多的功能，引入包依赖的管理，easy_install就是它的一个命令行工具，引入了
    egg 的文件格式。
 
-   \```sh e llsh el # 从 pypi 上下载安装 easy_install pkg
+-  **Pipenv**\ ：一个集依赖包管理（pip）及虚拟环境管理（virtualenv）的工具
 
-   .. rubric:: 从本地的 tgz 文件中安装
-      :name: 从本地的-tgz-文件中安装
+-  还有其他的，这里不一一列出。
 
-   easy_install pkg.tgz
-
-   .. rubric:: 从本地的 egg 文件中安装
-      :name: 从本地的-egg-文件中安装
-
-   easy_install pkg.egg \``\`
-
--  Pipenv：一个集依赖包管理（pip）及虚拟环境管理（virtualenv）的工具
-
--  可能还有其他的，这里就不列了。
+今天的主角是 pip
+，大家肯定不会陌生。但我相信不少人，只是熟悉几个常用的用法，而对于其他几个低频且实用的用法，却知之甚少，这两天，我查阅官方文档，把这些用法整理了一下，应该是网络上比较全的介绍。
 
 1. 查询软件包
 -------------
@@ -140,10 +129,24 @@ pip 是官方推荐的包管理工具，在大多数开发者眼里，pip 几乎
    # 确保当前环境软件包的版本(并不确保安装)
    pip install -c constraints.txt
 
-**3.3 限制不从 wheel 安装**
+**3.3 限制不使用二进制包安装**
+
+由于默认情况下，wheel 包的平台是运行 pip download 命令
+的平台，所以可能出现平台不适配的情况。
+
+比如在 MacOS 系统下得到的 pymongo-2.8-cp27-none-macosx_10_10_intel.whl
+就不能在 linux_x86_64 安装。
+
+使用下面这条命令下载的是 tar.gz 的包，可以直接使用 pip install 安装。
+
+比 wheel 包，这种包在安装时会进行编译，所以花费的时间会长一些。
 
 .. code:: shell
 
+   # 下载非二进制的包
+   $ pip download --no-binary=:all: pkg
+
+   #　安装非二进制的包
    $ pip install pkg --no-binary
 
 **3.4 指定代理服务器安装**
@@ -209,19 +212,20 @@ pip 是官方推荐的包管理工具，在大多数开发者眼里，pip 几乎
 
 **3.5 安装用户私有软件包**
 
-很多人可能还不清楚，python 的安装包是可以有用户隔离的。
+很多人可能还不清楚，python 的安装包是可以用户隔离的。
 
-如果你拥有管理员权限，你可以将包安装在全局环境中。在全局环境中的这个包可被该机器上的所有用户使用（没有被用户层级的包覆盖的情况下）。
+如果你拥有管理员权限，你可以将包安装在全局环境中。在全局环境中的这个包可被该机器上的所有拥有管理员权限的用户使用。
 
-当你的用户没有管理员的权限，你使用 ``pip install <pkg>``
-会提示权限不足，安装失败。
+如果一台机器上的使用者不只一样，自私地将在全局环境中安装或者升级某个包，是不负责任且危险的做法。
 
-这可怎么办呢？你的项目中，需要安装这个第三方包。
+面对这种情况，我们就想能否安装单独为我所用的包呢？
 
-面对这种情况，我能想到的有两种方法：
+庆幸的是，还真有。
 
-1. 建立一个虚拟环境
-2. 将包安装在用户层级的环境中
+我能想到的有两种方法：
+
+1. 使用虚拟环境
+2. 将包安装在用户的环境中
 
 虚拟环境，之前写过几篇文章，这里不再展开讲。
 
@@ -235,7 +239,66 @@ pip 是官方推荐的包管理工具，在大多数开发者眼里，pip 几乎
 
    pip install --user pkg
 
-那么他是如何实现这个优先级顺序呢？答案是，sys.path
+来举个例子
+
+.. code:: shell
+
+   # 在全局环境中未安装 requests
+   [root@localhost ~]# pip list | grep requests   
+   [root@localhost ~]# su - wangbm
+   [root@localhost ~]# 
+
+   # 由于用户环境继承自全局环境，这里也未安装
+   [wangbm@localhost ~]# pip list | grep requests 
+   [wangbm@localhost ~]# pip install --user requests  
+   [wangbm@localhost ~]# pip list | grep requests 
+   requests (2.22.0)
+   [wangbm@localhost ~]# 
+
+   # 从 Location 属性可发现 requests 只安装在当前用户环境中
+   [wangbm@ws_compute01 ~]$ pip show requests
+   ---
+   Metadata-Version: 2.1
+   Name: requests
+   Version: 2.22.0
+   Summary: Python HTTP for Humans.
+   Home-page: http://python-requests.org
+   Author: Kenneth Reitz
+   Author-email: me@kennethreitz.org
+   Installer: pip
+   License: Apache 2.0
+   Location: /home/wangbm/.local/lib/python2.7/site-packages
+   [wangbm@localhost ~]$ exit
+   logout
+
+   # 退出 wangbm 用户，在 root 用户环境中发现 requests 未安装
+   [root@localhost ~]$ pip list | grep requests
+   [root@localhost ~]$ 
+
+当你身处个人用户环境中，python
+导包时会先检索当前用户环境中是否已安装这个包，已安装则优先使用，未安装则使用全局环境中的包。
+
+验证如下：
+
+.. code:: python
+
+   >>> import sys
+   >>> from pprint import pprint 
+   >>> pprint(sys.path)
+   ['',
+    '/usr/lib64/python27.zip',
+    '/usr/lib64/python2.7',
+    '/usr/lib64/python2.7/plat-linux2',
+    '/usr/lib64/python2.7/lib-tk',
+    '/usr/lib64/python2.7/lib-old',
+    '/usr/lib64/python2.7/lib-dynload',
+    '/home/wangbm/.local/lib/python2.7/site-packages',
+    '/usr/lib64/python2.7/site-packages',
+    '/usr/lib64/python2.7/site-packages/gtk-2.0',
+    '/usr/lib/python2.7/site-packages',
+    '/usr/lib/python2.7/site-packages/pip-18.1-py2.7.egg',
+    '/usr/lib/python2.7/site-packages/lockfile-0.12.2-py2.7.egg']
+   >>> 
 
 4. 卸载软件包
 -------------
@@ -274,9 +337,13 @@ pip 是官方推荐的包管理工具，在大多数开发者眼里，pip 几乎
    pip install --upgrade pkg1 --upgrade-strategy only-if-need
 
 以上几乎包含了 pip
-的所有常用使用场景，为了方便，我将其整理成一张表格，在公众号后台回复“pip”，可获取高清无水印图片。
+的所有常用使用场景，为了方便，我将其整理成一张表格，如果你需要，可以关注我的公众号（Python编程时光），后台回复“pip”，可获取高清无水印图片。
 
 |image0|
+
+.. figure:: http://image.python-online.cn/20190511161447.png
+   :alt: 关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.python-online.cn/20191105200041.png
 
