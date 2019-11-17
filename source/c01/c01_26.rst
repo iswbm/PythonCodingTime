@@ -1,0 +1,93 @@
+1.26 C语言基础的学习
+====================
+
+1. 安装编译器
+-------------
+
+C
+语言编译器用于把源代码编译成最终的可执行程序。这里假设您已经对编程语言编译器有基本的了解了。
+
+最常用的免费可用的编译器是 GNU 的 C/C++ 编译器。
+
+windows
+~~~~~~~
+
+MinGw 是 Minimal GNU on Windows 的缩写，允许在 GNU/Linux 和 Windows
+平台生成本地的 Windows 程序而不需要第三方运行时库。本文主要介绍 MinGw
+的安装和使用。
+
+**(一)安装**
+
+-  1.下载 min-gw
+   安装程序，链接为：http://sourceforge.net/projects/mingw/files/，下载
+   mingw-get-setup.exe (86.5 kB)
+-  2.运行 mingw-get-setup.exe (86.5 kB)
+   ,点击“运行”，continue等，注意记住安装的目录，如
+   \**C::raw-latex:`\MinGw*`\*,下面修改环境变量时还会用到。
+-  3.修改环境变量:
+   选择计算机—属性—高级系统设置—环境变量，在系统变量中找到 Path
+   变量，在后面加入 min-gw的安装目录，如
+   \**C::raw-latex:`\MinGw`:raw-latex:`\bin*`\*
+-  4.在开始菜单中，点击“运行”，输入 **cmd**,打开命令行:输入
+   **mingw-get.exe**,如果弹出 MinGw installation manager
+   窗口，说明安装正常。此时，关闭 MinGw installation manager
+   窗口，否则接下来的步骤会报错
+-  5.在cmd中输入命令 **mingw-get install gcc**,等待一会，gcc
+   就安装成功了。
+
+如果想安装 g++,gdb,只要输入命令 **mingw-get install g++** 和 **mingw-get
+install gdb**
+
+**(二)使用**
+
+在 cmd 的当前工作目录写 C 程序 hello.c：
+
+::
+
+   # include <stdio.h>
+   int main()
+   {
+       printf("%s\n","hello world");
+       return 0;
+   }
+
+在 cmd 中输入命令
+
+.. code:: shell
+
+   $ gcc hello.c
+
+在当前目录下会生成 a.exe 的可执行文件，在 cmd 中输入 a.exe
+就可以执行程序了。
+
+如果想调试程序，可以输入 gdb a.exe
+
+进入 gdb 的功能，使用 gdb 常用的命令就可以调试程序了。
+
+Mac OSX 及 Linux
+~~~~~~~~~~~~~~~~
+
+从苹果的网站上下载 `Xcode
+开发环境 <https://developer.apple.com/xcode/>`__\ ，并按照安装说明进行安装。一旦安装上
+Xcode，您就能使用 GNU 编译器。
+
+**使用**
+
+打开终端，使用 vim 编辑文件 hello.c
+
+::
+
+   # include <stdio.h>
+   int main()
+   {
+       printf("%s\n","hello world");
+       return 0;
+   }
+
+使用 gcc 工具进行编译完后，就会在当前目录下生成一个名为 a.out
+的可执行文件，手动运行它即可
+
+.. code:: shell
+
+   $ gcc hello.c
+   $ ./a.out

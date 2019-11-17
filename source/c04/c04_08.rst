@@ -410,8 +410,22 @@ URL相关
    　　　　e：下一个标点符号前位置
    　　　　b：取消选中上一个字符，字符和标点算一个字符
 
+4.8.5 VSCode
+------------
+
+::
+
+   运行： Ctrl + F5
+   调试： F5
+
+   删除行：Ctrl + Shift + K
+   在终端运行当前行：Shift + Enter
+
+   往下新开一行：Ctrl + Enter
+   往上新开一行：Ctrl Shift + Enter
+
 --------------
 
-.. figure:: http://image.python-online.cn/20190511161447.png
+.. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 

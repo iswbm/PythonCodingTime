@@ -237,7 +237,7 @@ NoteBook 既然支持 Markdown ，你已经也能想到它可以用来记录学�
 
 --------------
 
-.. figure:: http://image.python-online.cn/20190511161447.png
+.. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
 

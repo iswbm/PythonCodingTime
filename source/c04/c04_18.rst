@@ -150,6 +150,10 @@ QSpace：\ `finder
 
 eZip：与QSpace同一开发者。集所有同类产品所长的解压缩工具（\ `官网可下 <https://ezip.awehunt.com/>`__\ ）
 
+ArcTime Pro：免费给视频自动加字幕，依赖 java 环境
+
+PPDuck3：优秀的图片压缩软件，体积减小但是画质肉眼观察不出变化，压缩完自动替换原图。免费使用一次仅能压缩10张，需要退出重进。
+
 参考文章
 --------
 
@@ -160,7 +164,7 @@ eZip：与QSpace同一开发者。集所有同类产品所长的解压缩工具�
 
 --------------
 
-.. figure:: http://image.python-online.cn/20190511161447.png
+.. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
 

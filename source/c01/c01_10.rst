@@ -1297,70 +1297,6 @@ logging 模块呢，或者直接 f.write()。
 以上两点，学习自董伟明的文章：\ `一些你不知道的Python
 Tips <https://mp.weixin.qq.com/s/KTLRwzCM7lOvBF4IEGuBPg>`__
 
-::
-
-           <style>
-             #locker .mask {
-               height: 240px;
-               width: 100%;
-               background: -webkit-gradient(linear, 0 top, 0 bottom, from(rgba(255, 255, 255, 0)), to(#fff));
-           }
-
-           #locker .info {
-               background: white;
-               height: 400px;
-               padding-bottom: 50px;
-           }
-
-           .lock {
-               position: relative;
-               overflow: hidden;
-               padding-bottom: 30px;
-           }
-           .text-center {
-               text-align: center
-           }
-           #locker {
-               position: absolute;
-               left: 0;
-               bottom: 0;
-               width: 100%;
-           }
-            </style>
-            <div id="locker">
-             <div class="mask">
-             </div>
-             <div class="info">
-              <div>
-               <p class="text-center">
-                扫码或搜索：
-                <span style="color: #E9405A; font-weight: bold;">
-                 Python编程时光
-                </span>
-               </p>
-               <p class="text-center">
-                <span>
-                 发送
-                </span>
-                <span class="token" style="color: #e9415a; font-weight: bold; font-size: 17px; margin-bottom: 45px;">
-                </span>
-               </p>
-               <p class="text-center">
-                即可
-                <span style="color: #e9415a; font-weight: bold;">
-                 立即永久
-                </span>
-                解锁本站全部文章
-               </p>
-              </div>
-              <div class="text-center" id="mycode">
-               <img class="code-img" src="http://image.python-online.cn/20190920004120.png" style="width: 300px"/>
-              </div>
-             </div>
-             <div>
-             </div>
-            </div>
-
 附录：参考文章
 --------------
 
@@ -1368,7 +1304,7 @@ Tips <https://mp.weixin.qq.com/s/KTLRwzCM7lOvBF4IEGuBPg>`__
 
 --------------
 
-.. figure:: http://image.python-online.cn/20190511161447.png
+.. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
 

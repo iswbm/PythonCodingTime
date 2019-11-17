@@ -314,7 +314,7 @@ Python3.x 没有经典类，只有新式类，而且有三种写法
 
 --------------
 
-.. figure:: http://image.python-online.cn/20190511161447.png
+.. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
 

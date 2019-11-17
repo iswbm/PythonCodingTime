@@ -341,7 +341,7 @@ pip 是官方推荐的包管理工具，在大多数开发者眼里，pip 几乎
 
 |image0|
 
-.. figure:: http://image.python-online.cn/20190511161447.png
+.. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
 

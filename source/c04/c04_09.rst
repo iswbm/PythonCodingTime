@@ -710,7 +710,7 @@ SO，如果是提交的是英文的话，不会有冲突。因为都是一个字
 
 --------------
 
-.. figure:: http://image.python-online.cn/20190511161447.png
+.. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
 

@@ -25,5 +25,5 @@
 
 ------------------------------
 
-.. figure:: http://image.python-online.cn/20190511161447.png
+.. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注明哥公众号

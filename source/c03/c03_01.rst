@@ -773,7 +773,7 @@ property
 我的文章更新频率是远低于其他 Python
 技术号，但我仍然坚持自己，坚持原创，每周虽然只有一篇，但我能保证我的每一篇文章都是诚意之作。希望那些对你有帮助的文章能够多多帮忙转发分享。这也是我更新的一大动力。非常感谢。
 
-.. figure:: http://image.python-online.cn/20190511161447.png
+.. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
 
