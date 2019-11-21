@@ -14,7 +14,6 @@ Contents:
    :glob:
    
    preface
-   bookmark
    chapters/*
    leetcode/*
    thanks
