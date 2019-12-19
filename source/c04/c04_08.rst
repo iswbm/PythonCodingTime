@@ -424,6 +424,8 @@ URL相关
    往下新开一行：Ctrl + Enter
    往上新开一行：Ctrl Shift + Enter
 
+   跳转到文件： Ctrl + p
+
 --------------
 
 .. figure:: http://image.python-online.cn/20191117155836.png

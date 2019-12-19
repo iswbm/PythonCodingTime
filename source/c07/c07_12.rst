@@ -12,5 +12,85 @@
 .. code:: shell
 
    yumdownloader --resolve --destdir /home/wangbm/ perl-Sys-Virt.x86_64
+   yumdownloader --resolve --destdir /home/test/ systemd-devel-219-62.el7_6.2.x86_64
 
-yumdownloader –resolve –destdir /root/wangbm/ perl-Sys-Virt.x86_64
+查看一个包的安装时间
+
+::
+
+   [root@ws_compute01 ~]# rpm -qi|grep zlib-1.2.7-17.el7.i686
+   rpm: no arguments given for query
+   [root@ws_compute01 ~]# rpm -qi zlib-1.2.7-17.el7.i686
+   Name        : zlib
+   Version     : 1.2.7
+   Release     : 17.el7
+   Architecture: i686
+   Install Date: Tue 13 Aug 2019 10:22:41 AM CST
+   Group       : System Environment/Libraries
+   Size        : 184798
+   License     : zlib and Boost
+   Signature   : RSA/SHA256, Mon 21 Nov 2016 05:05:03 AM CST, Key ID 24c6a8a7f4a80eb5
+   Source RPM  : zlib-1.2.7-17.el7.src.rpm
+   Build Date  : Sun 06 Nov 2016 02:07:22 AM CST
+   Build Host  : worker1.bsys.centos.org
+   Relocations : (not relocatable)
+   Packager    : CentOS BuildSystem <http://bugs.centos.org>
+   Vendor      : CentOS
+   URL         : http://www.zlib.net/
+   Summary     : The compression and decompression library
+   Description :
+   Zlib is a general-purpose, patent-free, lossless data compression
+   library which is used by many different programs.
+
+查看一个包在系统已配的源里都有哪些版本
+
+::
+
+   [root@ws_compute01 ~]# yum provides 
+   Loaded plugins: fastestmirror, versionlock
+   Loading mirror speeds from cached hostfile
+    * epel: hkg.mirror.rackspace.com
+   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
+   Repo        : ansible-master
+
+
+   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
+   Repo        : libvirt-3.9.0
+
+
+   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
+   Repo        : wsbase
+
+
+   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
+   Repo        : ansible-master
+
+
+   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
+   Repo        : libvirt-4.5.0
+
+
+   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
+   Repo        : wsupdates
+
+
+   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
+   Repo        : @libvirt-4.5.0
+
+yum-utils 使用
+
+.. code:: shell
+
+   $ yum install yum-utils
+
+   # 清理未完成的yum事务
+   $ yum-complete-transaction --cleanup-only
+
+   # 清除可能存在的重复包
+   $ package-cleanup --dupes
+
+   # 清除可能存在的损坏包
+   $ package-cleanup --problems
+   glibc-common-2.17-196.el7_4.2.x86_64 has missing requires of glibc = ('0', '2.17', '196.el7_4.2')
+   # 将上面列出的包卸载
+   $ rpm -e glibc-common-2.17-196.el7_4.2.x86_64

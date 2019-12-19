@@ -793,8 +793,9 @@ sys.path）查找器
 -  https://docs.python.org/zh-cn/3/library/importlib.html#module-importlib.abc
 -  https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p11_load_modules_from_remote_machine_by_hooks.html
 
-|image1|
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.python-online.cn/20191027192949.png
-.. |image1| image:: http://image.python-online.cn/20191028214135.png
 

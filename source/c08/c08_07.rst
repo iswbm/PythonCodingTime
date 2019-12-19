@@ -137,14 +137,14 @@ GPU 作为一种硬件资源，同样需要在模板中配置，配置方式是�
 
 ::
 
-   `nova flavor-key <flavor_id> ``set` `pci_passthrough:``alias``=``'nvidia:1'`
+   nova flavor-key <flavor_id> set pci_passthrough:alias='nvidia:1'
 
 8.7.3.2 镜像配置
 ~~~~~~~~~~~~~~~~
 
 ::
 
-   `openstack image ``set` `<IMG-UUID> --property img_hide_hypervisor_id=``true`
+   openstack image set <IMG-UUID> --property img_hide_hypervisor_id=true
 
 --------------
 

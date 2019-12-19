@@ -36,6 +36,55 @@
    # 批量推送文件
    ansible ws_compute01 -m copy -a 'src=<src> dest=<dest>'
 
+3. 测试机器连接性
+~~~~~~~~~~~~~~~~~
+
+.. code:: shell
+
+   ansible ws_compute01,ws_compute02 -m ping
+
+4. 将命令放在远程主机的后台执行
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+在下架机器时，要做的一个操作是去除ip，若使用shell 或者 command
+模块去删除ip配置，会导致当前连接的断开而失败。这时候可以借鉴异步的思想，将这个脚本放在后台执行。
+
+可以使用 async 和 poll 关键字来实现。
+
+-  async：表示超时时间
+
+-  poll：检测task执行情况的时间间隔
+
+如下设置超时时间为 4
+秒，每2秒检测一次执行结果。若经过两次检测后，脚本仍没有执行完成，就将其挂起在后台，直接进入一步。
+
+::
+
+   - name: remove private ip
+     shell: "sh /tmp/remove_private_ip.sh &"
+     when: host_status is success
+     async: 4
+     poll: 2
+
+所以要实现挂起在后台的效果，你应该在 ``remove_private_ip.sh``
+里加一条语句：\ ``sleep 5``\ ，使脚本的运行时间超时 4 s。
+
+5. 获取节点级变量：Gathering Facts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   ansible all -m setup
+
+6. 获取节点信息
+~~~~~~~~~~~~~~~
+
+保证这个文件有 x 执行权限，并且文件格式要是 unix 而不能是dos
+
+.. code:: shell
+
+   /root/deployment/inventory/get_controller_v1.py --list
+
 快速传送门
 ----------
 

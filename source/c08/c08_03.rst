@@ -498,6 +498,20 @@ CentOS6 创建快照前需要先删除\ ``75-persistent-net-generator.rules``
 
 |image2|
 
+8.3.3 KVM 镜像快照
+------------------
+
+参考链接：https://www.cnblogs.com/sammyliu/p/4468757.html
+
+.. code:: shell
+
+   $ virsh snapshot-create-as ws_controller01 2.2.7 --disk-only --atomic
+   $ virsh blockcommit ws_controller01 hda --active --verbose --pivot
+
+|image3|
+
+|image4|
+
 附录：参考文档
 --------------
 
@@ -521,4 +535,6 @@ CentOS6 创建快照前需要先删除\ ``75-persistent-net-generator.rules``
 .. |image0| image:: https://i.loli.net/2018/01/27/5a6c34714685d.png
 .. |image1| image:: https://i.loli.net/2018/01/27/5a6c34b14c6ec.png
 .. |image2| image:: http://image.python-online.cn/20190827200522.png
+.. |image3| image:: http://image.python-online.cn/20191211174659.png
+.. |image4| image:: http://image.python-online.cn/20191211174956.png
 
