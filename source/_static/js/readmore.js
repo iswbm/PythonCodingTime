@@ -38,10 +38,10 @@ var setIdTimer = setInterval(function () {
             btw = new BTWPlugin();
             btw.init({
                 id: id,
-                blogId: '15406-1570802191948-686',
+                blogId: '15406-1578143418297-890',
                 name: 'Python编程时光',
-                qrcode: 'http://image.python-online.cn/20191011215508.png',
-                keyword: 'more'
+                qrcode: 'http://image.python-online.cn/20200104210733.png',
+                keyword: 'vip'
             });
         }
        
