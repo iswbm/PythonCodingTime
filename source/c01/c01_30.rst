@@ -1,0 +1,417 @@
+1.30 Go语言学习
+===============
+
+1.30.1 为什么学习Go？
+---------------------
+
+编程语言按照开发效、编译与执行效率，可以大致分为三类：
+
+-  执行速度快但是编译速度并不理想的语言（以 C++ 为代表）
+-  编译速度较快但执行效率不佳的语言（以 Java 为代表）
+-  开发难度较低但执行速度一般的动态语言呢？（以 Python 为代表）
+
+三类语言，各有利弊，让人难以选择。
+
+而Go语言，在这 3
+个条件之间做到了最佳的平衡：快速编译，高效执行，易于开发。Go语言支持交叉编译，比如说你可以在运行
+Linux 系统的计算机上开发可以在 Windows
+上运行的应用程序。这是第一门完全支持 UTF-8
+的编程语言，这不仅体现在它可以处理使用 UTF-8
+编码的字符串，就连它的源码文件格式都是使用的 UTF-8
+编码。Go语言做到了真正的国际化！
+
+1.30.2 下载安装 Go语言
+----------------------
+
+下载地址：https://golang.google.cn/dl/
+
+|image0|
+
+下载完成后，直接双击 msi 文件进行安装，我习惯将软件安装在我的 E 盘下的
+``Program Files`` 目录下
+
+|image1|
+
+后面就是一路点击 ``Next`` 即可，直到出现如下界面，安装完成。
+
+|image2|
+
+1.30.3 下载安装 Goland
+----------------------
+
+学习编程语言，使用一个称心的 IDE，可以帮你省去很多麻烦。
+
+开发 Python 项目，我习惯使用 PyCharm，因为已经习惯了 JetBrains
+风格的IDE，可以替我省去很多熟悉新IDE的成本，所以这里我照样使用 JetBrains
+专门为 Go语言开发的IDE：\ ``Goland``\ 。
+
+Goland 下载地址：https://download.jetbrains.com/go/goland-2019.2.3.exe
+
+双击下载下来的 exe 文件，除了选择安装路径，我惯例更换成 E
+盘之外，一路选择 ``Next`` ，
+直到如下界面，根据你的需要全选中（推荐全选）
+
+|image3|
+
+接着一路 ``Next``\ ，直到出现如下界面，安装完成，选择 ``Run Gogland``
+立即运行。
+
+|image4|
+
+此时如果你若没有购买 JetBrains 的激活码，此时是无法使用 Goland 的。
+
+|image5|
+
+为了让我们的学习更加顺畅，这里会教大家使用 破解的方式获得 Goland
+的使用权。
+
+首先下载相关的破解补丁：http://c.biancheng.net/uploads/course/go/Goland_Crack_Sinicization.zip
+
+下载的 zip 包里包含三个文件
+
+|image6|
+
+-  jetbrains-agent.jar：破解补丁
+-  resources_cn.jar：汉化补丁
+-  激活码.txt：激活码
+
+将 jetbrains-agent.jar 拷贝到 你的 Goland
+安装目录的bin文件夹下，我的路径是：E::raw-latex:`\Program `Files:raw-latex:`\JetBrains`:raw-latex:`\GoLand `2019.2.3:raw-latex:`\bin`
+
+然后用编辑器打开这两个文件
+
+|image7|
+
+在最后一行添加如下一行，你要根据自己路径对应修改后面的值
+
+.. code:: shell
+
+   -javaagent:E:\Program Files\JetBrains\GoLand 2019.2.3\bin\jetbrains-agent.jar
+
+接着打开回到你的 Goland 启动界面，点击 ``Activation code``\ ，复制
+``激活码.txt`` 中的激活码，填入再点击 OK
+
+|image8|
+
+此时你的 Goland 已经可以正常使用了，创建我的项目目录，顺便设置好 GOROOT
+。
+
+|image9|
+
+1.30.4 编写HelloWorld
+---------------------
+
+在项目根目录下，创建如下三个文件夹，并在 src 目录下创建一个hello.go
+的文件。
+
+|image10|
+
+上面 Goland 提示我们 GOPATH 还未设置，那我们就先设置一下，点击
+Files->Settings->GOPATH，添加我们的项目目录\ ``F:\Go-Player``
+
+|image11|
+
+接下来还要配置Go运行器
+
+|image12|
+
+按照如下指示进行配置。
+
+|image13|
+
+一切完成之后，就可以点击运行按钮，在控制台我们看到了熟悉的
+``Hello, World!``
+
+|image14|
+
+1.30.5 四种变量声明的方法
+-------------------------
+
+Go
+语言是静态类型语言，由于编译时，编译器会检查变量的类型，所以要求所有的变量都要有明确的类型。
+
+变量在使用前，需要先声明。
+
+声明一般有以下四种方法，其中前面两种同样也可用于定义常量，只需把关键字
+``var`` 变成 ``const`` 即可。
+
+**第一种** ：一行声明一个变量
+
+::
+
+   var name type
+
+其中 var 是关键字（固定不变），name 是变量名，type 是类型。
+
+使用 var ，虽然只指定了类型，但是 Go 会对其进行隐式初始化，比如 string
+类型就初始化为空字符串，int 类型就初始化为0，float 就初始化为
+0.0，bool类型就初始化为false，指针类型就初始化为 nil。
+
+若想声明过程，顺便也初始化
+
+.. code:: go
+
+   var name sting = "wangbm"
+
+从右值（等号右边的值，rvalue）来看，明显是个 string
+类型，因此也可以将其简化为
+
+.. code:: go
+
+   var name = "wangbm"
+
+若你的右值带有小数点，在不指定类型的情况下，编译器会将你的这个变量声明为
+float64，但是很多情况下，我们并不需要这么高的精度（占用的内存空间更大）
+
+这种情况下，推荐指定类型，不要偷懒
+
+.. code:: go
+
+   var rate float32 0.89
+
+**第二种**\ ：多个变量一起声明
+
+声明多个变量，除了可以按照上面写成多行之外，还可以写成下面这样
+
+.. code:: go
+
+   var (
+       name string
+       age int
+       gender string
+   )
+
+**第三种**\ ：声明和初始化一个变量
+
+使用 ``:=``
+（专业术语叫，推导声明写法：编译器会自动根据右值类型推断出左值的对应类型。），可以声明一个变量，并对其进行（显式）初始化。
+
+.. code:: go
+
+   name := "wangbm"
+
+   // 等价于
+
+   var name string
+   name = "wangbm"
+
+但这种方法有两个限制就是，只能用于函数内部
+
+**第四种**\ ：声明和初始化多个变量
+
+.. code:: go
+
+   name, age := "wangbm", 28
+
+以上不管哪种方法，变量/常量都只能声明一次，声明多次，编译会报错。但也有例外，这就要说到一个特殊变量：\ **匿名变量**\ ，也称作占位符，或者空白标识符（在
+Lua 等编程语言里，匿名变量也被叫做哑元变量），用下划线表示。
+
+匿名变量，不占用内存空间，多次声明不会有任何问题，通常用它接收必须接收，但是又不会用到的值。
+
+.. code:: go
+
+   func GetData() (int, int) {
+       return 100, 200
+   }
+   func main(){
+       a, _ := GetData()
+       _, b := GetData()
+       fmt.Println(a, b)
+   }
+
+1.30.6 推荐命名编码规范
+-----------------------
+
+每个语言都有自己特色的命名规范，学习该语言的命名规范，能让你写出来的代码更加易读。
+
+以下内容整理自：\ `Go语言(Golang)编码规范 <https://www.bookstack.cn/books/go-code-convention>`__
+
+命名规范分为以下几点
+
+**1. 文件命名**
+
+文件名应一律使用小写（因为Windows的原因）， 不同单词之间用下划线分割。
+
+应用的主入口应当为 main.go ，或者为应用名的全小写形式，比如 Gogs
+的入口应当为 gogs.go
+
+**2. 常量命名**
+
+-  常量均需使用全部大写字母组成，并使用下划线分词：
+
+   .. code:: go
+
+        const APP_VER = "0.7.0.1110 Beta"
+
+-  如果是枚举类型的常量，需要先创建相应类型：
+
+   .. code:: go
+
+        type Scheme string
+        const (
+            HTTP  Scheme = "http"
+            HTTPS Scheme = "https"
+        )
+
+-  如果模块的功能较为复杂、常量名称容易混淆的情况下，为了更好地区分枚举类型，可以使用完整的前缀：
+
+   .. code:: go
+
+        type PullRequestStatus int
+        const (
+            PULL_REQUEST_STATUS_CONFLICT PullRequestStatus = iota
+            PULL_REQUEST_STATUS_CHECKING
+            PULL_REQUEST_STATUS_MERGEABLE
+        )
+
+**3. 变量命名**
+
+使用驼峰命名法
+
+-  在相对简单的环境（对象数量少、针对性强）中，可以将完整单词简写为单个字母，例如：user写为u
+-  若该变量为 bool 类型，则名称应以 ``Has``, ``Is``, ``Can`` 或
+   ``Allow`` 开头。例如：isExist ，hasConflict 。
+
+-  其他一般情况下首单词全小写，其后各单词首字母大写。例如：numShips 和
+   startDate 。
+-  若变量中有特有名词（以下列出），且变量为私有，则首单司还是使用全小写，如
+   ``apiClient``\ 。
+
+-  若变量中有特有名词（以下列出），那首单词就要变成全大写。例如：APIClient
+
+下面列举了一些常见的特有名词：
+
+::
+
+   // A GonicMapper that contains a list of common initialisms taken from golang/lint
+   var LintGonicMapper = GonicMapper{
+       "API":   true,
+       "ASCII": true,
+       "CPU":   true,
+       "CSS":   true,
+       "DNS":   true,
+       "EOF":   true,
+       "GUID":  true,
+       "HTML":  true,
+       "HTTP":  true,
+       "HTTPS": true,
+       "ID":    true,
+       "IP":    true,
+       "JSON":  true,
+       "LHS":   true,
+       "QPS":   true,
+       "RAM":   true,
+       "RHS":   true,
+       "RPC":   true,
+       "SLA":   true,
+       "SMTP":  true,
+       "SSH":   true,
+       "TLS":   true,
+       "TTL":   true,
+       "UI":    true,
+       "UID":   true,
+       "UUID":  true,
+       "URI":   true,
+       "URL":   true,
+       "UTF8":  true,
+       "VM":    true,
+       "XML":   true,
+       "XSRF":  true,
+       "XSS":   true,
+   }
+
+**接口命名**
+
+使用驼峰命名法，可以用 type alias 来定义大写开头的type 给包外访问。
+
+.. code:: go
+
+   type helloWorld interface {
+       func Hello();
+   }
+
+   type SayHello helloWorld
+
+**注释规范**
+
+单行注释使用 ``//`` ，多行注释使用 ``/* comment */``
+
+.. code:: go
+
+   // go语言
+
+   /*
+   Go 语言
+   Hello, World
+   */
+
+-  所有导出对象都需要注释说明其用途；非导出对象根据情况进行注释。
+
+-  如果对象可数且无明确指定数量的情况下，一律使用单数形式和一般进行时描述；否则使用复数形式。
+
+-  包、函数、方法和类型的注释说明都是一个完整的句子。
+
+-  句子类型的注释首字母均需大写；短语类型的注释首字母需小写。
+
+-  注释的单行长度不能超过 80 个字符。
+
+-  包级别的注释说明，只需要在一个源文件中注释即可，并且放在 package 之前
+
+-  如果是特别复杂的包，可单独创建 doc.go 文件说明
+
+-  类型的定义一般都以单数形式描述：
+
+   .. code:: go
+
+        // Request represents a request to run a command.  type Request struct { ...
+
+-  如果为接口，则一般以以下形式描述：
+
+   .. code:: go
+
+        // FileInfo is the interface that describes a file and is returned by Stat and Lstat.
+        type FileInfo interface { ...
+
+-  函数与方法的注释需以函数或方法的名称作为开头：
+
+   .. code:: go
+
+        // Post returns *BeegoHttpRequest with POST method.
+
+-  如果一句话不足以说明全部问题，则可换行继续进行更加细致的描述：
+
+   .. code:: go
+
+        // Copy copies file from source to target path.
+        // It returns false and error when error occurs in underlying function calls.
+
+-  若函数或方法为判断类型（返回值主要为 ``bool`` 类型），则以
+   ``<name> returns true if`` 开头：
+
+   .. code:: go
+
+        // HasPrefix returns true if name has any string in given slice as prefix.
+        func HasPrefix(name string, prefixes []string) bool { ...
+
+特别注释
+
+-  TODE：提醒维护人员此部分代码待完成
+-  FIXME：提醒维护人员此处有BUG待修复
+-  NOTE：维护人员要关注的一些问题说明
+
+.. |image0| image:: http://image.python-online.cn/20200102220841.png
+.. |image1| image:: http://image.python-online.cn/20200102221555.png
+.. |image2| image:: http://image.python-online.cn/20200102221840.png
+.. |image3| image:: http://image.python-online.cn/20200102221932.png
+.. |image4| image:: http://image.python-online.cn/20200102222123.png
+.. |image5| image:: http://image.python-online.cn/20200102222635.png
+.. |image6| image:: http://image.python-online.cn/20200102222907.png
+.. |image7| image:: http://image.python-online.cn/20200102223113.png
+.. |image8| image:: http://image.python-online.cn/20200102223451.png
+.. |image9| image:: http://image.python-online.cn/20200102223946.png
+.. |image10| image:: http://image.python-online.cn/20200102224417.png
+.. |image11| image:: http://image.python-online.cn/20200102224643.png
+.. |image12| image:: http://image.python-online.cn/20200102225750.png
+.. |image13| image:: http://image.python-online.cn/20200102225349.png
+.. |image14| image:: http://image.python-online.cn/20200102225550.png
+

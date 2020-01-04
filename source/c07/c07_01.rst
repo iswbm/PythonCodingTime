@@ -1882,6 +1882,12 @@ url** 即可。
    yum clean all
    yum makecache
 
+磁盘修复
+
+.. code:: shell
+
+    xfs_repair /dev/vda2 -L
+
 附：推荐阅读
 ------------
 

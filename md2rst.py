@@ -21,7 +21,7 @@ osName = platform.system()
 if (osName == 'Windows'):
     blog_path = 'F:\\VMP-Code\\07. PythonCodingTime\\source'
     index_path = 'F:\\VMP-Code\\07. PythonCodingTime\\README.md'
-elif (osName == 'Mac'):
+elif (osName == 'Darwin'):
     blog_path = '/Users/MING/Github/PythonCodingTime/source'
     index_path = '/Users/MING/Github/PythonCodingTime/README.md'
 
@@ -64,7 +64,6 @@ def convert_md5_to_rst(file):
     convert_cmd = 'pandoc -V mainfont="SimSun" -f markdown -t rst {md_file} -o {rst_file}'.format(
         md_file=filename+'.md', rst_file=filename+'.rst'
     )
-    print(convert_cmd)
     status, output = commands.getstatusoutput(convert_cmd)
     #retcode = subprocess.call(convert_cmd)
     if status != 0:
@@ -106,7 +105,7 @@ def main(index_info):
         os.chdir(folder)
         chapter = os.path.split(folder)[1]
         all_file = os.listdir(folder)
-        all_md_file = [file for file in all_file if file.endswith('md')]
+        all_md_file = sorted([file for file in all_file if file.endswith('md')])
 
         for file in all_md_file:
             line = make_line(chapter, file)

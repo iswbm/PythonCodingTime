@@ -960,26 +960,69 @@ Debug ，而远程调试需要不少前置步骤。
 4.15.33 在Windows上使用 Linux 命令
 ----------------------------------
 
+在 Windows 上的 cmd 命令和 Linux
+命令有不少的差异，比如要列出当前目录下的所有文件，Windows 上是用 ``dir``
+，而 Linux 上则是用 ``ls -l`` 。
+
+对于像我这样熟悉 Linux 的开发者来说，Windows 的 那些 CMD
+命令带来的糟糕体验是无法忍受的。
+
 |image87|
 
-4.15.34 使用 Git 进行版本管理
+在弹出的 Bash 窗口，你可以敲入你想使用的 Linux 命令，是不是舒服多了。
+
+|image88|
+
+4.15.34 快速进行代码封装的技巧
+------------------------------
+
+当一个主函数的代码行数越来越多时，代码的可读性会变得越来越差。通常的做法，是按照功能将代码进行封装成多个函数。
+
+这个过程无非是
+
+1. 在合适的位置定义一个新的函数
+2. 将原有的代码拷贝至该函数中
+3. 并将原的代码替换成该函数的调用
+
+倘若你的重构的工作量不是很大，完全可以手工来完成这些事。
+
+但当你是在重构一个项目代码时，你可能需要一个更高效的封装技巧。
+
+在 PyCharm
+中，提供了多种形式的代码重构快捷方法，大家比较常见的可能是重构变量名：shift+F6，而今天要给大家介绍的是方法的重构，也即代码快速封装的技巧。
+
+假如，我现在有如下一段代码，红框标出的代码放在主函数中，有些不太合适，况且这段代码不能让人一眼就看出它是在做什么事情。如何将其进行封装，对我们理清整个主程序的逻辑会有帮助。
+
+|image89|
+
+选中你要封装的代码，然后按住 ``Ctrl``\ +\ ``Alt``\ +\ ``M``
+后，会跳出如下界面，根据自己的需要，修改函数名，选择参数和返回值
+
+|image90|
+
+一切就绪点击 ``OK``\ ，PyCharm
+会自动在合适的位置为你定义一个函数名，并将你选中的代码放到里面，其中参数名和返回值也都是按照你的要求，效果如下：
+
+|image91|
+
+4.15.35 使用 Git 进行版本管理
 -----------------------------
 
 点击 ``VCS`` -> ``Git`` -> ``Clone``
 
-|image88|
+|image92|
 
 填写git仓库相关信息
 
-|image89|
+|image93|
 
 点击 ``Test``\ ，会尝试连接 git 服务器，中间会让你输入登陆的帐号和密码。
 
-|image90|
+|image94|
 
 点击\ ``OK`` 后，若一切正常会提示连接成功。
 
-|image91|
+|image95|
 
 点击 ``OK`` 后，PyCharm 需要你选择如何打开这个 Git
 仓库目录，是在当前窗口中打开，还是新建一个窗口？
@@ -988,14 +1031,14 @@ Debug ，而远程调试需要不少前置步骤。
 仓库，为了方便，我选择在当前窗口中打开（注意勾选
 ``Add to currently opened projects``\ ）。
 
-|image92|
+|image96|
 
 至此，Git 配置完成。
 
 此时你可以 ``VCS`` -> ``Git``
 查看，发现之前这些灰色不可用的按钮都可以使用了。
 
-|image93|
+|image97|
 
 本篇重在讲解 PyCharm 的配置，关于Git
 的操作，不属于本篇重点，就不再展开讲了。
@@ -1003,11 +1046,11 @@ Debug ，而远程调试需要不少前置步骤。
 若你想对已配置的Git仓库进行修改，可点击 ``File`` -> ``Setting`` ->
 ``Version Control`` 调出如下界面。
 
-|image94|
+|image98|
 
 不得不说 PyCharm 的这 UI 做得可以，随便改了个东西提交一下
 
-|image95|
+|image99|
 
 附录
 ----
@@ -1112,12 +1155,16 @@ Debug ，而远程调试需要不少前置步骤。
 .. |image85| image:: http://image.python-online.cn/20191211211334.png
 .. |image86| image:: http://image.python-online.cn/20191211211626.png
 .. |image87| image:: http://image.python-online.cn/20191211212546.png
-.. |image88| image:: http://image.python-online.cn/20191211100048.png
-.. |image89| image:: http://image.python-online.cn/20191211100657.png
-.. |image90| image:: http://image.python-online.cn/20191211101706.png
-.. |image91| image:: http://image.python-online.cn/20191211101845.png
-.. |image92| image:: http://image.python-online.cn/20191211102501.png
-.. |image93| image:: http://image.python-online.cn/20191211102826.png
-.. |image94| image:: http://image.python-online.cn/20191211133836.png
-.. |image95| image:: http://image.python-online.cn/20191211143510.png
+.. |image88| image:: http://image.python-online.cn/20191222143741.png
+.. |image89| image:: http://image.python-online.cn/20191222141905.png
+.. |image90| image:: http://image.python-online.cn/20191222141955.png
+.. |image91| image:: http://image.python-online.cn/20191222142223.png
+.. |image92| image:: http://image.python-online.cn/20191211100048.png
+.. |image93| image:: http://image.python-online.cn/20191211100657.png
+.. |image94| image:: http://image.python-online.cn/20191211101706.png
+.. |image95| image:: http://image.python-online.cn/20191211101845.png
+.. |image96| image:: http://image.python-online.cn/20191211102501.png
+.. |image97| image:: http://image.python-online.cn/20191211102826.png
+.. |image98| image:: http://image.python-online.cn/20191211133836.png
+.. |image99| image:: http://image.python-online.cn/20191211143510.png
 

@@ -91,6 +91,7 @@
 - 6.6 [自动生成图像视频](http://python-online.cn/zh_CN/latest/c06/c06_06.html)
 
 ## 第七章：运维人生
+- 7.8 [Keepalived 部署文档](http://python-online.cn/zh_CN/latest/c07/C07_08.html)
 - 7.1 [Linux 命令行的艺术](http://python-online.cn/zh_CN/latest/c07/c07_01.html)
 - 7.2 [Zabbix 监控部署文档](http://python-online.cn/zh_CN/latest/c07/c07_02.html)
 - 7.3 [Docker：Hello world](http://python-online.cn/zh_CN/latest/c07/c07_03.html)
@@ -98,7 +99,6 @@
 - 7.5 [Docker：网络通信](http://python-online.cn/zh_CN/latest/c07/c07_05.html)
 - 7.6 [Docker：存储与多主机](http://python-online.cn/zh_CN/latest/c07/c07_06.html)
 - 7.7 [SaltStack 入门指南](http://python-online.cn/zh_CN/latest/c07/c07_07.html)
-- 7.8 [Keepalived 部署文档](http://python-online.cn/zh_CN/latest/c07/c07_08.html)
 - 7.9 [Ansible 入门指南使用手册](http://python-online.cn/zh_CN/latest/c07/c07_09.html)
 - 7.10 [Ansible API 最全使用文档（中文）](http://python-online.cn/zh_CN/latest/c07/c07_10.html)
 - 7.11 [K8S：基础入门](http://python-online.cn/zh_CN/latest/c07/c07_11.html)
