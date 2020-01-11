@@ -1,0 +1,266 @@
+9.5 Go语言数据类型
+==================
+
+int 和 uint
+~~~~~~~~~~~
+
+int 和 uint 的区别就在于一个 ``u``\ ，有 ``u`` 说明是无符号，没有 ``u``
+代表有符号。
+
+**解释这个符号的区别**
+
+以 ``int8`` 和 ``uint8`` 举例，8 代表 8个bit，能表示的数值个数有 2^8 =
+256。
+
+uint8 是无符号，能表示的都是正数，0-255，刚好256个数。
+
+int8
+是有符号，既可以正数，也可以负数，那怎么办？对半分呗，-128-127，也刚好
+256个数。
+
+int8 int16 int32 int64
+这几个类型，都有一个数字，表明了它们能表示的数值个数是固定的。
+
+而 int 没有数值，说明它的大小，是可以变化的，那根据什么变化呢？
+
+-  当你在32位的系统下，int 和 uint 都占用 4个字节，也就是32位。
+-  若你在64位的系统下，int 和 uint 都占用 8个字节，也就是64位。
+
+出于这个原因，在某些场景下，你应当避免使用 int 和 uint
+，而使用更加精确的 int32 和
+int64，比如在二进制传输、读写文件的结构描述（为了保持文件的结构不会受到不同编译目标平台字节长度的影响）
+
+float32 和 float64
+~~~~~~~~~~~~~~~~~~
+
+Go语言提供了两种精度的浮点数 float32 和 float64。
+
+这些浮点数类型的取值范围可以从很微小到很巨大。浮点数取值范围的极限值可以在
+math 包中找到：
+
+-  常量 math.MaxFloat32 表示 float32 能取到的最大数值，大约是 3.4e38；
+-  常量 math.MaxFloat64 表示 float64 能取到的最大数值，大约是 1.8e308；
+-  float32 和 float64 能表示的最小值分别为 1.4e-45 和 4.9e-324。
+
+人家虽然能表示的数值很大，但精度位却没有那么大。
+
+-  float32的精度只能提供大约6个十进制数的精度
+-  float64的精度能提供大约15个十进制数的精度
+
+这里的精度是什么意思呢？
+
+比如 10000018这个数，若是
+6个十进制的精度，表示成科学计数法，意味着小数点后面只有6位数是准确的，就是
+1.0000018 \* 10^7
+
+此时你会发现，刚刚好，满足精度要求，此时我们对其+1或者-1，由于都在精度范围内，计算机算得非常准。
+
+.. code:: go
+
+   import "fmt"
+   var myfloat float32 = 10000018
+   func main()  {
+       fmt.Println("myfloat: ", myfloat)
+       fmt.Println("myfloat: ", myfloat+1)
+   }
+
+输出如下
+
+.. code:: go
+
+   myfloat:  1.0000018e+07
+   myfloat:  1.0000019e+07
+
+但如果给这个数加一位呢？变成
+100000187，同样表示成科学计数法，由于此时还是 6个进制精度，本应该表示成
+1.00000187\* 10^8 的，现在只能写成 1.00000187\* 10^8
+，小数点后面6位是完全准确的，但是从第七位开始要受第八位的影响，有时候会准确，有时候会不准确。
+
+这时你再对其 +1 或者 -1
+，由于已经超出精度范围，计算机开始无能为力，要犯错了。
+
+.. code:: go
+
+   import "fmt"
+   var myfloat float32 = 100000189
+   func main()  {
+       fmt.Println("myfloat: ", myfloat)
+       fmt.Println("myfloat: ", myfloat+1)
+       fmt.Println( myfloat == myfloat +1)
+   }
+
+输出如下
+
+.. code:: go
+
+   myfloat:  1.0000019e+08
+   myfloat:  1.0000019e+08
+   true
+
+由于精度的问题，就会出现这种很怪异的现象，\ ``myfloat == myfloat +1``
+会返回 ``true``
+
+布尔类型
+~~~~~~~~
+
+关于布尔值，其实没什么说的，无非就两个值。只是这两个值，在不同的语言里可能不同。
+
+在 Python 中，真值用 True 表示，与 1 相等，假值用 False 表示，与 0 相等
+
+.. code:: python
+
+   >>> True == 1
+   True
+   >>> False == 0
+   True
+   >>> 
+
+而在 Go 中，真值用 true 表示，不但不与 1
+相等，并且更加严格，不同类型无法进行比较，而假值用 false 表示，同样与 0
+无法比较。如下图所示，Goland 直接波浪线提示类型不匹配，不能比较。
+
+|image0|
+
+在 Python 中使用 not 对布尔取值，而 Go 中使用 ``!`` 符号
+
+.. code:: go
+
+   import "fmt"
+
+   var male bool = true
+   func main()  {
+       fmt.Println( !male == false)
+   }
+
+   // output: true
+
+一个 if 判断语句，有可能不只一个判断条件，在 Python 中是使用 ``and`` 和
+``or`` 来执行逻辑运算符，
+
+.. code:: python
+
+   >>> age = 15
+   >>> gender = "male"
+   >>> 
+   >>> gender == "male" and age >18
+   False
+
+而在 Go 语言中，则使用 ``&&`` 和 ``||`` 。
+
+.. code:: go
+
+   import "fmt"
+
+   var age int = 15
+   var gender string = "male"
+   func main()  {
+       fmt.Println( gender == "male" && age > 18)
+   }
+
+   // output: false
+
+字符串
+~~~~~~
+
+一个字符串是一个不可改变的字节序列，字符串可以包含任意的数据，但是通常是用来包含可读的文本，字符串是
+UTF-8 字符的一个序列（当字符为 ASCII 码表上的字符时则占用 1
+个字节，其它字符根据需要占用 2-4 个字节）。
+
+.. code:: python
+
+   import "fmt"
+
+   var gender string = "male"
+   func main()  {
+       fmt.Println(gender[0])
+       fmt.Println(string(gender[0]))
+   }
+
+输出如下，其中 109 是 m 对应的 ASCII 编码，若要将其转成 m，直接使用
+string 函数即可
+
+.. code:: go
+
+   109
+   m
+
+|image1|
+
+用下标索引的方式取值
+
+-  取第一个字节：str[0]
+-  取第 i 个字节：str[i-1]
+-  取最后一个字节：str(len(str)-1)，和 Python 不同，Python 可以用 [-1]
+   表求最后一个字节
+
+**字符串拼接**\ ，直接使用 ``+`` 即可
+
+.. code:: go
+
+   import "fmt"
+
+   var str1 string = "Life " + "is "
+
+   func main()  {
+       str2 := str1 + "Short, "
+       str2 += "I Use Go"
+       fmt.Println(str2)
+   }
+
+   // output: Life is Short, I Use Go
+
+于在Go语言中，使用双引号书写字符串的方式是字符串常见表达方式之一，但是其有一个缺点，不能用来表示多行字符串，在
+Python 中 可以使用 三个绰号来表示多行，而在 Go 比较特殊，它使用 反引号
+
+.. code:: go
+
+   var slogan string = `
+   Life is Short
+   I Use Go.
+   `
+
+   func main()  {
+       fmt.Println(slogan)
+   }
+
+输出如下
+
+.. code:: go
+
+   Life is Short
+   I Use Go.
+
+字符
+~~~~
+
+字符串是由一个一个的字符组成的。比如
+``hello``\ 由5个英文字符组成，\ ``中国`` 由两个中文字符组成。
+
+但是不同的是，有的字符占用一个字节，有的占用多个字节。
+
+因此在 Go 语言中，字符可以分为两种：
+
+-  占用一个字节，叫做 byte ，或者 int8 类型，代表 ASCII
+   的一个字符，都是占用8个bit。
+
+   如下代码，三种表示方法，打印后，都是输出同一个字母：m
+
+   .. code:: go
+
+      import "fmt"
+
+      func main()  {
+        var a byte = 109     // 10进制
+        var b byte = '\155'  // 8进制，这时不能使用双引号,\ 是固定写法
+        var c byte = '\x6d'  // 16 进制，这时也不能使用双引号，\x 是固定写法
+        fmt.Printf("%c \n", a)
+        fmt.Printf("%c \n", b)
+        fmt.Printf("%c \n", c)
+      }
+
+-  占用多个字节，叫做 rune 类型，代表一个 UTF-8 字符，由于 UTF-8
+   长度不固定，所以它占用的大小也不固定。
+
+.. |image0| image:: http://image.python-online.cn/20200106201856.png
+.. |image1| image:: http://image.python-online.cn/20200106210502.png
+

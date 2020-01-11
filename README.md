@@ -28,8 +28,7 @@
 - 1.26 [C语言基础的学习](http://python-online.cn/zh_CN/latest/c01/c01_26.html)
 - 1.27 [全面学习 Python 包：包的构建与分发](http://python-online.cn/zh_CN/latest/c01/c01_27.html)
 - 1.27 [如何阅读 CPython源码？](http://python-online.cn/zh_CN/latest/c01/c01_29.html)
-- 1.30 [Go语言学习](http://python-online.cn/zh_CN/latest/c01/c01_30.html)
-- 1.31 [学习编程的几大网站](http://python-online.cn/zh_CN/latest/c01/c01_31.html)
+- 1.30 [学习编程的几大网站](http://python-online.cn/zh_CN/latest/c01/c01_30.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python-online.cn/zh_CN/latest/c02/c02_01.html)
@@ -124,6 +123,13 @@
 - 8.13 [网络知识必知必会](http://python-online.cn/zh_CN/latest/c08/c08_13.html)
 - 8.14 [支持 IPv6以及多运营商](http://python-online.cn/zh_CN/latest/c08/c08_14.html)
 - 8.15 [Neutron 源码解读](http://python-online.cn/zh_CN/latest/c08/c08_15.html)
+
+## 第九章：Go 语言之路
+- 9.1 [开发环境的搭建（Goland和VSCode）](http://python-online.cn/zh_CN/latest/c09/c09_01.html)
+- 9.3 [五种变量创建的方法](http://python-online.cn/zh_CN/latest/c09/c09_02.html)
+- 9.3 [理解语句块与作用域](http://python-online.cn/zh_CN/latest/c09/c09_03.html)
+- 9.4 [Go语言命名编码规范](http://python-online.cn/zh_CN/latest/c09/c09_04.html)
+- 9.5 [Go语言数据类型](http://python-online.cn/zh_CN/latest/c09/c09_05.html)
 
 
 ---

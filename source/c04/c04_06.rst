@@ -324,6 +324,17 @@ add/commit 前撤销对文件的修改
 
 |image2|
 
+3.6 回退远程提交
+~~~~~~~~~~~~~~~~
+
+.. code:: shell
+
+   # 可能需要先回退本地，再执行第二条命令，有可能不用，需要再试
+   $ git reset --hard commit_id
+
+   # 回退一个版本
+   $ git push origin HEAD --force
+
 四、分支管理
 ------------
 

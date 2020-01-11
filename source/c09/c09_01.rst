@@ -1,0 +1,271 @@
+9.1 开发环境的搭建（Goland和VSCode）
+====================================
+
+9.1.1 为什么学习Go？
+--------------------
+
+一直很喜欢 Python 的我，为什么突然学起了Go呢？
+
+之前有想通过 Python 转行机算机的同学，应该深有体会，你只学了 Python
+就想出去找一份比较不错的工作，其实是比较难的。
+
+以前经常能看到有人盘点，有哪几个国外的大型网站是使用 Python
+开发的，当小白看到这个榜单的时候，也许会想原来 Python
+做网站也可以这么牛。爱了。
+
+可是你可曾听到过有人盘点有哪些网站是用 Java
+开发的？没有吧？印证了那句话：“**一个人越炫耀什么,说明内心越缺少什么**”。
+
+有不少人都跟我说过，现在很多公司都更倾向于用 Go
+来开发项目。然后好奇去了解一番，发现确实很优秀。
+
+如果按照开发效率、编译与执行效率，编程语言可以大致分为三类：
+
+1. 执行速度快但是编译速度并不理想的语言（以 C++ 为代表）
+2. 编译速度较快但执行效率不佳的语言（以 Java 为代表）
+3. 开发难度较低但执行速度一般的动态语言呢？（以 Python 为代表）
+
+三类语言，各有利弊，让人难以选择。
+
+而Go语言，优秀到什么程度？
+
+它在这 3
+个条件之间做到了最佳的平衡：快速编译，高效执行，易于开发。Go语言支持交叉编译，比如说你可以在运行
+Linux 系统的计算机上开发可以在 Windows 上运行的应用程序。
+
+这是第一门完全支持 UTF-8 的编程语言，这不仅体现在它可以处理使用 UTF-8
+编码的字符串，就连它的源码文件格式都是使用的 UTF-8
+编码。Go语言做到了真正的国际化！
+
+9.1.2 下载安装 Go语言
+---------------------
+
+下载地址：https://golang.google.cn/dl/
+
+|image0|
+
+下载完成后，直接双击 msi 文件进行安装，我习惯将软件安装在我的 E 盘下的
+``Program Files`` 目录下
+
+|image1|
+
+后面就是一路点击 ``Next`` 即可，直到出现如下界面，安装完成。
+
+|image2|
+
+9.1.3 安装并破解 Goland
+-----------------------
+
+学习编程语言，使用一个称心的 IDE，可以帮你省去很多麻烦。
+
+开发 Python 项目，我习惯使用 PyCharm，因为已经习惯了 JetBrains
+风格的IDE，可以替我省去很多熟悉新IDE的成本，所以这里我照样使用 JetBrains
+专门为 Go语言开发的IDE：\ ``Goland``\ 。
+
+Goland 下载地址：https://download.jetbrains.com/go/goland-2019.2.3.exe
+
+双击下载下来的 exe 文件，除了选择安装路径，我惯例更换成 E
+盘之外，一路选择 ``Next`` ，
+直到如下界面，根据你的需要全选中（推荐全选）
+
+|image3|
+
+接着一路 ``Next``\ ，直到出现如下界面，安装完成，选择 ``Run Gogland``
+立即运行。
+
+|image4|
+
+此时如果你若没有购买 JetBrains 的激活码，此时是无法使用 Goland 的。
+
+|image5|
+
+为了让我们的学习更加顺畅，这里会教大家使用 破解的方式获得 Goland
+的使用权。
+
+首先下载相关的破解补丁：http://c.biancheng.net/uploads/course/go/Goland_Crack_Sinicization.zip
+
+下载的 zip 包里包含三个文件
+
+|image6|
+
+-  jetbrains-agent.jar：破解补丁
+-  resources_cn.jar：汉化补丁
+-  激活码.txt：激活码
+
+将 jetbrains-agent.jar 拷贝到 你的 Goland
+安装目录的bin文件夹下，我的路径是：E::raw-latex:`\Program `Files:raw-latex:`\JetBrains`:raw-latex:`\GoLand `2019.2.3:raw-latex:`\bin`
+
+然后用编辑器打开这两个文件
+
+|image7|
+
+在最后一行添加如下一行，你要根据自己路径对应修改后面的值
+
+.. code:: shell
+
+   -javaagent:E:\Program Files\JetBrains\GoLand 2019.2.3\bin\jetbrains-agent.jar
+
+接着打开回到你的 Goland 启动界面，点击 ``Activation code``\ ，复制
+``激活码.txt`` 中的激活码，填入再点击 OK
+
+|image8|
+
+此时你的 Goland 已经可以正常使用了，创建我的项目目录，顺便设置好 GOROOT
+。
+
+|image9|
+
+9.1.4 配置 VS Code 环境
+-----------------------
+
+提前设置用户级的环境变量
+
+::
+
+   # 用户级
+   GOPATH = F:\Go-Player
+   PATH = %GOPATH%\bin  # 以追加的方式
+
+昨天评论区有人问，GOPATH 和 GOROOT 是什么？为什么需要设置？回想一下 你学
+Python 的话，安装 Python
+解释器的时候，是不是也要设置环境变量？这里也是类似。
+
+GOROOT ：在GO语言中表示的是
+Go语言编译、工具、标准库等的安装路径，通过它可以告诉系统你的 go.exe
+是放在哪里，不设置的话，你后面执行 ``go get`` 、\ ``go install``
+的时候，系统就不认识它了。
+
+而 GOPATH环境变量则表示
+Go的工作目录，这个目录指定了需要从哪个地方寻找GO的包、可执行程序等，这个目录可以是多个目录表示。这里我设置成我的工作空间（目录你可以自己定）
+：\ ``F:\Go-Player``\ ，如果不设置的话 ，默认是在你的用户目录下的 go
+文件夹。
+
+这时要再说一点，GO 项目中，一般来说它的工作目录结构是这样的：
+
+-  bin目录：包含了可执行程序，注意是可执行的，不需要解释执行。
+
+-  pkg目录：包含了使用的包或者说库。
+
+-  src目录：里面包含了go的代码源文件，其中仍按包的不同进行组织。
+
+所以后面我的创建的GO工作目录，也是按照这个标准来，先说明一下。
+
+接下来，要开始配置 VS Code 环境。
+
+打开你的 VS Code软件，先确认你设置的环境变量已经生效，点击 ``Terminal``
+-> ``New Terminal``\ ，使用 cmd 命令查看环境变量。
+
+|image10|
+
+如上图所求，我的环境变量是OK的，如果你的输出是指向你的用户目录：\ ``%USERPROFILE%\go``
+建议你不要折腾（因为我无论重启多少次 VS
+Code，其记录的GOPATH始终指向%USERPROFILE%:raw-latex:`\go`），
+直接重启你的电脑。
+
+好了之后，我们要从 github
+上下载两个仓库，之所以要手动下载，是因为有墙的存在，在线安装的话，很多插件你会下载失败。
+
+创建目录 ``src/goland.org/x/``\ ，并进入此目录，执行命令
+
+.. code:: shell
+
+   $ git clone https://github.com/golang/tools.git
+   $ git clone https://github.com/golang/lint.git
+
+点击 ``File`` - ``Open Folder`` 安装两个插件：
+
+第一个是：Go 语言的扩展插件
+
+|image11|
+
+第二个是：Code Runner，让你的 VS Code 能够编译运行 Go 的程序。
+
+|image12|
+
+随便点开一个 go 文件，在你的右下角会提示要你安装一些工具，点击
+``Install All``
+
+|image13|
+
+然后你在 OUTPUT 就能看到安装进度
+
+|image14|
+
+查看 OUTPUT 会有一些安装失败的信息。
+
+|image15|
+
+把这两条单独拿出来执行吧（记住执行的话，要切回 %GOPATH%），先使用
+``go get`` 下载，再使用 ``go install``
+安装（若你想安装其他的包，其实也是一样的逻辑）。
+
+|image16|
+
+安装的 exe 文件会放在 %GOPATH%/bin 下，也就是 ``F:\Go-Player\bin``
+
+|image17|
+
+而此的 src 目录结构是这样的
+
+|image18|
+
+到这时环境配置完成，编写 HelloWorld，并运行查看输出，一切完成。
+
+|image19|
+
+9.1.5 编写HelloWorld
+--------------------
+
+在项目根目录下，创建如下三个文件夹，并在 src 目录下创建一个hello.go
+的文件。
+
+|image20|
+
+上面 Goland 提示我们 GOPATH 还未设置，那我们就先设置一下，点击
+Files->Settings->GOPATH，添加我们的项目目录\ ``F:\Go-Player``
+
+|image21|
+
+接下来还要配置Go运行器
+
+|image22|
+
+按照如下指示进行配置。
+
+|image23|
+
+一切完成之后，就可以点击运行按钮，在控制台我们看到了熟悉的
+``Hello, World!``
+
+|image24|
+
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
+
+.. |image0| image:: http://image.python-online.cn/20200102220841.png
+.. |image1| image:: http://image.python-online.cn/20200102221555.png
+.. |image2| image:: http://image.python-online.cn/20200102221840.png
+.. |image3| image:: http://image.python-online.cn/20200102221932.png
+.. |image4| image:: http://image.python-online.cn/20200102222123.png
+.. |image5| image:: http://image.python-online.cn/20200102222635.png
+.. |image6| image:: http://image.python-online.cn/20200102222907.png
+.. |image7| image:: http://image.python-online.cn/20200102223113.png
+.. |image8| image:: http://image.python-online.cn/20200102223451.png
+.. |image9| image:: http://image.python-online.cn/20200102223946.png
+.. |image10| image:: http://image.python-online.cn/20200109210630.png
+.. |image11| image:: http://image.python-online.cn/20200108202934.png
+.. |image12| image:: http://image.python-online.cn/20200109153948.png
+.. |image13| image:: http://image.python-online.cn/20200109210654.png
+.. |image14| image:: http://image.python-online.cn/20200109211543.png
+.. |image15| image:: http://image.python-online.cn/20200109212824.png
+.. |image16| image:: http://image.python-online.cn/20200109213032.png
+.. |image17| image:: http://image.python-online.cn/20200109213056.png
+.. |image18| image:: http://image.python-online.cn/20200109214117.png
+.. |image19| image:: http://image.python-online.cn/20200109154657.png
+.. |image20| image:: http://image.python-online.cn/20200102224417.png
+.. |image21| image:: http://image.python-online.cn/20200102224643.png
+.. |image22| image:: http://image.python-online.cn/20200102225750.png
+.. |image23| image:: http://image.python-online.cn/20200102225349.png
+.. |image24| image:: http://image.python-online.cn/20200102225550.png
+

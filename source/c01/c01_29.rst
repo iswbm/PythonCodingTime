@@ -4,5 +4,3 @@
 参考学习地址：https://realpython.com/cpython-source-code-guide/
 
 基于 Python 3.6 的源码分析：https://he11olx.com/
-
-
