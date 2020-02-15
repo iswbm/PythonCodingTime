@@ -26,7 +26,7 @@
 4.3.1 成品展示
 --------------
 
-以我的博客(\ ``python-online.cn``)为例，先给大家展示一下。
+以我的博客(``python-online.cn``)为例，先给大家展示一下。
 
 这是首页。显示了你所有的文章索引。 |image0|
 
@@ -481,6 +481,7 @@ Python 3.x ，所以这里的代码也要对应修改。
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20190511160523.png
 .. |image1| image:: http://image.python-online.cn/20190511161056.png
@@ -500,4 +501,3 @@ Python 3.x ，所以这里的代码也要对应修改。
 .. |image15| image:: http://image.python-online.cn/20191016205653.png
 .. |image16| image:: http://image.python-online.cn/20191015225652.png
 .. |image17| image:: http://image.python-online.cn/20191016211012.png
-

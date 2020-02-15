@@ -251,10 +251,10 @@
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |课程大纲| image:: https://i.loli.net/2018/05/27/5b0a1523a0730.png
 .. |image1| image:: https://i.loli.net/2018/05/08/5af1781dbad7c.jpg
 .. |image2| image:: https://i.loli.net/2018/05/08/5af1781f05c29.jpg
 .. |image3| image:: http://image.python-online.cn/20190112205155.png
 .. |image4| image:: http://image.python-online.cn/20190112204930.png
-

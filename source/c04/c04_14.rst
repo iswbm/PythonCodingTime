@@ -171,6 +171,7 @@ DjangoWebBlog 是我们的项目目录，进入这个目录下创建虚拟环境
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/Fk6WZ2xbqg2DM3AvnYCpsiKQ4xOn
 .. |image1| image:: http://image.python-online.cn/FjuJ8yZsgjkzVuBRZHxK1ZnnzaEX
@@ -180,4 +181,3 @@ DjangoWebBlog 是我们的项目目录，进入这个目录下创建虚拟环境
 .. |image5| image:: http://image.python-online.cn/20190612211925.png
 .. |image6| image:: http://image.python-online.cn/20190614000336.png
 .. |image7| image:: http://image.python-online.cn/20190612215924.png
-

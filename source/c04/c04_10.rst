@@ -298,7 +298,7 @@ limit子句：限制返回数据的量。
 ~~~~~~~~~~~~
 
 ``自然连接: natural join`` ``自然连接``, 就是\ ``自动匹配``\ 连接条件:
-系统以字段名字作为匹配模式(\ **同名字段就作为条件,
+系统以字段名字作为匹配模式(**同名字段就作为条件,
 多个同名字段都作为条件**).
 
 自然连接: 可以分为自然内连接和自然外连接.
@@ -539,6 +539,7 @@ limit子句：限制返回数据的量。
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: https://ooo.0o0.ooo/2017/08/26/59a1429722061.png
 .. |image1| image:: https://i.loli.net/2017/08/27/59a2307e7b6bc.png
@@ -564,4 +565,3 @@ limit子句：限制返回数据的量。
 .. |image21| image:: https://i.loli.net/2017/08/27/59a2756c66952.png
 .. |image22| image:: https://i.loli.net/2017/08/27/59a27651cd78e.png
 .. |image23| image:: https://i.loli.net/2017/08/27/59a2784f6562d.png
-

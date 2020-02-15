@@ -272,7 +272,7 @@ aggregate管理
 1.2 virsh命令
 ~~~~~~~~~~~~~
 
-::
+.. code:: shell
 
    # 查看虚拟机的网卡信息
    $ virsh domiflist VM1
@@ -293,7 +293,7 @@ aggregate管理
    # 修改虚拟机密码，需要虚拟机内部安装 qga：qemu-guest-agent
    virsh set-user-password instance-00000444 root "root12#$"
 
-热增加网卡:\ ``virsh attach-device ws_controller01 ./tmp.xml --persistent --live``
+热增加网卡:``virsh attach-device ws_controller01 ./tmp.xml --persistent --live``
 
 .. code:: xml
 
@@ -305,6 +305,12 @@ aggregate管理
         <model type='virtio'/>
         <alias name='net1'/>
    </interface>
+
+热去除带宽限速
+
+.. code:: shell
+
+   $ virsh domiftune ws_controller01 vnet4 --inbound 0,0,0 --outbound 0,0,0 --config --live
 
 压缩镜像
 
@@ -323,6 +329,12 @@ aggregate管理
    echo 'export TEMP=/data/tmp' >> /etc/profile
    echo 'export TMPDIR=/data/tmp' >> /etc/profile
    source /etc/profile
+
+在线查看虚拟机的messages日志
+
+.. code:: shell
+
+   virt-log -d ws_controller01
 
 1.2 LVM管理
 ~~~~~~~~~~~
@@ -435,3 +447,4 @@ aggregate管理
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！

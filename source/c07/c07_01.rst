@@ -381,6 +381,19 @@ more、cat file \| head等。
 
 【注意】：以上对源文件都不做修改，若要修改，要加上\ ``-i``
 
+替换换行符
+
+.. code:: shell
+
+   # 将换行符换成逗号
+   $ cat a.txt
+   1
+   2
+   3
+   3
+   $ sed ":a;N;s/\n/,/g;ta" a.txt
+   1,2,3,4
+
 1.4 文件重构
 ~~~~~~~~~~~~
 
@@ -1898,8 +1911,8 @@ url** 即可。
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/17-9-20/47469030.jpg
 .. |image1| image:: http://image.python-online.cn/20190705182629.png
 .. |image2| image:: http://image.python-online.cn/17-10-15/97911325.jpg
-

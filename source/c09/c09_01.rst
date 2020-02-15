@@ -1,8 +1,8 @@
 9.1 开发环境的搭建（Goland和VSCode）
 ====================================
 
-9.1.1 为什么学习Go？
---------------------
+1. 为什么学习Go？
+-----------------
 
 一直很喜欢 Python 的我，为什么突然学起了Go呢？
 
@@ -37,8 +37,8 @@ Linux 系统的计算机上开发可以在 Windows 上运行的应用程序。
 编码的字符串，就连它的源码文件格式都是使用的 UTF-8
 编码。Go语言做到了真正的国际化！
 
-9.1.2 下载安装 Go语言
----------------------
+2. 下载安装 Go语言
+------------------
 
 下载地址：https://golang.google.cn/dl/
 
@@ -53,8 +53,8 @@ Linux 系统的计算机上开发可以在 Windows 上运行的应用程序。
 
 |image2|
 
-9.1.3 安装并破解 Goland
------------------------
+3. 配置 Goland 环境
+-------------------
 
 学习编程语言，使用一个称心的 IDE，可以帮你省去很多麻烦。
 
@@ -93,7 +93,7 @@ Goland 下载地址：https://download.jetbrains.com/go/goland-2019.2.3.exe
 -  激活码.txt：激活码
 
 将 jetbrains-agent.jar 拷贝到 你的 Goland
-安装目录的bin文件夹下，我的路径是：E::raw-latex:`\Program `Files:raw-latex:`\JetBrains`:raw-latex:`\GoLand `2019.2.3:raw-latex:`\bin`
+安装目录的bin文件夹下，我的路径是：E::raw-latex:`\Program `Files:raw-latex:`\JetBrains`:raw-latex:`\GoLand 2019.2`.3:raw-latex:`\bin`
 
 然后用编辑器打开这两个文件
 
@@ -115,14 +115,51 @@ Goland 下载地址：https://download.jetbrains.com/go/goland-2019.2.3.exe
 
 |image9|
 
-9.1.4 配置 VS Code 环境
------------------------
+创建好Project后，再点击
+Files->Settings->GOPATH，添加我们的项目目录\ ``F:\Go-Player``
+
+|image10|
+
+随便点击一个go文件，就能在下图箭头处看到配置入口，点击进入配置一下
+Go运行器。
+
+|image11|
+
+按照如下指示进行配置。
+
+|image12|
+
+去掉参数提示
+
+|image13|
+
+设置 goproxy
+
+|image14|
+
+设置 goimports（自动格式化插件），如果 你之前 没有安装 ，会提示你点击
+``yes`` 下载安装 。
+
+|image15|
+
+至此，环境配置完成。
+
+在项目根目录下，创建如下三个文件夹，并在 src 目录下创建一个hello.go
+的文件。
+
+|image16|
+
+点击运行按钮，在控制台我们看到了熟悉的 ``Hello, World!``
+
+|image17|
+
+4. 配置 VS Code 环境
+--------------------
 
 提前设置用户级的环境变量
 
 ::
 
-   # 用户级
    GOPATH = F:\Go-Player
    PATH = %GOPATH%\bin  # 以追加的方式
 
@@ -155,7 +192,7 @@ Go的工作目录，这个目录指定了需要从哪个地方寻找GO的包、�
 打开你的 VS Code软件，先确认你设置的环境变量已经生效，点击 ``Terminal``
 -> ``New Terminal``\ ，使用 cmd 命令查看环境变量。
 
-|image10|
+|image18|
 
 如上图所求，我的环境变量是OK的，如果你的输出是指向你的用户目录：\ ``%USERPROFILE%\go``
 建议你不要折腾（因为我无论重启多少次 VS
@@ -176,72 +213,119 @@ Code，其记录的GOPATH始终指向%USERPROFILE%:raw-latex:`\go`），
 
 第一个是：Go 语言的扩展插件
 
-|image11|
+|image19|
 
 第二个是：Code Runner，让你的 VS Code 能够编译运行 Go 的程序。
 
-|image12|
+|image20|
 
 随便点开一个 go 文件，在你的右下角会提示要你安装一些工具，点击
 ``Install All``
 
-|image13|
+|image21|
 
 然后你在 OUTPUT 就能看到安装进度
 
-|image14|
+|image22|
 
 查看 OUTPUT 会有一些安装失败的信息。
 
-|image15|
+|image23|
 
 把这两条单独拿出来执行吧（记住执行的话，要切回 %GOPATH%），先使用
 ``go get`` 下载，再使用 ``go install``
 安装（若你想安装其他的包，其实也是一样的逻辑）。
 
-|image16|
+|image24|
 
 安装的 exe 文件会放在 %GOPATH%/bin 下，也就是 ``F:\Go-Player\bin``
 
-|image17|
+|image25|
 
 而此的 src 目录结构是这样的
 
-|image18|
+|image26|
 
 到这时环境配置完成，编写 HelloWorld，并运行查看输出，一切完成。
 
-|image19|
+|image27|
 
-9.1.5 编写HelloWorld
---------------------
+5. 配置环境变量
+---------------
 
-在项目根目录下，创建如下三个文件夹，并在 src 目录下创建一个hello.go
-的文件。
+当你在终端使用 ``go env`` 的时候，会打印出go 相关的所有环境变量
 
-|image20|
+.. code:: shell
 
-上面 Goland 提示我们 GOPATH 还未设置，那我们就先设置一下，点击
-Files->Settings->GOPATH，添加我们的项目目录\ ``F:\Go-Player``
+   $ go env
+   set GO111MODULE=
+   set GOARCH=amd64
+   set GOBIN=
+   set GOCACHE=C:\Users\wangbm\AppData\Local\go-build
+   set GOENV=C:\Users\wangbm\AppData\Roaming\go\env
+   set GOEXE=.exe
+   set GOFLAGS=
+   set GOHOSTARCH=amd64
+   set GOHOSTOS=windows
+   set GONOPROXY=
+   set GONOSUMDB=
+   set GOOS=windows
+   set GOPATH=E:\MING-Code\GoPlayer
+   set GOPRIVATE=
+   set GOPROXY=https://proxy.golang.org,direct
+   set GOROOT=D:\Program Files (x86)\Go-1.13.6
+   set GOSUMDB=sum.golang.org
+   set GOTMPDIR=
+   set GOTOOLDIR=D:\Program Files (x86)\Go-1.13.6\pkg\tool\windows_amd64
+   set GCCGO=gccgo
+   set AR=ar
+   set CC=gcc
+   set CXX=g++
+   set CGO_ENABLED=1
+   set GOMOD=
+   set CGO_CFLAGS=-g -O2
+   set CGO_CPPFLAGS=
+   set CGO_CXXFLAGS=-g -O2
+   set CGO_FFLAGS=-g -O2
+   set CGO_LDFLAGS=-g -O2
+   set PKG_CONFIG=pkg-config
 
-|image21|
+想查看几个特定的环境变量就加在 ``go env`` 后面
 
-接下来还要配置Go运行器
+.. code:: shell
 
-|image22|
+   $ go env GOPATH
+   E:\MING-Code\GoPlayer
+   $ go env GOROOT
+   D:\Program Files (x86)\Go-1.13.6
+   $ go env GOPROXY
+   https://goproxy.cn,direct
 
-按照如下指示进行配置。
+其中有几个比较重要的，我这里会讲一下。
 
-|image23|
+``GOPATH``\ ：
 
-一切完成之后，就可以点击运行按钮，在控制台我们看到了熟悉的
-``Hello, World!``
+``GOROOT``\ ：
 
-|image24|
+``GOPROXY``\ ：你安装下载包的时候去哪里下载，一条命令即可，更多详情可以查看
+`Github ·
+GoProxy <https://github.com/goproxy/goproxy.cn/blob/master/README.zh-CN.md>`__
+
+.. code:: shell
+
+   $ go env -w GOPROXY=https://goproxy.cn,direct
+
+``GO111MODULE``\ ：on、 off或
+auto，必须为小写，不能为为true或false，也不能为1或0。这里推荐设置为on
+
+.. code:: shell
+
+   $ go env -w GO111MODULE=on
 
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20200102220841.png
 .. |image1| image:: http://image.python-online.cn/20200102221555.png
@@ -253,19 +337,21 @@ Files->Settings->GOPATH，添加我们的项目目录\ ``F:\Go-Player``
 .. |image7| image:: http://image.python-online.cn/20200102223113.png
 .. |image8| image:: http://image.python-online.cn/20200102223451.png
 .. |image9| image:: http://image.python-online.cn/20200102223946.png
-.. |image10| image:: http://image.python-online.cn/20200109210630.png
-.. |image11| image:: http://image.python-online.cn/20200108202934.png
-.. |image12| image:: http://image.python-online.cn/20200109153948.png
-.. |image13| image:: http://image.python-online.cn/20200109210654.png
-.. |image14| image:: http://image.python-online.cn/20200109211543.png
-.. |image15| image:: http://image.python-online.cn/20200109212824.png
-.. |image16| image:: http://image.python-online.cn/20200109213032.png
-.. |image17| image:: http://image.python-online.cn/20200109213056.png
-.. |image18| image:: http://image.python-online.cn/20200109214117.png
-.. |image19| image:: http://image.python-online.cn/20200109154657.png
-.. |image20| image:: http://image.python-online.cn/20200102224417.png
-.. |image21| image:: http://image.python-online.cn/20200102224643.png
-.. |image22| image:: http://image.python-online.cn/20200102225750.png
-.. |image23| image:: http://image.python-online.cn/20200102225349.png
-.. |image24| image:: http://image.python-online.cn/20200102225550.png
-
+.. |image10| image:: http://image.python-online.cn/20200102224643.png
+.. |image11| image:: http://image.python-online.cn/20200102225750.png
+.. |image12| image:: http://image.python-online.cn/20200102225349.png
+.. |image13| image:: http://image.python-online.cn/20200127192147.png
+.. |image14| image:: http://image.python-online.cn/20200127192512.png
+.. |image15| image:: http://image.python-online.cn/20200127192748.png
+.. |image16| image:: http://image.python-online.cn/20200102224417.png
+.. |image17| image:: http://image.python-online.cn/20200102225550.png
+.. |image18| image:: http://image.python-online.cn/20200109210630.png
+.. |image19| image:: http://image.python-online.cn/20200108202934.png
+.. |image20| image:: http://image.python-online.cn/20200109153948.png
+.. |image21| image:: http://image.python-online.cn/20200109210654.png
+.. |image22| image:: http://image.python-online.cn/20200109211543.png
+.. |image23| image:: http://image.python-online.cn/20200109212824.png
+.. |image24| image:: http://image.python-online.cn/20200109213032.png
+.. |image25| image:: http://image.python-online.cn/20200109213056.png
+.. |image26| image:: http://image.python-online.cn/20200109214117.png
+.. |image27| image:: http://image.python-online.cn/20200109154657.png

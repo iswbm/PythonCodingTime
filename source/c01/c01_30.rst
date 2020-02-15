@@ -6,4 +6,3 @@
 |image0|
 
 .. |image0| image:: http://image.python-online.cn/20200104144109.png
-

@@ -76,4 +76,3 @@ K8s 角色详解
 **共享资源**\ 。
 
 .. |image0| image:: http://image.python-online.cn/20190907162015.png
-

@@ -161,4 +161,3 @@ mysql，这时也请将其卸载再重新安装吧。
 .. |image4| image:: http://image.python-online.cn/20190615001908.png
 .. |image5| image:: http://image.python-online.cn/20190615112422.png
 .. |image6| image:: http://image.python-online.cn/20190705225651.png
-

@@ -26,4 +26,3 @@ cd，操作文件时，需要使用绝对路径。
 .. |image0| image:: http://image.python-online.cn/20191111112221.png
 .. |image1| image:: http://image.python-online.cn/20191111112421.png
 .. |image2| image:: http://image.python-online.cn/20191111112548.png
-

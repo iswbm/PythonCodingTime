@@ -176,6 +176,7 @@ Host
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20190113104817.png
 .. |image1| image:: http://image.python-online.cn/20190113105512.png
@@ -194,4 +195,3 @@ Host
 .. |image14| image:: http://image.python-online.cn/20190113113211.png
 .. |image15| image:: http://image.python-online.cn/20190113112456.png
 .. |image16| image:: http://image.python-online.cn/20190113112649.png
-

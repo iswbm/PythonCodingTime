@@ -422,6 +422,7 @@ sgnificant digital)，LSD 的排序方式由键值的最右边开始，而 MSD
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |快速排序| image:: http://image.python-online.cn/Fpj4DFN_YCtfmJwb_85QnsuIVLqk
 .. |\|冒泡排序\|| image:: http://image.python-online.cn/FvbrVECeq58hY8TptG4ilkL5Owcc
@@ -435,4 +436,3 @@ sgnificant digital)，LSD 的排序方式由键值的最右边开始，而 MSD
 .. |合并两个有序数组| image:: http://image.python-online.cn/FnCZ-3Pj39T_ELROSsGRDN31yWtY
 .. |桶排序| image:: http://image.python-online.cn/FljGa3F3wM_YGACETeuRHCiERXKb
 .. |基数排序| image:: http://image.python-online.cn/FhwWVp4LVABIMPHqNo_cpjJA9kHV
-

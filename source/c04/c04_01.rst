@@ -50,7 +50,7 @@ virtualenvwrapper，就必须先安装 virtualenv。
 
 .. code:: bash
 
-   # 准备目录并进行
+   # 准备目录并进入
    $ mkdir -p /home/wangbm/Envs
    $ cd !$
 
@@ -129,6 +129,12 @@ virtualenv 虽然已经相当好用了，可是功能还是不够完善。
    find / -name virtualenvwrapper.sh
    # /usr/bin/virtualenvwrapper.sh
 
+若是 windows 则使用everything 查找 virtualenvwrapper.bat 脚本
+
+::
+
+   D:\Program Files (x86)\Python38-32\Scripts\virtualenvwrapper.bat
+
 在~/.bashrc 文件新增配置
 
 ::
@@ -137,6 +143,10 @@ virtualenv 虽然已经相当好用了，可是功能还是不够完善。
    export PROJECT_HOME=$HOME/workspace
    export VIRTUALENVWRAPPER_SCRIPT=/usr/bin/virtualenvwrapper.sh
    source /usr/bin/virtualenvwrapper.sh
+
+若是 windows 则新增环境变量：\ ``WORKON_HOME``
+
+|image0|
 
 **基本语法**\ ：
 
@@ -211,7 +221,7 @@ https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
 先对比下，全局环境和虚拟环境的区别，全局环境中有requests包，而虚拟环境中并未安装。
 当我们敲入
 ``workon my_env01``\ ，前面有\ ``my_env01``\ 的标识，说明我们已经处在虚拟环境中。后面所有的操作，都将在虚拟环境下执行。
-|image0|
+|image1|
 
 4.2 工程项目中
 ~~~~~~~~~~~~~~
@@ -244,23 +254,24 @@ https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
 
    $ ./ming.py
 
-发现和预期一样，真的报错了。说明我们指定的虚拟环境有效果。 |image1|
+发现和预期一样，真的报错了。说明我们指定的虚拟环境有效果。 |image2|
 
 4.3 PyCharm中
 ~~~~~~~~~~~~~
 
-点击 File - Settings - Project - Interpreter |image2|
+点击 File - Settings - Project - Interpreter |image3|
 点击小齿轮。如图点击添加，按提示添加一个虚拟环境。然后点 OK
-就可以使用这个虚拟环境，之后的项目都会在这个虚拟环境下运行。 |image3|
+就可以使用这个虚拟环境，之后的项目都会在这个虚拟环境下运行。 |image4|
 
 --------------
 
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
-.. |image0| image:: https://i.loli.net/2018/06/11/5b1e7d36ce8ad.png
-.. |image1| image:: https://i.loli.net/2018/06/11/5b1e7f140be6a.png
-.. |image2| image:: https://i.loli.net/2018/06/11/5b1e805c996c8.png
-.. |image3| image:: https://i.loli.net/2018/06/11/5b1e812db603f.png
-
+.. |image0| image:: http://image.python-online.cn/20200209161935.png
+.. |image1| image:: https://i.loli.net/2018/06/11/5b1e7d36ce8ad.png
+.. |image2| image:: https://i.loli.net/2018/06/11/5b1e7f140be6a.png
+.. |image3| image:: https://i.loli.net/2018/06/11/5b1e805c996c8.png
+.. |image4| image:: https://i.loli.net/2018/06/11/5b1e812db603f.png

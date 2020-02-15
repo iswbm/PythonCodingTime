@@ -713,6 +713,7 @@ SO，如果是提交的是英文的话，不会有冲突。因为都是一个字
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: https://i.loli.net/2017/08/25/599feabef31a6.png
 .. |image1| image:: https://i.loli.net/2017/08/25/59a0345577dc0.png
@@ -750,4 +751,3 @@ SO，如果是提交的是英文的话，不会有冲突。因为都是一个字
 .. |image33| image:: https://i.loli.net/2017/08/27/59a261734e896.png
 .. |image34| image:: https://i.loli.net/2017/08/27/59a261734ff8b.png
 .. |image35| image:: https://i.loli.net/2017/08/25/599fc9aa85094.png
-

@@ -138,8 +138,10 @@ NetworkManager， ubuntu 是network-manager）才负责获取ip。
 --------------------
 
 1.  启用DHCP后，dhcp server 会占用一个allocation_pools中的ip。
+
 2.  子网启用了dhcp，ConfigDrive不会携带静态的ip地址（类型为ipv4，左图），而是携带了将类型变更为ipv4_dhcp（右图），虚拟机启动时发送广播消息DHCP
     discover从dhcp server获得真正的ip地址。 |image3|
+
 3.  若子网启用了dhcp，并且创建了虚拟机，此时 disable dhcp，只是表象上
     dhcp 被关了，而实际 dhcp port 被是占用着，因为 dhcp server
     还要给之前创建的虚拟机提供服务。如果再用这个子网创建的虚拟机会使用dhcp
@@ -151,20 +153,26 @@ NetworkManager， ubuntu 是network-manager）才负责获取ip。
     ip。如果一个子网开启了dhcp，并且这个子网下\ **有虚拟机**\ ，更新子网
     disable
     dhcp，dhcp-port\ **不会立即删除**\ 。再用这个子网创建的虚拟机会使用dhcp获取ip。
+
 4.  dnsmasq进程是由dhcp-agent 服务管理的。如果停用 dhcp-agent
     时，dnsmasq 进程并不会关闭。如果同一个网络下有多个dnsmasq
     ，不会影响正常的dhcp获取ip。
+
 5.  如果三个控制节点上的 dhcp-agent
     都是关闭状态，此时创建虚拟机时，ip仍然会正常分配、port会正常创建，但由于nova-compute等不到neutron的port
     plugged事件，过一段时间就超时导致创建虚拟机失败。而如果在超时范围内将dhcp-agent启动起来，就可以立即创建成功。
+
 6.  如果一台节点上的 dhcp-agent 关闭了，neutron-server
     会等待150s（agent_down_time*2）后再重新调度，将负责这个节点上的dnsmasq进程在另一台上启动起来。
+
 7.  虚拟机通过dhcp获取ip，和用config drive
     注入静态ip配置的时间差不多，经验证从创建到ping通，dhcp花了22s，静态ip花了23s
+
 8.  如果一个子网没有配置
     dns，那么用这个子网创建虚拟机，虚拟机内部会将这个子网的dhcp server
     的ip拿来做dns配在 /etc/resolv.conf
     里，而且在排在最上面，可能会导致虚拟机上不了网。
+
 9.  使用 dhcp 的模式，cloudinit 从 configure drive
     中知道是dhcp后就不会去刷新配置文件将static
     改为dhcp（使用的是NetworkManager自动获取ip，这在开机启动时
@@ -172,6 +180,7 @@ NetworkManager， ubuntu 是network-manager）才负责获取ip。
     去做），所以如果这个镜像原网卡配置文件里是静态ip，那么使用这个镜像创建dhcp
     的虚拟机，就会暴露旧ip，但是这对于配置ip没有影响，NetworkManager
     配置ip的顺序是先dhcp，获取不到再从配置文件读。
+
 10. 如果一个子网只有dhcp
     port，子网可以被删除，如果有其他port，则子网不能删除。
 
@@ -240,7 +249,7 @@ DOWN后会触发重新调度将dnsmasq迁到另一台，对应函数：reschedul
 **dhcp-port 是如何被创建出来的？**
 
 从
-neutron:raw-latex:`\neutron`-0.0.1.dev2:raw-latex:`\neutron`:raw-latex:`\agent`:raw-latex:`\linux`:raw-latex:`\dhcp`.py:
+neutron:raw-latex:`\neutron-0.0`.1.dev2:raw-latex:`\neutron`:raw-latex:`\agent`:raw-latex:`\linux`:raw-latex:`\dhcp`.py:
 setup() 开始
 
 再进入
@@ -252,6 +261,7 @@ setup_dhcp_port()，从这个函数里可以知道，dhcp-port的创建顺序：
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20190514202013.png
 .. |image1| image:: http://image.python-online.cn/20190514202442.png
@@ -260,4 +270,3 @@ setup_dhcp_port()，从这个函数里可以知道，dhcp-port的创建顺序：
 .. |image4| image:: http://image.python-online.cn/20190430204707.png
 .. |image5| image:: http://image.python-online.cn/20190430204933.png
 .. |image6| image:: http://image.python-online.cn/20190430205449.png
-

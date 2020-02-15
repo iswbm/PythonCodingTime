@@ -531,10 +531,10 @@ CentOS6 创建快照前需要先删除\ ``75-persistent-net-generator.rules``
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: https://i.loli.net/2018/01/27/5a6c34714685d.png
 .. |image1| image:: https://i.loli.net/2018/01/27/5a6c34b14c6ec.png
 .. |image2| image:: http://image.python-online.cn/20190827200522.png
 .. |image3| image:: http://image.python-online.cn/20191211174659.png
 .. |image4| image:: http://image.python-online.cn/20191211174956.png
-

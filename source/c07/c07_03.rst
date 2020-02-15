@@ -3,14 +3,16 @@
 
 --------------
 
-一、安装Docker
---------------
+1. 安装Docker
+-------------
 
 参照官方文档，不同Linux发行版，安装方法略有不同。 CentOS：\ `CentOS 7
 上安装 Docker
 详解 <https://docs.docker.com/engine/installation/linux/docker-ce/centos/#set-up-the-repository>`__
 Ubuntu：\ `Ubuntu 16.04 上安装 Docker
 详解 <https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/>`__
+Windows：\ `Windows 10 上安装 Docker
+指导 <https://hub.docker.com/?overlay=onboarding>`__
 
 因为本人都是使用CentOS 7.2的系统，所以以下示例都将在CentOS上操作。
 
@@ -74,8 +76,32 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
    $ sudo systemctl start docker
    $ chkconfig docker on
 
-二、创建第一个容器
-------------------
+2. 配置镜像源
+-------------
+
+docker默认镜像拉取地址为国外仓库下载速度较慢，网速不好，则会报错”net/http:
+TLS handshake timeout”。
+
+解决方法很简单，给你的 Docker 配置一个国内的镜像源。
+
+在 Win 10 上可以这样配。
+
+点击 Docker 图标，选择 ``Setting`` -> ``Docker Engine`` 输入
+
+::
+
+   {
+     "registry-mirrors":  [
+       "https://dockerhub.azk8s.cn",
+       "https://hub-mirror.c.163.com"
+     ],
+     "insecure-registries": [],
+     "debug": true,
+     "experimental": false
+   }
+
+3. 创建第一个容器
+-----------------
 
 ``docker run -d -p 80:80 httpd``
 
@@ -93,10 +119,10 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
 
    $ docker ps 或者 docker container ls
 
-三、关于容器
-------------
+4、关于容器
+-----------
 
-3.1 相关命令
+4.1 相关命令
 ~~~~~~~~~~~~
 
 ::
@@ -138,7 +164,7 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
    # 创建一个容器
    docker create <image>
 
-3.2 内存限额
+4.2 内存限额
 ~~~~~~~~~~~~
 
 ::
@@ -153,7 +179,7 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
    --vm 1：启动 1 个内存工作线程。
    --vm-bytes 280M：每个线程分配 280M 内存。如果分配超过300，就会出错，容器退出
 
-3.3 cpu配额
+4.3 cpu配额
 ~~~~~~~~~~~
 
 默认设置下，所有容器可以平等地使用 host CPU 资源并且没有限制。 Docker
@@ -174,7 +200,7 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
    docker run --name container_A -it -c 1024 <image> --cpu 1
    docker run --name container_B -it -c 512 <image> --cpu 1
 
-3.4 blkio配额
+4.4 blkio配额
 ~~~~~~~~~~~~~
 
 ``Block IO`` 限制不同容器的读写资源分配 Block IO
@@ -209,7 +235,7 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
    docker run -it ubuntu
    time dd if=/dev/zero out=test.out bs=1M count=800 oflag=direct  # 测试速度
 
-3.5 cgroup
+4.5 cgroup
 ~~~~~~~~~~
 
 ``cgroup``\ 全称\ ``Control Group``\ 。\ ``Linux`` 操作系统通过 cgroup
@@ -228,7 +254,7 @@ Ubuntu：\ `Ubuntu 16.04 上安装 Docker
    3. blkio
    路径：/sys/fs/blkio/cpu/docker
 
-3.6 namespace
+4.6 namespace
 ~~~~~~~~~~~~~
 
 ``namespace`` 管理着 ``host``
@@ -264,7 +290,7 @@ namespace 有下面六种
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/17-12-23/44035514.jpg
 .. |image1| image:: http://image.python-online.cn/17-12-23/20133481.jpg
-
