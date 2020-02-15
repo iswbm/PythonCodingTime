@@ -1,0 +1,12 @@
+1.17 ansible 自定义 Jinja2 过滤器
+=================================
+
+在 ansible 中 Jinja2 的过滤器是作为插件存在于 ansible 的项目中。
+
+它的代码位于 /usr/lib/python2.7/site-packages/ansible/plugins/filter
+
+观察其代码结构，不难看出
+
+https://blog.oddbit.com/post/2019-04-25-writing-ansible-filter-plugins/
+
+https://www.jianshu.com/p/ae74f5f39828

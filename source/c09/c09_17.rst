@@ -1,0 +1,27 @@
+9.17 Go原生协程：goroutine
+==========================
+
+一台电脑能使用多少线程
+
+协程与线程的关系
+
+线程：抢占式多任务处理
+
+协程：非抢占式多任务处理由协程主动交出控制权
+
+coroutine
+
+.. figure:: C:\Users\wangbm\AppData\Roaming\Typora\typora-user-images\image-20200202142007967.png
+   :alt: image-20200202142007967
+
+   image-20200202142007967
+
+.. figure:: C:\Users\wangbm\AppData\Roaming\Typora\typora-user-images\image-20200202142004117.png
+   :alt: image-20200202142004117
+
+   image-20200202142004117
+
+.. figure:: C:\Users\wangbm\AppData\Roaming\Typora\typora-user-images\image-20200202142258895.png
+   :alt: image-20200202142258895
+
+   image-20200202142258895
