@@ -50,7 +50,7 @@ def render_index_page(index_info):
     生成 readme.md 索引文件，包含所有文件目录
     '''
     # 重新排序
-    index_info = sorted(index_info.iteritems(), key=lambda item:item[0], reverse=False)
+    index_info = sorted(index_info.items(), key=lambda item:item[0], reverse=False)
 
     # 写入文件
     with open(index_path, 'w+') as file:
