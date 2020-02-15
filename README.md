@@ -1,7 +1,7 @@
 
 这是我的个人博客（ [MING's BLOG](http://python-online.cn/) ），主要写关于Python的一些思考总结。
 
-关于搭建教程，感兴趣的可以查看这边：[Sphinx 搭建博客的图文教程](http://python-online.cn/zh_CN/latest/c04/c04_03.rst)
+关于搭建教程，感兴趣的可以查看这边：[Sphinx 搭建博客的图文教程](http://python-online.cn/zh_CN/latest/c04/c04_03.html)
 ## 第一章：基础知识
 - 1.1 [13条Python2.x和3.x的区别？](http://python-online.cn/zh_CN/latest/c01/c01_01.html)
 - 1.4 [什么是猴子补丁?](http://python-online.cn/zh_CN/latest/c01/c01_04.html)
@@ -29,6 +29,7 @@
 - 1.27 [全面学习 Python 包：包的构建与分发](http://python-online.cn/zh_CN/latest/c01/c01_27.html)
 - 1.27 [如何阅读 CPython源码？](http://python-online.cn/zh_CN/latest/c01/c01_29.html)
 - 1.30 [学习编程的几大网站](http://python-online.cn/zh_CN/latest/c01/c01_30.html)
+- 1.31 [学习 Pillow 笔记](http://python-online.cn/zh_CN/latest/c01/c01_31.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python-online.cn/zh_CN/latest/c02/c02_01.html)
@@ -75,6 +76,7 @@
 - 4.20 [学会使用谷歌搜索引擎](http://python-online.cn/zh_CN/latest/c04/c04_20.html)
 - 4.21 [最全的 pip 使用指南，50% 你可能没用过](http://python-online.cn/zh_CN/latest/c04/c04_21.html)
 - 4.22 [用好 Chrome 必看](http://python-online.cn/zh_CN/latest/c04/c04_22.html)
+- 4.23 [电脑使用技巧](http://python-online.cn/zh_CN/latest/c04/c04_23.html)
 
 ## 第五章：算法教程
 - 5.1 [图解九大经典排序算法](http://python-online.cn/zh_CN/latest/c05/c05_01.html)
@@ -90,7 +92,6 @@
 - 6.6 [自动生成图像视频](http://python-online.cn/zh_CN/latest/c06/c06_06.html)
 
 ## 第七章：运维人生
-- 7.8 [Keepalived 部署文档](http://python-online.cn/zh_CN/latest/c07/C07_08.html)
 - 7.1 [Linux 命令行的艺术](http://python-online.cn/zh_CN/latest/c07/c07_01.html)
 - 7.2 [Zabbix 监控部署文档](http://python-online.cn/zh_CN/latest/c07/c07_02.html)
 - 7.3 [Docker：Hello world](http://python-online.cn/zh_CN/latest/c07/c07_03.html)
@@ -98,6 +99,7 @@
 - 7.5 [Docker：网络通信](http://python-online.cn/zh_CN/latest/c07/c07_05.html)
 - 7.6 [Docker：存储与多主机](http://python-online.cn/zh_CN/latest/c07/c07_06.html)
 - 7.7 [SaltStack 入门指南](http://python-online.cn/zh_CN/latest/c07/c07_07.html)
+- 7.8 [Keepalived 部署文档](http://python-online.cn/zh_CN/latest/c07/c07_08.html)
 - 7.9 [Ansible 入门指南使用手册](http://python-online.cn/zh_CN/latest/c07/c07_09.html)
 - 7.10 [Ansible API 最全使用文档（中文）](http://python-online.cn/zh_CN/latest/c07/c07_10.html)
 - 7.11 [K8S：基础入门](http://python-online.cn/zh_CN/latest/c07/c07_11.html)
@@ -106,6 +108,7 @@
 - 7.14 [Linux 如何写判断语句](http://python-online.cn/zh_CN/latest/c07/c07_14.html)
 - 7.15 [Mariadb 与 Galera 集群总结](http://python-online.cn/zh_CN/latest/c07/c07_15.html)
 - 7.16 [Linux 运维之路](http://python-online.cn/zh_CN/latest/c07/c07_16.html)
+- 1.17 [ansible 自定义 Jinja2 过滤器](http://python-online.cn/zh_CN/latest/c07/c07_17.html)
 
 ## 第八章：OpenStack
 - 8.1 [OpenStack 运维命令](http://python-online.cn/zh_CN/latest/c08/c08_01.html)
@@ -126,11 +129,35 @@
 
 ## 第九章：Go 语言之路
 - 9.1 [开发环境的搭建（Goland和VSCode）](http://python-online.cn/zh_CN/latest/c09/c09_01.html)
-- 9.3 [五种变量创建的方法](http://python-online.cn/zh_CN/latest/c09/c09_02.html)
-- 9.3 [理解语句块与作用域](http://python-online.cn/zh_CN/latest/c09/c09_03.html)
-- 9.4 [Go语言命名编码规范](http://python-online.cn/zh_CN/latest/c09/c09_04.html)
-- 9.5 [Go语言数据类型](http://python-online.cn/zh_CN/latest/c09/c09_05.html)
+- 9.2 [五种变量创建的方法](http://python-online.cn/zh_CN/latest/c09/c09_02.html)
+- 9.3 [详解数据类型：整型与浮点型](http://python-online.cn/zh_CN/latest/c09/c09_03.html)
+- 9.4 [详解数据类型：byte、rune与字符串](http://python-online.cn/zh_CN/latest/c09/c09_04.html)
+- 9.7 [详解数据类型：数组与切片](http://python-online.cn/zh_CN/latest/c09/c09_05.html)
+- 9.6 [详解数据类型：字典与布尔类型](http://python-online.cn/zh_CN/latest/c09/c09_06.html)
+- 9.7 [详解数据类型：指针](http://python-online.cn/zh_CN/latest/c09/c09_07.html)
+- 9.8 [面向对象编程：结构体与继承](http://python-online.cn/zh_CN/latest/c09/c09_08.html)
+- 9.9 [一篇文章理解 Go 里的函数](http://python-online.cn/zh_CN/latest/c09/c09_09.html)
+- 9.10 [Go语言流程控制：if-else](http://python-online.cn/zh_CN/latest/c09/c09_10.html)
+- 9.11 [Go语言流程控制：switch-case](http://python-online.cn/zh_CN/latest/c09/c09_11.html)
+- 9.11 [Go语言流程控制：for](http://python-online.cn/zh_CN/latest/c09/c09_12.html)
+- 9.13 [Go语言流程控制：goto 无条件跳转](http://python-online.cn/zh_CN/latest/c09/c09_13.html)
+- 9.14 [Go语言流程控制：defer 延迟语句](http://python-online.cn/zh_CN/latest/c09/c09_14.html)
+- 9.15 [面向对象编程：接口与多态](http://python-online.cn/zh_CN/latest/c09/c09_15.html)
+- 9.16 [关键字：make 和 new 的区别？](http://python-online.cn/zh_CN/latest/c09/c09_16.html)
+- 9.17 [Go原生协程：goroutine](http://python-online.cn/zh_CN/latest/c09/c09_17.html)
+- 9.10 [理解语句块与作用域](http://python-online.cn/zh_CN/latest/c09/c09_18.html)
+- 9.9 [Go语言命名编码规范](http://python-online.cn/zh_CN/latest/c09/c09_19.html)
+- 9.12 [详解数据类型：信道](http://python-online.cn/zh_CN/latest/c09/c09_23.html)
+- 9.14 [几个信道死锁经典错误案例详解](http://python-online.cn/zh_CN/latest/c09/c09_24.html)
+- 9.12 [Go语言的包依赖管理](http://python-online.cn/zh_CN/latest/c09/c09_25.html)
+- 9.13 [go 命令详解](http://python-online.cn/zh_CN/latest/c09/c09_27.html)
+- 9.30 [函数式编程](http://python-online.cn/zh_CN/latest/c09/c09_30.html)
+- 9.31 [todo](http://python-online.cn/zh_CN/latest/c09/todo.html)
+
+## 第十章：有趣的工具
+- 10.1 [情人节来了，教你使用 Python 来表白](http://python-online.cn/zh_CN/latest/c10/c10_01.html)
 
 
 ---
 ![关注公众号，获取最新干货！](http://image.python-online.cn/20191117155836.png)
+

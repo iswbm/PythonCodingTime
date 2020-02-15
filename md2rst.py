@@ -53,7 +53,7 @@ def render_index_page(index_info):
     index_info = sorted(index_info.items(), key=lambda item:item[0], reverse=False)
 
     # 写入文件
-    with open(index_path, 'w+') as file:
+    with open(index_path, 'w+', encoding="utf-8") as file:
         file.write(readme_header)
         for chp, info in index_info:
             chp_name = info["name"]
