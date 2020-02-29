@@ -30,6 +30,10 @@
 - 1.27 [如何阅读 CPython源码？](http://python-online.cn/zh_CN/latest/c01/c01_29.html)
 - 1.30 [学习编程的几大网站](http://python-online.cn/zh_CN/latest/c01/c01_30.html)
 - 1.31 [学习 Pillow 笔记](http://python-online.cn/zh_CN/latest/c01/c01_31.html)
+- 1.32 [在 CentOS 7.2 上安装 Python3.7](http://python-online.cn/zh_CN/latest/c01/c01_32.html)
+- 1.33 [如何调试已经运行中的程序](http://python-online.cn/zh_CN/latest/c01/c01_33.html)
+- 1.34 [每日一库：sh，最优雅的命令调用方式](http://python-online.cn/zh_CN/latest/c01/c01_34.html)
+- 1.35 [使用 Python 远程登陆服务器的利器](http://python-online.cn/zh_CN/latest/c01/c01_35.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python-online.cn/zh_CN/latest/c02/c02_01.html)
@@ -44,6 +48,7 @@
 - 2.10 [深入异步IO框架：asyncio 中篇](http://python-online.cn/zh_CN/latest/c02/c02_10.html)
 - 2.11 [实战异步IO框架：asyncio 下篇](http://python-online.cn/zh_CN/latest/c02/c02_11.html)
 - 2.12 [生成器与协程，你分清了吗？](http://python-online.cn/zh_CN/latest/c02/c02_12.html)
+- 2.13 [I/O多路复用：select/poll/epoll](http://python-online.cn/zh_CN/latest/c02/c02_13.html)
 
 ## 第三章：高级编程
 - 3.1 [装饰器进阶用法详解](http://python-online.cn/zh_CN/latest/c03/c03_01.html)
@@ -109,6 +114,7 @@
 - 7.15 [Mariadb 与 Galera 集群总结](http://python-online.cn/zh_CN/latest/c07/c07_15.html)
 - 7.16 [Linux 运维之路](http://python-online.cn/zh_CN/latest/c07/c07_16.html)
 - 1.17 [ansible 自定义 Jinja2 过滤器](http://python-online.cn/zh_CN/latest/c07/c07_17.html)
+- 7.18 [Shell中去除字符串前后空格的方法](http://python-online.cn/zh_CN/latest/c07/c07_18.html)
 
 ## 第八章：OpenStack
 - 8.1 [OpenStack 运维命令](http://python-online.cn/zh_CN/latest/c08/c08_01.html)
@@ -144,15 +150,16 @@
 - 9.14 [Go语言流程控制：defer 延迟语句](http://python-online.cn/zh_CN/latest/c09/c09_14.html)
 - 9.15 [面向对象编程：接口与多态](http://python-online.cn/zh_CN/latest/c09/c09_15.html)
 - 9.16 [关键字：make 和 new 的区别？](http://python-online.cn/zh_CN/latest/c09/c09_16.html)
-- 9.17 [Go原生协程：goroutine](http://python-online.cn/zh_CN/latest/c09/c09_17.html)
-- 9.10 [理解语句块与作用域](http://python-online.cn/zh_CN/latest/c09/c09_18.html)
-- 9.9 [Go语言命名编码规范](http://python-online.cn/zh_CN/latest/c09/c09_19.html)
-- 9.12 [详解数据类型：信道](http://python-online.cn/zh_CN/latest/c09/c09_23.html)
-- 9.14 [几个信道死锁经典错误案例详解](http://python-online.cn/zh_CN/latest/c09/c09_24.html)
-- 9.12 [Go语言的包依赖管理](http://python-online.cn/zh_CN/latest/c09/c09_25.html)
-- 9.13 [go 命令详解](http://python-online.cn/zh_CN/latest/c09/c09_27.html)
-- 9.30 [函数式编程](http://python-online.cn/zh_CN/latest/c09/c09_30.html)
-- 9.31 [todo](http://python-online.cn/zh_CN/latest/c09/todo.html)
+- 9.17 [理解语句块与作用域](http://python-online.cn/zh_CN/latest/c09/c09_17.html)
+- 9.18 [理解 Go 协程：goroutine](http://python-online.cn/zh_CN/latest/c09/c09_18.html)
+- 9.19 [学习 Go 协程：详解信道/通道](http://python-online.cn/zh_CN/latest/c09/c09_19.html)
+- 9.20 [几个信道死锁经典错误案例详解](http://python-online.cn/zh_CN/latest/c09/c09_20.html)
+- 9.21 [学习 Go 协程：WaitGroup](http://python-online.cn/zh_CN/latest/c09/c09_21.html)
+- 9.23 [学习一些常见的并发模型](http://python-online.cn/zh_CN/latest/c09/c09_23.html)
+- 9.9 [Go语言命名编码规范](http://python-online.cn/zh_CN/latest/c09/c09_24.html)
+- 9.25 [Go语言的包依赖管理](http://python-online.cn/zh_CN/latest/c09/c09_25.html)
+- 9.27 [go 命令详解](http://python-online.cn/zh_CN/latest/c09/c09_27.html)
+- 9.28 [函数式编程](http://python-online.cn/zh_CN/latest/c09/c09_28.html)
 
 ## 第十章：有趣的工具
 - 10.1 [情人节来了，教你使用 Python 来表白](http://python-online.cn/zh_CN/latest/c10/c10_01.html)

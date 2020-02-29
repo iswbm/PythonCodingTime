@@ -227,4 +227,9 @@ float32，精度不足，导致最后比较的结果是不相等（从小数点�
 
 https://www.zhihu.com/question/26022206
 
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！
+
 .. |image0| image:: http://image.python-online.cn/20200120204329.png

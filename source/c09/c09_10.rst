@@ -120,3 +120,8 @@ if - else if - else
            fmt.Println("已经成年了")
        }
    }
+
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！

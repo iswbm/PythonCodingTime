@@ -1,4 +1,4 @@
-9.12 Go语言的包依赖管理
+9.25 Go语言的包依赖管理
 =======================
 
 在以前，Go
@@ -181,3 +181,8 @@ go mod 出现后， GOPATH 和 GOVENDOR
 ----------
 
 -  `Go语言之依赖管理 <https://www.cnblogs.com/Dr-wei/p/11742253.html>`__
+
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！

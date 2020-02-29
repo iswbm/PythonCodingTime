@@ -1,0 +1,58 @@
+7.18 Shell中去除字符串前后空格的方法
+====================================
+
+原文：https://www.jb51.net/article/157327.htm
+
+经常碰到的场景，需要去除字符串中的前后的空格。在Shell中不像其他语言有strip()来处理，不过也是可以使用诸如awk等命令来处理。
+
+**下面是一个简单示例:**
+
+::
+
+   [root@localhost ~]``# echo ' A B C ' | awk '{gsub(/^\s+|\s+$/, "");print}'
+
+-  ^:raw-latex:`\s`+ 匹配行首一个或多个空格
+-  :raw-latex:`\s`+$ 匹配行末一个或多个空格
+-  ^:raw-latex:`\s`+\|:raw-latex:`\s`+$ 同时匹配行首或者行末的空格
+
+**如果不用awk命令，也可以使用eval命令来达到相同的目的**
+
+::
+
+   [root@``local` `~]``# echo " A BC "`` ``A BC``[root@``local` `~]``# eval echo " A BC "``A BC
+
+或者
+
+::
+
+   [root@linux ~]``# echo ' A BC ' | python -c "s=raw_input();print(s.strip())"``A BC
+
+或者
+
+::
+
+   [root@linux ~]``# s=`echo " A BC "```[root@linux ~]``# echo $s``A BC
+
+或者
+
+::
+
+   [root@linux ~]``# echo ' A BC ' | sed -e 's/^[ ]*//g' | sed -e 's/[ ]*$//g'``A BC
+
+或者
+
+::
+
+   [root@linux ~]``# echo " A BC " | awk '$1=$1'``A BC
+
+或者
+
+::
+
+   [root@linux ~]``# echo " A BC " | sed -r 's/^[ \t]+(.*)[ \t]+$//g'``A BC
+
+或者
+
+::
+
+   [root@linux ~]``# echo ' A BC ' | awk '{sub(/^ */, "");sub(/ *$/, "")}1'``A BC

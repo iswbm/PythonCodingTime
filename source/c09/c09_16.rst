@@ -95,3 +95,8 @@ make：只能为 slice，map，chan 分配内存，并初始化，返回的是�
 
 但是 make
 就不一样了，它的地位无可替代，在使用slice、map以及channel的时候，还是要使用make进行初始化，然后才可以对他们进行操作。
+
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！

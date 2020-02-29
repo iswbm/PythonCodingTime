@@ -1,0 +1,37 @@
+1.32 在 CentOS 7.2 上安装 Python3.7
+===================================
+
+首先下载 python3.7的源码包，然后解压
+
+.. code:: shell
+
+   $ cd ~
+   $ wget -c https://www.python.org/ftp/python/3.7.1/Python-3.7.1.tgz
+   $ tar xf Python-3.7.1.tgz && cd Python-3.7.1
+
+安装 一些依赖包
+
+.. code:: shell
+
+   $ yum install gcc zlib-devel bzip2-devel openssl openssl-devel ncurses-devel sqlite-devel libffi-devel python3-devel -y
+
+编译安装
+
+.. code:: shell
+
+   $ ./configure
+   $ make
+   $ sudo make install
+
+至此，你已经成功安装 了 Python3， pip3，setuptools
+
+requests.get(“https://www.baidu.com”)
+
+::
+
+   python3 -m pip install --user requests aiohttp cryptography pymysql prettytable sh Fabric paramiko apscheduler bashplotlib httpie PathPicker -i https://pypi.douban.com/simple
+
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！

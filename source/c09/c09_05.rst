@@ -226,3 +226,8 @@
 
    myslice为 [5 6], 其长度为: 2
    myslice的第四个元素为: 8
+
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！

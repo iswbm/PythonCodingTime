@@ -163,8 +163,8 @@ Condition和Event 是类似的，并没有多大区别。
    cond = threading.Condition()
    seeker = Seeker(cond, 'seeker')
    hider = Hider(cond, 'hider')
-   seeker.start()
-   hider.start()
+   seeker.run()
+   hider.run()
 
 通过cond来通信，阻塞自己，并使对方执行。从而，达到有顺序的执行。
 看下结果

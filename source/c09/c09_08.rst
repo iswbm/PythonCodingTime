@@ -262,3 +262,8 @@ staff 中，做为 staff 的一个匿名字段，staff 就直接拥有了 compan
 
 -  当方法的首字母为大写时，这个方法对于所有包都是Public，其他包可以随意调用
 -  当方法的首字母为小写时，这个方法是Private，其他包是无法访问的。
+
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！

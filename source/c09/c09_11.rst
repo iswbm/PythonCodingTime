@@ -252,3 +252,8 @@ default 的代码块。
 
    hello
    xxxx
+
+.. figure:: http://image.python-online.cn/20191117155836.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！
