@@ -539,7 +539,6 @@ limit子句：限制返回数据的量。
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: https://ooo.0o0.ooo/2017/08/26/59a1429722061.png
 .. |image1| image:: https://i.loli.net/2017/08/27/59a2307e7b6bc.png

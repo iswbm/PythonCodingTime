@@ -268,7 +268,6 @@ https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20200209161935.png
 .. |image1| image:: https://i.loli.net/2018/06/11/5b1e7d36ce8ad.png

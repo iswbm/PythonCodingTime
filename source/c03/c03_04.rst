@@ -513,7 +513,6 @@
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: https://i.loli.net/2017/08/20/599982f513b7e.png
 .. |image1| image:: https://i.loli.net/2017/08/20/59998b33265d9.png

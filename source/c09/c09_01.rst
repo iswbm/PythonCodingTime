@@ -325,7 +325,6 @@ auto，必须为小写，不能为为true或false，也不能为1或0。这里�
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20200102220841.png
 .. |image1| image:: http://image.python-online.cn/20200102221555.png

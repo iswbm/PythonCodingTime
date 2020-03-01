@@ -89,7 +89,6 @@ nova-scheduler 选择到主机后，在日志中会打印三条DEBUG信息，可
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20190424212211.png
 .. |image1| image:: http://image.python-online.cn/20190424213430.png
