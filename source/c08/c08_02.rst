@@ -306,7 +306,6 @@ port-update命令不支持，只能使用curl，需要修改port-id及binding:pr
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: https://i.loli.net/2018/01/19/5a61bfa0ca66f.png
 .. |image1| image:: https://i.loli.net/2018/01/19/5a61bfd243111.png

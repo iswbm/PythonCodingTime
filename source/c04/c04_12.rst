@@ -155,7 +155,6 @@ source                  列出给定对象的源码
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20190118000111.png
 .. |image1| image:: http://image.python-online.cn/20190118000234.png

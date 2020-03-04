@@ -108,7 +108,6 @@ self.jump了，因为首参不是 self，而如果使用@staticmethod
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20190630111243.png
 .. |image1| image:: http://image.python-online.cn/20190630104956.png

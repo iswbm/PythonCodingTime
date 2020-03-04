@@ -486,7 +486,6 @@ OpenStck，你可能不太明白它是做什么的。这里引用我昨天看到
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20190714161353.png
 .. |image1| image:: http://image.python-online.cn/20190716004341.png

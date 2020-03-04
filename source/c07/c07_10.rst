@@ -187,7 +187,6 @@ rc 为非0，表示有 fatal 致命错误，说明有部分节点部署/升级�
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20190716111523.png
 .. |image1| image:: http://image.python-online.cn/20190716112113.png

@@ -160,6 +160,5 @@ Pythonic ，在某一程度上代码看起来更加的简洁。
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
 
-   关注公众号，获取最新干货！
 
 .. |reduce 逻辑演示| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyx6i8q3anj208c04u3yu.jpg
