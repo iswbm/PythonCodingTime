@@ -53,7 +53,7 @@
    pip install virtualenv
    pip install virtualenvwrapper
 
-配置:``vim ~/.bashrc``\ ，编辑完成后，记得\ ``source ~/.bashrc``\ 使之生效
+配置:\ ``vim ~/.bashrc``\ ，编辑完成后，记得\ ``source ~/.bashrc``\ 使之生效
 
 ::
 
@@ -520,3 +520,4 @@
 .. |image3| image:: https://i.loli.net/2017/08/20/59998bdf36c79.png
 .. |image4| image:: https://i.loli.net/2017/08/25/59a0236def497.png
 .. |image5| image:: https://i.loli.net/2017/08/25/59a0244d239f0.png
+

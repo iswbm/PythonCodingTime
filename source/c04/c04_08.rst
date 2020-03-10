@@ -80,7 +80,6 @@
 -  https://zhuanlan.zhihu.com/p/36147819
 
 -  https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf
-
 -  https://www.jetbrains.com/help/pycharm/ctrl-alt.html
 
 4.8.2 Sublime Text 3

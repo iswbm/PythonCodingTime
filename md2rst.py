@@ -5,12 +5,25 @@ import subprocess
 import platform
 
 from git import Repo
-repo = Repo.init(path='.')
+
+
+osName = platform.system()
+repo_path ='.'
+if (osName == 'Windows'):
+    repo_path = 'E:\\MING-Git\\06. PythonCodingTime'
+    blog_path = 'E:\\MING-Git\\06. PythonCodingTime\\source'
+    index_path = 'E:\\MING-Git\\06. PythonCodingTime\\README.md'
+elif (osName == 'Darwin'):
+    repo_path = '/Users/MING/Github/PythonCodingTime/'
+    blog_path = '/Users/MING/Github/PythonCodingTime/source'
+    index_path = '/Users/MING/Github/PythonCodingTime/README.md'
+
+
+repo = Repo.init(path=repo_path)
 if not repo.is_dirty():
     # 没有文件变更
     os._exit(0)
 
-blog_path = ''
 base_link = "http://python-online.cn/zh_CN/latest/"
 readme_header = '''
 这是我的个人博客（ [MING's BLOG](http://python-online.cn/) ），主要写关于Python的一些思考总结。
@@ -22,15 +35,6 @@ readme_tooter = '''
 ![关注公众号，获取最新干货！](http://image.python-online.cn/20191117155836.png)
 
 '''
-
-
-osName = platform.system()
-if (osName == 'Windows'):
-    blog_path = 'E:\\MING-Git\\06. PythonCodingTime\\source'
-    index_path = 'E:\\MING-Git\\06. PythonCodingTime\\README.md'
-elif (osName == 'Darwin'):
-    blog_path = '/Users/MING/Github/PythonCodingTime/source'
-    index_path = '/Users/MING/Github/PythonCodingTime/README.md'
 
 
 def get_file_info(filename):
@@ -72,7 +76,7 @@ def convert_md5_to_rst(file):
         md_file=filename+'.md', rst_file=filename+'.rst'
     )
     # status, output = commands.getstatusoutput(convert_cmd)
-    status = subprocess.call(convert_cmd)
+    status = subprocess.call(convert_cmd.split(" "))
     if status != 0:
         print("命令执行失败: " + convert_cmd)
         os._exit(1)

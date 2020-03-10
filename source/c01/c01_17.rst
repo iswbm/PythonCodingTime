@@ -585,3 +585,4 @@ super 的实现原理，就交由你来自己完成。
 .. |image1| image:: http://image.python-online.cn/20190425221322.png
 .. |image2| image:: http://image.python-online.cn/20190425221233.png
 .. |image3| image:: http://image.python-online.cn/20190519001930.png
+

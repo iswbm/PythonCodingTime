@@ -1,5 +1,5 @@
-4.18 Mac 高效工具
-=================
+4.18 如何上手Mac ？
+===================
 
 4.18.1 iTerm2
 -------------
@@ -27,7 +27,8 @@
 ---------------
 
 1. Xnip：取色+丰富的标注功能+滚动截屏；
-2. Snip：小巧轻量+滚动截屏：；
+2. `Snip <https://snip.qq.com/>`__\ ：小巧轻量+滚动截屏(不能从App
+   Store下载，亲测已经失效)；
 3. QQ：截屏+录屏+OCR文字识别；
 4. Snipaste：贴屏功能；
 5. ScreenShot PSD：psd 文件，每种元素都有单独的图层。
@@ -40,12 +41,81 @@
    # 返回桌面
    fn + f11
 
-   # finder 后退与前进
-   command + up   # 文件夹后退
-   command + down # 文件夹前进
-
    # 最大化窗口与取消
    command + ctrl + f
+
+   # 关闭访达
+   command + w
+
+   # 关闭除访达外的其他程序
+   command + q
+
+   # 在不同的程序间切换
+   command + tab
+   command + shift + tab
+
+   # 在一个程序的不同窗口切换
+   command + ~
+
+   # 强制退出程序
+   command + option + esc
+
+   # 删除光标处到行首
+   command + backspace(删除键)
+
+   # 新建窗口打开页面
+   command + 鼠标左键
+
+文件夹管理
+
+::
+
+   # 快速打开访达：先打开搜索，再打开个人家目录
+   打开搜索：command + option(alt) + space
+   关闭标签页：command + shift + h
+
+   # 返回父级文件夹
+   command + ↑ 
+
+   # 进入文件夹
+   command + ↓
+
+   # enter
+   重命名文件夹
+
+   # 选中所有文件，并将这些文件归档入一个新的文件夹
+   右键 -> 用所选项目新建的文件夹 -> 回车，重命名
+
+
+   # 选择
+   点击 -> 拖拽
+   如果想要取消选中，就 command + 点击
+
+   # 指定路径打开访达
+   shift +  command + g
+
+   # 前进 后退
+   command + [ 
+   comand + ]
+
+   # 打开最近使用过的文件夹
+   comand + shift + f
+
+   # 
+
+查询汇率
+
+::
+
+   command + space
+   输入 1港币或者1美元
+
+将网页图片保存到本地
+
+::
+
+   直接拖动图片
+   如果不仍想让访达窗口保持在最前面，就按住 command 键
 
 4.18.4 系统设置
 ---------------
@@ -150,6 +220,8 @@ QSpace：\ `finder
 
 eZip：与QSpace同一开发者。集所有同类产品所长的解压缩工具（\ `官网可下 <https://ezip.awehunt.com/>`__\ ）
 
+Keta：解压缩软件
+
 ArcTime Pro：免费给视频自动加字幕，依赖 java 环境
 
 PPDuck3：优秀的图片压缩软件，体积减小但是画质肉眼观察不出变化，压缩完自动替换原图。免费使用一次仅能压缩10张，需要退出重进。
@@ -157,6 +229,43 @@ PPDuck3：优秀的图片压缩软件，体积减小但是画质肉眼观察不�
 Downie：网页视频下载，复制链接即可。
 
 GoodSync：和 windows 平台同步文件
+
+`IINA <https://iina.io/>`__\ ：万能的视频播放器，一个就够
+
+TUXERA：使得插入的 NTFS 磁盘格式，能写入（不装只能读取）
+
+4.18.6 brew 的使用
+------------------
+
+设置国内源
+
+.. code:: shell
+
+   git -C "$(brew --repo)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+
+   git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+
+   git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
+
+   brew update
+
+如果要还原
+
+.. code:: shell
+
+   git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew.git
+
+   git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core.git
+
+   git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask.git
+
+   brew update
+
+安装docker
+
+.. code:: shell
+
+   brew cask install docker
 
 参考文章
 --------
@@ -176,3 +285,4 @@ GoodSync：和 windows 平台同步文件
 
 .. |image0| image:: http://image.python-online.cn/20190810161513.png
 .. |image1| image:: http://image.python-online.cn/20190810162315.png
+

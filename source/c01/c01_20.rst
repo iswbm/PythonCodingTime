@@ -113,3 +113,4 @@ self.jump了，因为首参不是 self，而如果使用@staticmethod
 .. |image1| image:: http://image.python-online.cn/20190630104956.png
 .. |image2| image:: http://image.python-online.cn/20190630105735.png
 .. |image3| image:: http://image.python-online.cn/20190630105600.png
+

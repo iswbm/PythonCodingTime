@@ -1,182 +1,147 @@
-9.9 Go语言命名编码规范
-======================
+9.24 panic 和 recover
+=====================
 
-每个语言都有自己特色的命名规范，学习该语言的命名规范，能让你写出来的代码更加易读。
+编程语言一般都会有异常捕获机制，在 Python 中 是使用\ ``raise`` 和
+``try-except`` 语句来实现的异常抛出和异常捕获的。
 
-以下内容整理自：\ `Go语言(Golang)编码规范 <https://www.bookstack.cn/books/go-code-convention>`__
+在 Golang
+中，有不少常规错误，在编译阶段就能提前告警，比如语法错误或类型错误等，但是有些错误仅能在程序运行后才能发生，比如数组访问越界、空指针引用等，这些运行时错误会引起程序退出。
 
-命名规范分为以下几点
+当然能触发程序宕机退出的，也可以是我们自己，比如经过检查判断，当前环境无法达到我们程序进行的预期条件时（比如一个服务指定监听端口被其他程序占用），可以手动触发
+panic，让程序退出停止运行。
 
-**1. 文件命名**
+1. 触发panic
+------------
 
-文件名应一律使用小写（因为Windows文件名不区分大小写？），
-不同单词之间用下划线分割。
+手动触发宕机，是非常简单的一件事，只需要调用 panic
+这个内置函数即可，就像这样子
 
-应用的主入口应当为 main.go ，或者为应用名的全小写形式，比如
-MyBlog的入口应当为 myblog.go
+.. code:: go
 
-**2. 常量命名**
+   package main
 
--  常量均需使用全部大写字母组成，并使用下划线分词：
+   func main() {
+       panic("crash")
+   }
 
-   .. code:: go
+运行后，直接报错宕机
 
-        const APP_VER = "0.7.0.1110 Beta"
+.. code:: shell
 
--  如果是枚举类型的常量，需要先创建相应类型：
+   $ go run main.go
+   go run main.go
+   panic: crash
 
-   .. code:: go
+   goroutine 1 [running]:
+   main.main()
+           E:/MING-Code/GoPlayer/src/imooc.com/ccmouse/learngo/main.go:4 +0x40
+   exit status 2
 
-      type Scheme string
-      const (
-          HTTP  Scheme = "http"
-          HTTPS Scheme = "https"
-      )
+2. 捕获 panic
+-------------
 
--  如果模块的功能较为复杂、常量名称容易混淆的情况下，为了更好地区分枚举类型，可以使用完整的前缀：
+发生了异常，有时候就得捕获，就像 Python 中的\ ``except`` 一样，那 Golang
+中是如何做到的呢？
 
-   .. code:: go
+这就不得不引出另外一个内建函数 –
+``recover``\ ，它可以让程序在发生宕机后起生回生。
 
-        type PullRequestStatus int
-        const (
-            PULL_REQUEST_STATUS_CONFLICT PullRequestStatus = iota
-            PULL_REQUEST_STATUS_CHECKING
-            PULL_REQUEST_STATUS_MERGEABLE
-        )
+但是 recover 的使用，有一个条件，就是它必须在 defer
+函数中才能生效，其他作用域下，它是不工作的。
 
-**3. 变量命名**
+这是一个简单的例子
 
-使用驼峰命名法
+.. code:: go
 
--  在相对简单的环境（对象数量少、针对性强）中，可以将完整单词简写为单个字母，例如：user写为u
--  若该变量为 bool 类型，则名称应以 ``Has``, ``Is``, ``Can`` 或
-   ``Allow`` 开头。例如：isExist ，hasConflict 。
--  其他一般情况下首单词全小写，其后各单词首字母大写。例如：numShips 和
-   startDate 。
--  若变量中有特有名词（以下列出），且变量为私有，则首单司还是使用全小写，如
-   ``apiClient``\ 。
--  若变量中有特有名词（以下列出），那首单词就要变成全大写。例如：APIClient
+   import "fmt"
 
-下面列举了一些常见的特有名词：
+   func set_data(x int) {
+       defer func() {
+           // recover() 可以将捕获到的panic信息打印
+           if err := recover(); err != nil {
+               fmt.Println(err)
+           }
+       }()
+
+       // 故意制造数组越界，触发 panic
+       var arr [10]int
+       arr[x] = 88
+   }
+
+   func main() {
+       set_data(20)
+
+       // 如果能执行到这句，说明panic被捕获了
+       // 后续的程序能继续运行
+       fmt.Println("everything is ok")
+   }
+
+运行后，输出如下
+
+.. code:: go
+
+   $ go run main.go
+   runtime error: index out of range [20] with length 10
+   everything is ok
+
+通常来说，不应该对进入 panic
+宕机的程序做任何处理，但有时，需要我们可以从宕机中恢复，至少我们可以在程序崩溃前，做一些操作，举个例子，当
+web
+服务器遇到不可预料的严重问题时，在崩溃前应该将所有的连接关闭，如果不做任何处理，会使得客户端一直处于等待状态，如果
+web 服务器还在开发阶段，服务器甚至可以将异常信息反馈到客户端，帮助调试。
+
+3. 无法跨协程
+-------------
+
+从上面的例子，可以看到，即使 panic 会导致整个程序退出，但在退出前，若有
+defer 延迟函数，还是得执行完 defer 。
+
+但是这个 defer 在多个协程之间是没有效果，在子协程里触发
+panic，只能触发自己协程内的 defer，而不能调用 main 协程里的 defer
+函数的。
+
+来做个实验就知道了
+
+.. code:: go
+
+   import (
+       "fmt"
+       "time"
+   )
+
+   func main() {
+       // 这个 defer 并不会执行
+       defer fmt.Println("in main")
+       
+       go func() {
+           defer println("in goroutine")
+           panic("")
+       }()
+
+       time.Sleep(2 * time.Second)
+   }
+
+输出如下
 
 ::
 
-   // A GonicMapper that contains a list of common initialisms taken from golang/lint
-   var LintGonicMapper = GonicMapper{
-       "API":   true,
-       "ASCII": true,
-       "CPU":   true,
-       "CSS":   true,
-       "DNS":   true,
-       "EOF":   true,
-       "GUID":  true,
-       "HTML":  true,
-       "HTTP":  true,
-       "HTTPS": true,
-       "ID":    true,
-       "IP":    true,
-       "JSON":  true,
-       "LHS":   true,
-       "QPS":   true,
-       "RAM":   true,
-       "RHS":   true,
-       "RPC":   true,
-       "SLA":   true,
-       "SMTP":  true,
-       "SSH":   true,
-       "TLS":   true,
-       "TTL":   true,
-       "UI":    true,
-       "UID":   true,
-       "UUID":  true,
-       "URI":   true,
-       "URL":   true,
-       "UTF8":  true,
-       "VM":    true,
-       "XML":   true,
-       "XSRF":  true,
-       "XSS":   true,
-   }
+   in goroutine
+   panic:
 
-**接口命名**
+   goroutine 6 [running]:
+   main.main.func1()
+           E:/MING-Code/main.go:12 +0x7b
+   created by main.main
+           E:/MING-Code/main.go:10 +0xbc
+   exit status 2
 
-使用驼峰命名法，可以用 type alias 来定义大写开头的type 给包外访问。
+总结一下
+--------
 
-.. code:: go
+Golang 异常的抛出与捕获，依赖两个内置函数：
 
-   type helloWorld interface {
-       func Hello();
-   }
+-  panic：抛出异常，使程序崩溃
+-  recover：捕获异常，恢复程序
 
-   type SayHello helloWorld
-
-**注释规范**
-
-单行注释使用 ``//`` ，多行注释使用 ``/* comment */``
-
-.. code:: go
-
-   // go语言
-
-   /*
-   Go 语言
-   Hello, World
-   */
-
--  所有导出对象都需要注释说明其用途；非导出对象根据情况进行注释。
-
--  如果对象可数且无明确指定数量的情况下，一律使用单数形式和一般进行时描述；否则使用复数形式。
-
--  包、函数、方法和类型的注释说明都是一个完整的句子。
-
--  句子类型的注释首字母均需大写；短语类型的注释首字母需小写。
-
--  注释的单行长度不能超过 80 个字符。
-
--  包级别的注释说明，只需要在一个源文件中注释即可，并且放在 package 之前
-
--  如果是特别复杂的包，可单独创建 doc.go 文件说明
-
--  类型的定义一般都以单数形式描述：
-
-   .. code:: go
-
-        // Request represents a request to run a command.  type Request struct { ...
-
--  如果为接口，则一般以以下形式描述：
-
-   .. code:: go
-
-        // FileInfo is the interface that describes a file and is returned by Stat and Lstat.
-        type FileInfo interface { ...
-
--  函数与方法的注释需以函数或方法的名称作为开头：
-
-   .. code:: go
-
-        // Post returns *BeegoHttpRequest with POST method.
-
--  如果一句话不足以说明全部问题，则可换行继续进行更加细致的描述：
-
-   .. code:: go
-
-        // Copy copies file from source to target path.
-        // It returns false and error when error occurs in underlying function calls.
-
--  若函数或方法为判断类型（返回值主要为 ``bool`` 类型），则以
-   ``<name> returns true if`` 开头：
-
-   .. code:: go
-
-        // HasPrefix returns true if name has any string in given slice as prefix.
-        func HasPrefix(name string, prefixes []string) bool { ...
-
-特别注释
-
--  TODE：提醒维护人员此部分代码待完成
--  FIXME：提醒维护人员此处有BUG待修复
--  NOTE：维护人员要关注的一些问题说明
-
-.. figure:: http://image.python-online.cn/20191117155836.png
-   :alt: 关注公众号，获取最新干货！
-
+revocer 调用后，抛出的 panic 将会在此外终结，不会再外抛，但是
+recover，并不能任意使用，它有强制要求，必须得在 defer 下才能发挥用途。

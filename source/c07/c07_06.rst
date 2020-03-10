@@ -333,3 +333,4 @@ centos的配置文件路径如下，ubuntu的有所不同
 .. |image0| image:: https://i.loli.net/2017/12/30/5a473ba8f374f.png
 .. |image1| image:: https://i.loli.net/2018/01/03/5a4ce6eeaff7d.png
 .. |image2| image:: https://i.loli.net/2018/01/03/5a4ce964d3e73.png
+

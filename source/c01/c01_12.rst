@@ -160,3 +160,4 @@ Python2默认是使用ASCII编码，这也是出现编码问题的罪魁祸首�
 
 .. |image0| image:: https://i.loli.net/2017/08/02/598168fe2b016.png
 .. |image1| image:: https://i.loli.net/2017/08/02/59816d652aeb9.png
+

@@ -178,3 +178,4 @@ ubuntu的启动设备。就它了，选择进入系统。接下来，就是选�
 .. |image14| image:: http://image.python-online.cn/20190511163750.png
 .. |image15| image:: http://image.python-online.cn/20190511163757.png
 .. |image16| image:: http://image.python-online.cn/20190511163805.png
+

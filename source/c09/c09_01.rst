@@ -93,7 +93,7 @@ Goland 下载地址：https://download.jetbrains.com/go/goland-2019.2.3.exe
 -  激活码.txt：激活码
 
 将 jetbrains-agent.jar 拷贝到 你的 Goland
-安装目录的bin文件夹下，我的路径是：E::raw-latex:`\Program `Files:raw-latex:`\JetBrains`:raw-latex:`\GoLand 2019.2`.3:raw-latex:`\bin`
+安装目录的bin文件夹下，我的路径是：E::raw-latex:`\Program `Files:raw-latex:`\JetBrains`:raw-latex:`\GoLand `2019.2.3:raw-latex:`\bin`
 
 然后用编辑器打开这两个文件
 
@@ -354,3 +354,4 @@ auto，必须为小写，不能为为true或false，也不能为1或0。这里�
 .. |image25| image:: http://image.python-online.cn/20200109213056.png
 .. |image26| image:: http://image.python-online.cn/20200109214117.png
 .. |image27| image:: http://image.python-online.cn/20200109154657.png
+

@@ -832,3 +832,4 @@ bash窗口，不然会提示找不到npm命令）
 .. |image4| image:: http://image.python-online.cn/17-9-9/63041495.jpg
 .. |image5| image:: https://i.loli.net/2018/04/15/5ad3018e18cc7.png
 .. |image6| image:: https://i.loli.net/2018/04/15/5ad31888232e9.png
+

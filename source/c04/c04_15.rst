@@ -460,7 +460,7 @@ PyCharm 版本有效，可以实现永久激活（到 2099 /
 **第二步**\ ：
 
 若是 Windows 系统，请找到并进入你的 PyCharm
-安装启动目录（以我的为例）：E::raw-latex:`\Program `Files:raw-latex:`\JetBrains`:raw-latex:`\PyCharm 2017.1`.5:raw-latex:`\bin`
+安装启动目录（以我的为例）：E::raw-latex:`\Program `Files:raw-latex:`\JetBrains`:raw-latex:`\PyCharm `2017.1.5:raw-latex:`\bin`
 
 将第一步下载的 jar 包放入这个目录，并打开如下两个以 ``vmoptions``
 后缀结尾的文件：
@@ -1167,3 +1167,4 @@ Debug ，而远程调试需要不少前置步骤。
 .. |image97| image:: http://image.python-online.cn/20191211102826.png
 .. |image98| image:: http://image.python-online.cn/20191211133836.png
 .. |image99| image:: http://image.python-online.cn/20191211143510.png
+

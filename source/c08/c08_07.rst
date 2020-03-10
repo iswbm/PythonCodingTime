@@ -163,3 +163,4 @@ GPU 作为一种硬件资源，同样需要在模板中配置，配置方式是�
 .. |image8| image:: http://image.python-online.cn/20190528105021.png
 .. |image9| image:: http://image.python-online.cn/20190528114526.png
 .. |image10| image:: http://image.python-online.cn/20190606185531.png
+

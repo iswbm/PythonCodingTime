@@ -210,3 +210,4 @@ subplot，一个是axes。这两个概念将贯穿整个 matplotlib
 .. |image4| image:: http://image.python-online.cn/20190511165211.png
 .. |image5| image:: http://image.python-online.cn/20190511165221.png
 .. |image6| image:: http://image.python-online.cn/20190511165229.png
+

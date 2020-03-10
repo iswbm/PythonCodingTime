@@ -34,6 +34,7 @@
 - 1.33 [如何调试已经运行中的程序](http://python-online.cn/zh_CN/latest/c01/c01_33.html)
 - 1.34 [每日一库：sh，最优雅的命令调用方式](http://python-online.cn/zh_CN/latest/c01/c01_34.html)
 - 1.35 [使用 Python 远程登陆服务器的利器](http://python-online.cn/zh_CN/latest/c01/c01_35.html)
+- 1.36 [每日一库：pretty_errors 解决bug 洁癖](http://python-online.cn/zh_CN/latest/c01/c01_36.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python-online.cn/zh_CN/latest/c02/c02_01.html)
@@ -76,7 +77,7 @@
 - 4.15 [30个 PyCharm 实用技巧](http://python-online.cn/zh_CN/latest/c04/c04_15.html)
 - 4.16 [Python 开发技巧集合](http://python-online.cn/zh_CN/latest/c04/c04_16.html)
 - 4.17 [详解 23 种设计模式](http://python-online.cn/zh_CN/latest/c04/c04_17.html)
-- 4.18 [Mac 高效工具](http://python-online.cn/zh_CN/latest/c04/c04_18.html)
+- 4.18 [如何上手Mac ？](http://python-online.cn/zh_CN/latest/c04/c04_18.html)
 - 4.19 [程序员编码必学：Vim](http://python-online.cn/zh_CN/latest/c04/c04_19.html)
 - 4.20 [学会使用谷歌搜索引擎](http://python-online.cn/zh_CN/latest/c04/c04_20.html)
 - 4.21 [最全的 pip 使用指南，50% 你可能没用过](http://python-online.cn/zh_CN/latest/c04/c04_21.html)
@@ -155,9 +156,11 @@
 - 9.19 [学习 Go 协程：详解信道/通道](http://python-online.cn/zh_CN/latest/c09/c09_19.html)
 - 9.20 [几个信道死锁经典错误案例详解](http://python-online.cn/zh_CN/latest/c09/c09_20.html)
 - 9.21 [学习 Go 协程：WaitGroup](http://python-online.cn/zh_CN/latest/c09/c09_21.html)
+- 9.22 [学习 Go 协程：互斥锁和读写锁](http://python-online.cn/zh_CN/latest/c09/c09_22.html)
 - 9.23 [学习一些常见的并发模型](http://python-online.cn/zh_CN/latest/c09/c09_23.html)
-- 9.9 [Go语言命名编码规范](http://python-online.cn/zh_CN/latest/c09/c09_24.html)
+- 9.24 [panic 和 recover](http://python-online.cn/zh_CN/latest/c09/c09_24.html)
 - 9.25 [Go语言的包依赖管理](http://python-online.cn/zh_CN/latest/c09/c09_25.html)
+- 9.26 [Go语言命名编码规范](http://python-online.cn/zh_CN/latest/c09/c09_26.html)
 - 9.27 [go 命令详解](http://python-online.cn/zh_CN/latest/c09/c09_27.html)
 - 9.28 [函数式编程](http://python-online.cn/zh_CN/latest/c09/c09_28.html)
 
