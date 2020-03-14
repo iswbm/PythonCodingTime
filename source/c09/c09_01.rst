@@ -219,8 +219,14 @@ Code，其记录的GOPATH始终指向%USERPROFILE%:raw-latex:`\go`），
 
 |image20|
 
-随便点开一个 go 文件，在你的右下角会提示要你安装一些工具，点击
-``Install All``
+随便点开一个 go
+文件，在你的右下角会提示要你安装一些工具，安装的包有些由于墙的原因，无法下载，为了保证下载顺利，可以设置一下代理。
+
+.. code:: shell
+
+   $ go env -w GOPROXY=https://goproxy.cn,direct
+
+然后再点击 ``Install All``
 
 |image21|
 
@@ -228,27 +234,17 @@ Code，其记录的GOPATH始终指向%USERPROFILE%:raw-latex:`\go`），
 
 |image22|
 
-查看 OUTPUT 会有一些安装失败的信息。
+安装的 exe 文件会放在 %GOPATH%/bin 下，也就是 ``F:\Go-Player\bin``
 
 |image23|
 
-把这两条单独拿出来执行吧（记住执行的话，要切回 %GOPATH%），先使用
-``go get`` 下载，再使用 ``go install``
-安装（若你想安装其他的包，其实也是一样的逻辑）。
+而此的 src 目录结构是这样的
 
 |image24|
 
-安装的 exe 文件会放在 %GOPATH%/bin 下，也就是 ``F:\Go-Player\bin``
-
-|image25|
-
-而此的 src 目录结构是这样的
-
-|image26|
-
 到这时环境配置完成，编写 HelloWorld，并运行查看输出，一切完成。
 
-|image27|
+|image25|
 
 5. 配置环境变量
 ---------------
@@ -272,7 +268,7 @@ Code，其记录的GOPATH始终指向%USERPROFILE%:raw-latex:`\go`），
    set GOOS=windows
    set GOPATH=E:\MING-Code\GoPlayer
    set GOPRIVATE=
-   set GOPROXY=https://proxy.golang.org,direct
+   set GOPROXY=https://goproxy.cn,direct
    set GOROOT=D:\Program Files (x86)\Go-1.13.6
    set GOSUMDB=sum.golang.org
    set GOTMPDIR=
@@ -301,26 +297,19 @@ Code，其记录的GOPATH始终指向%USERPROFILE%:raw-latex:`\go`），
    $ go env GOPROXY
    https://goproxy.cn,direct
 
-其中有几个比较重要的，我这里会讲一下。
+以上环境变量很多，这里仅设置下面这两个就足够了
 
-``GOPATH``\ ：
-
-``GOROOT``\ ：
-
-``GOPROXY``\ ：你安装下载包的时候去哪里下载，一条命令即可，更多详情可以查看
-`Github ·
-GoProxy <https://github.com/goproxy/goproxy.cn/blob/master/README.zh-CN.md>`__
-
-.. code:: shell
-
-   $ go env -w GOPROXY=https://goproxy.cn,direct
-
-``GO111MODULE``\ ：on、 off或
-auto，必须为小写，不能为为true或false，也不能为1或0。这里推荐设置为on
+-  一个是GO111MODULE 设置为 on，表示使用 go modules 模式
 
 .. code:: shell
 
    $ go env -w GO111MODULE=on
+
+-  一个是开启代理，防止下载包失败（前面可能你已经设置过）
+
+.. code:: shell
+
+   $ go env -w GOPROXY=https://goproxy.cn,direct
 
 .. figure:: http://image.python-online.cn/20191117155836.png
    :alt: 关注公众号，获取最新干货！
@@ -349,9 +338,7 @@ auto，必须为小写，不能为为true或false，也不能为1或0。这里�
 .. |image20| image:: http://image.python-online.cn/20200109153948.png
 .. |image21| image:: http://image.python-online.cn/20200109210654.png
 .. |image22| image:: http://image.python-online.cn/20200109211543.png
-.. |image23| image:: http://image.python-online.cn/20200109212824.png
-.. |image24| image:: http://image.python-online.cn/20200109213032.png
-.. |image25| image:: http://image.python-online.cn/20200109213056.png
-.. |image26| image:: http://image.python-online.cn/20200109214117.png
-.. |image27| image:: http://image.python-online.cn/20200109154657.png
+.. |image23| image:: http://image.python-online.cn/20200109213056.png
+.. |image24| image:: http://image.python-online.cn/20200109214117.png
+.. |image25| image:: http://image.python-online.cn/20200109154657.png
 

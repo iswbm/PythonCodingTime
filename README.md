@@ -116,6 +116,7 @@
 - 7.16 [Linux 运维之路](http://python-online.cn/zh_CN/latest/c07/c07_16.html)
 - 1.17 [ansible 自定义 Jinja2 过滤器](http://python-online.cn/zh_CN/latest/c07/c07_17.html)
 - 7.18 [Shell中去除字符串前后空格的方法](http://python-online.cn/zh_CN/latest/c07/c07_18.html)
+- 7.19 [Ansible 使用教程](http://python-online.cn/zh_CN/latest/c07/c07_19.html)
 
 ## 第八章：OpenStack
 - 8.1 [OpenStack 运维命令](http://python-online.cn/zh_CN/latest/c08/c08_01.html)
@@ -157,12 +158,13 @@
 - 9.20 [几个信道死锁经典错误案例详解](http://python-online.cn/zh_CN/latest/c09/c09_20.html)
 - 9.21 [学习 Go 协程：WaitGroup](http://python-online.cn/zh_CN/latest/c09/c09_21.html)
 - 9.22 [学习 Go 协程：互斥锁和读写锁](http://python-online.cn/zh_CN/latest/c09/c09_22.html)
-- 9.23 [学习一些常见的并发模型](http://python-online.cn/zh_CN/latest/c09/c09_23.html)
-- 9.24 [panic 和 recover](http://python-online.cn/zh_CN/latest/c09/c09_24.html)
-- 9.25 [Go语言的包依赖管理](http://python-online.cn/zh_CN/latest/c09/c09_25.html)
+- 9.23 [panic 和 recover](http://python-online.cn/zh_CN/latest/c09/c09_23.html)
+- 9.24 [超级详细的Go语言包管理方案演变及 go mod 入门](http://python-online.cn/zh_CN/latest/c09/c09_24.html)
 - 9.26 [Go语言命名编码规范](http://python-online.cn/zh_CN/latest/c09/c09_26.html)
 - 9.27 [go 命令详解](http://python-online.cn/zh_CN/latest/c09/c09_27.html)
 - 9.28 [函数式编程](http://python-online.cn/zh_CN/latest/c09/c09_28.html)
+- 9.29 [学习一些常见的并发模型](http://python-online.cn/zh_CN/latest/c09/c09_29.html)
+- 9.40 [推荐几个Go学习网站](http://python-online.cn/zh_CN/latest/c09/c09_40.html)
 
 ## 第十章：有趣的工具
 - 10.1 [情人节来了，教你使用 Python 来表白](http://python-online.cn/zh_CN/latest/c10/c10_01.html)

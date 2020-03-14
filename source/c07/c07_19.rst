@@ -1,0 +1,47 @@
+7.19 Ansible 使用教程
+=====================
+
+1. 环境准备
+-----------
+
+安装 Ansible ，需要 epel 源，所以要先配置一下
+
+.. code:: shell
+
+   $ pwd
+   /etc/yum.repos.d
+    
+   $ cat aliBase.repo
+   [aliBase]
+   name=aliBase
+   baseurl=https://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+   enabled=1
+   gpgcheck=1
+   gpgkey=https://mirrors.aliyun.com/centos/$releasever/os/$basearch/RPM-GPG-KEY-CentOS-$releasever
+    
+   $ cat aliEpel.repo
+   [aliEpel]
+   name=aliEpel
+   baseurl=https://mirrors.aliyun.com/epel/$releasever\Server/$basearch/
+   enabled=1
+   gpgcheck=0
+
+然后安装
+
+.. code:: shell
+
+   $ yum install ansible
+
+在管理节点生成密钥（公钥和私钥）对，然后将公钥放到要被 ansible
+管理的机器上。
+
+.. code:: shell
+
+   $ ssh-keygen
+   $ ssh-copy-id -i /root/.ssh/id_rsa.pub root@172.20.20.1
+
+运行第一条命令
+
+.. code:: shell
+
+   $ ansible 172.20.20.1 -m ping
