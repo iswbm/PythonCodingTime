@@ -24,11 +24,11 @@ if not repo.is_dirty():
     # 没有文件变更
     os._exit(0)
 
-base_link = "http://python-online.cn/zh_CN/latest/"
+base_link = "http://python.iswbm.com/en/latest/"
 readme_header = '''
-这是我的个人博客（ [MING's BLOG](http://python-online.cn/) ），主要写关于Python的一些思考总结。
+这是我的个人博客（ [Python编程时光](http://python.iswbm.com/) ），主要写关于Python的一些思考总结。
 
-关于搭建教程，感兴趣的可以查看这边：[Sphinx 搭建博客的图文教程](http://python-online.cn/zh_CN/latest/c04/c04_03.html)
+关于搭建教程，感兴趣的可以查看这边：[Sphinx 搭建博客的图文教程](http://python.iswbm.com/en/latest/c04/c04_03.html)
 '''
 readme_tooter = '''
 ---
