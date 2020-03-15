@@ -31,9 +31,6 @@
 
 ------------------------------
 
-.. figure:: http://image.python-online.cn/20191117155836.png
-   :alt: 关注公众号，获取最新文章
-
-
+.. figure:: http://image.python-online.cn/20200315144434.png
 
 .. _博客构建教程: http://python-online.cn/zh_CN/latest/c04/c04_03.html

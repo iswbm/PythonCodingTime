@@ -197,7 +197,7 @@ pip是python的安装工具，很多python的常用工具，都可以通过pip�
 
 -  https://www.cnblogs.com/stonehe/p/7944366.html
 
-.. figure:: http://image.python-online.cn/20191117155836.png
+.. figure:: http://image.python-online.cn/20200315144434.png
    :alt: 关注公众号，获取最新干货！
 
 

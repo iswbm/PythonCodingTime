@@ -683,7 +683,7 @@ Index）上，它是 Python
 -  http://blog.konghy.cn/2018/04/29/setup-dot-py/
 -  https://note.qidong.name/2018/01/python-setup-requires/
 
-.. figure:: http://image.python-online.cn/20191117155836.png
+.. figure:: http://image.python-online.cn/20200315144434.png
    :alt: 关注公众号，获取最新干货！
 
 

@@ -577,7 +577,7 @@ super 的实现原理，就交由你来自己完成。
 
 --------------
 
-.. figure:: http://image.python-online.cn/20191117155836.png
+.. figure:: http://image.python-online.cn/20200315144434.png
    :alt: 关注公众号，获取最新干货！
 
 

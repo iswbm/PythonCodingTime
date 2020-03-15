@@ -137,7 +137,7 @@ Jupyter NoteBook 里观察整个变化的过程。
 
 --------------
 
-.. figure:: http://image.python-online.cn/20191117155836.png
+.. figure:: http://image.python-online.cn/20200315144434.png
    :alt: 关注公众号，获取最新干货！
 
 

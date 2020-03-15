@@ -46,8 +46,8 @@ source_suffix = ['.rst']
 master_doc = 'index'
 
 # General information about the project.
-project = 'MING\'s BLOG' 
-copyright = 'Python编程时光'
+project = 'Python编程时光'
+copyright = '王炳明'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -91,10 +91,10 @@ latex_elements={# The paper size ('letterpaper' or 'a4paper').
 \XeTeXlinebreakskip = 0pt plus 1pt
 """}
 
-man_pages = [
-    ('index', 'python3-cookbook', '《Python编程时光》',
-     ['小明同学'], 1)
-]
+# man_pages = [
+#     ('index', 'python3-cookbook', '《Python编程时光》',
+#      ['小明同学'], 1)
+# ]
 
 # If true, show URL addresses after external links.
 #man_show_urls = False
@@ -105,11 +105,11 @@ man_pages = [
 # Grouping the document tree into Texinfo files. List of tuples
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
-texinfo_documents = [
-  ('index', 'Python-Time', '《Python编程时光》',
-   '小明同学', 'Python-Time', '《Python编程时光》',
-   'Miscellaneous'),
-]
+# texinfo_documents = [
+#   ('index', 'Python-Time', '《Python编程时光》',
+#    '小明同学', 'Python-Time', '《Python编程时光》',
+#    'Miscellaneous'),
+# ]
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

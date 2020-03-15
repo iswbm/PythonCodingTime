@@ -4,11 +4,11 @@
 
 * 姓名：     王炳明
 * 微信：     mrbensonwon
-* 公众号：   Python编程时光
+* 公众号：   《Python编程时光》&《Go编程时光》
 * Email：    wongbingming@163.com
 * GitHub：   https://github.com/bingmingwong
 
 --------------------------------------------
 
-.. image:: http://image.python-online.cn/20191117155836.png
+.. image:: http://image.python-online.cn/20200315144434.png
 

@@ -419,7 +419,7 @@ sgnificant digital)，LSD 的排序方式由键值的最右边开始，而 MSD
 
 --------------
 
-.. figure:: http://image.python-online.cn/20191117155836.png
+.. figure:: http://image.python-online.cn/20200315144434.png
    :alt: 关注公众号，获取最新干货！
 
 

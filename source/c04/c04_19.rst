@@ -719,6 +719,6 @@ n\ ``==``\ ，这种方式要求你所编辑的文件的扩展名是被vim所识
 
 --------------
 
-.. figure:: http://image.python-online.cn/20191117155836.png
+.. figure:: http://image.python-online.cn/20200315144434.png
    :alt: 关注公众号，获取最新干货！
 

@@ -19,3 +19,7 @@ Contents:
    thanks
    aboutme
    roadmap
+
+--------------
+
+.. figure:: http://image.python-online.cn/20200315144434.png

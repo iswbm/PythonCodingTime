@@ -259,6 +259,6 @@ Out），就是先进入队列的消息，将优先被消费。
 
 --------------
 
-.. figure:: http://image.python-online.cn/20191117155836.png
+.. figure:: http://image.python-online.cn/20200315144434.png
    :alt: 关注公众号，获取最新干货！
 

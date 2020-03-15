@@ -25,3 +25,7 @@
    :glob:
 
    ../c05/*
+
+--------------
+
+.. figure:: http://image.python-online.cn/20200315144434.png

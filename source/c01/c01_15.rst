@@ -78,6 +78,6 @@ comprehension），会产生整个列表，对大量数据的迭代会产生负�
 
 --------------
 
-.. figure:: http://image.python-online.cn/20191117155836.png
+.. figure:: http://image.python-online.cn/20200315144434.png
    :alt: 关注公众号，获取最新干货！
 
