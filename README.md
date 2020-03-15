@@ -135,39 +135,8 @@
 - 8.14 [支持 IPv6以及多运营商](http://python-online.cn/zh_CN/latest/c08/c08_14.html)
 - 8.15 [Neutron 源码解读](http://python-online.cn/zh_CN/latest/c08/c08_15.html)
 
-## 第九章：Go 语言之路
-- 9.1 [开发环境的搭建（Goland和VSCode）](http://python-online.cn/zh_CN/latest/c09/c09_01.html)
-- 9.2 [五种变量创建的方法](http://python-online.cn/zh_CN/latest/c09/c09_02.html)
-- 9.3 [详解数据类型：整型与浮点型](http://python-online.cn/zh_CN/latest/c09/c09_03.html)
-- 9.4 [详解数据类型：byte、rune与字符串](http://python-online.cn/zh_CN/latest/c09/c09_04.html)
-- 9.7 [详解数据类型：数组与切片](http://python-online.cn/zh_CN/latest/c09/c09_05.html)
-- 9.6 [详解数据类型：字典与布尔类型](http://python-online.cn/zh_CN/latest/c09/c09_06.html)
-- 9.7 [详解数据类型：指针](http://python-online.cn/zh_CN/latest/c09/c09_07.html)
-- 9.8 [面向对象编程：结构体与继承](http://python-online.cn/zh_CN/latest/c09/c09_08.html)
-- 9.9 [一篇文章理解 Go 里的函数](http://python-online.cn/zh_CN/latest/c09/c09_09.html)
-- 9.10 [Go语言流程控制：if-else](http://python-online.cn/zh_CN/latest/c09/c09_10.html)
-- 9.11 [Go语言流程控制：switch-case](http://python-online.cn/zh_CN/latest/c09/c09_11.html)
-- 9.11 [Go语言流程控制：for](http://python-online.cn/zh_CN/latest/c09/c09_12.html)
-- 9.13 [Go语言流程控制：goto 无条件跳转](http://python-online.cn/zh_CN/latest/c09/c09_13.html)
-- 9.14 [Go语言流程控制：defer 延迟语句](http://python-online.cn/zh_CN/latest/c09/c09_14.html)
-- 9.15 [面向对象编程：接口与多态](http://python-online.cn/zh_CN/latest/c09/c09_15.html)
-- 9.16 [关键字：make 和 new 的区别？](http://python-online.cn/zh_CN/latest/c09/c09_16.html)
-- 9.17 [理解语句块与作用域](http://python-online.cn/zh_CN/latest/c09/c09_17.html)
-- 9.18 [理解 Go 协程：goroutine](http://python-online.cn/zh_CN/latest/c09/c09_18.html)
-- 9.19 [学习 Go 协程：详解信道/通道](http://python-online.cn/zh_CN/latest/c09/c09_19.html)
-- 9.20 [几个信道死锁经典错误案例详解](http://python-online.cn/zh_CN/latest/c09/c09_20.html)
-- 9.21 [学习 Go 协程：WaitGroup](http://python-online.cn/zh_CN/latest/c09/c09_21.html)
-- 9.22 [学习 Go 协程：互斥锁和读写锁](http://python-online.cn/zh_CN/latest/c09/c09_22.html)
-- 9.23 [panic 和 recover](http://python-online.cn/zh_CN/latest/c09/c09_23.html)
-- 9.24 [超级详细的Go语言包管理方案演变及 go mod 入门](http://python-online.cn/zh_CN/latest/c09/c09_24.html)
-- 9.26 [Go语言命名编码规范](http://python-online.cn/zh_CN/latest/c09/c09_26.html)
-- 9.27 [go 命令详解](http://python-online.cn/zh_CN/latest/c09/c09_27.html)
-- 9.28 [函数式编程](http://python-online.cn/zh_CN/latest/c09/c09_28.html)
-- 9.29 [学习一些常见的并发模型](http://python-online.cn/zh_CN/latest/c09/c09_29.html)
-- 9.40 [推荐几个Go学习网站](http://python-online.cn/zh_CN/latest/c09/c09_40.html)
-
-## 第十章：有趣的工具
-- 10.1 [情人节来了，教你使用 Python 来表白](http://python-online.cn/zh_CN/latest/c10/c10_01.html)
+## 第九章：有趣的工具
+- 9.1 [情人节来了，教你使用 Python 来表白](http://python-online.cn/zh_CN/latest/c09/c09_01.html)
 
 
 ---
