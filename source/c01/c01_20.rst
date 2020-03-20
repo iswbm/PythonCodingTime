@@ -105,9 +105,10 @@ self.jump了，因为首参不是 self，而如果使用@staticmethod
 
 写这篇文章的起源，是前两天有位读者在交流里问到了相关的问题，正好没什么主题可以写，就拿过来做为素材整理一下，也正好没有写过静态方法、类方法的内容，没想到简单的东西，也能写出这么多的内容出来。
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/20190630111243.png
 .. |image1| image:: http://image.python-online.cn/20190630104956.png

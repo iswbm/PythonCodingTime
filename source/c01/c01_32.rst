@@ -31,6 +31,7 @@ requests.get(“https://www.baidu.com”)
 
    python3 -m pip install --user requests aiohttp cryptography pymysql prettytable sh Fabric paramiko apscheduler bashplotlib httpie PathPicker -i https://pypi.douban.com/simple
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！

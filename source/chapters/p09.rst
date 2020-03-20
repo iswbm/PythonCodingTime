@@ -18,4 +18,4 @@ Python 是一门可以快速开发的语言，使用它可以用最少的时间�
 
 --------------
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png

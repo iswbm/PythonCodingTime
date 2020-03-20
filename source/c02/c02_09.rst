@@ -244,9 +244,10 @@ emmm，和上面的结果是一样的。nice
 
 --------------
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |普通函数中 不能使用 await| image:: https://i.loli.net/2018/05/26/5b09794f45340.png
 .. |async 中 不能使用yield| image:: https://i.loli.net/2018/05/26/5b0978b646230.png

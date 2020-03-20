@@ -104,6 +104,7 @@ Python中有一个基础的数据结构，叫做元组（tuple），但是一般
 
 --------------
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！

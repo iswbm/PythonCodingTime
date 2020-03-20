@@ -56,6 +56,8 @@
 
 25、[ 别笑！Python 新手这五大坑你躲不过](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485573&idx=1&sn=362e7c5e73c27942e8250375257620e2&chksm=e8866867dff1e17140dc043b5dd33eec0e94e1616eab7e4b415bb767883d46d58a7243fb198f#rd)
 
+26、[Python 3.9 发布，字典的合并操作符终于来了](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485825&idx=1&sn=04075357936423097f692fa19857c3aa&chksm=e8866963dff1e075707b605fb1352f7760fb1b41040bdda4dec6b83370af37e009424d24f65e&token=2013245174&lang=zh_CN#rd)
+
 ### 1.2 开发技巧
 
 1、[让Python中类的属性具有惰性求值的能力](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485759&idx=2&sn=e32b66c4666f96f84572738549a47a24&chksm=e88669dddff1e0cb0a4b6e6e965c9570b273236fa58a54351ae3b118d6a4bcbd52e452109a63&token=1148998814&lang=zh_CN#rd)
@@ -190,6 +192,14 @@
 
 17、[为什么说线程是CPU调度的基本单位?](https://mp.weixin.qq.com/s/c3aZ-6UzZVD3_PvVhiDPWA)
 
+18、[非常适合小白的 Asyncio 教程](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485842&idx=1&sn=ab85dab95cf47046ddcc35b60e633c40&chksm=e8866970dff1e066381c0ba53fe09e34b8f1ce52bbbfe568c1ee66b9cbad87f43b442895c770&token=2013245174&lang=zh_CN#rd)
+
+### 2.5 实战练习
+
+1、[适合 Python 新手练习的绝佳项目](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485898&idx=2&sn=36a1b1a94dece0a290652da23679cff0&chksm=e8866928dff1e03e58b95b3cd24dbc23e368b6eb2c0599b2efe814924e21ec5c01935b2e0455&token=2013245174&lang=zh_CN#rd)
+
+2、[4个Python实战项目，让你瞬间读懂Python！](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485852&idx=2&sn=eb3471a260cce835a755a780d6cc690d&chksm=e886697edff1e068bd0f9d456e26ee5ebe482580457951e42807e731d266c95f00c37de22fea&token=2013245174&lang=zh_CN#rd)
+
 ## 03. 数据分析
 
 ### 3.1 基础库
@@ -298,6 +308,12 @@
 
 7、[ 为了选出最合适的 http客户端，我做了个测评](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485651&idx=1&sn=647c22ac66e469ccc33478457dadf224&chksm=e8866831dff1e1279149ff1e3af84bef86d24c524b7b7c14e9c519cf7c4739fa8f10dcc4a8d0#rd)
 
+8、[凭什么 FastAPI 火成这样？看这篇文章就知道了](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485891&idx=1&sn=82bde3e83435ebb6beb7e3581f12f7b0&chksm=e8866921dff1e0376befb029e9f1d81f33b0fa55242182f8de20d2a6e6b0cce0b5efd02f9aef&token=2013245174&lang=zh_CN#rd)
+
+9、[要想 BUG 变得富有美感，这个库你一定要看](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485889&idx=1&sn=0258eb138dce2c71b533d340770d5d09&chksm=e8866923dff1e03548dee4f780b410c22b51e1c3ffde3ef814f6a9b94e49af941fc04c79a660&token=2013245174&lang=zh_CN#rd)
+
+10、[如何使用 Python 输出漂亮的表格？](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485841&idx=2&sn=705c123abed5441a52f8640b65f3c400&chksm=e8866973dff1e0650e4b2e025d0e86b3aedeb7ea8f68ad560f37cb033f36660b6eee15fb3ce4&token=2013245174&lang=zh_CN#rd)
+
 ## 05. 网络爬虫
 
 1、[想逆向我的 js 代码？先过了我的反 debug 再说吧！](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247484876&idx=1&sn=ed81400f77deb2af18311f8e42e9b11b&scene=21#wechat_redirect)
@@ -354,9 +370,13 @@
 
 5、[ 神器！这款VSCode插件能填满Github绿色格子](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485595&idx=1&sn=65df21ab0b4042953dd8257bea8b1848&chksm=e8866879dff1e16fff97584467f2f1728f9c2da007894ae062e9201d53b82a30054036f8e81e#rd)
 
+6、[Git 中冷门却又非常需要的高级用法](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485890&idx=2&sn=528df28585ec16114324e391dbfebab4&chksm=e8866920dff1e036d5da7f5dfe3c944ef8b13d72f022d72b209117120c7e27ebb71036b99893&token=2013245174&lang=zh_CN#rd)
+
 ### 7.3 MySQL
 
 1、[写给程序员的 MySQL 面试高频 100 问](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485321&idx=1&sn=30432df24d4e7858a475192bcf233914&scene=21#wechat_redirect)
+
+2、[开发人员必学的几点 SQL 优化点](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485892&idx=1&sn=e0b526002a5568391e75fb0cac60ab0b&chksm=e8866926dff1e0303f2717e95ff801c2550d97812c1a775cc232d48183af802db1be54f26105&token=2013245174&lang=zh_CN#rd)
 
 ### 7.4 Chrome
 
@@ -420,6 +440,8 @@
 
 2、[ 如何探测虚拟环境是物理机、虚拟机还是容器？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485401&idx=2&sn=8bfb6e1a71e0777a4d5e55f64b55ace5&chksm=e886673bdff1ee2d8acce291e402cd2ae0c7f64e455fdeea158eb53e535ee79b2aadc449935e#rd)
 
+3、[超详细教你如何阅读 OpenStack 源码？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485899&idx=1&sn=7a578a553c67e794ef6ec2f463864a46&chksm=e8866929dff1e03fa8152751967106e9262980db6afdff106fe9e39854d24d25494b3e8a3a4e&token=2013245174&lang=zh_CN#rd)
+
 ## 11. 职场相关
 
 1、[一个专科生的 Python 转行之路](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485012&idx=1&sn=751796e63a30d84be01486619b5fb806&scene=21#wechat_redirect)
@@ -436,4 +458,4 @@
 
 ---
 
-![关注公众号，获取最新干货！](http://image.python-online.cn/20200315144434.png)
+![关注公众号，获取最新干货！](http://image.python-online.cn/image-20200320125724880.png)

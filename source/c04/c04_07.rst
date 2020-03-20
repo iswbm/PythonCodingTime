@@ -821,9 +821,10 @@ bash窗口，不然会提示找不到npm命令）
 
 --------------
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/17-9-9/50205036.jpg
 .. |image1| image:: http://image.python-online.cn/17-9-9/5214564.jpg

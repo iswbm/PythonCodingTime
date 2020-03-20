@@ -54,6 +54,38 @@ Python
 
 已经可以使用了。
 
+来试一下加几个参数：\ ``--foo`` 和 ``bar``
+
+其中 ``metavar`` 就相当于注释，在打印help的时候会显示
+
+.. code:: python
+
+   >>> parser = argparse.ArgumentParser()
+   >>> parser.add_argument('--foo', metavar='YYY')
+   >>> parser.add_argument('bar', metavar='XXX')
+   >>> parser.parse_args('X --foo Y'.split())
+   Namespace(bar='X', foo='Y')
+   >>> parser.print_help()
+   usage:  [-h] [--foo YYY] XXX
+
+   positional arguments:
+     XXX
+
+   optional arguments:
+     -h, --help  show this help message and exit
+     --foo YYY
+
+**参数来源**
+
+通常参数都是通过 ``sys.argv`` 获得。
+
+有时候也可以通过向
+``parser.parse_args()``\ 函数传入一段字符串列表，来解析。
+
+::
+
+   parser.parse_args('test --name wangbm'.split())
+
 1. 入门配置
 -----------
 
@@ -399,6 +431,7 @@ arguments）。
 
 --------------
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！

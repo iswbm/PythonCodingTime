@@ -498,9 +498,10 @@ app 的上下文信息是否已经 push 进去了，如果没有的话，就会�
 
 --------------
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: http://image.python-online.cn/Fuhww2CZdUv4mGqx-N0YqAuXUWlX
 .. |image1| image:: http://image.python-online.cn/FgI6y-_Ka-S20VCjyufsCIczKjup

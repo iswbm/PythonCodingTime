@@ -248,9 +248,10 @@
 
 --------------
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |课程大纲| image:: https://i.loli.net/2018/05/27/5b0a1523a0730.png
 .. |image1| image:: https://i.loli.net/2018/05/08/5af1781dbad7c.jpg

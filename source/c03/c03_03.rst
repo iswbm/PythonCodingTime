@@ -292,9 +292,10 @@
 
 --------------
 
-.. figure:: http://image.python-online.cn/20200315144434.png
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
+   关注公众号，获取最新干货！
 
 .. |image0| image:: https://i.loli.net/2018/04/30/5ae6c303c870c.png
 .. |image1| image:: https://i.loli.net/2018/04/30/5ae6c31b2d1c8.png
