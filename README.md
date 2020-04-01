@@ -35,6 +35,8 @@
 - 1.34 [每日一库：sh，最优雅的命令调用方式](http://python.iswbm.com/en/latest/c01/c01_34.html)
 - 1.35 [使用 Python 远程登陆服务器的利器](http://python.iswbm.com/en/latest/c01/c01_35.html)
 - 1.36 [每日一库：pretty_errors 解决bug 洁癖](http://python.iswbm.com/en/latest/c01/c01_36.html)
+- 1.37 [Python 炫技操作：条件语句的七种写法](http://python.iswbm.com/en/latest/c01/c01_37.html)
+- 1.38 [/usr/bin/env python 有什么用？](http://python.iswbm.com/en/latest/c01/c01_38.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python.iswbm.com/en/latest/c02/c02_01.html)

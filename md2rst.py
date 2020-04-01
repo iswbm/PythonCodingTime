@@ -10,9 +10,9 @@ from git import Repo
 osName = platform.system()
 repo_path ='.'
 if (osName == 'Windows'):
-    repo_path = 'E:\\MING-Git\\06. PythonCodingTime'
-    blog_path = 'E:\\MING-Git\\06. PythonCodingTime\\source'
-    index_path = 'E:\\MING-Git\\06. PythonCodingTime\\README.md'
+    repo_path = 'E:\\MING-Git\\PythonCodingTime'
+    blog_path = 'E:\\MING-Git\\PythonCodingTime\\source'
+    index_path = 'E:\\MING-Git\\PythonCodingTime\\README.md'
 elif (osName == 'Darwin'):
     repo_path = '/Users/MING/Github/PythonCodingTime/'
     blog_path = '/Users/MING/Github/PythonCodingTime/source'
