@@ -72,3 +72,4 @@ python 解释器都是 ``/usr/bin/python`` 。
 .. |image2| image:: http://image.python-online.cn/20200331184755.png
 .. |image3| image:: http://image.python-online.cn/20200331185741.png
 .. |image4| image:: http://image.python-online.cn/20200331190224.png
+

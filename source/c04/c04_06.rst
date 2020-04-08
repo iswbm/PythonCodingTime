@@ -179,6 +179,23 @@ add/commit 前撤销对文件的修改
 
 |image0|
 
+查看两个 commit 之间的修改
+
+::
+
+   $ git diff commit_id1 commit_id2
+   $ git diff commit_id^!
+
+   # 如果只想看改了哪些文件
+   $ git diff commit_id1 commit_id2 --stat
+
+查看某个 commit 的改动
+
+::
+
+   git show commit_id
+   git show --stat commit_id
+
 三、状态回滚
 ------------
 

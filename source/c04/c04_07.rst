@@ -3,27 +3,28 @@
 
 --------------
 
+现在越来越多的人喜欢利用Github搭建静态网站，原因不外乎简单省钱。本人也利用hexo+github搭建了本博客，用于分享一些心得。在此过程中，折腾博客的各种配置以及功能占具了我一部分时间，在此详细记录下我是如何利用hexo+github搭建静态博客以及一些配置相关问题，以免过后遗忘，且当备份之用。
+
 一、创建博客项目
 ----------------
-
---------------
 
 1.1 准备工作
 ~~~~~~~~~~~~
 
--  下载node.js并安装（官网下载安装），默认会安装npm。
+-  下载\ `node.js <http://nodejs.cn/download/>`__\ 并安装（官网下载安装），默认会安装npm。
 -  下载安装git（官网下载安装）
--  下载安装hexo。方法：打开cmd 运行\ *npm install -g hexo*\ （要翻墙）
+-  下载安装hexo。方法：打开终端
+   运行\ ``npm install -g hexo``\ （要翻墙）
+
+|image0|
 
 1.2 初始化项目
 ~~~~~~~~~~~~~~
 
--  新创建一个目录，比如叫做 MyBlog
--  进入该文件夹内，右击运行 Git Bash，执行\ ``hexo init`` （初始化项目）
+-  新创建一个目录，比如叫做 ``iswbm-blog``
+-  使用终端进入该文件夹内，执行\ ``hexo init`` （初始化项目）
 
-.. code:: shell
-
-   $ hexo init
+|image1|
 
 -  运行你的博客项目（用于调试），查看生成的文章是否符合自己的预期。
 
@@ -43,61 +44,68 @@
 
 按照下面的步骤来
 
--  在Github上创建名字为XXX.github.io的项目，XXX为自己的github用户名。
+-  在Github上创建名字为XXX.github.io的项目，XXX为自己的github用户名。然后
+   clone 到你的本地电脑上。
 
--  打开本地的MyBlog
-   文件夹内的\ ``_config.yml``\ 配置文件，将其中的type设置为git，其他配置如下
+   |image2|
 
-::
+-  打开该文件夹内的\ ``_config.yml``\ 配置文件，将其中的type设置为git，其他配置如下
+
+.. code:: yml
 
    # Deployment
    ## Docs: https://hexo.io/docs/deployment.html
    deploy:
      type: git
-     repository: https://github.com/BingmingWong/BingmingWong.github.io.git
+     repository: https://github.com/iswbm/iswbm.github.io.git
      branch: master
 
 -  安装Git部署插件
 
-::
+.. code:: shell
 
-   npm install hexo-deployer-git --save
+   $ npm install hexo-deployer-git --save
 
 -  重新生成静态文件，部署上线。
 
-::
+.. code:: shell
 
-   hexo clean 
-   hexo g 
-   hexo d
+   $ hexo clean 
+   $ hexo g 
+   $ hexo d
 
-一切完成之后，你就可以通过 来访问我的博客了。
+在第一次部署后，请到 github 后台，补充你的 网站信息，否则无法访问。
+
+|image3|
+
+一切完成之后，你就可以通过上面的网址来访问我的博客了。
 
 1.4 绑定域名
 ~~~~~~~~~~~~
 
 做为一个个人博客，使用 github的域名，明显不够个性化。
 
-我们可以自己去阿里云购买一个域名，然后将其解析到你的博客地址上。
+我们可以自己去阿里云购买一个域名（我的是 iswbm.com），然后将其 CNAME
+到你的博客地址上。
 
--  去阿里云 域名云解析 其中\ ``151.101.73.147``\ 是我的
-   ``bingmingwong.github.io`` 的ip，可以通过ping获得 |image0| |image1|
+-  去阿里云 域名云解析 |image4|
 
--  然后到对应的GitHub仓库，绑定我的个性域名 |image2|
+-  然后到对应的GitHub仓库，绑定我的个性域名 |image5|
 
--  然后再本地项目\ ``blog/source/``\ 下新建\ ``CNAME``\ 文件，内容就是我的域名
+-  然后再在你本地的项目里的 ``source`` 目录下新建
+   ``CNAME``\ 文件，内容就是我的域名
 
    ::
 
-      wongbingming.me
+      iswbm.com
 
 -  然后重新部署，使配置生效。这样就可以使用域名访问。
 
-   ::
+   .. code:: shell
 
-      hexo clean
-      hexo g
-      hexo d
+      $ hexo clean 
+      $ hexo g 
+      $ hexo d
 
 二、丰富博客页面
 ----------------
@@ -135,7 +143,7 @@
    Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.
    {% endblockquote %}
 
-效果如下 |image3|
+效果如下 |image6|
 
 3.2 一键生成md头格式
 ~~~~~~~~~~~~~~~~~~~~
@@ -158,6 +166,11 @@
 然后使用
 ``hexo new``\ 就可以一键生成新文章的头格式了，不用手动去搬运或者书写。相当方便。
 
+.. figure:: http://image.python-online.cn/image-20200321201555321.png
+   :alt: image-20200321201555321
+
+   image-20200321201555321
+
 四、美化博客
 ------------
 
@@ -166,13 +179,14 @@
 4.1 更换主题
 ~~~~~~~~~~~~
 
-下载主题
+在 hexo 部署目录下，使用如下命令下载主题
 
 ::
 
    git clone https://github.com/iissnan/hexo-theme-next themes/next
 
-打开站点配置文件
+打开站点配置文件（部署代码根目录下的
+``_config.yml``\ ）选择刚刚下载的next主题
 
 ::
 
@@ -181,8 +195,7 @@
    ## Themes: https://hexo.io/themes/
    theme: next
 
-下面都是\ ``..\themes\next/_config.yml``\ 中设置
-选择主题样式（取消注释即可）
+然后再编辑 ``themes/next/_config.yml`` 选择主题样式
 
 ::
 
@@ -193,14 +206,14 @@
 
 ::
 
-   1. 制作icon图标，最好是32x32，可以在这里制作：http://www.faviconico.org/favicon
+   1. 制作icon图标，最好是32x32，可以在这里制作：https://tool.lu/favicon/
 
    2. 将制作的ico文件，放到next主题source/images目录下
 
-   3. 配置ico文件路径。配置文件在 ..\themes\next\_config.yml
-
-   # Put your favicon.ico into `hexo-site/source/` directory.
-   favicon: images/favicon.ico
+   3. 配置ico文件路径。配置文件在 themes/next/_config.yml
+   favicon:
+     small: /images/favicon-16x16-next.ico
+     medium: /images/favicon-32x32-next.ico
 
 4.3 菜单栏和图标
 ~~~~~~~~~~~~~~~~
@@ -227,7 +240,7 @@
 ::
 
    social:
-     GitHub: https://github.com/BingmingWong || github
+     GitHub: https://github.com/iswbm || github
      E-Mail: mailto:wongbingming@163.com || envelope-o
      微博: http://weibo.com/942663728 || weibo
      WeChat: http://image.python-online.cn/17-9-9/58657236.jpg || weixin
@@ -260,9 +273,9 @@ next主题集成leanCloud，我只需稍微配置下(在主题配置文件)
      app_id: 你的id
      app_key: 你的key
 
-打开\ ``/themes/next/layout/_macro/post.swig``
+打开\ ``themes/next/layout/_macro/post.swig``
 在\ ``”leancloud-visitors-count”>``\ 标签后面添加℃。
-然后打开，/themes/next/languages/zh-Hans.yml，将visitors内容改为热度即可。
+然后打开，\ ``themes/next/languages/zh-Hans.yml``\ ，将visitors内容改为热度即可。
 
 为什么不直接用不蒜子，因为首页的时候，无法显示。
 如果也开了不蒜子的计数功能的话，可以直接把下面代码删掉
@@ -275,6 +288,23 @@ next主题集成leanCloud，我只需稍微配置下(在主题配置文件)
                <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>{{ theme.busuanzi_count.page_pv_footer }}
                </span>
    {% endif %}
+
+如果你在前端看到了这个错误
+
+::
+
+   Code 504: The app is archived, please restore in console before use.
+
+很好解决，前往 `LeanCloud <https://leancloud.cn/>`__ 重新激活应用即可。
+
+如果在前端又出现了这个错误
+
+::
+
+   Code 403: 访问被api域名白名单拒绝，请检查你的安全域名设置.
+
+也很好解决，前往 `LeanCloud <https://leancloud.cn/>`__
+绑定你的域名即可。不过要注意的是这个域名，你得备案，否则会绑定失败
 
 4.7 分享插件JiaThis
 ~~~~~~~~~~~~~~~~~~~
@@ -307,7 +337,7 @@ next主题集成leanCloud，我只需稍微配置下(在主题配置文件)
    {% endif %}
    -->
 
-4.8 Fork me on github
+4.8 Fork me on Github
 ~~~~~~~~~~~~~~~~~~~~~
 
 点击\ `这里 <https://github.com/blog/273-github-ribbons>`__\ 挑选自己喜欢的样式，并复制代码
@@ -327,7 +357,7 @@ next主题集成leanCloud，我只需稍微配置下(在主题配置文件)
 4.10 添加版权
 ~~~~~~~~~~~~~
 
-修改\ ``F:\MyBlog\themes\next\layout\_macro\post-copyright.swig``\ 如下
+修改\ ``themes/next/layout/_macro/post-copyright.swig``\ 如下
 
 ::
 
@@ -358,14 +388,14 @@ next主题集成leanCloud，我只需稍微配置下(在主题配置文件)
 ::
 
    post_copyright:
-     enable: True
+     enable: true
      license: CC BY-NC-SA 3.0
      license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/
 
 4.11 文章结尾页眉
 ~~~~~~~~~~~~~~~~~
 
-在路径\ ``\themes\next\layout\_macro``\ 中新建 ``passage-end-tag.swig``
+在路径\ ``themes/next/layout/_macro``\ 中新建 ``passage-end-tag.swig``
 文件,并添加以下内容：
 
 ::
@@ -376,8 +406,8 @@ next主题集成leanCloud，我只需稍微配置下(在主题配置文件)
        {% endif %}
    </div>
 
-接着打开\ ``\themes\next\layout\_macro\post.swig``\ 文件，添加如下下代码，注意位置
-|image4| 代码如下：
+接着打开\ ``themes/next/layout/_macro/post.swig``\ 文件，添加如下下代码，注意位置
+|image7| 代码如下：
 
 ::
 
@@ -419,7 +449,7 @@ next主题集成leanCloud，我只需稍微配置下(在主题配置文件)
 
 更改NexT容器宽度可以参考这个\ `常见问题 <http://theme-next.iissnan.com/faqs.html>`__
 Pisces Scheme比较特殊。
-在\ ``F:\MyBlog\themes\next\source\css\_schemes\Pisces\_layout.styl``\ 最后面增加如下样式
+在\ ``themes/next/source/css/_schemes/Pisces/_layout.styl``\ 最后面增加如下样式
 
 ::
 
@@ -461,13 +491,13 @@ Pisces Scheme比较特殊。
 ::
 
    # 设置图片不居中
-   themes\next\source\css\_common\components\post\post-expand.styl
+   themes/next/source/css/_common/components/post/post-expand.styl
 
    .post-gallery-row .fancybox img { margin: 0 auto !important;}
 
 
    # 标题格式
-   themes\next\source\css\_common\scaffolding\base.styl
+   themes/next/source/css/_common/scaffolding/base.styl
 
    h1 {
        font-size: 27px;
@@ -483,6 +513,44 @@ Pisces Scheme比较特殊。
        font-family: cursive;
        border-radius: 15px 15px 15px 15px !important;
    }
+
+4.16 添加头像
+~~~~~~~~~~~~~
+
+将你的头像放置到 ``themes/next/source/images/avatar.png``
+
+在 ``themes/next/_config.yml`` 设置路径
+
+.. code:: yaml
+
+   avatar: /images/avatar.png
+
+4.17 设置中文
+~~~~~~~~~~~~~
+
+在根目录的 ``_config.yml`` 里 把 ``language`` 改成
+``zh-Hans``\ ，这个值是要和 ``themes/next/languages``
+目录下的文件名保持一致。
+
+4.18 不渲染 README
+------------------
+
+在根目录创建 README.md 文件，内容由你决定。
+
+然后在 ``_config.yml`` 修改配置
+
+.. code:: yaml
+
+   skip_render: README.md
+
+4.18 页面出现 %20 问题
+~~~~~~~~~~~~~~~~~~~~~~
+
+Next 主题的配置文件有一个原生
+bug，就是菜单项后面会多一个空格，这会导致你在页面访问
+about，tags等页面时，会报 404，原因是地址后面多了个空格。
+
+|image8|
 
 五、其他实用功能
 ----------------
@@ -640,6 +708,8 @@ Pisces Scheme比较特殊。
 5.8 归档设置分页数量
 ~~~~~~~~~~~~~~~~~~~~
 
+在根目录的 ``_config.yml``
+
 ::
 
    index_generator:
@@ -656,7 +726,7 @@ Pisces Scheme比较特殊。
 5.9 设置永久链接
 ~~~~~~~~~~~~~~~~
 
-站点配置文件
+在根目录的 ``_config.yml``
 
 ::
 
@@ -668,14 +738,12 @@ Pisces Scheme比较特殊。
 
    permalink: Database-MySQL-Basic_usage
 
-一个是，如何在多台电脑都能使用Hexo更新博客
-
 六、多台电脑协同更新博客
 ------------------------
 
 --------------
 
-这个问题很普遍，上班后，工作都会给配置了一台电脑，而自己家里也有电脑，有时候我想使用家里电脑更新博客，而有时候我也想使用公司电脑更新博客。
+上班后，工作都会给配置了一台电脑，而自己家里也有电脑，有时候我想使用家里电脑更新博客，而有时候我也想使用公司电脑更新博客。
 
 这就很蛋疼了，因为Markdown的原文只有一份，如何将两台电脑的原文保持一致呢。当然，容易想到的是代管在Github上。
 
@@ -688,7 +756,7 @@ Pisces Scheme比较特殊。
 在web界面新建分支，命名为\ ``hexo``
 
 在web界面设置 ``hexo`` 为默认分支，因为我们只会在这个分支上进行操作。
-|image5|
+|image9|
 
 6.2 本地PC操作
 ~~~~~~~~~~~~~~
@@ -697,7 +765,7 @@ clone项目到本地：
 
 ::
 
-   git clone git@github.com:BingmingWong/BingmingWong.github.io.git
+   git clone git@github.com:iswbm/iswbm.github.io.git
 
 使用 ``git branch``
 确认此时的分支是否为hexo，如果不是则上面设置默认分支有误，要重新设置。
@@ -717,7 +785,7 @@ clone项目到本地：
    git push origin hexo
 
 将博客原始文件添加进来，但是有一些是没必要放的，具体要放哪些文件，看图片。
-|image6|
+|image10|
 
 ::
 
@@ -785,7 +853,7 @@ bash窗口，不然会提示找不到npm命令）
 
 ::
 
-   git clone git@github.com:BingmingWong/BingmingWong.github.io.git
+   git clone git@github.com:iswbm/iswbm.github.io.git
 
 添加node_modules/文件夹 本来这个文件夹，不需要拷过来的，但是怕安装
 ``hexo-deployer-git`` 失败，所以这里我直接备份一份，可以拷贝覆盖上即可。
@@ -826,11 +894,15 @@ bash窗口，不然会提示找不到npm命令）
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/17-9-9/50205036.jpg
-.. |image1| image:: http://image.python-online.cn/17-9-9/5214564.jpg
-.. |image2| image:: http://image.python-online.cn/17-9-9/56478208.jpg
-.. |image3| image:: http://image.python-online.cn/17-9-10/85269241.jpg
-.. |image4| image:: http://image.python-online.cn/17-9-9/63041495.jpg
-.. |image5| image:: https://i.loli.net/2018/04/15/5ad3018e18cc7.png
-.. |image6| image:: https://i.loli.net/2018/04/15/5ad31888232e9.png
+.. |image0| image:: http://image.python-online.cn/image-20200321163152876.png
+.. |image1| image:: http://image.python-online.cn/image-20200321163746032.png
+.. |image2| image:: http://image.python-online.cn/image-20200321165634287.png
+.. |image3| image:: http://image.python-online.cn/image-20200321171008622.png
+.. |image4| image:: http://image.python-online.cn/image-20200321171939919.png
+.. |image5| image:: http://image.python-online.cn/image-20200321171821683.png
+.. |image6| image:: http://image.python-online.cn/17-9-10/85269241.jpg
+.. |image7| image:: http://image.python-online.cn/17-9-9/63041495.jpg
+.. |image8| image:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200321210014963.png
+.. |image9| image:: http://image.python-online.cn/image-20200321193444320.png
+.. |image10| image:: https://i.loli.net/2018/04/15/5ad31888232e9.png
 

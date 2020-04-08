@@ -190,7 +190,7 @@ ArcTime Pro：免费给视频自动加字幕，依赖 java 环境
 
 PPDuck3：优秀的图片压缩软件，体积减小但是画质肉眼观察不出变化，压缩完自动替换原图。免费使用一次仅能压缩10张，需要退出重进。
 
-Downie：网页视频下载，复制链接即可。
+Downie：网页视频下载，复制链接即可，支持优酷、YouTube 等 700+ 网站。
 
 GoodSync：和 windows 平台同步文件
 
@@ -198,7 +198,33 @@ GoodSync：和 windows 平台同步文件
 
 TUXERA：使得插入的 NTFS 磁盘格式，能写入（不装只能读取）
 
+NTFS for Mac 助手，安装可以在 Mac 上读写 NTFS 格式的移动硬盘或U盘。
+
 NewFileMenu：使得可以在访达中新建文件
+
+ScreenFlow：视频录制
+
+One
+Switch，多合一功能开关合集，一键隐藏桌面、保持屏幕常亮、切换夜间模式。
+
+Fantastical，可能是 Mac 上最好用的日历工具。
+
+TinyCal（小历），菜单栏日历小工具，有农历和假期。Mac App Store
+购买下载。
+
+iMazing，最佳 iOS 备份及管理软件，完美替代 iTunes。
+
+Permute 3，精致小巧的视频格式转换工具。
+
+PP 鸭，好用的多格式图片压缩软件。
+
+Squash，优雅而强大的图片压缩工具。领取优惠购买链接：
+
+GIF Brewery 3，视频转Gif动图。Mac App Store 免费下载
+
+PhotoBulk，图片批处理修改大小、格式、加水印 Mac App Store 购买下载
+
+iText，精准的 OCR 文字识别工具。
 
 4.18.6 brew 的使用
 ------------------
@@ -304,6 +330,44 @@ NewFileMenu：使得可以在访达中新建文件
 
    # 关闭访达标签页，如果是最后一个标签页，则关闭访达
    command + w
+
+4.18.8 使用小鹤双拼
+-------------------
+
+2018 款的 MBP 系统是 10.13.6
+，这个系统支持的双拼是自然码，若想使用小鹤双拼，可以使用如下命令
+
+.. code:: shell
+
+   defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 4
+
+同样的，还有更多的方案，都可以使用命令来修改
+
+.. code:: shell
+
+   全拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 0
+
+   智能 ABC：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 1
+
+   微软双拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 2
+
+   紫光双拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 3
+
+   小鹤双拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 4
+
+   自然码：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 5
+
+   拼音加加：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 6
+
+   搜狗双拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 7
+
+练习的话，可以使用这两个网站：
+
+练习单字：https://api.ihint.me/shuang/
+
+练习文章：https://api.ihint.me/zi/
+
+对应的 github：https://github.com/BlueSky-07/Shuang
 
 参考文章
 --------

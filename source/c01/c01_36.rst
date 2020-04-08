@@ -266,6 +266,11 @@ PEP8
 规范一样，没有它是可以，但是有了它会更好一样。对于某些想自定义错误输出场景的人，\ ``pretty_errors``
 会是一个不错的解决方案，明哥把它推荐给你。
 
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！
+
 .. |image0| image:: http://image.python-online.cn/image-20200307210853246.png
 .. |image1| image:: http://image.python-online.cn/image-20200307212823345.png
 .. |image2| image:: http://image.python-online.cn/image-20200307213534278.png
