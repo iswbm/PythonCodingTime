@@ -37,6 +37,7 @@
 - 1.36 [每日一库：pretty_errors 解决bug 洁癖](http://python.iswbm.com/en/latest/c01/c01_36.html)
 - 1.37 [Python 炫技操作：条件语句的七种写法](http://python.iswbm.com/en/latest/c01/c01_37.html)
 - 1.38 [/usr/bin/env python 有什么用？](http://python.iswbm.com/en/latest/c01/c01_38.html)
+- 1.38 [Python 炫技操作：合并字典的七种方法](http://python.iswbm.com/en/latest/c01/c01_39.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python.iswbm.com/en/latest/c02/c02_01.html)
