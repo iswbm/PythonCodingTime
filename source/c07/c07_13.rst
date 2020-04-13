@@ -8,7 +8,7 @@
 （如 Puppet）相比，Ansible 尤其明显的优势：
 
 -  简单，是一种高级的脚本类语言，而非标准语言。
--  不需要安装 agent, 分为管理节点和远程被管节点通过 SSH 认证。
+-  不需要安装 agent, 分为管理节点和远程被管节点,通过 SSH 认证。
 -  纳管范围广泛，不仅仅是操作系统，还包括各种虚拟化、公有云，甚至网络设备。
 
 用过 ansible 的人都知道，ansible
@@ -25,40 +25,87 @@
 本想从官方文档中查得一些资料，结果发现官网中对于这块也没有很详细的介绍。
 
 后来想想，ansible、ansible-playbook、ansible-doc 这些命令不也是基于
-ansible api 开发出来的吗？
+ansible 的 api 开发出来的吗？
 
 我不是可以模仿他们，来调用 ansible api 接口。
 
 以下通过阅读 ansible cli 的源码，总结出来的。
 
+如何调用 Playbook
+-----------------
+
+我习惯性地将调用 playbook 的代码封装为一个函数。
+
+.. code:: python
+
+   def playbook_task():
+       try:
+           # 执行 playbook 的各项参数
+           cli = PlaybookCLI(args=["", "you_task.yml"])
+           cli.parse()
+           super(PlaybookCLI, cli).run()
+
+           loader, inventory, variable_manager = cli._play_prereqs(cli.options)
+           CLI.get_host_list(inventory, cli.options.subset)
+           pbex = PlaybookExecutor(playbooks=cli.args, inventory=inventory,
+                                   variable_manager=variable_manager, 
+                                   loader=loader, 
+                                   options=cli.options,
+                                   passwords=None)
+           # 【重点】指定回调实例
+           pbex._tqm._stdout_callback = ResultCallback()
+           exit_code = pbex.run()
+
+       except Exception as e:
+           LOG.exception('Failed to run playbook：{}'.format(e))
+
+以上的代码相对固定，你可以直接拷贝直接用。除了两个位置你要注意一下
+
+1. 第一个注释处：按需要对应添加 playbook 的参数
+2. 第二个注释处：指定你自定义的回调实例
+
 定义回调类
 
 .. code:: python
 
-   class ResultCallback(CallbackBase):
-       def v2_runner_on_ok(self, result, **kwargs):
-           pass
+   from ansible.plugins.callback.default import CallbackModule
 
-       def v2_runner_on_failed(self, result, **kwargs):
+   class ResultCallback(CallbackModule):
+       def __init__(self):
+           self.display_failed_stderr = False
+           self.display_ok_hosts = True
+           super(ResultCallback, self).__init__()
+
+       def v2_runner_on_failed(self, result, ignore_errors=False, **kwargs):
+           super(ResultCallback, self).v2_runner_on_failed(result, ignore_errors, **kwargs)
            host = result._host.get_name()
-           self.runner_on_failed(host, result._result, False)
-           task_result[host]['status'] = 'fail'
-           task_result[host]['reason'] = result._result.get('msg', '').encode('utf-8')
+           self.runner_on_failed(host, result._result, ignore_errors)
+           if not ignore_errors:
+               if "ws" not in host:
+                   host = "ws_" + host.replace("_host", "")
+
+               if host in task_result:
+                   task_result[host]["detailStatus"] = "FAIL"
+                   task_result[host]["detailMsg"] = result.task_name + ": " + result._result.get("msg", "").encode("utf-8")
+               else:
+                   for host, _ in task_result.items():
+                       task_result[host]["detailStatus"] = "FAIL"
+                       task_result[host]["detailMsg"] = result.task_name + ": " + result._result.get("msg", "").encode("utf-8")
 
        def v2_runner_on_unreachable(self, result):
+           super(ResultCallback, self).v2_runner_on_unreachable(result)
            host = result._host.get_name()
            self.runner_on_unreachable(host, result._result)
-           task_result[host]['status'] = 'fail'
-           task_result[host]['reason'] = result._result.get('msg' , 'unreachable')
+           if "ws" not in host:
+               host = "ws_" + host.replace("_host", "")
+           task_result[host]["detailStatus"] = "FAIL"
+           task_result[host]["detailMsg"] = result.task_name + ": " + result._result.get("msg", "").encode("utf-8")
 
        def v2_runner_on_skipped(self, result):
+           super(ResultCallback, self).v2_runner_on_skipped(result)
            if C.DISPLAY_SKIPPED_HOSTS:
                host = result._host.get_name()
                self.runner_on_skipped(host, self._get_item(getattr(result._result, 'results', {})))
-
-       def v2_playbook_on_stats(self, stats):
-           global PLAYBOOK_ERROR
-           PLAYBOOK_ERROR = len(stats.dark)+len(stats.failures)
 
 并实现其中几个关键的方法
 

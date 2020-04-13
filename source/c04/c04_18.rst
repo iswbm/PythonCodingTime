@@ -48,6 +48,12 @@
    # 最大化窗口与取消
    command + ctrl + f
 
+   # 最小化/隐藏窗口
+   command + h
+
+   # 隐藏除当前窗口外的其他所有窗口
+   command + opthon + h
+
    # 关闭除访达外的其他程序
    command + q
 

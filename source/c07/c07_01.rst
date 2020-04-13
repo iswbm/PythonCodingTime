@@ -339,7 +339,15 @@ more、cat file \| head等。
     
     # 以上，只是输出，源文件并不会替换，若要对源文件进行修改，需加 -i
     sed -i '1,2d' somefile
-    
+
+删除指定行的上一行或下一行
+
+.. code:: shell
+
+   删除指定文件的上一行
+   sed -i -e :a -e '$!N;s/.*n(.*directory)/1/;ta' -e 'P;D' server.xml
+   删除指定文件的下一行
+   sed -i '/pattern="%/{n;d}' server.xml 
 
 显示某行
 
@@ -347,8 +355,8 @@ more、cat file \| head等。
 
     sed -n '1p' somefile           #显示第一行
     sed -n '$p' somefile           #显示最后一行
-    sed -n '1,2p' somefile        #显示第一行到第二行
-    sed -n '2,$p' somefile        #显示第二行到最后一行
+    sed -n '1,2p' somefile         #显示第一行到第二行
+    sed -n '2,$p' somefile         #显示第二行到最后一行
 
 使用模式进行查询
 
@@ -357,13 +365,21 @@ more、cat file \| head等。
     sed -n '/ruby/p' somefile    #查询包括关键字ruby所在所有行
     sed -n '/\$/p' somefile      #查询包括关键字$所在所有行，使用反斜线\屏蔽特殊含义
 
-插入行
+插入行（a 表示 append 追加，也可以使用 i，表示
+insert，如果你要在第一行插入，就不得不使用 i 了）
 
 ::
 
    sed '1a drink tea' somefile              #第一行后增加字符串"drink tea"
    sed '1,3a drink tea' somefile            #第一行到第三行后增加字符串"drink tea"
    sed '1a drink tea\nor coffee' somefile   #第一行后增加多行，使用换行符\n
+
+在某一行后面加入一行（示例为第四行）
+
+::
+
+   sed -i 'N;4addpdf' a.txt
+   sed -i 'N;4ieepdf' a.txt 
 
 替换行
 
@@ -378,6 +394,17 @@ more、cat file \| head等。
 
    sed 's/ruby/bird/g somefile'    #替换ruby为bird，记住这个并不会更改源文件，只是输出
    sed 's/ruby//g' somefile       #删除ruby
+
+在某行的前一行或后一行添加内容，其中 ``\``
+可省略，但为了可读性，所以我一般不省略
+
+.. code:: shell
+
+   # 匹配行前加
+   sed -i '/2222222222/a\3333333333' test.txt
+
+   # 匹配行前后
+   sed -i '/2222222222/i\3333333333' test.txt
 
 【注意】：以上对源文件都不做修改，若要修改，要加上\ ``-i``
 
