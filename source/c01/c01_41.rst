@@ -19,6 +19,8 @@ Python
 1. 最直观的相加
 ---------------
 
+使用 ``+`` 对多个列表进行相加，你应该懂，不多说了。
+
 .. code:: python
 
    >>> list01 = [1,2,3]
@@ -31,6 +33,14 @@ Python
 
 2. 借助 itertools
 -----------------
+
+itertools 在 Python
+里有一个非常强大的内置模块，它专门用于操作可迭代对象。
+
+在前面的文章中也介绍过，使用 ``itertools.chain()``
+函数先可迭代对象（在这里指的是列表）串联起来，组成一个更大的可迭代对象。
+
+最后你再利用 list 将其转化为 列表。
 
 .. code:: python
 
@@ -46,6 +56,17 @@ Python
 3. 使用 \* 解包
 ---------------
 
+在 `Python
+炫技操作(02)：合并字典的七种方法 <https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247486080&idx=1&sn=f1c5c4fc5363a1d787b9ae9baba0d07b&chksm=e8866a62dff1e374ad1e5ae2e51bc6cbeb41f631899cde980555ded61be840f0fe6c76c44b7d&token=688334198&lang=zh_CN#rd>`__
+提到了使用 ``**`` 可解包字典。
+
+与它相似的，使用 ``*`` 可以解包列表。 ``*`` 和 ``**``
+常用在函数定义时，设置可变参数。
+
+现在我将它单独拿出来用在多个列表的合并。
+
+示例如下：
+
 .. code:: python
 
    >>> list01 = [1,2,3]
@@ -58,9 +79,12 @@ Python
 4. 使用 extend
 --------------
 
+在字典中，使用 update 可实现原地更新，而在列表中，使用 extend
+可实现列表的自我扩展。
+
 .. code:: python
 
-   >> list01 = [1,2,3]
+   >>> list01 = [1,2,3]
    >>> list02 = [4,5,6]
    >>>
    >>> list01.extend(list02)
@@ -69,6 +93,13 @@ Python
 
 5. 使用列表推导式
 -----------------
+
+Python 里对于生成列表、集合、字典，有一套非常 Pythonnic 的写法。
+
+那就是列表解析式，集合解析式和字典解析式，通常是 Python
+发烧友的最爱，那么今天的主题：列表合并，列表推导式还能否胜任呢？
+
+当然可以，具体示例代码如下：
 
 .. code:: python
 
@@ -83,6 +114,10 @@ Python
 6. 使用 heapq
 -------------
 
+heapq 是 Python 的一个标准模块，它提供了堆排序算法的实现。
+
+该模块里有一个 merge 方法，可以用于合并多个列表，如下所示
+
 .. code:: python
 
    >>> list01 = [1,2,3]
@@ -95,8 +130,61 @@ Python
    [1, 2, 3, 4, 5, 6, 7, 8, 9]
    >>> 
 
+要注意的是，heapq.merge
+除了合并多个列表外，它还会将合并后的最终的列表进行排序。
+
+.. code:: python
+
+   >>> list01 = [2,5,3]
+   >>> list02 = [1,4,6]
+   >>> list03 = [7,9,8]
+   >>> 
+   >>> from heapq import merge
+   >>> 
+   >>> list(merge(list01, list02, list03))
+   [1, 2, 4, 5, 3, 6, 7, 9, 8]
+   >>> 
+
+它的效果等价于下面这行代码：
+
+.. code:: python
+
+   sorted(itertools.chain(*iterables))
+
+如果你希望得到一个始终有序的列表，那请第一时间想到
+heapq.merge，因为它采用堆排序，效率非常高。但若你不希望得到一个排过序的列表，就不要使用它了。
+
 7. 借助魔法方法
 ---------------
+
+在之前的文章里，把魔法方法介绍得很全。
+
+`非常全的通俗易懂 Python
+魔法方法指南（上） <http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485551&idx=1&sn=4c0983f22269a113bcdf83690e5e2b20&chksm=e886688ddff1e19b9ad230128a67ee1a9ee1eced0720c14b5d48f68943be10b1b85b23d8ca2d#rd>`__
+
+`非常全的通俗易懂 Python
+魔法方法指南（下） <http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485555&idx=1&sn=0a218b796e651b451a17112e22790d07&chksm=e8866891dff1e18771a9392da7f509732244ebc4d1a6e2427acd39ee8b59b146e3d4961a2a62#rd>`__
+
+其中有一个魔法方法是 ``__add__``\ ，实际 上当我们使用第一种方法 list01 +
+list02 的时候，内部实际上是作用在 ``__add__`` 这个魔法方法上的.
+
+所以以下两种方法其实是等价的
+
+::
+
+   >>> list01 = [1,2,3]
+   >>> list02 = [4,5,6]
+   >>> 
+   >>> list01 + list02
+   [1, 2, 3, 4, 5, 6]
+   >>> 
+   >>> 
+   >>> list01.__add__(list02)
+   [1, 2, 3, 4, 5, 6]
+   >>> 
+
+借用这个魔法特性，我们可以 reduce
+这个方法来对多个列表进行合并，示例代码如下
 
 .. code:: python
 
@@ -111,6 +199,14 @@ Python
 
 8. 使用 yield from
 ------------------
+
+在很早的一篇文章里（\ `并发编程08｜深入理解yield
+from语法 <https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485063&idx=1&sn=0ff7a99058320ff90a6237e7e03367fb&scene=21#wechat_redirect>`__\ ），我很详细的介绍了
+yield from 意义及使用方法。
+
+在 yield from 后可接一个可迭代对象，用于迭代并返回其中的每一个元素。
+
+因此，我们可以像下面这样自定义一个合并列表的工具函数。
 
 .. code:: python
 
