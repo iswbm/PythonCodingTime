@@ -40,6 +40,7 @@
 - 1.39 [Python 炫技操作：合并字典的七种方法](http://python.iswbm.com/en/latest/c01/c01_39.html)
 - 1.40 [Python 炫技操作：判断是否包含子串的七种方法](http://python.iswbm.com/en/latest/c01/c01_40.html)
 - 1.41 [Python 炫技操作：连接列表的八种方法](http://python.iswbm.com/en/latest/c01/c01_41.html)
+- 1.42 [Python 炫技操作：海象运算符的三种用法](http://python.iswbm.com/en/latest/c01/c01_42.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python.iswbm.com/en/latest/c02/c02_01.html)
