@@ -6,7 +6,7 @@
 * 微信：     mrbensonwon
 * 公众号：   《Python编程时光》&《Go编程时光》
 * Email：    wongbingming@163.com
-* GitHub：   https://github.com/bingmingwong
+* GitHub：   https://github.com/iswbm
 
 --------------------------------------------
 
