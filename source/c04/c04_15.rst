@@ -1052,6 +1052,27 @@ Debug ，而远程调试需要不少前置步骤。
 
 |image99|
 
+4.15.36 快速查看 Git 的修改
+---------------------------
+
+如果你的项目在 git
+的管理之下，在你修改了文件后，你会有很多种方法来查看自己到底修改了什么？
+
+第一种当然是使用 git diff
+
+|image100|
+
+第二种是使用之前写的 show history
+
+|image101|
+
+第三种，也是今天要介绍的，是最简便，也是直接的方法。
+
+在有文本变动的位置，PyCharm
+会有提示，如下红色箭头标识处，点击它就可以直接查看，还可以快速回滚。
+
+|image102|
+
 附录
 ----
 
@@ -1168,4 +1189,7 @@ Debug ，而远程调试需要不少前置步骤。
 .. |image97| image:: http://image.python-online.cn/20191211102826.png
 .. |image98| image:: http://image.python-online.cn/20191211133836.png
 .. |image99| image:: http://image.python-online.cn/20191211143510.png
+.. |image100| image:: http://image.iswbm.com/20200420085524.png
+.. |image101| image:: http://image.iswbm.com/20200420090117.png
+.. |image102| image:: http://image.iswbm.com/20200420090428.png
 

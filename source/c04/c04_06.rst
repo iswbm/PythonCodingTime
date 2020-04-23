@@ -552,6 +552,30 @@ Desktop真心觉得不好用）。
 
 如果想要用户名和密码登陆，可以将上面的 OpenSSH 改成 PuTTY/Plink就行了。
 
+八、Gitlab 使用
+---------------
+
+8.1 免密使用
+~~~~~~~~~~~~
+
+新建一个配置文件：\ ``/root/.gitconfig``
+
+.. code:: ini
+
+   [user]
+       email = wangbm@163.com
+       name = wangbm
+   [push]
+       default = matching
+   [gui]
+       recentrepo = /root/git/deployment
+       recentrepo = /root/git/vmp2.0
+   [credential]
+       helper = store
+
+使用再次 git pull，提示你输入密码后，再次输入后，git
+会给你存储下来，下次就不需要你再输入密码。
+
 --------------
 
 .. figure:: http://image.python-online.cn/image-20200320125724880.png
