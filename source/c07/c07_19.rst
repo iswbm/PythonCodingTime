@@ -45,3 +45,8 @@
 .. code:: shell
 
    $ ansible 172.20.20.1 -m ping
+
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！

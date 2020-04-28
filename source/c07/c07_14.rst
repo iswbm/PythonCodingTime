@@ -23,3 +23,8 @@ filename可读，则为真 ``-w filename``: 如果 filename可写，则为真
 
 -eq ：等于 -ne ：不等于 -gt ：大于 -ge ：大于等于 -lt ：小于 -le
 ：小于等于
+
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！

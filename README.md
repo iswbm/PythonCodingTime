@@ -41,6 +41,7 @@
 - 1.40 [Python 炫技操作：判断是否包含子串的七种方法](http://python.iswbm.com/en/latest/c01/c01_40.html)
 - 1.41 [Python 炫技操作：连接列表的八种方法](http://python.iswbm.com/en/latest/c01/c01_41.html)
 - 1.42 [Python 炫技操作：海象运算符的三种用法](http://python.iswbm.com/en/latest/c01/c01_42.html)
+- 1.44 [详解 Python 中的编码问题](http://python.iswbm.com/en/latest/c01/c01_44.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python.iswbm.com/en/latest/c02/c02_01.html)
@@ -89,6 +90,7 @@
 - 4.21 [最全的 pip 使用指南，50% 你可能没用过](http://python.iswbm.com/en/latest/c04/c04_21.html)
 - 4.22 [用好 Chrome 必看](http://python.iswbm.com/en/latest/c04/c04_22.html)
 - 4.23 [电脑使用技巧](http://python.iswbm.com/en/latest/c04/c04_23.html)
+- 4.24 [Python “用户环境”的一次完美应用](http://python.iswbm.com/en/latest/c04/c04_24.html)
 
 ## 第五章：算法教程
 - 5.1 [图解九大经典排序算法](http://python.iswbm.com/en/latest/c05/c05_01.html)
@@ -115,7 +117,7 @@
 - 7.9 [Ansible 入门指南使用手册](http://python.iswbm.com/en/latest/c07/c07_09.html)
 - 7.10 [Ansible API 最全使用文档（中文）](http://python.iswbm.com/en/latest/c07/c07_10.html)
 - 7.11 [K8S：基础入门](http://python.iswbm.com/en/latest/c07/c07_11.html)
-- 7.12 [yum 的使用总结](http://python.iswbm.com/en/latest/c07/c07_12.html)
+- 7.12 [Linux 包管理工具：yum 和 rpm](http://python.iswbm.com/en/latest/c07/c07_12.html)
 - 7.13 [基于 ansible-api 二次开发](http://python.iswbm.com/en/latest/c07/c07_13.html)
 - 7.14 [Linux 如何写判断语句](http://python.iswbm.com/en/latest/c07/c07_14.html)
 - 7.15 [Mariadb 与 Galera 集群总结](http://python.iswbm.com/en/latest/c07/c07_15.html)

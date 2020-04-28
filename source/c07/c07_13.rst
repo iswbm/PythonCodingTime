@@ -114,3 +114,8 @@ ansible 的 api 开发出来的吗？
 -  v2_runner_on_unreachable：节点不可达时，会调用
 -  v2_runner_on_skipped：部署任务跳过时，会调用
 -  v2_playbook_on_stats：所有的部署任务完成时，调用
+
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！

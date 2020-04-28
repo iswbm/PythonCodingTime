@@ -1,0 +1,196 @@
+4.24 Python “用户环境”的一次完美应用
+====================================
+
+在之前写过一篇关于虚拟环境使用的文章 ：\ `Python
+虚拟环境使用指南 <http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485049&idx=1&sn=c16383d6cc91a7ed8254e344d994f101&chksm=e886669bdff1ef8d82aae3a231ef0651f82d5e97cf1e64aceda00e686119900518c202dc9b1b&scene=21#wechat_redirect>`__.
+
+但是还没有好好的介绍一下 Python 的用户环境，原因是自己一直没遇到要使用
+``用户环境`` 的使用场景，所以就一直懒得写。
+
+恰巧这两天，自己遇到了一个使用用户环境的体验可以完爆虚拟环境的案例，就拿出来分享一下。
+
+1. 我的使用背景
+---------------
+
+公司有数以万计的服务器，为了对实现对访问记录进行集中管理以及出于安全考虑，每台服务器都有访问限制，必须使用公司的跳板机才能登陆。
+
+每个公司的员工在跳板机上都有自己的用户、 家目录，对于很多需要 root
+权限的操作，是高度受限制的。
+
+比如我现在我要在跳板机上实现远程登陆大批量的机器进行一些维护工作，当然我这里使用的还是
+Python 来实现，这个 Python 脚本里有一些依赖库（比如 之前介绍过的
+paramiko 这个神器），在跳板机上中并没有安装。
+
+|image0|
+
+做为普通用户的你，是没有权限安装第三方包的。
+
+|image1|
+
+问题就来了，我如何才能在跳板机中使用 paramiko 这个包呢？
+
+2. 为何不使用虚拟环境？
+-----------------------
+
+既然不能对全局的 Python
+环境进行更改，那我完全可以自己再创建一个环境，只要这个环境里事先装好
+paramiko 这个包不就好了。
+
+因此，使用虚拟环境是一种解决方案，但它并不是一个完美的解决方案。
+
+**原因有以下几点**\ ：
+
+1、
+创建虚拟环境的过程，步骤较多，比较复杂。这里的复杂是相对于我后面要使用的用户环境而言。
+
+2、 虚拟环境是包含一整个 Python
+解释器，存在大量与系统重复的包，size比较大，并不轻便。
+
+3、 使用 console 模式调试的话，进入很不方便
+
+|image2|
+
+就算你不使用 console 模式，你调用脚本的方式，也会很奇怪，你得这样
+
+.. code:: python
+
+   $ zabbix_env/bin/python demo.py
+
+如果你不想使用这样，可以给这个脚本加个可执行权限，并在脚本的第一行指定你的解释器，省去了一点点麻烦，可即便如此，我仍然感觉很别扭。
+
+.. code:: shell
+
+   [wangbm@35ha02 ~]$ cat demo.py 
+   #!/home/wangbm/zabbix_env/bin/python
+
+   import zabbix_api
+   [wangbm@35ha02 ~]$ 
+   [wangbm@35ha02 ~]$ 
+   [wangbm@35ha02 ~]$ chmod +x demo.py
+   [wangbm@35ha02 ~]$ 
+   [wangbm@35ha02 ~]$ ./demo.py     # 可以执行，没有报错
+   [wangbm@35ha02 ~]$ 
+
+你可能会问我：为什么不使用 virtualenv + virtualenvwrapper ，这样可以使用
+workon 进入虚拟环境。
+
+原因是跳板机里的都是很古老的包，你看上面的 Python 还是 2.7.5
+呢，所以你所说的那些工具通通没有。
+
+3. 用户环境原理
+---------------
+
+这里要介绍的这种方案（\ **用户环境**\ ），可能很多人都没有使用过，甚至没有听过，它算是一个冷门但是非常好用的功能。
+
+操作之前 ，先简单介绍一下它。
+
+先提一个问题，Python 在查找导入包时，如果我们多个路径都有这个包，那
+Python 如何确定应该从哪个路径进行导入呢？
+
+答案是， 搜索导入路径是有优先级的，你可以通过 sys.path 进行查看。
+
+.. code:: python
+
+   >>> import sys
+   >>> from pprint import pprint
+   >>> pprint(sys.path)
+   ['',
+    '/usr/lib64/python27.zip',
+    '/usr/lib64/python2.7',
+    '/usr/lib64/python2.7/plat-linux2',
+    '/usr/lib64/python2.7/lib-tk',
+    '/usr/lib64/python2.7/lib-old',
+    '/usr/lib64/python2.7/lib-dynload',
+    '/home/wangbm/.local/lib/python2.7/site-packages',
+    '/usr/lib64/python2.7/site-packages',
+    '/usr/lib64/python2.7/site-packages/gtk-2.0',
+    '/usr/lib/python2.7/site-packages',
+    '/usr/lib/python2.7/site-packages/pip-18.1-py2.7.egg',
+    '/usr/lib/python2.7/site-packages/lockfile-0.12.2-py2.7.egg']
+   >>>
+
+可以看到路径 ``/home/wangbm/.local/lib/python2.7/site-packages``
+是优先于 ``/usr/lib64/python2.7/site-packages`` 路径的。
+
+这就是 **用户环境**
+的原理，只要我们将包装在自己家目录下，就可以优先于全局环境中进行查找。
+
+使用起来，可以做到用户无感知，跟使用原生的全局环境并没有区别。
+
+4. 具体操作方法
+---------------
+
+创建一个用户环境，并安装上你所需要的包，一条命令就能搞定，这可比虚拟环境简单方便多了。
+
+那么怎么操作呢？
+
+只要你在使用 pip 安装包时，加上 ``--user`` 参数，pip
+就会将其安装在当前用户的 ``~/.local/lib/python2.x/site-packages``
+下，而其他用户的 python 则不会受影响。
+
+.. code:: shell
+
+   $ pip install --user pkg
+
+这里要注意的是，不能使用这种方式，亲测它会将包装到全局环境下，具体原因我还没有深究。
+
+.. code:: shell
+
+   $ python -m pip install --user pkg
+
+为了让你理解这个过程，我这里来举个例子，并且验证其是否可以做到用户隔离。
+
+.. code:: shell
+
+   # 在全局环境中未安装 requests
+   [root@localhost ~]$ pip list | grep requests
+   [root@localhost ~]$ su - wangbm
+
+   # 由于用户环境继承自全局环境，这里也未安装
+   [wangbm@localhost ~]$ pip list | grep requests
+   [wangbm@localhost ~]$ pip install --user requests
+   [wangbm@localhost ~]$ pip list | grep requests
+   requests (2.22.0)
+   [wangbm@localhost ~]$
+
+   # 从 Location 属性可发现 requests 只安装在当前用户环境中
+   [wangbm@localhost ~]$ pip show requests
+   ---
+   Metadata-Version: 2.1
+   Name: requests
+   Version: 2.22.0
+   Summary: Python HTTP for Humans.
+   Home-page: http://python-requests.org
+   Author: Kenneth Reitz
+   Author-email: me@kennethreitz.org
+   Installer: pip
+   License: Apache 2.0
+   Location: /home/wangbm/.local/lib/python2.7/site-packages
+   [wangbm@localhost ~]$ exit
+   logout
+
+   # 退出 wangbm 用户，在 root 用户环境中发现 requests 未安装
+   [root@localhost ~]$ pip list | grep requests
+   [root@localhost ~]$
+
+有了这个思路，我就可以先在其他机器（前提自己必须拥有管理员权限
+）上，创建一个用户环境，并且安装上 paramiko 这个包。
+
+然后将这个用户环境，压缩拷贝至跳板机自己的家目录下的 ``.local/lib``
+目录下并解压。
+
+然后直接使用 python 进入 console 模式，现在已经可以直接使用 paramiko
+这个包了。
+
+|image3|
+
+.. figure:: http://image.python-online.cn/image-20200320125724880.png
+   :alt: 关注公众号，获取最新干货！
+
+   关注公众号，获取最新干货！
+
+.. |image0| image:: http://image.iswbm.com/20200427180207.png
+.. |image1| image:: http://image.iswbm.com/20200427180042.png
+.. |image2| image:: http://image.iswbm.com/20200427182334.png
+.. |image3| image:: http://image.iswbm.com/20200427185854.png
+

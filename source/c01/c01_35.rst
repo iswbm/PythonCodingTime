@@ -336,6 +336,45 @@ Windows，这里就有一件好事，一件坏事了，。
 
 |image2|
 
+注意事项
+~~~~~~~~
+
+使用 paramiko 的时候，有一点需要注意一下，这个也是我自己 “踩坑”
+后才发现的，其实我觉得这个设计挺好的，如果你不需要等待它返回数据，可以直接实现异步效果，只不过对于不知道这个设计的人，确实是个容易掉坑的点
+
+就是在执行 ``ssh.exec_command(cmd)`` 时，这个命令并不是同步阻塞的。
+
+比如下面这段代码，执行时，你会发现 脚本立马就结束退出了，并不会等待 5 s
+后，再 执行 ssh.close()
+
+.. code:: python
+
+   import paramiko
+
+   trans = paramiko.Transport(("172.20.42.1", 57891))
+   trans.connect(username="root", password="youpassword")
+   ssh = paramiko.SSHClient()
+   ssh._transport = trans
+   stdin, stdout, stderr = ssh.exec_command("sleep 5;echo ok")
+   ssh.close()
+
+但是如果改成这样，加上一行 stdout.read()， paramiko
+就知道，你需要这个执行的结果，就会在 read() 进行阻塞。
+
+.. code:: python
+
+   import paramiko
+
+   trans = paramiko.Transport(("172.20.42.1", 57891))
+   trans.connect(username="root", password="youpassword")
+   ssh = paramiko.SSHClient()
+   ssh._transport = trans
+   stdin, stdout, stderr = ssh.exec_command("sleep 5;echo ok")
+
+   # 加上一行 read()
+   print(stdout.read())
+   ssh.close()
+
 4. 写在最后
 -----------
 
@@ -352,6 +391,7 @@ Windows，这里就有一件好事，一件坏事了，。
 -  https://github.com/paramiko/paramiko
 -  http://docs.paramiko.org
 -  https://www.liujiangblog.com/blog/15/
+-  http://docs.paramiko.org/en/stable/
 
 .. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
