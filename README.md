@@ -84,7 +84,7 @@
 - 4.15 [30个 PyCharm 实用技巧](http://python.iswbm.com/en/latest/c04/c04_15.html)
 - 4.16 [Python 开发技巧集合](http://python.iswbm.com/en/latest/c04/c04_16.html)
 - 4.17 [详解 23 种设计模式](http://python.iswbm.com/en/latest/c04/c04_17.html)
-- 4.18 [如何上手Mac ？](http://python.iswbm.com/en/latest/c04/c04_18.html)
+- 4.18 [详细的 Mac 使用指南](http://python.iswbm.com/en/latest/c04/c04_18.html)
 - 4.19 [程序员编码必学：Vim](http://python.iswbm.com/en/latest/c04/c04_19.html)
 - 4.20 [学会使用谷歌搜索引擎](http://python.iswbm.com/en/latest/c04/c04_20.html)
 - 4.21 [最全的 pip 使用指南，50% 你可能没用过](http://python.iswbm.com/en/latest/c04/c04_21.html)
@@ -125,6 +125,7 @@
 - 1.17 [ansible 自定义 Jinja2 过滤器](http://python.iswbm.com/en/latest/c07/c07_17.html)
 - 7.18 [Shell中去除字符串前后空格的方法](http://python.iswbm.com/en/latest/c07/c07_18.html)
 - 7.19 [Ansible 使用教程](http://python.iswbm.com/en/latest/c07/c07_19.html)
+- 7.20 [使用 Shell 删除文件的多种方法](http://python.iswbm.com/en/latest/c07/c07_20.html)
 
 ## 第八章：OpenStack
 - 8.1 [OpenStack 运维命令](http://python.iswbm.com/en/latest/c08/c08_01.html)
