@@ -57,6 +57,7 @@
 - 2.11 [实战异步IO框架：asyncio 下篇](http://python.iswbm.com/en/latest/c02/c02_11.html)
 - 2.12 [生成器与协程，你分清了吗？](http://python.iswbm.com/en/latest/c02/c02_12.html)
 - 2.13 [I/O多路复用：select/poll/epoll](http://python.iswbm.com/en/latest/c02/c02_13.html)
+- 2.14 [浅谈线程安全那些事儿](http://python.iswbm.com/en/latest/c02/c02_14.html)
 
 ## 第三章：高级编程
 - 3.1 [装饰器进阶用法详解](http://python.iswbm.com/en/latest/c03/c03_01.html)
