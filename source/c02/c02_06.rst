@@ -1,15 +1,18 @@
-2.6 如何创建线程池
-==================
+2.6 线程池与进程池的创建
+========================
 
 --------------
 
    **友情提醒**\ ：
    本系列所有的代码均在Python3下编写。Python2中可能有所差异。
 
-2.6.1 使用第三方模块
---------------------
+1. 线程池的创建
+---------------
 
-在使用多线程处理任务时也不是线程越多越好，由于在切换线程的时候，需要切换上下文环境，依然会造成cpu的大量开销。为解决这个问题，线程池的概念被提出来了。预先创建好一个较为优化的数量的线程，让过来的任务立刻能够使用，就形成了线程池。
+使用内置模块
+~~~~~~~~~~~~
+
+在使用多线程处理任务时也不是线程越多越好，由于在切换线程的时候，需要切换上下文环境，依然会造成cpu的大量开销。为解决这个问题，线程池的概念被提出来了。预先创建好一个合理数量的线程池，让过来的任务立刻能够使用，就形成了线程池。
 
 在Python3中，创建线程池是通过\ ``concurrent.futures``\ 函数库中的\ ``ThreadPoolExecutor``\ 类来实现的。
 
@@ -19,39 +22,49 @@
    import threading
    from concurrent.futures import ThreadPoolExecutor
 
-
    def target():
        for i in range(5):
            print('running thread-{}:{}'.format(threading.get_ident(), i))
            time.sleep(1)
            
-   #: 生成线程池最大线程为5个
+   # 创建一个最大容纳数量为5的线程池
    pool = ThreadPoolExecutor(5) 
 
-   for i in range(100):
-       pool.submit(target) # 往线程中提交，并运行 
+   for i in range(10):
+       # 往线程池上塞任务
+       pool.submit(target)
 
-从结果来看，前面设置线程池最大线程数5个，有生效。
+创建线程池还可以使用更优雅的方式，就是使用上下文管理器
 
 .. code:: python
 
-   running thread-11308:0
-   running thread-12504:0
-   running thread-5656:0
-   running thread-12640:0
-   running thread-7948:0
+   with ThreadPoolExecutor(5) as pool:
+       for i in range(100):
+           pool.submit(target) 
 
-   running thread-11308:1
-   running thread-5656:1
-   running thread-7948:1
-   running thread-12640:1
-   running thread-12504:1
+直接运行代码，从输出可以看出，前面我们设置线程池最大线程数，会保证“同时”仅有五个线程在工作。
 
-   ...
-   ...
+.. code:: python
 
-2.6.2 自定义线程池
-------------------
+   running thread-123145483767808:0
+   running thread-123145489022976:0
+   running thread-123145494278144:0
+   running thread-123145499533312:0
+   running thread-123145504788480:0
+   running thread-123145483767808:1
+   running thread-123145489022976:1
+   running thread-123145499533312:1
+   running thread-123145494278144:1
+   running thread-123145504788480:1
+   running thread-123145489022976:2
+   running thread-123145499533312:2
+   running thread-123145483767808:2
+   running thread-123145504788480:2
+   running thread-123145494278144:2
+   ....
+
+自定义线程池
+~~~~~~~~~~~~
 
 除了使用上述第三方模块的方法之外，我们还可以自己结合前面所学的消息队列来自定义线程池。
 
@@ -63,49 +76,66 @@
    import threading
    from queue import Queue
 
-   def target(q):
+   def target(queue):
        while True:
-           msg = q.get()
-           for i in range(5):
-               print('running thread-{}:{}'.format(threading.get_ident(), i))
-               time.sleep(1)
+           task = queue.get()
+           if task == "stop":
+               queue.task_done()
+               break
 
-   def pool(workers,queue):
-       for n in range(workers):
-           t = threading.Thread(target=target, args=(queue,))
+           task()
+           queue.task_done()
+
+   def do_task():
+       for i in range(5):
+           print('running thread-{}:{}'.format(threading.get_ident(), i))
+           time.sleep(1)
+
+
+   class MyQueue(Queue):
+       def close(self):
+           for i in range(self.maxsize):
+               self.put("stop")
+
+   def custome_pool(task_func, max_workers):
+       queue = MyQueue(max_workers)
+       for n in range(max_workers):
+           t = threading.Thread(target=task_func, args=(queue,))
            t.daemon = True
            t.start()
 
-   queue = Queue()
-   # 创建一个线程池：并设置线程数为5
-   pool(5, queue)
+       return queue
 
-   for i in range(100):
-       queue.put("start")
 
-   # 消息都被消费才能结束
-   queue.join()
+
+   pool = custome_pool(task_func=target, max_workers=5)
+
+   for i in range(10):
+       pool.put(do_task)
+
+   pool.close()
+   pool.join()
 
 输出是和上面是完全一样的效果
 
 .. code:: python
 
-   running thread-11308:0
-   running thread-12504:0
-   running thread-5656:0
-   running thread-12640:0
-   running thread-7948:0
-
-   running thread-11308:1
-   running thread-5656:1
-   running thread-7948:1
-   running thread-12640:1
-   running thread-12504:1
-
-   ...
+   running thread-123145469886464:0
+   running thread-123145475141632:0
+   running thread-123145485651968:0
+   running thread-123145490907136:0
+   running thread-123145480396800:0
+   running thread-123145469886464:1
+   running thread-123145480396800:1
+   running thread-123145475141632:1
+   running thread-123145490907136:1
+   running thread-123145485651968:1
    ...
 
 构建线程池的方法，是可以很灵活的，大家有空可以自己多研究。但是建议只要掌握一种自己熟悉的，能快速上手的就好了。
+
+2. 进程池的创建
+---------------
 
 --------------
 

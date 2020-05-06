@@ -49,7 +49,7 @@
 - 2.3 [谈谈线程中的“锁机制”](http://python.iswbm.com/en/latest/c02/c02_03.html)
 - 2.4 [线程消息通信机制](http://python.iswbm.com/en/latest/c02/c02_04.html)
 - 2.5 [线程中的信息隔离](http://python.iswbm.com/en/latest/c02/c02_05.html)
-- 2.6 [如何创建线程池](http://python.iswbm.com/en/latest/c02/c02_06.html)
+- 2.6 [线程池与进程池的创建](http://python.iswbm.com/en/latest/c02/c02_06.html)
 - 2.7 [从生成器使用入门协程](http://python.iswbm.com/en/latest/c02/c02_07.html)
 - 2.8 [深入理解yield from语法](http://python.iswbm.com/en/latest/c02/c02_08.html)
 - 2.9 [初识异步IO框架：asyncio 上篇](http://python.iswbm.com/en/latest/c02/c02_09.html)
