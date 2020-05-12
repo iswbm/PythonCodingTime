@@ -1,14 +1,28 @@
-1.30 学习编程的几大网站
-=======================
+1.30 盘点程序员学习编程的那些网站
+=================================
 
-`书栈网 <https://www.bookstack.cn/rank?tab=popular>`__
+书栈网
+------
+
+**网站链接**\ ：https://www.bookstack.cn/rank?tab=popular
 
 |image0|
 
-`魔法学院 <http://www.nowamagic.net/academy/>`__
+魔法学院
+--------
+
+**网站链接**\ ：http://www.nowamagic.net/academy/
 
 |image1|
 
+Python 3 标准库实例教程
+-----------------------
+
+**网站链接**\ ：https://learnku.com/docs/pymotw
+
+|image2|
+
 .. |image0| image:: http://image.python-online.cn/20200104144109.png
 .. |image1| image:: http://image.python-online.cn/20200112210558.png
+.. |image2| image:: http://image.iswbm.com/20200508201333.png
 

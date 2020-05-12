@@ -1,8 +1,8 @@
 7.9 Ansible 入门指南使用手册
 ============================
 
-7.9.1 有用的小技巧
-------------------
+1. 有用的小技巧
+---------------
 
 1. 只输出错误的信息
 ~~~~~~~~~~~~~~~~~~~
@@ -85,7 +85,14 @@
 
    /root/deployment/inventory/get_controller_v1.py --list
 
-7. playbook 参数
+7. ad-hoc 指定 run_once
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: shell
+
+   ansible compute[0] -m synchronize -a 'src=/etc/deny.list dest=/etc/deny.list mode=pull'
+
+2. playbook 参数
 ----------------
 
 ::

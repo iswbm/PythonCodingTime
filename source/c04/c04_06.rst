@@ -196,6 +196,17 @@ add/commit 前撤销对文件的修改
    git show commit_id
    git show --stat commit_id
 
+查看两个分支之间的差异
+
+::
+
+   # 查看两个分支有哪些文件发生改变了
+   git diff stable/2.2.9 stable/2.3.0 --stat
+
+   # 对比某一个文件在两个文件中的变化 
+   git diff stable/2.2.9 stable/2.3.0 -- README.md
+   git diff stable/2.2.9:README.md stable/2.3.0:README.md
+
 三、状态回滚
 ------------
 
@@ -284,7 +295,11 @@ add/commit 前撤销对文件的修改
    # HEAD^^是上上个版本
    # HEAD~100是前100个版本
 
+   # 回到上一个版本
    $ git reset --hard HEAD^ 
+
+   # 若本地不小心修改或删除了很多文件，一个一个恢复太麻烦，可以这样，回到上一个版本
+   $ git reset --hard HEAD
 
 使用 ``git revert``\ ，间接回退，会生成新的提交
 

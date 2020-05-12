@@ -10,7 +10,7 @@
 - 1.7 [15个Pythonic的代码示例](http://python.iswbm.com/en/latest/c01/c01_07.html)
 - 1.8 [新式类和经典类的区别？](http://python.iswbm.com/en/latest/c01/c01_08.html)
 - 1.9 [多继承与Mixin设计模式](http://python.iswbm.com/en/latest/c01/c01_09.html)
-- 1.10 [Python 冷知识 40 讲](http://python.iswbm.com/en/latest/c01/c01_10.html)
+- 1.10 [Python 黑魔法指南 50 例](http://python.iswbm.com/en/latest/c01/c01_10.html)
 - 1.11 [正则表达式必知必会](http://python.iswbm.com/en/latest/c01/c01_11.html)
 - 1.12 [搞懂字符编码的前世今生](http://python.iswbm.com/en/latest/c01/c01_12.html)
 - 1.13 [Python几个高阶函数](http://python.iswbm.com/en/latest/c01/c01_13.html)
@@ -28,7 +28,7 @@
 - 1.26 [C语言基础的学习](http://python.iswbm.com/en/latest/c01/c01_26.html)
 - 1.27 [全面学习 Python 包：包的构建与分发](http://python.iswbm.com/en/latest/c01/c01_27.html)
 - 1.27 [如何阅读 CPython源码？](http://python.iswbm.com/en/latest/c01/c01_29.html)
-- 1.30 [学习编程的几大网站](http://python.iswbm.com/en/latest/c01/c01_30.html)
+- 1.30 [盘点程序员学习编程的那些网站](http://python.iswbm.com/en/latest/c01/c01_30.html)
 - 1.31 [学习 Pillow 笔记](http://python.iswbm.com/en/latest/c01/c01_31.html)
 - 1.32 [在 CentOS 7.2 上安装 Python3.7](http://python.iswbm.com/en/latest/c01/c01_32.html)
 - 1.33 [如何调试已经运行中的程序](http://python.iswbm.com/en/latest/c01/c01_33.html)
@@ -41,7 +41,9 @@
 - 1.40 [Python 炫技操作：判断是否包含子串的七种方法](http://python.iswbm.com/en/latest/c01/c01_40.html)
 - 1.41 [Python 炫技操作：连接列表的八种方法](http://python.iswbm.com/en/latest/c01/c01_41.html)
 - 1.42 [Python 炫技操作：海象运算符的三种用法](http://python.iswbm.com/en/latest/c01/c01_42.html)
+- 1.43 [求你了，别再使用 pprint 打印字典了](http://python.iswbm.com/en/latest/c01/c01_43.html)
 - 1.44 [详解 Python 中的编码问题](http://python.iswbm.com/en/latest/c01/c01_44.html)
+- 1.45 [Python炫技操作：花式导包的八种方法](http://python.iswbm.com/en/latest/c01/c01_45.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python.iswbm.com/en/latest/c02/c02_01.html)
