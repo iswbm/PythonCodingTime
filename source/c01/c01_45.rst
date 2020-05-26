@@ -67,6 +67,15 @@
    >>> myos.getcwd()
    '/home/wangbm'
 
+上面说过的 ``__import__``
+是一个内建函数，既然是内建函数的话，那么这个内建函数必将存在于
+``__buildins__`` 中，因此我们还可以这样导入 os 的模块：
+
+.. code:: python
+
+   >>> __builtins__.__dict__['__import__']('os').getcwd()
+   '/home/wangbm'
+
 3. 使用 importlib 模块
 ----------------------
 

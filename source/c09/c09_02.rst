@@ -1,0 +1,161 @@
+9.2 没有这 50 个APP，我的 Mac 将只是一块铁
+==========================================
+
+1. 效率神器
+-----------
+
+1. Alfred 3
+~~~~~~~~~~~
+
+Mac 中必不可少的APP，没有它 Mac 基本也就『残废』了。
+
+目前我非常依赖它的功能有：
+
+1. 快速百度/谷歌搜索
+2. 快速打开某个链接/书签：使用 ``bm +关键字``
+3. 快速打开/切换指定APP
+4. 访问剪切板记录：快捷键 Command + Option + c
+5. 快速查找文件：使用 ``find + 关键字``
+6. 自定义大量个人常用短语，比如我要填写邮箱，只要输入\ ``!mail``\ ，就会自动转成
+   ``wongbingming@163.com``
+
+2. NewFileMenu
+~~~~~~~~~~~~~~
+
+在访达下，你无法使用右键菜单直接新建文件，比如我们使用的 Excel，World 等
+
+NewFileMenu 可以解决你的烦恼
+
+|image0|
+
+3. Magnet/Moon
+~~~~~~~~~~~~~~
+
+分屏工作几乎是办公必备技能。
+
+4. 快贴
+~~~~~~~
+
+https://clipber.com/
+
+用于多设备间剪切板同步共享
+
+GoodSync
+~~~~~~~~
+
+和 windows 平台同步文件
+
+One
+Switch，多合一功能开关合集，一键隐藏桌面、保持屏幕常亮、切换夜间模式。
+
+CheatSheet：快捷键帮助菜单
+
+2. 开发必备
+-----------
+
+iTerm2：终端神器
+
+PyCharm：写 Python 代码
+
+Goland：写 Golang 代码
+
+SourceTree：Git可视化管理
+
+Pretty Regular Expressions：正则表达式测试工具（限免已拿到）
+
+3. 优化体验
+-----------
+
+Bartender 3：状态栏管理
+
+Caffenie：讲PPT时，控制不息屏。
+
+Tickeys：键盘模拟音效。
+
+Vicinity：环境白噪音（限免已拿到）
+
+Fantastical，可能是 Mac 上最好用的日历工具。
+
+TinyCal（小历），菜单栏日历小工具，有农历和假期。Mac App Store
+购买下载。
+
+Coffee
+Buzz：阻止电脑休眠，三种模式：永不休眠、屏幕熄灭但电脑不休眠、跟随系统节能设置。（限免已拿到）
+
+ShortCat：在系统栏也可以搜索聚焦
+
+4. 图片影音
+-----------
+
+Snipaste：截图工具
+
+Capture Gif：Gif 录制（不推荐）
+
+Kap Beta：录屏开源免费软件，支持GIF导出，快捷键：\ ``Command Shift 5``
+
+ScreenFlow：视频录制
+
+ArcTime Pro：免费给视频自动加字幕，依赖 java 环境
+
+`IINA <https://iina.io/>`__\ ：万能的视频播放器，一个就够
+
+PPDuck3：优秀的图片压缩软件，体积减小但是画质肉眼观察不出变化，压缩完自动替换原图。免费使用一次仅能压缩10张，需要退出重进。
+
+Downie：网页视频下载，复制链接即可，支持优酷、YouTube 等 700+ 网站。
+
+Permute 3，精致小巧的视频格式转换工具。
+
+PP 鸭，好用的多格式图片压缩软件。
+
+GIF Brewery 3，视频转Gif动图。Mac App Store 免费下载
+
+PhotoBulk，图片批处理修改大小、格式、加水印 Mac App Store 购买下载
+
+5. 文件管理
+-----------
+
+FreeDownloadManagger：下载管理
+
+滴答清单：待办事项管理
+
+QSpace：\ `finder
+的增强版 <https://mp.weixin.qq.com/s/BRBZZfx0bGc8X8WueS37Xg>`__\ ，可分屏整理文件（1块钱购买）
+
+eZip：与QSpace同一开发者。集所有同类产品所长的解压缩工具（\ `官网可下 <https://ezip.awehunt.com/>`__\ ）
+
+NTFS for Mac 助手，安装可以在 Mac 上读写 NTFS 格式的移动硬盘或U盘。
+
+iStat Menus：系统指标仪表盘
+
+Squash，优雅而强大的图片压缩工具。
+
+Keta：解压缩软件
+
+6. 写作必备
+-----------
+
+印象笔记：笔记
+
+PicGo：图床上传
+
+Typora/Bear：Markdown写作工具
+
+WPS：Office套件
+
+TeamViewer：远程控制工具
+
+iText，精准的 OCR 文字识别工具。
+
+7. 系统管理
+-----------
+
+CCleaner：系统清理、软件卸载
+
+TUXERA：使得插入的 NTFS 磁盘格式，能写入（不装只能读取）
+
+iMazing，最佳 iOS 备份及管理软件，完美替代 iTunes。
+
+Macs Fan Control：控制风扇转速，加快散热
+
+.. |image0| image:: http://image.iswbm.com/image-20200524183640630.png
+

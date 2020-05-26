@@ -22,7 +22,22 @@ Python 3 标准库实例教程
 
 |image2|
 
+Django Web 框架
+---------------
+
+网站链接：https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django
+
+该网站可以让你从0开始学习Web，包括前端（HTML,CSS,JS）、后端（Django）
+
+|image3|
+
+在服务端网页编程里，重点介绍了 Django
+
+|image4|
+
 .. |image0| image:: http://image.python-online.cn/20200104144109.png
 .. |image1| image:: http://image.python-online.cn/20200112210558.png
 .. |image2| image:: http://image.iswbm.com/20200508201333.png
+.. |image3| image:: http://image.iswbm.com/20200525080531.png
+.. |image4| image:: http://image.iswbm.com/20200525080715.png
 

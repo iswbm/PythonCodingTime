@@ -44,6 +44,7 @@
 - 1.43 [求你了，别再使用 pprint 打印字典了](http://python.iswbm.com/en/latest/c01/c01_43.html)
 - 1.44 [详解 Python 中的编码问题](http://python.iswbm.com/en/latest/c01/c01_44.html)
 - 1.45 [Python炫技操作：花式导包的八种方法](http://python.iswbm.com/en/latest/c01/c01_45.html)
+- 1.47 [通俗理解OSI七层模型](http://python.iswbm.com/en/latest/c01/c01_47.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python.iswbm.com/en/latest/c02/c02_01.html)
@@ -149,6 +150,8 @@
 
 ## 第九章：有趣的工具
 - 9.1 [情人节来了，教你使用 Python 来表白](http://python.iswbm.com/en/latest/c09/c09_01.html)
+- 9.2 [没有这 50 个APP，我的 Mac 将只是一块铁](http://python.iswbm.com/en/latest/c09/c09_02.html)
+- 9.3 [明哥的在线工具集](http://python.iswbm.com/en/latest/c09/c09_03.html)
 
 
 ---

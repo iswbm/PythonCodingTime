@@ -132,110 +132,7 @@ finder的显示
 
       风扇转得快了，散热自然也快了，但是风扇声音也更大了。建议只在非常烫（超过60℃？）的时候开启。
 
-4.18.5 软件推荐
----------------
-
-Alfred 3：快捷神器
-
-iTerm2：终端神器
-
-New File Menu：右键新建特定格式的文件。
-
-Caffenie：讲PPT时，控制不息屏。
-
-Tickeys：键盘模拟音效。
-
-Magnet/Moon：窗口控制
-
-Bartender 3：状态栏管理
-
-SourceTree：Git可视化管理
-
-FreeDownloadManagger：下载管理
-
-PicGo：图床上传
-
-Typora/Bear：Markdown写作工具
-
-滴答清单：待办事项管理
-
-Capture Gif：Gif 录制（不推荐）
-
-Kap Beta：录屏开源免费软件，支持GIF导出，快捷键：\ ``Command Shift 5``
-
-TeamViewer：远程控制工具
-
-iStat Menus：系统指标仪表盘
-
-CheatSheet：快捷键帮助菜单
-
-CCleaner：系统清理、软件卸载
-
-印象笔记：笔记
-
-WPS：Office套件
-
-Snipaste：截图工具
-
-Macs Fan Control：控制风扇转速，加快散热
-
-ShortCat：在系统栏也可以搜索聚焦
-
-Coffee
-Buzz：阻止电脑休眠，三种模式：永不休眠、屏幕熄灭但电脑不休眠、跟随系统节能设置。（限免已拿到）
-
-Pretty Regular Expressions：正则表达式测试工具（限免已拿到）
-
-Vicinity：环境白噪音（限免已拿到）
-
-QSpace：\ `finder
-的增强版 <https://mp.weixin.qq.com/s/BRBZZfx0bGc8X8WueS37Xg>`__\ ，可分屏整理文件（1块钱购买）
-
-eZip：与QSpace同一开发者。集所有同类产品所长的解压缩工具（\ `官网可下 <https://ezip.awehunt.com/>`__\ ）
-
-Keta：解压缩软件
-
-ArcTime Pro：免费给视频自动加字幕，依赖 java 环境
-
-PPDuck3：优秀的图片压缩软件，体积减小但是画质肉眼观察不出变化，压缩完自动替换原图。免费使用一次仅能压缩10张，需要退出重进。
-
-Downie：网页视频下载，复制链接即可，支持优酷、YouTube 等 700+ 网站。
-
-GoodSync：和 windows 平台同步文件
-
-`IINA <https://iina.io/>`__\ ：万能的视频播放器，一个就够
-
-TUXERA：使得插入的 NTFS 磁盘格式，能写入（不装只能读取）
-
-NTFS for Mac 助手，安装可以在 Mac 上读写 NTFS 格式的移动硬盘或U盘。
-
-NewFileMenu：使得可以在访达中新建文件
-
-ScreenFlow：视频录制
-
-One
-Switch，多合一功能开关合集，一键隐藏桌面、保持屏幕常亮、切换夜间模式。
-
-Fantastical，可能是 Mac 上最好用的日历工具。
-
-TinyCal（小历），菜单栏日历小工具，有农历和假期。Mac App Store
-购买下载。
-
-iMazing，最佳 iOS 备份及管理软件，完美替代 iTunes。
-
-Permute 3，精致小巧的视频格式转换工具。
-
-PP 鸭，好用的多格式图片压缩软件。
-
-Squash，优雅而强大的图片压缩工具。领取优惠购买链接：
-
-GIF Brewery 3，视频转Gif动图。Mac App Store 免费下载
-
-PhotoBulk，图片批处理修改大小、格式、加水印 Mac App Store 购买下载
-
-iText，精准的 OCR 文字识别工具。
-
-4.18.6 brew 的使用
+4.18.5 brew 的使用
 ------------------
 
 设置国内源
@@ -268,7 +165,7 @@ iText，精准的 OCR 文字识别工具。
 
    brew cask install docker
 
-4.18.7 访达使用技巧
+4.18.6 访达使用技巧
 -------------------
 
 详细请看这篇文章（\ `MacOS实用技巧之Finder(访达)的使用 <https://www.jianshu.com/p/3666e6954e8a>`__\ ），非常好的教程。
@@ -362,7 +259,7 @@ iText，精准的 OCR 文字识别工具。
    # 在指定目录打开
    open ~/Code
 
-4.18.8 使用小鹤双拼
+4.18.7 使用小鹤双拼
 -------------------
 
 2018 款的 MBP 系统是 10.13.6
@@ -399,6 +296,24 @@ iText，精准的 OCR 文字识别工具。
 练习文章：https://api.ihint.me/zi/
 
 对应的 github：https://github.com/BlueSky-07/Shuang
+
+4.18.8 输入法切换 BUG
+---------------------
+
+问题是由 ``TISwitcher`` 引起的。
+
+当你按住 ``control`` 键，不停的敲 ``空格`` 就可了看到这个进程的面貌了。
+
+对于使用 ``command + space`` 切换输入法的， ``control`` 换成 ``command``
+即可。 ``TISwitcher``
+干掉没有任何影响。顶多就是切换输入法时，看不到切换状态而已。
+
+解决方法如下：
+
+1. 打开 ``Activity Monitor``
+2. 找到 ``TISwitcher`` 这个进程，干掉就 OK 了
+3. 为了防止重启后，这个进程再次启动， 直接删掉
+   ``/System/Library/CoreServices/Menu Extras/TextInput.menu/Contents/SharedSupport/TISwitcher.app``
 
 参考文章
 --------
