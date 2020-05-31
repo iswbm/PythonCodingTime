@@ -45,7 +45,6 @@
 - 1.44 [详解 Python 中的编码问题](http://python.iswbm.com/en/latest/c01/c01_44.html)
 - 1.45 [Python炫技操作：花式导包的八种方法](http://python.iswbm.com/en/latest/c01/c01_45.html)
 - 1.47 [通俗理解OSI七层模型](http://python.iswbm.com/en/latest/c01/c01_47.html)
-- 1.48 [详细解读 DNS 解析过程](http://python.iswbm.com/en/latest/c01/c01_48.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python.iswbm.com/en/latest/c02/c02_01.html)
@@ -153,6 +152,9 @@
 - 9.1 [情人节来了，教你使用 Python 来表白](http://python.iswbm.com/en/latest/c09/c09_01.html)
 - 9.2 [没有这 50 个APP，我的 Mac 将只是一块铁](http://python.iswbm.com/en/latest/c09/c09_02.html)
 - 9.3 [明哥的在线工具集](http://python.iswbm.com/en/latest/c09/c09_03.html)
+
+## 第十章：网络基础
+- 10.1 [网络知识扫盲：一篇文章搞懂 DNS](http://python.iswbm.com/en/latest/c10/c10_01.html)
 
 
 ---
