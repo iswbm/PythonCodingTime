@@ -45,6 +45,7 @@
 - 1.44 [详解 Python 中的编码问题](http://python.iswbm.com/en/latest/c01/c01_44.html)
 - 1.45 [Python炫技操作：花式导包的八种方法](http://python.iswbm.com/en/latest/c01/c01_45.html)
 - 1.47 [通俗理解OSI七层模型](http://python.iswbm.com/en/latest/c01/c01_47.html)
+- 1.48 [详细解读 DNS 解析过程](http://python.iswbm.com/en/latest/c01/c01_48.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python.iswbm.com/en/latest/c02/c02_01.html)
