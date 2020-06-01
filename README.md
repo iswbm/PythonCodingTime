@@ -44,7 +44,6 @@
 - 1.43 [求你了，别再使用 pprint 打印字典了](http://python.iswbm.com/en/latest/c01/c01_43.html)
 - 1.44 [详解 Python 中的编码问题](http://python.iswbm.com/en/latest/c01/c01_44.html)
 - 1.45 [Python炫技操作：花式导包的八种方法](http://python.iswbm.com/en/latest/c01/c01_45.html)
-- 1.47 [通俗理解OSI七层模型](http://python.iswbm.com/en/latest/c01/c01_47.html)
 
 ## 第二章：并发编程
 - 2.1 [从性能角度初探并发编程](http://python.iswbm.com/en/latest/c02/c02_01.html)
@@ -155,6 +154,8 @@
 
 ## 第十章：网络基础
 - 10.1 [网络知识扫盲：一篇文章搞懂 DNS](http://python.iswbm.com/en/latest/c10/c10_01.html)
+- 10.2 [通俗理解OSI七层模型](http://python.iswbm.com/en/latest/c10/c10_02.html)
+- 10.3 [一篇文章理解 HTTP](http://python.iswbm.com/en/latest/c10/c10_03.html)
 
 
 ---
