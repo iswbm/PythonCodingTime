@@ -154,7 +154,7 @@
 
 ## 第十章：网络基础
 - 10.1 [网络知识扫盲：一篇文章搞懂 DNS](http://python.iswbm.com/en/latest/c10/c10_01.html)
-- 10.2 [通俗理解OSI七层模型](http://python.iswbm.com/en/latest/c10/c10_02.html)
+- 10.2 [网络知识扫盲：如何理解 OSI七层模型](http://python.iswbm.com/en/latest/c10/c10_02.html)
 - 10.3 [一篇文章理解 HTTP](http://python.iswbm.com/en/latest/c10/c10_03.html)
 
 
