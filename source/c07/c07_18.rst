@@ -19,43 +19,46 @@
 
 ::
 
-   [root@``local` `~]``# echo " A BC "`` ``A BC``[root@``local` `~]``# eval echo " A BC "``A BC
+   [root@local ~]# echo " A BC "
+     A BC
+   [root@local ~]# eval echo " A BC "
+   A BC
 
 或者
 
 ::
 
-   [root@linux ~]``# echo ' A BC ' | python -c "s=raw_input();print(s.strip())"``A BC
+   [root@linux ~]# echo ' A BC ' | python -c "s=raw_input();print(s.strip())"
+   A BC
 
 或者
 
 ::
 
-   [root@linux ~]``# s=`echo " A BC "```[root@linux ~]``# echo $s``A BC
+   [root@linux ~]# s=`echo " A BC "`
+   [root@linux ~]# echo $s
+   A BC
+
+或者（\ **最简单易记的方法**\ ）
+
+::
+
+   [root@linux ~]# echo " A BC " | awk '$1=$1'
+   A BC
 
 或者
 
 ::
 
-   [root@linux ~]``# echo ' A BC ' | sed -e 's/^[ ]*//g' | sed -e 's/[ ]*$//g'``A BC
+   [root@linux ~]# echo " A BC " | sed -r 's/^[ \t]+(.*)[ \t]+$//g'
+   A BC
 
 或者
 
 ::
 
-   [root@linux ~]``# echo " A BC " | awk '$1=$1'``A BC
-
-或者
-
-::
-
-   [root@linux ~]``# echo " A BC " | sed -r 's/^[ \t]+(.*)[ \t]+$//g'``A BC
-
-或者
-
-::
-
-   [root@linux ~]``# echo ' A BC ' | awk '{sub(/^ */, "");sub(/ *$/, "")}1'``A BC
+   [root@linux ~]# echo ' A BC ' | awk '{sub(/^ */, "");sub(/ *$/, "")}1'
+   A BC
 
 .. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！

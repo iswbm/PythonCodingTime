@@ -129,6 +129,7 @@
 - 7.18 [Shell中去除字符串前后空格的方法](http://python.iswbm.com/en/latest/c07/c07_18.html)
 - 7.19 [Ansible 使用教程](http://python.iswbm.com/en/latest/c07/c07_19.html)
 - 7.20 [使用 Shell 删除文件的多种方法](http://python.iswbm.com/en/latest/c07/c07_20.html)
+- 7.21 [如何快速创建超大文件？](http://python.iswbm.com/en/latest/c07/c07_21.html)
 
 ## 第八章：OpenStack
 - 8.1 [OpenStack 运维命令](http://python.iswbm.com/en/latest/c08/c08_01.html)
@@ -155,7 +156,10 @@
 ## 第十章：网络基础
 - 10.1 [网络知识扫盲：一篇文章搞懂 DNS](http://python.iswbm.com/en/latest/c10/c10_01.html)
 - 10.2 [网络知识扫盲：如何理解 OSI七层模型](http://python.iswbm.com/en/latest/c10/c10_02.html)
-- 10.3 [一篇文章理解 HTTP](http://python.iswbm.com/en/latest/c10/c10_03.html)
+- 10.3 [网络知识扫盲：扒开 TCP 的外衣，我看清了 TCP 的本质](http://python.iswbm.com/en/latest/c10/c10_03.html)
+- 10.5 [Wireshark 抓包教程](http://python.iswbm.com/en/latest/c10/c10_05.html)
+- 10.6 [通过比较，学习 TCP 与 UDP](http://python.iswbm.com/en/latest/c10/c10_06.html)
+- 10.7 [网络知识扫盲：一篇文章理解 HTTP](http://python.iswbm.com/en/latest/c10/c10_07.html)
 
 
 ---

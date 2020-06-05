@@ -196,6 +196,16 @@ rpm
 
    　　-qpl----------------查询一个尚未安装的安装包包含的信息
 
+重建 rpmdb
+
+.. code:: shell
+
+   # 删除rpm数据文件
+   rm -f /var/lib/rpm/__db.00*   
+
+   # 重建rpm数据文件
+   rpm –rebuilddb                
+
 .. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
