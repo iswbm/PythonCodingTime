@@ -4,6 +4,7 @@
 关于搭建教程，感兴趣的可以查看这边：[Sphinx 搭建博客的图文教程](http://python.iswbm.com/en/latest/c04/c04_03.html)
 ## 第一章：基础知识
 - 1.1 [13条Python2.x和3.x的区别？](http://python.iswbm.com/en/latest/c01/c01_01.html)
+- 1.2 [Python 自省机制详解](http://python.iswbm.com/en/latest/c01/c01_02.html)
 - 1.4 [什么是猴子补丁?](http://python.iswbm.com/en/latest/c01/c01_04.html)
 - 1.5 [深入闭包与变量作用域](http://python.iswbm.com/en/latest/c01/c01_05.html)
 - 1.6 [深入理解元组存在的意义](http://python.iswbm.com/en/latest/c01/c01_06.html)
@@ -68,6 +69,7 @@
 - 3.4 [Django+Uwsgi部署网站](http://python.iswbm.com/en/latest/c03/c03_04.html)
 - 3.5 [源码解读：Flask上下文与代理模式](http://python.iswbm.com/en/latest/c03/c03_05.html)
 - 3.6 [Web开发者必看：理解WSGI](http://python.iswbm.com/en/latest/c03/c03_06.html)
+- 3.7 [超实用10 条 Python使用技巧](http://python.iswbm.com/en/latest/c03/c03_07.html)
 
 ## 第四章：开发工具
 - 4.1 [虚拟环境：virtualenv](http://python.iswbm.com/en/latest/c04/c04_01.html)
