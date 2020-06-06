@@ -156,7 +156,7 @@
 ## 第十章：网络基础
 - 10.1 [网络知识扫盲：一篇文章搞懂 DNS](http://python.iswbm.com/en/latest/c10/c10_01.html)
 - 10.2 [网络知识扫盲：如何理解 OSI七层模型](http://python.iswbm.com/en/latest/c10/c10_02.html)
-- 10.3 [网络知识扫盲：扒开 TCP 的外衣，我看清了 TCP 的本质](http://python.iswbm.com/en/latest/c10/c10_03.html)
+- 10.3 [网络知识扫盲：详解TCP的三次握手与四次挥手](http://python.iswbm.com/en/latest/c10/c10_03.html)
 - 10.5 [Wireshark 抓包教程](http://python.iswbm.com/en/latest/c10/c10_05.html)
 - 10.6 [通过比较，学习 TCP 与 UDP](http://python.iswbm.com/en/latest/c10/c10_06.html)
 - 10.7 [网络知识扫盲：一篇文章理解 HTTP](http://python.iswbm.com/en/latest/c10/c10_07.html)
