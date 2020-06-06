@@ -1,6 +1,8 @@
 4.15 30个 PyCharm 实用技巧
 ==========================
 
+|image0|
+
 刚开始做公众号的时候，更新频率正常是一周两到三篇。老读者应该有注意到，以前都是写系列教程，对于读者而言，系列教程会更加友好，学习起来会更容易深入浅出，而对于作者来说，写系列教程，更有一种使命感，而这种使命感是维持更新一大动力。
 
 不写文章的朋友，可能不会知道，写文章也是很费脑子的事情，由于知识的诅咒的存在，往往我会认为我知道的事情，大家也都知道，分享的欲望其实并没有那么强烈，久而久之，这种恶性循环会让我产生更多的焦虑感，产出也越发下降。为了改变这种现状，我打算从今天开始，重新走以前的风格，继续以系列来输出文章。可能会有多个系列在同时进行着，提前告知一下。
@@ -32,19 +34,19 @@
    Working directory: $ProjectFileDir$
    Output filters: $FILE_PATH$\:$LINE$\:$COLUMN$\:.*
 
-|image0|
+|image1|
 
 我随意写了一段不符合 pep8 规范的代码。
 
-|image1|
+|image2|
 
 点击右键，选择 ``External Tools`` -> ``AutoPep8``
 
-|image2|
+|image3|
 
 看一下效果，还是挺明显的。
 
-|image3|
+|image4|
 
 你可能会说，Pycharm 本身就自带这个功能了呀，快捷键
 ``Command``\ +\ ``Option``\ +\ ``L``
@@ -77,7 +79,7 @@ Pycharm 的隐藏的一个功能
 ``Show History``\ ，你可以看到这里有个记录板。如果你想恢复删除的文件，就在删除的记录项点击右键，选择
 ``Revert`` 即可恢复。
 
-|image4|
+|image5|
 
 4.15.3 拥抱Vim，远离鼠标
 ------------------------
@@ -91,7 +93,7 @@ Pycharm 中 使用 vim 来编辑代码。
 
 安装方法如下，安装完后需要重启 Pycharm 生效。
 
-|image5|
+|image6|
 
 4.15.4 代码模板，效率编码
 -------------------------
@@ -99,11 +101,11 @@ Pycharm 中 使用 vim 来编辑代码。
 Pycharm
 提供的这个代码模板，可以说是相当实用的一个功能了。它可以在你新建一个文件时，按照你预设的模板给你生成一段内容，比如解释器路径，编码方法，作者详细信息等
 
-|image6|
+|image7|
 
 按照上图模板，生成的效果如下。
 
-|image7|
+|image8|
 
 除了新建文件时可以初始化文件，在开发编写代码时，也同样使用 Pycharm
 中自带的实用的代码模板，提高你的编码效率。
@@ -111,16 +113,16 @@ Pycharm
 当你在键盘中敲入 ``Command`` + ``J``
 时，就可以调出一个面板，从下图可以看出里面有许多预设的模板。
 
-|image8|
+|image9|
 
 如果我们想选择最后一个 main ，可以继续键入
 main，然后就可以直接生成如下这段平时都要手动敲入的代码。
 
-|image9|
+|image10|
 
 这里再举个例子，for 循环 可以这样写。
 
-|image10|
+|image11|
 
 4.15.5 使用书签，快速定位
 -------------------------
@@ -149,7 +151,7 @@ command + 鼠标左键
 加了 ``1`` 这个序号，下次你就可以使用 ``Control`` + ``1``
 直接跳转到这个位置。
 
-|image11|
+|image12|
 
 当然你也可以不加，不加的话就是匿名书签了。你可以使用 ``Shift`` + ``F11``
 展示所有的书签，再进行跳转。
@@ -171,16 +173,16 @@ Pycharm 中可以像 IPython Shell 和 Jupyter Notebook
 假如我在调试如下几行简单的代码。在第 3 行处打了个断点。然后点击图示位置
 ``Show Python Prompt`` 按钮。
 
-|image12|
+|image13|
 
 就进入了 ``Python Shell`` 的界面，这个Shell
 环境和我们当前运行的程序环境是打通的，变量之间可以互相访问，这下你可以轻松地进行调试了。
 
-|image13|
+|image14|
 
 上面我们打了个断点，是为了方便说明这个效果。并不是说一定要打断点。如果不打断点，在脚本执行完成后，也仍然可以在这个界面查看并操作所有变量。
 
-|image14|
+|image15|
 
 现在我们已经可以满足我们的调试的需求，但是每次运行脚本，都要手动点击
 ``Show Python Prompt``
@@ -188,11 +190,11 @@ Pycharm 中可以像 IPython Shell 和 Jupyter Notebook
 
 你需要点击图示位置 ``Edit Configurations`` 处。
 
-|image15|
+|image16|
 
 然后在这里打勾选中。
 
-|image16|
+|image17|
 
 设置上之后，之后你每次运行后脚本后，都会默认为你存储所有变量的值，并为你打开
 console 命令行调试界面。
@@ -203,12 +205,12 @@ debug 模式运行项目，并打断点。
 使用方法就是，在你打了断点后，在图示位置处，点击右键使用
 ``Evaluate Expression``
 
-|image17|
+|image18|
 
 就弹出了一个 ``Evaluate Expression`` 窗口，这里
 可以运行命令表达式，直接操作变量。
 
-|image18|
+|image19|
 
 4.15.7 指定参数执行脚本
 -----------------------
@@ -227,16 +229,16 @@ debug 模式运行项目，并打断点。
 对于刚使用 Pycharm 的同学，可能并不知道 Pycharm
 也是可以指定参数的。点击下图位置
 
-|image19|
+|image20|
 
 进入设置面板，在 ``Script parameters`` 中填入参数即可。
 
-|image20|
+|image21|
 
 同时在上图的底部，你可以看到，这里可以很方便的切换
 解释器，比你跑到这边来要容易得多吧
 
-|image21|
+|image22|
 
 4.15. 8 搜索时过滤测试文件
 --------------------------
@@ -248,20 +250,20 @@ debug 模式运行项目，并打断点。
 时带来了不小的困扰，你可以从下图的搜索结果中感受一下，搜索一个函数，test
 文件里的结果比 正常文件要多很多。
 
-|image22|
+|image23|
 
 这些测试文件的搜索结果，对于我们看源代码不仅没有任何帮助的，更重要的是还干扰视线。于是我就研究了一下，从文件名入手，只要在
 ``File mask`` 里填写 ``!test*``
 可以将这些test文件过滤掉。搜索结果一下子清晰很多。
 
-|image23|
+|image24|
 
 4.15.9 关闭烦人的灯泡提示
 -------------------------
 
 本来没有想写这个的，但是知乎上有一位朋友有这个需求，那我研究了下。
 
-|image24|
+|image25|
 
 先来说下这个灯泡提示是什么，有什么用？
 
@@ -275,7 +277,7 @@ debug 模式运行项目，并打断点。
 我研究了下，Pycharm
 （2018版本）里是有开关按钮的，将下图中的这个选项（\ ``Show intention bulb``\ ）取消勾选，就可以关闭这个功能。
 
-|image25|
+|image26|
 
 4.15.10 关闭碍眼的波浪线
 ------------------------
@@ -283,7 +285,7 @@ debug 模式运行项目，并打断点。
 下面我先给出了一小段代码示例，思考一下，为什么name，my_name
 不会有波浪线，而 myname 和 wangbm 会有波浪线呢？
 
-|image26|
+|image27|
 
 Pycharm
 本身会实时地对变量名进行检查，如果变量名不是一个已存在的英文单词，就会出现一条波浪线，当一个变量里有多个单词时，Python
@@ -296,16 +298,16 @@ myname 会被当成是一个单词对待，由于它在单词库里并没有它�
 这种风格的变量命名方法，像下面这样（随便找了一段 cloudinit
 的代码），是让人挺不舒服的，总有一种代码有 bug 的错觉。
 
-|image27|
+|image28|
 
 那么如何关闭这个非语法级别的波浪线呢？很简单，它的开关就在你的右下角那个像
 人头像 一样的按钮
 
-|image28|
+|image29|
 
 然后选择 ``Syntax`` 级别的即可。同样一段代码，效果如下，干净了很多。
 
-|image29|
+|image30|
 
 4.15.11 一键进行代码性能分析
 ----------------------------
@@ -348,11 +350,11 @@ cProfile，在某些框架中，也内置了中间件帮助你进行性能分析
 
 点击 Run -> Profile ‘程序’ ，即可进行性能分析。
 
-|image30|
+|image31|
 
 运行完毕后，会自动跳出一个性能统计界面。
 
-|image31|
+|image32|
 
 性能统计界面由Name、Call Count、Time(ms)、Own Time(ms)
 ，4列组成一个表格，见下图。
@@ -366,7 +368,7 @@ cProfile，在某些框架中，也内置了中间件帮助你进行性能分析
 点击 Call
 Graph（调用关系图）界面直观展示了各函数直接的调用关系、运行时间和时间百分比，见下图。
 
-|image32|
+|image33|
 
 右上角的4个按钮表示放大、缩小、真实大小、合适大小；
 
@@ -383,26 +385,26 @@ Graph（调用关系图）界面直观展示了各函数直接的调用关系、
 
 按照如下提示点击 Git 仓库配置
 
-|image33|
+|image34|
 
 接着输入仓库地址
 
-|image34|
+|image35|
 
 点击 Test，测试连通性，会要求输入密码
 
-|image35|
+|image36|
 
 若一切顺利，则会看到如下界面
 
-|image36|
+|image37|
 
 测试连接成功后，点击 Clone 就可以克隆下来了。
 
 对于以前使用 Git 命令来管理的，现在可以直接使用 PyCharm
 的菜单栏来操作，这些功能已经可以满足大多数人的日常需求了，应该是够用了。
 
-|image37|
+|image38|
 
 4.15.13 Tab轻松转空格
 ---------------------
@@ -416,7 +418,7 @@ Pycharm
 
 在图示位置打勾即可开启自动检测。
 
-|image38|
+|image39|
 
 上面是对一个旧的 Python 模块进行修改时，如何决定当前编辑的缩进方式。
 
@@ -425,7 +427,7 @@ Pycharm
 如下图，若在 ``Use tab character`` 打上勾，则你新建一个 Python
 后，就会使用 TAB 进行缩进，反之，则使用四个空格进行缩进。
 
-|image39|
+|image40|
 
 5. 
 
@@ -435,7 +437,7 @@ Pycharm
 PyCharm
 有分两个版本，一个是社区版（免费功能有限），一个是专业版（有一些增强功能），详细差异你可以参考这个图，一般来说，社区版用作学习用途是没有问题的。
 
-|image40|
+|image41|
 
 如果需要使用专业版，网上也有一些注册服务器使用，非常方便，缺点是过一段时间，可能就会失效。这里有一种一劳永逸的方法，但可能仅对早期的
 PyCharm 版本有效，可以实现永久激活（到 2099 /
@@ -465,21 +467,21 @@ PyCharm 版本有效，可以实现永久激活（到 2099 /
 将第一步下载的 jar 包放入这个目录，并打开如下两个以 ``vmoptions``
 后缀结尾的文件：
 
-|image41|
+|image42|
 
 添加如下这一行（请根据你的实际安装目录自行调整）
 
-|image42|
+|image43|
 
 若是 Mac OS 系统，请找到并进入你的 Pycharm 安装启动目录（以我的为例）
 
 将第一步下载的 jar 包放入这个目录
 
-|image43|
+|image44|
 
 并打开如下一个以 ``vmoptions`` 后缀结尾的文件：
 
-|image44|
+|image45|
 
 **第三步**\ ：
 
@@ -495,12 +497,12 @@ PyCharm 版本有效，可以实现永久激活（到 2099 /
 
 若是 Windows 系统，重启 PyCharm 后，查看激活信息：Help -> About
 
-|image45|
+|image46|
 
 如果是 Mac OS 系统，重启 PyCharm 后，查看激活信息：PyCharm -> About
 PyCharm
 
-|image46|
+|image47|
 
 另外，以上仅做交流和个人学习使用，请勿商用，有能力的朋友还是希望多支持正版！
 
@@ -521,22 +523,22 @@ Ctrl + 鼠标左键 （Mac 上是：Command +
 几个简单的 Example Usage 有助于理解使用。在这一点上，Flask
 可以说做得相当好。这边随便截一个 Werkzeug 的例子。
 
-|image47|
+|image48|
 
 假如我们在使用这个类的时候，忘记了这个用法，可以按住 Ctrl +
 q（Mac暂时未找到对应快捷键），在当前页面就可以快速预览 LocalStack
 的接口文档。
 
-|image48|
+|image49|
 
 同样的，如果你对这个类或者函数的代码逻辑感兴趣，也可以使用快速预览的方式在当前页面展示源代码。快捷键是：Ctrl
 + shift + i （Mac：Command + shift + i）。效果如下
 
-|image49|
+|image50|
 
 如果 PyCharm 检测到的同名函数有多个，可以点这里进行选择查看
 
-|image50|
+|image51|
 
 这两个快捷键比起使用 Ctrl + 鼠标左键
 跳进源代码来说，更加方便，，就像微信小程序一样，用完即焚，不会新产生一个标签页，也不需要来回跳转页面。
@@ -547,7 +549,7 @@ q（Mac暂时未找到对应快捷键），在当前页面就可以快速预览 
 前几天打开 PyCharm，发现在导航栏这里出现了很多波浪线，有过 PyCharm
 使用经验的同学，就会知道，这是代码中出现了错误。
 
-|image51|
+|image52|
 
 顺着波浪线，我一层一层地展开目录树，终于找到了那个包含错误的文件。由于是手误，我也不知道我改动了哪一行，看了下这个文件，有将近8000行的代码，难道一行一行地去找？
 
@@ -561,11 +563,11 @@ q（Mac暂时未找到对应快捷键），在当前页面就可以快速预览 
 我在搜索框输入 Error，就找到了快速定位到错误位置的快捷键 ``F2`` 和
 ``Shift+F2`` 可以快速的定位到错误行。
 
-|image52|
+|image53|
 
 使用快捷键 F2 查看了下原来是这里缩进有问题。
 
-|image53|
+|image54|
 
 4.15.17 快速查看最近的修改
 --------------------------
@@ -578,7 +580,7 @@ q（Mac暂时未找到对应快捷键），在当前页面就可以快速预览 
 option+shift+C 可以快速查看最近修改的内容（windows
 上应该是alt+shift+c吧）
 
-|image54|
+|image55|
 
 4.15.18 静态代码分析检查
 ------------------------
@@ -601,11 +603,11 @@ Java，需要将代码编译成机器可识别的语言才可运行，在编译�
 你只需要像下面这样点击项目文件夹，然后右键，选择
 ``Inspect Code``\ ，就可以开启静态检查。
 
-|image55|
+|image56|
 
 我对开源组件 nova 的静态检查发现，其有不规范的地方有数千处。
 
-|image56|
+|image57|
 
 4.15.19 全方位无死角精准定位
 ----------------------------
@@ -624,26 +626,26 @@ OpenStack
 
 -  精准定位到文件：Windows（Ctrl+Shift+N），Mac（Command+ shift +N）
 
-|image57|
+|image58|
 
 -  精准定位到类：Windows（Ctrl+N），Mac（Command+N）
 
-|image58|
+|image59|
 
 -  精准定位到符号：类的所有成员（函数、变量等）都可以称之为符号，Windows（Ctrl+Alt+Shift+N），Mac（Option+Shift+Command+N）
 
-|image59|
+|image60|
 
 -  精准定位到文件结构：文件结构包括类、函数、变量，这说明上面定位到类和定位到符号的方法，你都可以用这个来代替。
 
    Windows：Ctrl+F12，Mac：Command+F12，如果和我一样是Mac是带touchbar的，键盘上是没有F12的，那你应该先按住
    Command + fn，这时 touchbar 上会出现 F12，再按F12即可。
 
-|image60|
+|image61|
 
 -  精准定位到某行：Windows（Ctrl+G），Mac（Command+G），如下图定位到第510行第9个字符处。
 
-|image61|
+|image62|
 
 4.15.20 TODO 解救“中年痴呆”
 ---------------------------
@@ -672,14 +674,14 @@ OpenStack
 开头。然后，你要查看全局项目中的所有 TODO 事项的时候，可以使用快捷键调出
 TODO 面板。如果你是 Mac， 快捷键 是Command + 6，而 Windows 是 Alt+6。
 
-|image62|
+|image63|
 
 另外，我还使用这个来记录下个版本要优化的代码逻辑，要添加的功能。
 
 如果是比较紧急的 BUG，可以使用类似 TODO 的标记 — ``FIXME``
 来区分紧急程度。
 
-|image63|
+|image64|
 
 4.15.21 随处折叠，实现代码自由
 ------------------------------
@@ -691,7 +693,7 @@ PyCharm 里代码块的折叠功能，相当的显眼，在代码编辑框的左
 如果你和我一样是个键盘党，你可以使用快捷（Mac：按住Command键，再按\ ``+``\ 或者\ ``-``
 ，Windows：按住Ctrl键，再按\ ``+``\ 或者\ ``-`` ）进行快速反折叠/折叠。
 
-|image64|
+|image65|
 
 代码块的折叠和反折叠，应该是一个代码编辑器的基本功能。在这一点上，
 PyCharm 做为一个 IDE，在这一点上势必要做得更出色，事实证明，它做到了。
@@ -705,7 +707,7 @@ PyCharm 做为一个 IDE，在这一点上势必要做得更出色，事实证�
 只要你先选中你想折叠的代码，再按住 Command 紧接着按住 ``.``
 就可以了。效果如下：
 
-|image65|
+|image66|
 
 (GIF动态只播放两次，重播请刷新页面)
 
@@ -723,7 +725,7 @@ PyCharm 做为一个 IDE，在这一点上势必要做得更出色，事实证�
 比如下面这段代码，我只想改myfun
 里的的test_name，而对于全局下的同名变量是不应该修改的。如果你全局替换，就会有误伤。
 
-|image66|
+|image67|
 
 这时候，我们如何做呢？
 
@@ -733,7 +735,7 @@ PyCharm 做为一个 IDE，在这一点上势必要做得更出色，事实证�
 操作方法很简单，先选中你的变量，然后使用快捷键
 Shift+F6，就可以直接重命名了。
 
-|image67|
+|image68|
 
 (GIF动态只播放两次，重播请刷新页面)
 
@@ -752,7 +754,7 @@ Command+y 删除该行，就删除了该函数。
 
 做录制方法如下：
 
-|image68|
+|image69|
 
 (GIF动态只播放两次，重播请刷新页面)
 
@@ -761,13 +763,13 @@ Command+y 删除该行，就删除了该函数。
 
 这样播放宏显得有点繁琐，个人建议你为这个宏定义一个快捷键，这样会更方便播放宏。
 
-|image69|
+|image70|
 
 设置快捷键时，注意不要和已有的快捷键冲突。
 
 设置好后，查看 Macro，发现PyCharm已经将这个快捷键绑定给这个宏。
 
-|image70|
+|image71|
 
 之后你就可以使用这个快捷键删除一个函数（其实这只是删除一个代码块，但是这里只讨论设置方法）。
 
@@ -779,7 +781,7 @@ PyCharm 打开一个文件，就占用一个标签面。
 你有没有发现，不知不觉地，打开的文件越来越多，多到一行标签都装不下，装不下的标签页
 PyCharm 会将其隐藏起来，并以数字的形式告诉你隐藏了几个文件。
 
-|image71|
+|image72|
 
 点击数字5，你才可以查看隐藏了哪些文件。
 
@@ -789,11 +791,11 @@ PyCharm 会将其隐藏起来，并以数字的形式告诉你隐藏了几个文
 
 如下图，将单行显示取消勾选即可。
 
-|image72|
+|image73|
 
 设置完后，有哪些文件就非常清晰了。
 
-|image73|
+|image74|
 
 4.15.25 应用搜索，阅读源码必备
 ------------------------------
@@ -812,7 +814,7 @@ PyCharm 会将其隐藏起来，并以数字的形式告诉你隐藏了几个文
 
 如下图所示，按下快捷键后可以很轻松地看见调用列表。
 
-|image74|
+|image75|
 
 如果你嫌这快捷键太长了，可以使用 ``鼠标中键``
 点击这个类，可以达到同样的效果。
@@ -830,19 +832,19 @@ PyCharm 会将其隐藏起来，并以数字的形式告诉你隐藏了几个文
 
 对比示例，可以查看下面这张图，UI做的还是挺好看的。
 
-|image75|
+|image76|
 
 4.15.27 以列为单位的块编辑
 --------------------------
 
 先给你出道小题，像下面这段代码，如果在不影响代码的情况下，快速删除后面代码后面的注释呢？
 
-|image76|
+|image77|
 
 我能想到的有两种方法，如果像如上这种有规律的注释，可以使用 ``正则匹配``
 + ``替换`` 来实现。
 
-|image77|
+|image78|
 
 对于这个场景我想到了可以用 vim来轻松的解决，vim
 支持块编辑，可以以列为单位选择区域然后进行操作，这在vim中是很常用的一个取消注释的操作。
@@ -852,7 +854,7 @@ PyCharm 会将其隐藏起来，并以数字的形式告诉你隐藏了几个文
 当你按住
 alt（windows）或者option（mac），然后使用鼠标进行选择，你会发现这样一件神奇的事情。
 
-|image78|
+|image79|
 
 4.15.28 智能补全，忽略大小写
 ----------------------------
@@ -861,17 +863,17 @@ alt（windows）或者option（mac），然后使用鼠标进行选择，你会�
 
 当你的对象是以大写字母开头时，而你使用小写字母编写代码时，是不能查找到该函数的，你必须得先切换成大写再输入一遍。
 
-|image79|
+|image80|
 
 如何避免这种尴尬的情况？
 
 只要在配置中关闭大小写匹配即可。
 
-|image80|
+|image81|
 
 效果如下：
 
-|image81|
+|image82|
 
 4.15.29 保护眼睛，从PyCharm开始
 -------------------------------
@@ -884,7 +886,7 @@ alt（windows）或者option（mac），然后使用鼠标进行选择，你会�
 
 这里就教大家如何设置 PyCharm 的背景色为护眼色，方法如下：
 
-|image82|
+|image83|
 
 设置护眼色，会降低 PyCharm 的顔值，这需要你从中取一个取舍。
 
@@ -930,7 +932,7 @@ Debug ，而远程调试需要不少前置步骤。
 
 这里我提前准备了几种编程语言的 Hello World ，效果如下：
 
-|image83|
+|image84|
 
 4.15.32 轻松实现 json 格式化
 ----------------------------
@@ -944,18 +946,18 @@ Debug ，而远程调试需要不少前置步骤。
 
 以前我经常使用一些在线的网站，比如：https://tool.oschina.net/codeformat/json
 
-|image84|
+|image85|
 
 如果你的电脑无法连网，或者不喜欢多记一个网址，完全可以使用 PyCharnm
 来解决这一诉求
 
 没有经过美化是这样的：
 
-|image85|
+|image86|
 
 按住 ``Ctrl+Alt+L``\ 经过美化后是这样的
 
-|image86|
+|image87|
 
 4.15.33 在Windows上使用 Linux 命令
 ----------------------------------
@@ -967,11 +969,11 @@ Debug ，而远程调试需要不少前置步骤。
 对于像我这样熟悉 Linux 的开发者来说，Windows 的 那些 CMD
 命令带来的糟糕体验是无法忍受的。
 
-|image87|
+|image88|
 
 在弹出的 Bash 窗口，你可以敲入你想使用的 Linux 命令，是不是舒服多了。
 
-|image88|
+|image89|
 
 4.15.34 快速进行代码封装的技巧
 ------------------------------
@@ -993,36 +995,36 @@ Debug ，而远程调试需要不少前置步骤。
 
 假如，我现在有如下一段代码，红框标出的代码放在主函数中，有些不太合适，况且这段代码不能让人一眼就看出它是在做什么事情。如何将其进行封装，对我们理清整个主程序的逻辑会有帮助。
 
-|image89|
+|image90|
 
 选中你要封装的代码，然后按住 ``Ctrl``\ +\ ``Alt``\ +\ ``M``
 后，会跳出如下界面，根据自己的需要，修改函数名，选择参数和返回值
 
-|image90|
+|image91|
 
 一切就绪点击 ``OK``\ ，PyCharm
 会自动在合适的位置为你定义一个函数名，并将你选中的代码放到里面，其中参数名和返回值也都是按照你的要求，效果如下：
 
-|image91|
+|image92|
 
 4.15.35 使用 Git 进行版本管理
 -----------------------------
 
 点击 ``VCS`` -> ``Git`` -> ``Clone``
 
-|image92|
+|image93|
 
 填写git仓库相关信息
 
-|image93|
+|image94|
 
 点击 ``Test``\ ，会尝试连接 git 服务器，中间会让你输入登陆的帐号和密码。
 
-|image94|
+|image95|
 
 点击\ ``OK`` 后，若一切正常会提示连接成功。
 
-|image95|
+|image96|
 
 点击 ``OK`` 后，PyCharm 需要你选择如何打开这个 Git
 仓库目录，是在当前窗口中打开，还是新建一个窗口？
@@ -1031,14 +1033,14 @@ Debug ，而远程调试需要不少前置步骤。
 仓库，为了方便，我选择在当前窗口中打开（注意勾选
 ``Add to currently opened projects``\ ）。
 
-|image96|
+|image97|
 
 至此，Git 配置完成。
 
 此时你可以 ``VCS`` -> ``Git``
 查看，发现之前这些灰色不可用的按钮都可以使用了。
 
-|image97|
+|image98|
 
 本篇重在讲解 PyCharm 的配置，关于Git
 的操作，不属于本篇重点，就不再展开讲了。
@@ -1046,11 +1048,11 @@ Debug ，而远程调试需要不少前置步骤。
 若你想对已配置的Git仓库进行修改，可点击 ``File`` -> ``Setting`` ->
 ``Version Control`` 调出如下界面。
 
-|image98|
+|image99|
 
 不得不说 PyCharm 的这 UI 做得可以，随便改了个东西提交一下
 
-|image99|
+|image100|
 
 4.15.36 快速查看 Git 的修改
 ---------------------------
@@ -1060,18 +1062,18 @@ Debug ，而远程调试需要不少前置步骤。
 
 第一种当然是使用 git diff
 
-|image100|
+|image101|
 
 第二种是使用之前写的 show history
 
-|image101|
+|image102|
 
 第三种，也是今天要介绍的，是最简便，也是直接的方法。
 
 在有文本变动的位置，PyCharm
 会有提示，如下红色箭头标识处，点击它就可以直接查看，还可以快速回滚。
 
-|image102|
+|image103|
 
 附录
 ----
@@ -1089,107 +1091,108 @@ Debug ，而远程调试需要不少前置步骤。
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190323164120.png
-.. |image1| image:: http://image.python-online.cn/20190323211635.png
-.. |image2| image:: http://image.python-online.cn/20190323211301.png
-.. |image3| image:: http://image.python-online.cn/20190324111603.png
-.. |image4| image:: http://image.python-online.cn/20190323153643.png
-.. |image5| image:: http://image.python-online.cn/20190323214545.png
-.. |image6| image:: http://image.python-online.cn/20190323225704.png
-.. |image7| image:: http://image.python-online.cn/20190323225631.png
-.. |image8| image:: http://image.python-online.cn/20190323232017.png
-.. |image9| image:: https://i.loli.net/2019/03/23/5c965275bf0d7.gif
-.. |image10| image:: https://i.loli.net/2019/03/23/5c9653e1b757a.gif
-.. |image11| image:: http://image.python-online.cn/20190324111429.png
-.. |image12| image:: http://image.python-online.cn/Fi3N02x9OeOPatGdaReam_icn9G_
-.. |image13| image:: http://image.python-online.cn/Fj1W53Txj0iFs5eYhFYh_dHlPtIL
-.. |image14| image:: http://image.python-online.cn/FlMsB7B1x6ET9mLOgydTWuTEXuOe
-.. |image15| image:: http://image.python-online.cn/FmfL3r0iWx_srT_xMASBEp1ZaaId
-.. |image16| image:: http://image.python-online.cn/FiNCYpVlI93gk1zhOdQn4c0A8FMX
-.. |image17| image:: http://image.python-online.cn/FrAq1tVRM7Bz948wRqZFzU2PQnI0
-.. |image18| image:: http://image.python-online.cn/Fo2aEraqbj_2KqDt44EzJTVe8pEf
-.. |image19| image:: http://image.python-online.cn/FmfL3r0iWx_srT_xMASBEp1ZaaId
-.. |image20| image:: http://image.python-online.cn/FujczKwTUPa8l5EEmS0eoh-zL1Nk
-.. |image21| image:: http://image.python-online.cn/Fq60WOdcRJopqV6MVoRcIuZclYKx
-.. |image22| image:: http://image.python-online.cn/FlXynbyxh8tTrCpc4tVLqycL7JQm
-.. |image23| image:: http://image.python-online.cn/FiD91PR1hUu0Ruc6cmZ7EGNM6Be_
-.. |image24| image:: http://image.python-online.cn/FhkX5Ko3LVZL_p7YfitDsTDxvHmL
-.. |image25| image:: http://image.python-online.cn/FuSSVa-aMqkfCaf62sbUoX2PLaYM
-.. |image26| image:: http://image.python-online.cn/FtFPI89AOKmPLNpNxf-jdkn1BDLW
-.. |image27| image:: http://image.python-online.cn/FiKyU6tjQauWXfaVfKLhwi3NkXBf
-.. |image28| image:: http://image.python-online.cn/FsAM-8HyzSrLWZJ_lg3ofw84_ibf
-.. |image29| image:: http://image.python-online.cn/FgJCtNYkjPfBaTbRxwb3Z6icHqkf
-.. |image30| image:: http://image.python-online.cn/20190507222856.png
-.. |image31| image:: http://image.python-online.cn/20190507222119.png
-.. |image32| image:: http://image.python-online.cn/20190507223313.png
-.. |image33| image:: http://image.python-online.cn/20190507215525.png
-.. |image34| image:: http://image.python-online.cn/20190507220101.png
-.. |image35| image:: http://image.python-online.cn/20190419152120.png
-.. |image36| image:: http://image.python-online.cn/20190419152145.png
-.. |image37| image:: http://image.python-online.cn/20190507220740.png
-.. |image38| image:: http://image.python-online.cn/20190423162328.png
-.. |image39| image:: http://image.python-online.cn/20190423163341.png
-.. |image40| image:: http://image.python-online.cn/20190506150523.png
-.. |image41| image:: http://image.python-online.cn/20190506150010.png
-.. |image42| image:: http://image.python-online.cn/20190506150100.png
-.. |image43| image:: http://image.python-online.cn/20190507000850.png
-.. |image44| image:: http://image.python-online.cn/20190507001025.png
-.. |image45| image:: http://image.python-online.cn/20190507001422.png
-.. |image46| image:: http://image.python-online.cn/20190507001350.png
-.. |image47| image:: http://image.python-online.cn/20190507152911.png
-.. |image48| image:: http://image.python-online.cn/20190507152840.png
-.. |image49| image:: http://image.python-online.cn/20190507153847.png
-.. |image50| image:: http://image.python-online.cn/20190507154027.png
-.. |image51| image:: http://image.python-online.cn/20190613154147.png
-.. |image52| image:: http://image.python-online.cn/20190613154401.png
-.. |image53| image:: http://image.python-online.cn/20190613160905.png
-.. |image54| image:: http://image.python-online.cn/20190614235120.png
-.. |image55| image:: http://image.python-online.cn/20190616211359.png
-.. |image56| image:: http://image.python-online.cn/20190616214310.png
-.. |image57| image:: http://image.python-online.cn/20190616221620.png
-.. |image58| image:: http://image.python-online.cn/20190616232746.png
-.. |image59| image:: http://image.python-online.cn/20190616233827.png
-.. |image60| image:: http://image.python-online.cn/20190616235007.png
-.. |image61| image:: http://image.python-online.cn/20190616234038.png
-.. |image62| image:: http://image.python-online.cn/20190616231649.png
-.. |image63| image:: http://image.python-online.cn/20190616232527.png
-.. |image64| image:: http://image.python-online.cn/20190629183430.png
-.. |image65| image:: https://i.loli.net/2019/06/29/5d17589c1603755790.gif
-.. |image66| image:: http://image.python-online.cn/20190629211910.png
-.. |image67| image:: https://i.loli.net/2019/06/29/5d1764b94d11128912.gif
-.. |image68| image:: https://i.loli.net/2019/06/29/5d176e9ba92e916696.gif
-.. |image69| image:: http://image.python-online.cn/20190629221224.png
-.. |image70| image:: http://image.python-online.cn/20190629221547.png
-.. |image71| image:: http://image.python-online.cn/20190629223534.png
-.. |image72| image:: http://image.python-online.cn/20190629224229.png
-.. |image73| image:: http://image.python-online.cn/20190629224430.png
-.. |image74| image:: http://image.python-online.cn/20190629231322.png
-.. |image75| image:: http://image.python-online.cn/20190721125739.png
-.. |image76| image:: http://image.python-online.cn/20190721132238.png
-.. |image77| image:: http://image.python-online.cn/20190721133403.png
-.. |image78| image:: https://i.loli.net/2019/07/21/5d3401410087b61815.gif
-.. |image79| image:: http://image.python-online.cn/20190721141327.png
-.. |image80| image:: http://image.python-online.cn/20190721141653.png
-.. |image81| image:: http://image.python-online.cn/20190721141751.png
-.. |image82| image:: http://image.python-online.cn/20190721143450.png
-.. |image83| image:: http://image.python-online.cn/20191211210012.png
-.. |image84| image:: http://image.python-online.cn/20191211211309.png
-.. |image85| image:: http://image.python-online.cn/20191211211334.png
-.. |image86| image:: http://image.python-online.cn/20191211211626.png
-.. |image87| image:: http://image.python-online.cn/20191211212546.png
-.. |image88| image:: http://image.python-online.cn/20191222143741.png
-.. |image89| image:: http://image.python-online.cn/20191222141905.png
-.. |image90| image:: http://image.python-online.cn/20191222141955.png
-.. |image91| image:: http://image.python-online.cn/20191222142223.png
-.. |image92| image:: http://image.python-online.cn/20191211100048.png
-.. |image93| image:: http://image.python-online.cn/20191211100657.png
-.. |image94| image:: http://image.python-online.cn/20191211101706.png
-.. |image95| image:: http://image.python-online.cn/20191211101845.png
-.. |image96| image:: http://image.python-online.cn/20191211102501.png
-.. |image97| image:: http://image.python-online.cn/20191211102826.png
-.. |image98| image:: http://image.python-online.cn/20191211133836.png
-.. |image99| image:: http://image.python-online.cn/20191211143510.png
-.. |image100| image:: http://image.iswbm.com/20200420085524.png
-.. |image101| image:: http://image.iswbm.com/20200420090117.png
-.. |image102| image:: http://image.iswbm.com/20200420090428.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190323164120.png
+.. |image2| image:: http://image.python-online.cn/20190323211635.png
+.. |image3| image:: http://image.python-online.cn/20190323211301.png
+.. |image4| image:: http://image.python-online.cn/20190324111603.png
+.. |image5| image:: http://image.python-online.cn/20190323153643.png
+.. |image6| image:: http://image.python-online.cn/20190323214545.png
+.. |image7| image:: http://image.python-online.cn/20190323225704.png
+.. |image8| image:: http://image.python-online.cn/20190323225631.png
+.. |image9| image:: http://image.python-online.cn/20190323232017.png
+.. |image10| image:: https://i.loli.net/2019/03/23/5c965275bf0d7.gif
+.. |image11| image:: https://i.loli.net/2019/03/23/5c9653e1b757a.gif
+.. |image12| image:: http://image.python-online.cn/20190324111429.png
+.. |image13| image:: http://image.python-online.cn/Fi3N02x9OeOPatGdaReam_icn9G_
+.. |image14| image:: http://image.python-online.cn/Fj1W53Txj0iFs5eYhFYh_dHlPtIL
+.. |image15| image:: http://image.python-online.cn/FlMsB7B1x6ET9mLOgydTWuTEXuOe
+.. |image16| image:: http://image.python-online.cn/FmfL3r0iWx_srT_xMASBEp1ZaaId
+.. |image17| image:: http://image.python-online.cn/FiNCYpVlI93gk1zhOdQn4c0A8FMX
+.. |image18| image:: http://image.python-online.cn/FrAq1tVRM7Bz948wRqZFzU2PQnI0
+.. |image19| image:: http://image.python-online.cn/Fo2aEraqbj_2KqDt44EzJTVe8pEf
+.. |image20| image:: http://image.python-online.cn/FmfL3r0iWx_srT_xMASBEp1ZaaId
+.. |image21| image:: http://image.python-online.cn/FujczKwTUPa8l5EEmS0eoh-zL1Nk
+.. |image22| image:: http://image.python-online.cn/Fq60WOdcRJopqV6MVoRcIuZclYKx
+.. |image23| image:: http://image.python-online.cn/FlXynbyxh8tTrCpc4tVLqycL7JQm
+.. |image24| image:: http://image.python-online.cn/FiD91PR1hUu0Ruc6cmZ7EGNM6Be_
+.. |image25| image:: http://image.python-online.cn/FhkX5Ko3LVZL_p7YfitDsTDxvHmL
+.. |image26| image:: http://image.python-online.cn/FuSSVa-aMqkfCaf62sbUoX2PLaYM
+.. |image27| image:: http://image.python-online.cn/FtFPI89AOKmPLNpNxf-jdkn1BDLW
+.. |image28| image:: http://image.python-online.cn/FiKyU6tjQauWXfaVfKLhwi3NkXBf
+.. |image29| image:: http://image.python-online.cn/FsAM-8HyzSrLWZJ_lg3ofw84_ibf
+.. |image30| image:: http://image.python-online.cn/FgJCtNYkjPfBaTbRxwb3Z6icHqkf
+.. |image31| image:: http://image.python-online.cn/20190507222856.png
+.. |image32| image:: http://image.python-online.cn/20190507222119.png
+.. |image33| image:: http://image.python-online.cn/20190507223313.png
+.. |image34| image:: http://image.python-online.cn/20190507215525.png
+.. |image35| image:: http://image.python-online.cn/20190507220101.png
+.. |image36| image:: http://image.python-online.cn/20190419152120.png
+.. |image37| image:: http://image.python-online.cn/20190419152145.png
+.. |image38| image:: http://image.python-online.cn/20190507220740.png
+.. |image39| image:: http://image.python-online.cn/20190423162328.png
+.. |image40| image:: http://image.python-online.cn/20190423163341.png
+.. |image41| image:: http://image.python-online.cn/20190506150523.png
+.. |image42| image:: http://image.python-online.cn/20190506150010.png
+.. |image43| image:: http://image.python-online.cn/20190506150100.png
+.. |image44| image:: http://image.python-online.cn/20190507000850.png
+.. |image45| image:: http://image.python-online.cn/20190507001025.png
+.. |image46| image:: http://image.python-online.cn/20190507001422.png
+.. |image47| image:: http://image.python-online.cn/20190507001350.png
+.. |image48| image:: http://image.python-online.cn/20190507152911.png
+.. |image49| image:: http://image.python-online.cn/20190507152840.png
+.. |image50| image:: http://image.python-online.cn/20190507153847.png
+.. |image51| image:: http://image.python-online.cn/20190507154027.png
+.. |image52| image:: http://image.python-online.cn/20190613154147.png
+.. |image53| image:: http://image.python-online.cn/20190613154401.png
+.. |image54| image:: http://image.python-online.cn/20190613160905.png
+.. |image55| image:: http://image.python-online.cn/20190614235120.png
+.. |image56| image:: http://image.python-online.cn/20190616211359.png
+.. |image57| image:: http://image.python-online.cn/20190616214310.png
+.. |image58| image:: http://image.python-online.cn/20190616221620.png
+.. |image59| image:: http://image.python-online.cn/20190616232746.png
+.. |image60| image:: http://image.python-online.cn/20190616233827.png
+.. |image61| image:: http://image.python-online.cn/20190616235007.png
+.. |image62| image:: http://image.python-online.cn/20190616234038.png
+.. |image63| image:: http://image.python-online.cn/20190616231649.png
+.. |image64| image:: http://image.python-online.cn/20190616232527.png
+.. |image65| image:: http://image.python-online.cn/20190629183430.png
+.. |image66| image:: https://i.loli.net/2019/06/29/5d17589c1603755790.gif
+.. |image67| image:: http://image.python-online.cn/20190629211910.png
+.. |image68| image:: https://i.loli.net/2019/06/29/5d1764b94d11128912.gif
+.. |image69| image:: https://i.loli.net/2019/06/29/5d176e9ba92e916696.gif
+.. |image70| image:: http://image.python-online.cn/20190629221224.png
+.. |image71| image:: http://image.python-online.cn/20190629221547.png
+.. |image72| image:: http://image.python-online.cn/20190629223534.png
+.. |image73| image:: http://image.python-online.cn/20190629224229.png
+.. |image74| image:: http://image.python-online.cn/20190629224430.png
+.. |image75| image:: http://image.python-online.cn/20190629231322.png
+.. |image76| image:: http://image.python-online.cn/20190721125739.png
+.. |image77| image:: http://image.python-online.cn/20190721132238.png
+.. |image78| image:: http://image.python-online.cn/20190721133403.png
+.. |image79| image:: https://i.loli.net/2019/07/21/5d3401410087b61815.gif
+.. |image80| image:: http://image.python-online.cn/20190721141327.png
+.. |image81| image:: http://image.python-online.cn/20190721141653.png
+.. |image82| image:: http://image.python-online.cn/20190721141751.png
+.. |image83| image:: http://image.python-online.cn/20190721143450.png
+.. |image84| image:: http://image.python-online.cn/20191211210012.png
+.. |image85| image:: http://image.python-online.cn/20191211211309.png
+.. |image86| image:: http://image.python-online.cn/20191211211334.png
+.. |image87| image:: http://image.python-online.cn/20191211211626.png
+.. |image88| image:: http://image.python-online.cn/20191211212546.png
+.. |image89| image:: http://image.python-online.cn/20191222143741.png
+.. |image90| image:: http://image.python-online.cn/20191222141905.png
+.. |image91| image:: http://image.python-online.cn/20191222141955.png
+.. |image92| image:: http://image.python-online.cn/20191222142223.png
+.. |image93| image:: http://image.python-online.cn/20191211100048.png
+.. |image94| image:: http://image.python-online.cn/20191211100657.png
+.. |image95| image:: http://image.python-online.cn/20191211101706.png
+.. |image96| image:: http://image.python-online.cn/20191211101845.png
+.. |image97| image:: http://image.python-online.cn/20191211102501.png
+.. |image98| image:: http://image.python-online.cn/20191211102826.png
+.. |image99| image:: http://image.python-online.cn/20191211133836.png
+.. |image100| image:: http://image.python-online.cn/20191211143510.png
+.. |image101| image:: http://image.iswbm.com/20200420085524.png
+.. |image102| image:: http://image.iswbm.com/20200420090117.png
+.. |image103| image:: http://image.iswbm.com/20200420090428.png
 

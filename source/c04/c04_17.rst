@@ -1,6 +1,8 @@
 4.17 详解 23 种设计模式
 =======================
 
+|image0|
+
 4.17.1 策略模式
 ---------------
 
@@ -20,7 +22,7 @@
 -  Stragety：策略基类
 -  ConcreteStragety：具体策略
 
-|image0|
+|image1|
 
 以第一个超市做活动的场景来举个例子。
 
@@ -281,7 +283,7 @@ Order
 
 验证结果
 
-|image1|
+|image2|
 
 -  使用装饰器
 
@@ -310,7 +312,7 @@ Order
 
 验证结果
 
-|image2|
+|image3|
 
 -  使用元类
 
@@ -333,7 +335,7 @@ Order
 
 验证结果
 
-|image3|
+|image4|
 
 以上的代码，一般情况下没有问题，但在并发场景中，就会出现线程安全的问题。
 
@@ -477,8 +479,9 @@ Order
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190414144511.png
-.. |image1| image:: http://image.python-online.cn/20190512113846.png
-.. |image2| image:: http://image.python-online.cn/20190512113917.png
-.. |image3| image:: http://image.python-online.cn/20190512114028.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190414144511.png
+.. |image2| image:: http://image.python-online.cn/20190512113846.png
+.. |image3| image:: http://image.python-online.cn/20190512113917.png
+.. |image4| image:: http://image.python-online.cn/20190512114028.png
 

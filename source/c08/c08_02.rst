@@ -1,6 +1,8 @@
 8.2 OpenStack 部署SR-IOV
 ========================
 
+|image0|
+
 --------------
 
 **摘要**: SR-IOV
@@ -21,13 +23,13 @@ SR-IOV
 8.2.1.1 bios开启vt-d, sriov
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-|image0| |image1|
+|image1| |image2|
 
 8.2.1.2 开启iommu
 ~~~~~~~~~~~~~~~~~
 
 vim /etc/sysconfig/grub（或者/etc/default/grub）：intel_iommu=on
-|image2| 改完后，重新生成配置
+|image3| 改完后，重新生成配置
 
 ::
 
@@ -118,7 +120,7 @@ vim /etc/nova/nova.conf
 
    service openstack-nova-compute restart
 
-查看数据库，compute_nodes，确认VF是否有被管理起来 |image3|
+查看数据库，compute_nodes，确认VF是否有被管理起来 |image4|
 
 8.2.3 控制节点
 --------------
@@ -128,7 +130,7 @@ vim /etc/nova/nova.conf
 8.2.3.1 neutron-server
 ~~~~~~~~~~~~~~~~~~~~~~
 
-vim /etc/neutron/plugins/ml2/ml2_conf.ini |image4|
+vim /etc/neutron/plugins/ml2/ml2_conf.ini |image5|
 
 添加sriov配置文件（如果没有此文件，就添加） vim
 /etc/neutron/plugins/ml2/ml2_conf_sriov.ini
@@ -145,7 +147,7 @@ vim /etc/neutron/plugins/ml2/ml2_conf.ini |image4|
 
    --config-file /etc/neutron/plugins/ml2/ml2_conf_sriov.ini
 
-|image5|
+|image6|
 
 重启服务，使配置生效
 
@@ -264,7 +266,7 @@ interface-attach不适用于sriov port。
 1、使用neutron port-show ，查看并记录原 port 的 ``binding:profile``
 信息，如果有多个port，把每个port的信息都记录下来。
 
-|image6|
+|image7|
 
 2、nova interface-detach卸载原来的port。
 
@@ -290,7 +292,7 @@ port-update命令不支持，只能使用curl，需要修改port-id及binding:pr
 
    select * from pci_devices where instance_uuid='5a1c1828-4190-43fa-8e05-ae51b0196656';
 
-|image7|
+|image8|
 
 附录：参考文档
 --------------
@@ -308,12 +310,13 @@ port-update命令不支持，只能使用curl，需要修改port-id及binding:pr
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: https://i.loli.net/2018/01/19/5a61bfa0ca66f.png
-.. |image1| image:: https://i.loli.net/2018/01/19/5a61bfd243111.png
-.. |image2| image:: https://i.loli.net/2018/01/19/5a61c022d68d3.png
-.. |image3| image:: https://i.loli.net/2018/01/19/5a61c1cf51b58.png
-.. |image4| image:: https://i.loli.net/2018/01/19/5a61c1faac447.png
-.. |image5| image:: https://i.loli.net/2018/01/19/5a61c246451e7.png
-.. |image6| image:: http://image.python-online.cn/20190529202132.png
-.. |image7| image:: http://image.python-online.cn/20190529202440.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: https://i.loli.net/2018/01/19/5a61bfa0ca66f.png
+.. |image2| image:: https://i.loli.net/2018/01/19/5a61bfd243111.png
+.. |image3| image:: https://i.loli.net/2018/01/19/5a61c022d68d3.png
+.. |image4| image:: https://i.loli.net/2018/01/19/5a61c1cf51b58.png
+.. |image5| image:: https://i.loli.net/2018/01/19/5a61c1faac447.png
+.. |image6| image:: https://i.loli.net/2018/01/19/5a61c246451e7.png
+.. |image7| image:: http://image.python-online.cn/20190529202132.png
+.. |image8| image:: http://image.python-online.cn/20190529202440.png
 

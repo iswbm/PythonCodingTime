@@ -1,6 +1,8 @@
 10.1 网络知识扫盲：一篇文章搞懂 DNS
 ===================================
 
+|image0|
+
 1. DNS 是什么？
 ---------------
 
@@ -60,7 +62,7 @@ DNS （Domain Name System
 2. 从“顶级域名服务器”查到“次级域名服务器”的NS记录和A记录（IP地址）
 3. 从“次级域名服务器”查出“主机名”的IP地址
 
-|image0|
+|image1|
 
 4. DNS的缓存时间
 ----------------
@@ -72,7 +74,7 @@ DNS （Domain Name System
 Live），意思就是这个缓存可以存活多长时间，过了这个时间，本地 DNS
 就会删除这条记录，删除了缓存后，你再访问，就要重新走一遍上面的流程，获取最新的地址。
 
-|image1|
+|image2|
 
 5. DNS 的记录类型
 -----------------
@@ -103,7 +105,7 @@ Live），意思就是这个缓存可以存活多长时间，过了这个时间�
 后面我将使用 wireshark 抓取 DNS 的数据包，但是在开始之前 ，得先了解一下
 DNS 的报文结构
 
-|image2|
+|image3|
 
 -  事务 ID：DNS 报文的 ID
    标识。对于请求报文和其对应的应答报文，该字段的值是相同的。通过它可以区分
@@ -125,17 +127,17 @@ DNS 的报文结构
 1. DNS 是应用层协议，传输层协议使用的是 UDP
 2. DNS 默认端口是 53
 
-|image3|
+|image4|
 
 请求和应答的报文的截图我放在了下面，接下来我将逐个分析。
 
 **请求**
 
-|image4|
+|image5|
 
 **应答**
 
-|image5|
+|image6|
 
 Transaction ID
 ~~~~~~~~~~~~~~
@@ -251,7 +253,7 @@ dig是一个在类Unix命令行模式下查询DNS包括NS记录，A记录，MX�
 通过 dig （参数：\ ``+trace``\ ）命令，我们可以看到上面描述的 DNS
 解析的详细过程
 
-|image6|
+|image7|
 
 从返回的结果，我们可以看得出几点信息
 
@@ -264,15 +266,15 @@ dig是一个在类Unix命令行模式下查询DNS包括NS记录，A记录，MX�
 如果你只想看到结果，可以使用 ``+short`` 参数，可以直接返回 www.163.com
 对应着哪几个ip
 
-|image7|
+|image8|
 
 你也可以加个 ``@`` 参数 ，指定从某个 DNS 服务器进行查询
 
-|image8|
+|image9|
 
 如果你只想查看指定的记录类型
 
-|image9|
+|image10|
 
 host 命令
 ~~~~~~~~~
@@ -280,14 +282,14 @@ host 命令
 ``host`` 命令
 可以看作\ ``dig``\ 命令的简化版本，返回当前请求域名的各种记录。
 
-|image10|
+|image11|
 
 whois命令
 ~~~~~~~~~
 
 ``whois``\ 命令用来查看域名的注册情况。
 
-|image11|
+|image12|
 
 nslookup命令
 ~~~~~~~~~~~~
@@ -298,11 +300,11 @@ nslookup也是常用的一个查询 DNS 解析结果的工具
 
    $ nslookup [查询的域名] [指定DNS服务器]
 
-|image12|
+|image13|
 
 你也可以指定公网的域名服务器进行查询，比如常见的 114.114.114.114
 
-|image13|
+|image14|
 
 10. 手动清理本地缓存
 --------------------
@@ -335,18 +337,19 @@ Linux
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.iswbm.com/464291-20170703113844956-354755333.jpg
-.. |image1| image:: http://image.iswbm.com/image-20200531141521689.png
-.. |image2| image:: http://image.iswbm.com/image-20200531152824672.png
-.. |image3| image:: http://image.iswbm.com/20200531175736.png
-.. |image4| image:: http://image.iswbm.com/20200531175811.png
-.. |image5| image:: http://image.iswbm.com/image-20200531153110621.png
-.. |image6| image:: http://image.iswbm.com/image-20200531162810531.png
-.. |image7| image:: http://image.iswbm.com/image-20200531164525384.png
-.. |image8| image:: http://image.iswbm.com/image-20200531170427834.png
-.. |image9| image:: http://image.iswbm.com/image-20200531170543250.png
-.. |image10| image:: http://image.iswbm.com/image-20200531171610902.png
-.. |image11| image:: http://image.iswbm.com/image-20200531171905345.png
-.. |image12| image:: http://image.iswbm.com/image-20200531145109182.png
-.. |image13| image:: http://image.iswbm.com/image-20200531145449577.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/464291-20170703113844956-354755333.jpg
+.. |image2| image:: http://image.iswbm.com/image-20200531141521689.png
+.. |image3| image:: http://image.iswbm.com/image-20200531152824672.png
+.. |image4| image:: http://image.iswbm.com/20200531175736.png
+.. |image5| image:: http://image.iswbm.com/20200531175811.png
+.. |image6| image:: http://image.iswbm.com/image-20200531153110621.png
+.. |image7| image:: http://image.iswbm.com/image-20200531162810531.png
+.. |image8| image:: http://image.iswbm.com/image-20200531164525384.png
+.. |image9| image:: http://image.iswbm.com/image-20200531170427834.png
+.. |image10| image:: http://image.iswbm.com/image-20200531170543250.png
+.. |image11| image:: http://image.iswbm.com/image-20200531171610902.png
+.. |image12| image:: http://image.iswbm.com/image-20200531171905345.png
+.. |image13| image:: http://image.iswbm.com/image-20200531145109182.png
+.. |image14| image:: http://image.iswbm.com/image-20200531145449577.png
 

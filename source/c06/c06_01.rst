@@ -1,6 +1,8 @@
 6.1 一张图带你入门matplotlib
 ============================
 
+|image0|
+
 --------------
 
 Python在数据分析领域有一个很完备的生态系统，在数据处理方面有
@@ -63,7 +65,7 @@ pylab 已经不再推荐使用了。所以你如果是一个初学者，在网�
 ------------------
 
 前两天的官网上闲逛的时候，发现了一张图，可以说把一个图表该有的元素都很好的展示出来了。从这张图入手，一点一点地实现这里面的每个元素，我们也算是入门了matplotlib了。
-|image0|
+|image1|
 
 这里面的大部分元素，我相信会点英文的你都能很轻松的理解。
 
@@ -127,7 +129,7 @@ ticks（由Locator对象定义），还有ticklabel（由Formatter对象定义�
 以上的注释，可以说是很直白啦。一张图表该有的东西都有了，不花哨，但实用。
 看看我们的代码输出的图表是啥样的。
 
-|image1|
+|image2|
 
 --------------
 
@@ -136,6 +138,7 @@ ticks（由Locator对象定义），还有ticklabel（由Formatter对象定义�
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: https://i.loli.net/2018/08/12/5b6ff3716fdc0.png
-.. |image1| image:: http://image.python-online.cn/20190511164650.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: https://i.loli.net/2018/08/12/5b6ff3716fdc0.png
+.. |image2| image:: http://image.python-online.cn/20190511164650.png
 

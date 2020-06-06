@@ -1,12 +1,14 @@
 8.16 修改 KVM 镜像文件的三种方法
 ================================
 
+|image0|
+
 如下工具的更多说明，请查看官方文档：http://libguestfs.org/guestfs-recipes.1.html
 
 8.16.1 使用 guestfish
 ---------------------
 
-|image0|
+|image1|
 
 guestfish 里的命令有限，大概会 600 多个，不能
 cd，操作文件时，需要使用绝对路径。
@@ -14,16 +16,17 @@ cd，操作文件时，需要使用绝对路径。
 8.16.2 使用 guestmount
 ----------------------
 
-|image1|
+|image2|
 
 使用完后，记得 umount /home/wangbm/mount
 
 8.16.3 使用 virt-\* 命令
 ------------------------
 
-|image2|
+|image3|
 
-.. |image0| image:: http://image.python-online.cn/20191111112221.png
-.. |image1| image:: http://image.python-online.cn/20191111112421.png
-.. |image2| image:: http://image.python-online.cn/20191111112548.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20191111112221.png
+.. |image2| image:: http://image.python-online.cn/20191111112421.png
+.. |image3| image:: http://image.python-online.cn/20191111112548.png
 

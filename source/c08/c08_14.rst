@@ -1,6 +1,8 @@
 8.14 支持 IPv6以及多运营商
 ==========================
 
+|image0|
+
 8.14.1 手工如何配置 IPv6
 ------------------------
 
@@ -109,7 +111,7 @@
 信息写入ConfigDrive，也只有这样cloudinit才能自动为我们配置上 IPv6 的
 ip。
 
-|image0|
+|image1|
 
 而对于 Neutron 来说，要使用 IPv6，当然要先创建一个 IPv6
 的子网，这里要注意，IPv6
@@ -192,11 +194,11 @@ Port 去创建虚拟机，二是，修改 nova-api 的接口，使之支持。
 
 在一张网卡上配置多个版本的IP（一个IPv4和一个IPv6），只在一个配置文件中配置就可以支持，因此cloudinit的处理的时候，会将同一个tap设备的归为一个同一张网卡。
 
-|image1|
+|image2|
 
 也就是说，cloudinit本身很轻松地就可以支持单网卡多版本IP的配置。
 
-|image2|
+|image3|
 
 而对于多线的IP，由于 Nova
 写入ConfigDrive时，尽管一个Port上有多个IPv4或者多个IPv6，同个版本的都会只取第一个写入，自然从cloudinit那侧就无法进一步操作。
@@ -229,7 +231,7 @@ Port 去创建虚拟机，二是，修改 nova-api 的接口，使之支持。
           }],
 
 -  Neutron 接口可以不改，因为创建Port的接口参数中的 fixed_ips
-   是一个数组类型，所以我们可以把这些版本信息，运营商信息放进这个数组的每一个元素中。\ |image3|
+   是一个数组类型，所以我们可以把这些版本信息，运营商信息放进这个数组的每一个元素中。\ |image4|
 
    所以我们只要修改Neutron 创建 Port 的代码逻辑。
 
@@ -243,7 +245,7 @@ Port 去创建虚拟机，二是，修改 nova-api 的接口，使之支持。
 最后另外再说一点无关紧要的，cloudinit
 解析后，每张网卡一个ip与一张网卡两个ip的区别如下。
 
-|image4|
+|image5|
 
 重装 ``openvswith.ko`` 过程
 
@@ -256,40 +258,40 @@ Port 去创建虚拟机，二是，修改 nova-api 的接口，使之支持。
 
 CentOS 6.x 在使用 ipv6 方面有问题
 
-|image5|
+|image6|
 
 导致在网卡配置文件里的配置的ip 都为none
 
-|image6|
+|image7|
 
 上面的 callbak 是 这个函数
 
-|image7|
+|image8|
 
 centos6.x 的网络信息不是从 latest 里的 network_data.json
 里读取的，而是从 content/0000 里读取
 
-|image8|
+|image9|
 
 这是因为 centos 6.x 配置网络是在 local
 阶段做的，而local阶段做的话，就会从 content/0000
 
-|image9|
+|image10|
 
 而 centos7.x 其实也会走 on_first_boot 去配置网络，但是cloudinit
 在centos7.x 里 sources.DSMODE_PASS
 
-|image10|
+|image11|
 
 导致在 local 阶段，这里配置网络被pass掉，自然也就不会从 content/0000
 读取了。
 
-|image11|
+|image12|
 
 centos 6.x 配置网络是在 on_first_boot 函数里，这是 local
 阶段就会执行的。
 
-|image12|
+|image13|
 
 8.14.5 ubuntu禁用ipv6
 ---------------------
@@ -297,7 +299,7 @@ centos 6.x 配置网络是在 on_first_boot 函数里，这是 local
 如果你给你的ubuntu配置上了ipv6的ip，那当你使用 apt-get install
 软件包的时候，会使用ipv6去源安装，这将会使你的安装过程卡住：
 
-|image13|
+|image14|
 
 如何解决这个问题呢？
 
@@ -328,18 +330,19 @@ centos 6.x 配置网络是在 on_first_boot 函数里，这是 local
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190716175250.png
-.. |image1| image:: http://image.python-online.cn/20190716180655.png
-.. |image2| image:: http://image.python-online.cn/20190716180952.png
-.. |image3| image:: http://image.python-online.cn/20190804110647.png
-.. |image4| image:: http://image.python-online.cn/20190716180726.png
-.. |image5| image:: http://image.python-online.cn/20190829103805.png
-.. |image6| image:: http://image.python-online.cn/20190829104544.png
-.. |image7| image:: http://image.python-online.cn/20190829104806.png
-.. |image8| image:: http://image.python-online.cn/20190829110541.png
-.. |image9| image:: http://image.python-online.cn/20190829105558.png
-.. |image10| image:: http://image.python-online.cn/20190829112446.png
-.. |image11| image:: http://image.python-online.cn/20190829111917.png
-.. |image12| image:: http://image.python-online.cn/20190829161243.png
-.. |image13| image:: http://image.python-online.cn/20190926171038.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190716175250.png
+.. |image2| image:: http://image.python-online.cn/20190716180655.png
+.. |image3| image:: http://image.python-online.cn/20190716180952.png
+.. |image4| image:: http://image.python-online.cn/20190804110647.png
+.. |image5| image:: http://image.python-online.cn/20190716180726.png
+.. |image6| image:: http://image.python-online.cn/20190829103805.png
+.. |image7| image:: http://image.python-online.cn/20190829104544.png
+.. |image8| image:: http://image.python-online.cn/20190829104806.png
+.. |image9| image:: http://image.python-online.cn/20190829110541.png
+.. |image10| image:: http://image.python-online.cn/20190829105558.png
+.. |image11| image:: http://image.python-online.cn/20190829112446.png
+.. |image12| image:: http://image.python-online.cn/20190829111917.png
+.. |image13| image:: http://image.python-online.cn/20190829161243.png
+.. |image14| image:: http://image.python-online.cn/20190926171038.png
 

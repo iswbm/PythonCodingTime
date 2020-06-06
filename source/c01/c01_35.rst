@@ -1,6 +1,8 @@
 1.35 使用 Python 远程登陆服务器的利器
 =====================================
 
+|image0|
+
 在使用 Python
 写一些脚本的时候，在某些情况下，我们需要频繁登陆远程服务去执行一次命令，并返回一些结果。
 
@@ -132,7 +134,7 @@ os.popen，os.system，commands，subprocess 等一些命令执行库来间接�
 2017 年就已经存在这个问题了，到现在 2020 年了还没有修复，看来使用
 ``sh.ssh`` 的人并不多，于是我又“追问”了下，期望能得到回复。
 
-|image0|
+|image1|
 
 以上这个问题，只有在需要输入密码才会出现，如果设置了机器互信是没有问题的。
 
@@ -169,7 +171,7 @@ top 命令看到已连接的终端的变化，会先 ``+1`` 再
 你得使用它的兄弟库 - ``pbs`` ，然后我又去 pypi 看了一眼
 `pbs <https://pypi.org/project/pbs/>`__\ ，已经 “年久失修”，没人维护了。
 
-|image1|
+|image2|
 
 至此，我离 “卒”，就差最后一根稻草了。
 
@@ -334,7 +336,7 @@ Windows，这里就有一件好事，一件坏事了，。
 坏事就是：你需要做很多复杂的准备，你可 google
 解决，但是我建议你直接放弃，坑太深了。
 
-|image2|
+|image3|
 
 注意事项
 ~~~~~~~~
@@ -398,7 +400,8 @@ Windows，这里就有一件好事，一件坏事了，。
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20200228085749.png
-.. |image1| image:: http://image.python-online.cn/20200228093627.png
-.. |image2| image:: http://image.python-online.cn/20200228111654.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20200228085749.png
+.. |image2| image:: http://image.python-online.cn/20200228093627.png
+.. |image3| image:: http://image.python-online.cn/20200228111654.png
 

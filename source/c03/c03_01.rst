@@ -1,6 +1,8 @@
 3.1 装饰器进阶用法详解
 ======================
 
+|image0|
+
 --------------
 
 对于每一个学习 Python 的同学，想必对 ``@``
@@ -20,7 +22,7 @@
 
 当时带着这两个问题，我就开始系统的学习装饰器的所有内容。这些一直整理在自己的博客中，今天对其进行了大量的补充和勘误，发表在这里分享给大家。希望对刚入门以及进阶的朋友可以提供一些参考。
 
-|image0|
+|image1|
 
 3.1.1 Hello，装饰器
 -------------------
@@ -388,7 +390,7 @@ Python工匠：使用装饰器的小技巧）
 
 其实例化的过程，你可以参考我这里的调试过程，加以理解。
 
-|image1|
+|image2|
 
 3.1.9 wraps 装饰器有啥用？
 --------------------------
@@ -778,6 +780,7 @@ property
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190811100737.png
-.. |image1| image:: http://image.python-online.cn/20190512113917.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190811100737.png
+.. |image2| image:: http://image.python-online.cn/20190512113917.png
 

@@ -1,26 +1,28 @@
 1.30 盘点程序员学习编程的那些网站
 =================================
 
+|image0|
+
 书栈网
 ------
 
 **网站链接**\ ：https://www.bookstack.cn/rank?tab=popular
 
-|image0|
+|image1|
 
 魔法学院
 --------
 
 **网站链接**\ ：http://www.nowamagic.net/academy/
 
-|image1|
+|image2|
 
 Python 3 标准库实例教程
 -----------------------
 
 **网站链接**\ ：https://learnku.com/docs/pymotw
 
-|image2|
+|image3|
 
 Django Web 框架
 ---------------
@@ -29,15 +31,16 @@ Django Web 框架
 
 该网站可以让你从0开始学习Web，包括前端（HTML,CSS,JS）、后端（Django）
 
-|image3|
+|image4|
 
 在服务端网页编程里，重点介绍了 Django
 
-|image4|
+|image5|
 
-.. |image0| image:: http://image.python-online.cn/20200104144109.png
-.. |image1| image:: http://image.python-online.cn/20200112210558.png
-.. |image2| image:: http://image.iswbm.com/20200508201333.png
-.. |image3| image:: http://image.iswbm.com/20200525080531.png
-.. |image4| image:: http://image.iswbm.com/20200525080715.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20200104144109.png
+.. |image2| image:: http://image.python-online.cn/20200112210558.png
+.. |image3| image:: http://image.iswbm.com/20200508201333.png
+.. |image4| image:: http://image.iswbm.com/20200525080531.png
+.. |image5| image:: http://image.iswbm.com/20200525080715.png
 

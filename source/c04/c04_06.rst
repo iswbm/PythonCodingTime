@@ -1,6 +1,8 @@
 4.6 我的 Git 使用指南
 =====================
 
+|image0|
+
 --------------
 
 一、Hello world
@@ -177,7 +179,7 @@ add/commit 前撤销对文件的修改
 
 使用 diff 进行查看
 
-|image0|
+|image1|
 
 查看两个 commit 之间的修改
 
@@ -350,11 +352,11 @@ add/commit 前撤销对文件的修改
 
 很简单，先使用 ``git reflog`` 找到你的 reset 的 commit id
 
-|image1|
+|image2|
 
 然后再次使用 ``git reset`` 指定 commit id 回到一次修改add前的状态
 
-|image2|
+|image3|
 
 3.6 回退远程提交
 ~~~~~~~~~~~~~~~~
@@ -512,10 +514,10 @@ add/commit 前撤销对文件的修改
 
    ssh-keygen -t rsa -C "wongbingming@163.com"
 
-|image3| 生成的私钥 ``/c/Users/wangbm/.ssh/id_rsa``\ ，由本机电脑保存。
+|image4| 生成的私钥 ``/c/Users/wangbm/.ssh/id_rsa``\ ，由本机电脑保存。
 生成的仅钥 ``/c/Users/wangbm/.ssh/id_rsa.pub``\ ，需要在Github上添加。
 
-在github上添加ssh keys方法如下： |image4|
+在github上添加ssh keys方法如下： |image5|
 
 添加完后，可以使用这个命令测试一下。
 
@@ -539,7 +541,7 @@ add/commit 前撤销对文件的修改
    git config --global user.name 'BingmingWong'
    git config --global user.email wongbingming@163.com
 
-配置完后我们就可以进行clone线上代码了。 |image5|
+配置完后我们就可以进行clone线上代码了。 |image6|
 
 7.3 使用 SourceTree
 ~~~~~~~~~~~~~~~~~~~
@@ -563,7 +565,7 @@ Desktop真心觉得不好用）。
 需要注意的是，使用它需要你进行一步操作。在 7.2
 章节，我在机器上生成了一对私钥和公钥，在这里需要配置一下才能正常访问和提交我们的Github仓库。
 
-|image6|
+|image7|
 
 如果想要用户名和密码登陆，可以将上面的 OpenSSH 改成 PuTTY/Plink就行了。
 
@@ -598,11 +600,12 @@ Desktop真心觉得不好用）。
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20191217150942.png
-.. |image1| image:: http://image.python-online.cn/20191231165152.png
-.. |image2| image:: http://image.python-online.cn/20191231165239.png
-.. |image3| image:: https://i.loli.net/2018/04/15/5ad2c06e8893d.png
-.. |image4| image:: http://image.python-online.cn/20190511163855.png
-.. |image5| image:: https://i.loli.net/2018/04/15/5ad2c2a9813b9.png
-.. |image6| image:: http://image.python-online.cn/20190430235625.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20191217150942.png
+.. |image2| image:: http://image.python-online.cn/20191231165152.png
+.. |image3| image:: http://image.python-online.cn/20191231165239.png
+.. |image4| image:: https://i.loli.net/2018/04/15/5ad2c06e8893d.png
+.. |image5| image:: http://image.python-online.cn/20190511163855.png
+.. |image6| image:: https://i.loli.net/2018/04/15/5ad2c2a9813b9.png
+.. |image7| image:: http://image.python-online.cn/20190430235625.png
 

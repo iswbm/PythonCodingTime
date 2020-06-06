@@ -1,6 +1,8 @@
 8.9 从0到1：全面理解RPC远程调用
 ===============================
 
+|image0|
+
 什么是RPC呢？
 
 百度百科给出的解释是这样的：“RPC（Remote Procedure Call
@@ -239,7 +241,7 @@ SimpleXMLRPCServer 标准库来进行编写的。
 
    server = jsonrpclib.Server("http://localhost:8080")
 
-|image0|
+|image1|
 
 再来看第二种python-jsonrpc，写起来貌似有些复杂。
 
@@ -275,7 +277,7 @@ SimpleXMLRPCServer 标准库来进行编写的。
        url="http://localhost:8080/jsonrpc"
    )
 
-|image1|
+|image2|
 
 还记得上面我提到过的 zabbix
 API，因为我有接触过，所以也拎出来讲讲。zabbix API 也是基于 json-rpc
@@ -284,7 +286,7 @@ API，因为我有接触过，所以也拎出来讲讲。zabbix API 也是基于
 因为内容较多，这里只带大家打个，zabbix 是如何调用的：直接指明要调用
 zabbix server 的哪个方法，要传给这个方法的参数有哪些。
 
-|image2|
+|image3|
 
 **03、基于 zerorpc**
 
@@ -339,11 +341,11 @@ MessagePack的，速度相对快，响应时间短，并发高。zerorpc 和 pyj
    c = zerorpc.Client()
    c.connect("tcp://127.0.0.1:4242")
 
-|image3|
+|image4|
 
 客户端除了可以使用zerorpc框架实现代码调用之外，它还支持使用“命令行”的方式调用。
 
-|image4|
+|image5|
 
 客户端可以使用命令行，那服务端是不是也可以呢？
 
@@ -362,7 +364,7 @@ MessagePack的，速度相对快，响应时间短，并发高。zerorpc 和 pyj
 
    zerorpc --client --connect tcp://127.0.0.1:1234 strftime %Y/%m/%d
 
-|image5|
+|image6|
 
 8.9.3 往rpc中引入消息中间件
 ---------------------------
@@ -443,7 +445,7 @@ Qpid，RabbitMQ等。
 
 为了让你明白这几者的关系，我画了一张模型图。
 
-|image6|
+|image7|
 
 关于AMQP，有几下几点值得注意：
 
@@ -518,7 +520,7 @@ Qpid，RabbitMQ等。
 
 其他模型我不太清楚，在 OpenStack 中的应用模型是这样的
 
-|image7|
+|image8|
 
 至于为什么要如此设计，前面我已经给出了自己的观点。
 
@@ -569,7 +571,7 @@ rpc.call 和 rpc.cast
 
       transport_url=rabbit://user:passwd@host:5672
 
-   |image8|
+   |image9|
 
    .. code:: python
 
@@ -598,30 +600,30 @@ rpc.call 和 rpc.cast
 
    rpc server 要获取消息，需要定义target，就像一个门牌号一样。
 
-   |image9|
+   |image10|
 
    rpc client 要发送消息，也需要有target，说明消息要发到哪去。
 
-   |image10|
+   |image11|
 
 -  endpoints：是可供别人远程调用的对象
 
    RPC服务器暴露出endpoint，每个 endpoint 包涵一系列的可被远程客户端通过
    transport 调用的方法。直观理解，可以参考nova-conductor创建rpc
    server的代码，这边的endpoints就是
-   ``nova/manager.py:ConductorManager()``\ |image11|
+   ``nova/manager.py:ConductorManager()``\ |image12|
 
--  dispatcher：分发器，这是 rpc server 才有的概念 |image12|\ 只有通过它
+-  dispatcher：分发器，这是 rpc server 才有的概念 |image13|\ 只有通过它
    server 端才知道接收到的rpc请求，要交给谁处理，怎么处理？
 
    在client端，是这样指定要调用哪个方法的。
 
-   |image13|
+   |image14|
 
    而在server端，是如何知道要执行这个方法的呢？这就是dispatcher
    要干的事，它从 endpoint 里找到这个方法，然后执行，最后返回。
 
-   |image14|
+   |image15|
 
 -  Serializer：在 python 对象和message(notification)
    之间数据做序列化或是反序列化的基类。
@@ -737,28 +739,28 @@ rpc server 和rpc client 的四个重要方法
 首先在这里先定义合法的
 ``notification_event_types``\ ，相当于添加白名单。
 
-|image15|
+|image16|
 
 然后在调用处，使用 ``rpc.get_notifier`` 来发送消息给ceilometer。
 
-|image16|
+|image17|
 
 继续查看 ``rpc.get_notifier`` 做了什么事？如何实现直接info
 就能发送消息的。
 
-|image17|
+|image18|
 
 当你使用的event_types 不在白名单内，或者是异常信息。就会给打印warn日志
 
-|image18|
+|image19|
 
 在rabbit里查看队列，notification 是 topic
 
-|image19|
+|image20|
 
 而 debug ，info 等是event priority
 
-|image20|
+|image21|
 
 参考文章：
 
@@ -787,25 +789,26 @@ rpc server 和rpc client 的四个重要方法
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190623185008.png
-.. |image1| image:: http://image.python-online.cn/20190623165341.png
-.. |image2| image:: http://image.python-online.cn/20190623171138.png
-.. |image3| image:: http://image.python-online.cn/20190623155955.png
-.. |image4| image:: http://image.python-online.cn/20190623162725.png
-.. |image5| image:: http://image.python-online.cn/20190623191042.png
-.. |image6| image:: http://image.python-online.cn/20190630160025.png
-.. |image7| image:: http://image.python-online.cn/20190623201427.png
-.. |image8| image:: http://image.python-online.cn/20190526182125.png
-.. |image9| image:: http://image.python-online.cn/20190526184854.png
-.. |image10| image:: http://image.python-online.cn/20190526185217.png
-.. |image11| image:: http://image.python-online.cn/20190526221219.png
-.. |image12| image:: http://image.python-online.cn/20190526220809.png
-.. |image13| image:: http://image.python-online.cn/20190527220820.png
-.. |image14| image:: http://image.python-online.cn/20190527220012.png
-.. |image15| image:: http://image.python-online.cn/20190526172514.png
-.. |image16| image:: http://image.python-online.cn/20190526172725.png
-.. |image17| image:: http://image.python-online.cn/20190526173314.png
-.. |image18| image:: http://image.python-online.cn/20190526175100.png
-.. |image19| image:: http://image.python-online.cn/20190526180708.png
-.. |image20| image:: http://image.python-online.cn/20190526181433.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190623185008.png
+.. |image2| image:: http://image.python-online.cn/20190623165341.png
+.. |image3| image:: http://image.python-online.cn/20190623171138.png
+.. |image4| image:: http://image.python-online.cn/20190623155955.png
+.. |image5| image:: http://image.python-online.cn/20190623162725.png
+.. |image6| image:: http://image.python-online.cn/20190623191042.png
+.. |image7| image:: http://image.python-online.cn/20190630160025.png
+.. |image8| image:: http://image.python-online.cn/20190623201427.png
+.. |image9| image:: http://image.python-online.cn/20190526182125.png
+.. |image10| image:: http://image.python-online.cn/20190526184854.png
+.. |image11| image:: http://image.python-online.cn/20190526185217.png
+.. |image12| image:: http://image.python-online.cn/20190526221219.png
+.. |image13| image:: http://image.python-online.cn/20190526220809.png
+.. |image14| image:: http://image.python-online.cn/20190527220820.png
+.. |image15| image:: http://image.python-online.cn/20190527220012.png
+.. |image16| image:: http://image.python-online.cn/20190526172514.png
+.. |image17| image:: http://image.python-online.cn/20190526172725.png
+.. |image18| image:: http://image.python-online.cn/20190526173314.png
+.. |image19| image:: http://image.python-online.cn/20190526175100.png
+.. |image20| image:: http://image.python-online.cn/20190526180708.png
+.. |image21| image:: http://image.python-online.cn/20190526181433.png
 

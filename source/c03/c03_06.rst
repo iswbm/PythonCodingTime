@@ -1,6 +1,8 @@
 3.6 Web开发者必看：理解WSGI
 ===========================
 
+|image0|
+
 在 三百六十行，行行转 IT 的现状下，很多来自各行各业的同学，都选择 Python
 这门胶水语言做为踏入互联网大门的第一块敲门砖，在这些人里，又有相当大比例的同学选择了
 Web 开发这个方向（包括我）。而从事 web 开发，绕不过一个知识点，就是
@@ -25,7 +27,7 @@ OpenStack 代码。
 一个HTTP请求的过程可以分为两个阶段，第一阶段是从客户端到WSGI
 Server，第二阶段是从WSGI Server 到WSGI Application
 
-|image0|
+|image1|
 
 今天主要是讲第二阶段，主要内容有以下几点：
 
@@ -106,7 +108,7 @@ web 服务器 和 web 框架，分工不同，职责不同（web
 
 我根据其架构组成的不同将这个过程的实现分为两种：
 
-|image1|
+|image2|
 
 **1、两级结构**
 在这种结构里，uWSGI作为服务器，它用到了HTTP协议以及wsgi协议，flask应用作为application，实现了wsgi协议。当有客户端发来请求，uWSGI接受请求，调用flask
@@ -147,7 +149,7 @@ nginx可以做负载均衡(前提是有多个服务器)，保护了实际的web�
 
 使用 lsof 命令可以查到确实开启了这个端口
 
-|image2|
+|image3|
 
 以上使用 wsgiref
 写了一个demo，让你对wsgi有个初步的了解。其由于只适合在学习测试使用，在生产环境中应该另寻他道。
@@ -173,26 +175,26 @@ nova-api，nova-compute，nova-conductor，nova-scheduler 等等。
 
 从 Service 文件可以得知 nova-api 的入口是 ``nova.cmd.api:main()``
 
-|image3|
-
 |image4|
+
+|image5|
 
 打开\ ``nova.cmd.api:main()`` ，一起看看是 OpenStack Nova 的代码。
 
 在如下的黄框里，可以看到在这里使用了service.WSGIService 启动了一个
 server，就是我们所说的的 wsgi server
 
-|image5|
+|image6|
 
 那这里的 WSGI Server 是依靠什么实现的呢？让我们继续深入源代码。
 
-|image6|
+|image7|
 
 wsgi.py 可以看到这里使用了 eventlet
 这个网络并发框架，它先开启了一个绿色线程池，从配置里可以看到这个服务器可以接收的请求并发量是
 1000 。
 
-|image7|
+|image8|
 
 可是我们还没有看到 WSGI Server 的身影，上面使用eventlet
 开启了线程池，那线程池里的每个线程应该都是一个服务器吧？它是如何接收请求的？
@@ -229,7 +231,7 @@ Server，还是使用的 eventlet。
    # 孵化协程
    self._server = utils.spawn(**wsgi_kwargs)
 
-|image8|
+|image9|
 
 就这样，nova 开启了一个可以接受1000个绿色协程并发的 WSGI Server。
 
@@ -273,7 +275,7 @@ PasteDeploy 到底是做什么的呢？
 
 具体可以，看下nova的实现。
 
-|image9|
+|image10|
 
 通过打印的 DEBUG 内容得知 config_url 和 app name 的值
 
@@ -448,7 +450,7 @@ loadapp 函数可以接收两个实参：
 
 applications 是URLMap 对象。
 
-|image10|
+|image11|
 
 完善并整合第二步和第三步的内容，写成一个 Python
 文件(wsgi_server.py)。内容如下
@@ -509,7 +511,7 @@ applications 是URLMap 对象。
 
 一切都准备好后，在终端执行 ``python wsgi_server.py``\ 来启动 web server
 
-|image11|
+|image12|
 
 如果像上图一样一切正常，那么打开浏览器
 
@@ -529,7 +531,7 @@ applications 是URLMap 对象。
 ``nova.api.openstack.compute:APIRouterV21.factory`` 这个 application
 的入口，看代码知道它其实返回了 APIRouterV21 类的一个实例。
 
-|image12|
+|image13|
 
 WSGI规定 application 必须是一个 callable
 的对象，函数、方法、类、实例，若是一个类实例，就要求这个实例所属的类实现
@@ -538,7 +540,7 @@ WSGI规定 application 必须是一个 callable
 APIRouterV21 本身没有实现 ``__call__`` ，但它的父类 Router实现了
 ``__call__``
 
-|image13|
+|image14|
 
 我们知道，application 必须遵丛 WSGI 的规范
 
@@ -551,7 +553,7 @@ response，而只是返回另一个 callable
 的对象，就这样我们的视线被一次又一次的转移，但没有关系，这些\ ``__call__``\ 都是外衣，只要扒掉这些外衣，我们就能看到核心app。
 
 而负责扒掉这层外衣的，就是其头上的装饰器 ``@webob.dec.wsgify`` ，wsgify
-是一个类，其 ``__call__`` 源码实现如下：\ |image14|
+是一个类，其 ``__call__`` 源码实现如下：\ |image15|
 
 可以看出，wsgify 在这里，会将 req 这个原始请求（dict对象）封装成 Request
 对象（就是规范1里提到的
@@ -577,7 +579,7 @@ RoutesMiddleware对象）是如何找到真正的 application呢？
 
 在文章最开始处，我们给大家画了一张图。
 
-|image15|
+|image16|
 
 这张图把一个 HTTP
 请求粗略简单地划分为两个过程。但事实上，整个过程远比这个过程要复杂得多。
@@ -601,7 +603,7 @@ URL Routing。
 进行路由匹配，并将匹配的结果存入request请求的环境变量\ ``['wsgiorg.routing_args']``\ ，最后会调用\ ``self._dispatch``\ （dispatch返回真正的application）返回response，最后会将这个response返回给
 WSGI Server。
 
-|image16|
+|image17|
 
 这个中间件的原理，看起来是挺简单的。并没有很复杂的逻辑。
 
@@ -611,7 +613,7 @@ WSGI Server。
 app，controller 这几个很重要的字眼，其是否是我苦苦追寻的 application
 对象呢？
 
-|image17|
+|image18|
 
 要搞明白这个问题，只要看清 match 到是什么东西？
 
@@ -643,7 +645,7 @@ Resource，同时将这些 Resource 交由 routes.Mapper
 从 Nova 代码中看出每个Resource 对应一个 Controller 对象，因为 Controller
 对象本身就是对一种资源的操作集合。
 
-|image18|
+|image19|
 
 通过日志的打印，可以发现 nova 管理的 Resource 对象有多么的多而杂
 
@@ -825,7 +827,7 @@ Controller在构建的过程中会由于MetaClass的影响将其所有action类�
 
 图示地方，会从 environ 里获取中看到获取 action 的具体代码
 
-|image19|
+|image20|
 
 我将这边的 action_args打印出来
 
@@ -837,7 +839,7 @@ Controller在构建的过程中会由于MetaClass的影响将其所有action类�
 
 在 ``__call__`` 的最后，会 调用 ``_process_stack`` 方法
 
-|image20|
+|image21|
 
 在图标处，get_method 会根据 action（函数名） 取得处理函数对象。
 
@@ -848,12 +850,12 @@ Controller在构建的过程中会由于MetaClass的影响将其所有action类�
 最后，再执行这个函数，取得 action_result，在 ``_process_stack`` 会对
 response 进行初步封装。
 
-|image21|
+|image22|
 
 然后将 response 再返回到 wsgify ，由这个专业的工具函数，进行 response
 的最后封装和返回给客户端。
 
-|image22|
+|image23|
 
 至此，一个请求从发出到响应就结束了。
 
@@ -887,27 +889,28 @@ response 进行初步封装。
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190607131728.png
-.. |image1| image:: http://image.python-online.cn/20190607191954.png
-.. |image2| image:: http://image.python-online.cn/20190607134310.png
-.. |image3| image:: http://image.python-online.cn/20190607140817.png
-.. |image4| image:: http://image.python-online.cn/20190607140922.png
-.. |image5| image:: http://image.python-online.cn/20190530212557.png
-.. |image6| image:: http://image.python-online.cn/20190530212753.png
-.. |image7| image:: http://image.python-online.cn/20190530212956.png
-.. |image8| image:: http://image.python-online.cn/20190530214820.png
-.. |image9| image:: http://image.python-online.cn/20190530221101.png
-.. |image10| image:: http://image.python-online.cn/20190607154119.png
-.. |image11| image:: http://image.python-online.cn/20190607155432.png
-.. |image12| image:: http://image.python-online.cn/20190602173212.png
-.. |image13| image:: http://image.python-online.cn/20190602173956.png
-.. |image14| image:: http://image.python-online.cn/20190605203016.png
-.. |image15| image:: http://image.python-online.cn/20190607131728.png
-.. |image16| image:: http://image.python-online.cn/20190608211233.png
-.. |image17| image:: http://image.python-online.cn/20190531211542.png
-.. |image18| image:: http://image.python-online.cn/20190531225529.png
-.. |image19| image:: http://image.python-online.cn/20190602220246.png
-.. |image20| image:: http://image.python-online.cn/20190602220511.png
-.. |image21| image:: http://image.python-online.cn/20190602220700.png
-.. |image22| image:: http://image.python-online.cn/20190605203016.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190607131728.png
+.. |image2| image:: http://image.python-online.cn/20190607191954.png
+.. |image3| image:: http://image.python-online.cn/20190607134310.png
+.. |image4| image:: http://image.python-online.cn/20190607140817.png
+.. |image5| image:: http://image.python-online.cn/20190607140922.png
+.. |image6| image:: http://image.python-online.cn/20190530212557.png
+.. |image7| image:: http://image.python-online.cn/20190530212753.png
+.. |image8| image:: http://image.python-online.cn/20190530212956.png
+.. |image9| image:: http://image.python-online.cn/20190530214820.png
+.. |image10| image:: http://image.python-online.cn/20190530221101.png
+.. |image11| image:: http://image.python-online.cn/20190607154119.png
+.. |image12| image:: http://image.python-online.cn/20190607155432.png
+.. |image13| image:: http://image.python-online.cn/20190602173212.png
+.. |image14| image:: http://image.python-online.cn/20190602173956.png
+.. |image15| image:: http://image.python-online.cn/20190605203016.png
+.. |image16| image:: http://image.python-online.cn/20190607131728.png
+.. |image17| image:: http://image.python-online.cn/20190608211233.png
+.. |image18| image:: http://image.python-online.cn/20190531211542.png
+.. |image19| image:: http://image.python-online.cn/20190531225529.png
+.. |image20| image:: http://image.python-online.cn/20190602220246.png
+.. |image21| image:: http://image.python-online.cn/20190602220511.png
+.. |image22| image:: http://image.python-online.cn/20190602220700.png
+.. |image23| image:: http://image.python-online.cn/20190605203016.png
 

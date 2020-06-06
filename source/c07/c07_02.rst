@@ -1,6 +1,8 @@
 7.2 Zabbix 监控部署文档
 =======================
 
+|image0|
+
 --------------
 
 7.2.1 Zabbix架构图
@@ -10,12 +12,12 @@ zabbix
 的使用架构主要有两种，如果你的监控环境比较单一，可以使用简单的\ ``Server``
 -> ``Agent``\ ，由zabbix-agent 直接上报给 zabbix-server。
 
-|image0|
+|image1|
 
 如果监控的环境比较复杂，就比如我们的线上的生产环境是分布式集群，最好使用的
 ``Server``-> ``Proxy`` -> ``Agent``
 
-|image1|
+|image2|
 
 Zabbix Proxy 可以代替 Zabbix Server 检索客户端的数据，然后把数据汇报给
 Zabbix Server， 并且在一定程度上分担了 Zabbix Server 的压力。Zabbix
@@ -234,7 +236,7 @@ Zabbix Proxy 是一个数据收集器，它不计算触发器、不处理事件�
 
 在使用 Proxy 的时候，需要在 Server 端的web 界面上，先注册一下。
 
-|image2|
+|image3|
 
 7.2.2.3 部署 Agent 端
 ~~~~~~~~~~~~~~~~~~~~~
@@ -282,26 +284,26 @@ Agent 就会发送心跳到 Proxy ，再转到Zabbix Server上，Server
 
 按照如下图点击，Event source注意选择\ ``Auto registration``
 
-|image3|
-
 |image4|
+
+|image5|
 
 7.2.3.2 配置监控项
 ~~~~~~~~~~~~~~~~~~
 
 一般情况下，我们的监控项，不会独立存在，而是依托于模板而存在。所以我们在创建监控项前，要首先创建一个模板。
 
-|image5|
+|image6|
 
 创建完模板后，点进模板的 items
 按钮，正常情况下，这里会有很多监控项，但由于我们还没有创建，所以现在一个也没有。现在你可以自己点右上角（\ ``Create Item``\ ）自己创建一个，创建界面是这样的
 
-|image6|
+|image7|
 
 这里说一下，zabbix
 自带有许多的模板，其实对于一些党规的监控项（说白了，就是zabbix给我们造好了轮子），这些模板已经足够了。这边只截了一小部分。
 
-|image7|
+|image8|
 
 如果以上这些不能满足你的需要，也没有关系，你也可以自己写脚本获取监控数据。
 
@@ -318,7 +320,7 @@ Agent 就会发送心跳到 Proxy ，再转到Zabbix Server上，Server
 
 那我在 web 界面上配置 监控项，就可以这样写
 
-|image8|
+|image9|
 
 openstack-nova-api
 是一个服务名，它将作为一个参数，传递给\ ``isActive.sh`` 这个脚本。
@@ -337,11 +339,11 @@ Proxy，然后由Proxy上报Server。
 
 你可以通过点击下图的操作，查看最近上报的数据（我这里选择value直接查看值，你可以选择Graph，按图表的形式查看）
 
-|image9|
+|image10|
 
 数据是这样的。
 
-|image10|
+|image11|
 
 7.2.3.4 配置动作
 ~~~~~~~~~~~~~~~~
@@ -349,11 +351,11 @@ Proxy，然后由Proxy上报Server。
 假如，我们要监控当 CPU 使用率超过90%
 就发个通知邮件，那我们就要新增一个发邮件的动作。
 
-|image11|
+|image12|
 
 然后点击 ``Operations``\ ， 添加触发的动作类型，比如发邮件
 
-|image12|
+|image13|
 
 其中的HTML样式，也是我网上找来的，我觉得还挺不错，这里也贴出来
 
@@ -391,7 +393,7 @@ Proxy，然后由Proxy上报Server。
 按钮，它是说当我们的问题解决后，要让zabbix做些什么，比如我想让
 当CPU的使用率降下来后，发一个邮件通知一下。
 
-|image13|
+|image14|
 
 邮件的 HTML 样式
 
@@ -427,7 +429,7 @@ Proxy，然后由Proxy上报Server。
 
 上面邮件中，有设置了一些颜色的自定义宏，我是在这里设置的。
 
-|image14|
+|image15|
 
 上面的动作，都是写的发邮件，也可以远程执行脚本，比如，我们监控服务，当服务被人为关闭了，我们可以让Zabbix
 Agent执行重启服务的命令。
@@ -459,7 +461,7 @@ Agent执行重启服务的命令。
 那在ACTION 里如何配置呢，看下图。你可以选择在
 agent或者proxy，或者server执行都可以，非常灵活。
 
-|image15|
+|image16|
 
 7.2.3.5 配置发件人
 ~~~~~~~~~~~~~~~~~~
@@ -468,7 +470,7 @@ Zabbix 要能发送邮件，需要配置邮箱发送方。这里以163邮箱为�
 
 vim /etc/mail.rc
 
-|image16|
+|image17|
 
 配置完成后，可用以下命令测试一下配置是否有效，若 yyy@163.com
 能收到一条来自xxx@163.com 的邮件，则说明配置成功。
@@ -499,7 +501,7 @@ outlook 的形式展现。
 
 先添加媒介：Administration - Media Types - Create media type
 
-|image17|
+|image18|
 
 上面用到 sendmail.sh
 是一个脚本，需要我们来自己写，内容就是如何将我们的告警内容发送出去。
@@ -520,11 +522,11 @@ Script parameters。
 
 然后再创建用户，并添加邮箱：Administration - Users - Admin - Media
 
-|image18|
+|image19|
 
 在创建用户的时候，要指定用户组，要注意这个用户组的权限一定要有相应主机组的权限，否则无法发送告警邮件。
 
-|image19|
+|image20|
 
 配置好收件人后 ，发件人呢？
 
@@ -547,7 +549,7 @@ Script parameters。
 
 zabbix 自带 mysql 的监控模板，监控项不多，只有 14 项。
 
-|image20|
+|image21|
 
 这个模板在使用前，需要进行两个配置。
 
@@ -577,7 +579,7 @@ zabbix 自带 mysql 的监控模板，监控项不多，只有 14 项。
 能够及时将配置文件路径修改过来就行。如下图所示，你只要修改下方 ``HOME``
 变量值。
 
-|image21|
+|image22|
 
 然后记得去 web界面在 该host主机上link到 ``Template DB MySQL``
 这个模板上。
@@ -698,26 +700,27 @@ float ，log， text 等，所以计算存在一定的误差，需留有冗余�
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190404193811.png
-.. |image1| image:: http://image.python-online.cn/20190404194416.png
-.. |image2| image:: http://image.python-online.cn/20190404201313.png
-.. |image3| image:: http://image.python-online.cn/20190404205221.png
-.. |image4| image:: http://image.python-online.cn/20190404205617.png
-.. |image5| image:: http://image.python-online.cn/20190404202122.png
-.. |image6| image:: http://image.python-online.cn/20190404202353.png
-.. |image7| image:: http://image.python-online.cn/20190404210213.png
-.. |image8| image:: http://image.python-online.cn/20190404213125.png
-.. |image9| image:: http://image.python-online.cn/20190404202855.png
-.. |image10| image:: http://image.python-online.cn/20190404202937.png
-.. |image11| image:: http://image.python-online.cn/20190404203425.png
-.. |image12| image:: http://image.python-online.cn/20190404203805.png
-.. |image13| image:: http://image.python-online.cn/20190404204212.png
-.. |image14| image:: http://image.python-online.cn/20190404205837.png
-.. |image15| image:: http://image.python-online.cn/20190404212423.png
-.. |image16| image:: http://image.python-online.cn/20190411205822.png
-.. |image17| image:: http://image.python-online.cn/20190417202834.png
-.. |image18| image:: http://image.python-online.cn/20190404204534.png
-.. |image19| image:: http://image.python-online.cn/20190605173956.png
-.. |image20| image:: http://image.python-online.cn/20190409103417.png
-.. |image21| image:: http://image.python-online.cn/20190409104026.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190404193811.png
+.. |image2| image:: http://image.python-online.cn/20190404194416.png
+.. |image3| image:: http://image.python-online.cn/20190404201313.png
+.. |image4| image:: http://image.python-online.cn/20190404205221.png
+.. |image5| image:: http://image.python-online.cn/20190404205617.png
+.. |image6| image:: http://image.python-online.cn/20190404202122.png
+.. |image7| image:: http://image.python-online.cn/20190404202353.png
+.. |image8| image:: http://image.python-online.cn/20190404210213.png
+.. |image9| image:: http://image.python-online.cn/20190404213125.png
+.. |image10| image:: http://image.python-online.cn/20190404202855.png
+.. |image11| image:: http://image.python-online.cn/20190404202937.png
+.. |image12| image:: http://image.python-online.cn/20190404203425.png
+.. |image13| image:: http://image.python-online.cn/20190404203805.png
+.. |image14| image:: http://image.python-online.cn/20190404204212.png
+.. |image15| image:: http://image.python-online.cn/20190404205837.png
+.. |image16| image:: http://image.python-online.cn/20190404212423.png
+.. |image17| image:: http://image.python-online.cn/20190411205822.png
+.. |image18| image:: http://image.python-online.cn/20190417202834.png
+.. |image19| image:: http://image.python-online.cn/20190404204534.png
+.. |image20| image:: http://image.python-online.cn/20190605173956.png
+.. |image21| image:: http://image.python-online.cn/20190409103417.png
+.. |image22| image:: http://image.python-online.cn/20190409104026.png
 

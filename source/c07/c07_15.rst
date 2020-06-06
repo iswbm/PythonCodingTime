@@ -1,6 +1,8 @@
 7.15 Mariadb 与 Galera 集群总结
 ===============================
 
+|image0|
+
 MariaDB是MySQL的一个分支，由MySQL的创始人Michael
 Widenius主导开发，采用GPL授权许可。
 
@@ -20,7 +22,7 @@ Galera 是一个MySQL(也支持MariaDB，Percona)
 5. 用户连接集群后，使用跟 MySQL 基本一致。
 6. 不会写binlog
 
-关于Galera是如何做到多主的，可以借助这张图来看看\ |image0|
+关于Galera是如何做到多主的，可以借助这张图来看看\ |image1|
 
 来源：https://blog.csdn.net/weixin_42867972/article/details/84198696
 
@@ -222,5 +224,6 @@ wsrep_flow_control_sent 和 wsrep_local_recv_queue_avg
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20191213162259.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20191213162259.png
 

@@ -1,6 +1,8 @@
 8.8 OpenStack 如何使用DHCP？
 ============================
 
+|image0|
+
 8.8.1 为何要使用dhcp？
 ----------------------
 
@@ -22,7 +24,7 @@
 
 如下图所示
 
-|image0|
+|image1|
 
 红色部分是虚拟机内部需要增加的网卡设备。
 
@@ -87,7 +89,7 @@ server网卡设备与ovs网桥。一个network一个tap设备。
 确保控制节点都安装了 ``neutron-openvswitch-agent`` 和
 ``neutron-dhcp-agent`` 等几个包
 
-|image1|
+|image2|
 
 确保如下几个配置无误
 
@@ -122,7 +124,7 @@ server网卡设备与ovs网桥。一个network一个tap设备。
 
 通过 ovs-vsctl show 检查环境是否正常
 
-|image2|
+|image3|
 
 8.8.3.3 镜像支持
 ~~~~~~~~~~~~~~~~
@@ -139,7 +141,7 @@ NetworkManager， ubuntu 是network-manager）才负责获取ip。
 
 1.  启用DHCP后，dhcp server 会占用一个allocation_pools中的ip。
 2.  子网启用了dhcp，ConfigDrive不会携带静态的ip地址（类型为ipv4，左图），而是携带了将类型变更为ipv4_dhcp（右图），虚拟机启动时发送广播消息DHCP
-    discover从dhcp server获得真正的ip地址。 |image3|
+    discover从dhcp server获得真正的ip地址。 |image4|
 3.  若子网启用了dhcp，并且创建了虚拟机，此时 disable dhcp，只是表象上
     dhcp 被关了，而实际 dhcp port 被是占用着，因为 dhcp server
     还要给之前创建的虚拟机提供服务。如果再用这个子网创建的虚拟机会使用dhcp
@@ -192,17 +194,17 @@ NetworkManager， ubuntu 是network-manager）才负责获取ip。
 
 比如 local 阶段作为第一个执行的。
 
-|image4|
+|image5|
 
 而后的几个服务（如init阶段），都需要保证 后于 local 已经启动过才能运行。
 
-|image5|
+|image6|
 
 在 **CentOS 6.x** 中，由于系统过于古老并没有 systemd
 ，它的服务启动顺序是由 ``/etc/rc.d/rc3.d``
 目录进行管理的，按照编号进行从小到大执行。
 
-|image6|
+|image7|
 
 这个启动顺序相当重要，在 CentOS6.x 上会因此出现问题
 
@@ -254,11 +256,12 @@ setup_dhcp_port()，从这个函数里可以知道，dhcp-port的创建顺序：
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190514202013.png
-.. |image1| image:: http://image.python-online.cn/20190514202442.png
-.. |image2| image:: http://image.python-online.cn/20190514202736.png
-.. |image3| image:: http://image.python-online.cn/20190514203612.png
-.. |image4| image:: http://image.python-online.cn/20190430204707.png
-.. |image5| image:: http://image.python-online.cn/20190430204933.png
-.. |image6| image:: http://image.python-online.cn/20190430205449.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190514202013.png
+.. |image2| image:: http://image.python-online.cn/20190514202442.png
+.. |image3| image:: http://image.python-online.cn/20190514202736.png
+.. |image4| image:: http://image.python-online.cn/20190514203612.png
+.. |image5| image:: http://image.python-online.cn/20190430204707.png
+.. |image6| image:: http://image.python-online.cn/20190430204933.png
+.. |image7| image:: http://image.python-online.cn/20190430205449.png
 

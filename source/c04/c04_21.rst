@@ -1,6 +1,8 @@
 4.21 最全的 pip 使用指南，50% 你可能没用过
 ==========================================
 
+|image0|
+
 所有的 Python 开发者都清楚，Python
 之所以如此受欢迎，能够在众多高级语言中，脱颖而出，除了语法简单，上手容易之外，更多还要归功于
 Python 生态的完备，有数以万计的 Python 爱好者愿意以 Python
@@ -366,12 +368,13 @@ pip 的文件夹，若没有则创建之。
 以上几乎包含了 pip
 的所有常用使用场景，为了方便，我将其整理成一张表格，如果你需要，可以关注我的公众号（Python编程时光），后台回复“pip”，可获取高清无水印图片。
 
-|image0|
+|image1|
 
 .. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20191105200041.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20191105200041.png
 

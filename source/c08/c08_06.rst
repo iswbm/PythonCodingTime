@@ -1,6 +1,8 @@
 8.6 源码解读：Cloud-Init
 ========================
 
+|image0|
+
 cloud-init 是 linux 的一个工具，当系统启动时，cloud-init 可从 nova
 metadata 服务或者 config drive 中获取
 metadata，完成一些虚拟机的初始化工作，这些工作有可能是每台虚拟机例行的动作，如配置ip，也有可能是定制化动作，如注入密码等。
@@ -30,17 +32,17 @@ metadata，完成一些虚拟机的初始化工作，这些工作有可能是每
 
 比如 local 阶段作为第一个执行的。
 
-|image0|
+|image1|
 
 而后的几个服务（如init阶段），都需要保证 后于 local 已经启动过才能运行。
 
-|image1|
+|image2|
 
 在 **CentOS 6.x** 中，由于系统过于古老并没有 systemd
 ，它的服务启动顺序是由 ``/etc/rc.d/rc3.d``
 目录进行管理的，按照编号进行从小到大执行。
 
-|image2|
+|image3|
 
 这个启动顺序相当重要，在排查并修复虚拟机创建时 ip
 的配置问题的时候会有帮助，主要是 CentOS6.x
@@ -63,7 +65,7 @@ cloudinit-local 之后启动才可正常从配置文件中读取 ip
 并配置。而当你在镜像里安装
 NetworkManager后，默认情况下它的启动顺序是会在 cloudinit-local 之前的。
 
-|image3|
+|image4|
 
 解决方法也很简单，将 ``S23NetworkManager`` 重命名为
 ``S54NetworkManager`` 即可。
@@ -94,21 +96,21 @@ NetworkManager后，默认情况下它的启动顺序是会在 cloudinit-local �
 这里再顺便说一点，在使用 pdb
 进行调试时，你会发现一旦执行就会报错或者无法调试。
 
-|image4|
+|image5|
 
 这里就需要一个小技巧。你只需修改cloudinit 的入口文件（CentOS6.x
 是在/usr/bin/cloud-init，CentOS7.x 是在
 /usr/lib/python2.7/site-packages/cloudinit/cmd/main.py）将红框这行注释。
 
-|image5|
+|image6|
 
 再尝试即可正常调试。
 
-|image6|
+|image7|
 
 从这里也学到了一点，如何要关闭调试功能，只要关闭标准输入就行了。
 
-|image7|
+|image8|
 
 如果你在调试 single，而且你把 /var/lib/cloud
 目录删除过，请务必要执行一下 cloud-init init ,不然会取不到 user_data
@@ -124,11 +126,11 @@ centos 6.5 的cloudinit 使用的是 python2.6，没有 format
 ``/usr/lib/python2.7/site-packages/cloudinit/cmd/main.py``)的 main_init
 函数中，会调用 ``stages.py:fetch()`` 函数。
 
-|image8|
+|image9|
 
 支持哪些源：是在代码里（settings.py）定义写死的
 
-|image9|
+|image10|
 
 如果你的虚拟机固定只使用其中一种，那可以只留一种，加快cloudinit
 的执行速度。
@@ -136,20 +138,20 @@ centos 6.5 的cloudinit 使用的是 python2.6，没有 format
 find_source 是通过一个一个去执行 对应source模块的
 get_data()，如果获取到了数据就直接返回。
 
-|image10|
+|image11|
 
 最经常使用的是 ConfigDrive，来看一下它是如何获取数据的。
 
-|image11|
+|image12|
 
 它会先创建一个临时目录，尝试将 ``/dev/sr0`` 挂载到这个目录下。
 
-|image12|
+|image13|
 
 然后将读取的数据存入 ``/var/lib/cloud/instance/obj.pkl``\ ，
 而后续执行都将从这里反序列化，提高速度。
 
-|image13|
+|image14|
 
 8.6.5 userdata 使用说明
 -----------------------
@@ -323,7 +325,7 @@ cirename0 的网卡。
 
 这就是cloudinit搞的鬼，在cloudinit的local阶段，好像会记录之前的mac地址，如果发现不一致，就会触发rename_interface。
 
-|image14|
+|image15|
 
 8.6.7 虚拟机启动卡住
 --------------------
@@ -336,7 +338,7 @@ ephemeral0 拿到对应的 /dev/vdb，并将其写入 /etc/fstab
 中。在下次重启时，会根据 fstab
 挂载磁盘，如果挂载不上，就会导致虚拟机启动卡住。
 
-|image15|
+|image16|
 
 8.6.8 模块是怎么执行的
 ----------------------
@@ -432,7 +434,7 @@ ephemeral0 拿到对应的 /dev/vdb，并将其写入 /etc/fstab
 里的代码，只有一个模块使用了 PER_ONCE ，那就是
 ``cc_scripts_per_once.py``\ 。
 
-|image16|
+|image17|
 
 其实他们还是有区别的，由下面的代码来看
 
@@ -442,14 +444,14 @@ ephemeral0 拿到对应的 /dev/vdb，并将其写入 /etc/fstab
    ``/var/lib/cloud/instances/<uuid>``
    下的文件获取的，这个目录每个虚拟机一个。
 
-|image17|
+|image18|
 
 如果你的模块里已经配置了频率，则以此为准。若没有配置，则默认为
 ``PER_INSTANCE``\ 。
 
 具体函数：\ ``_run_modules``
 
-|image18|
+|image19|
 
 那么cloudinit 是如何控制模块的执行频率呢？
 
@@ -458,15 +460,15 @@ ephemeral0 拿到对应的 /dev/vdb，并将其写入 /etc/fstab
 文件，说明已经执行过（返回 False ），如果不存在 sem 文件（返回 True）
 说明未执行过。
 
-|image19|
+|image20|
 
 sem 文件是怎样的？
 
 这是 ``PER_ONCE`` 的 sem 文件：
 
-|image20|
+|image21|
 
-这是 ``PER_INSTANCE`` 的 sem 文件\ |image21|
+这是 ``PER_INSTANCE`` 的 sem 文件\ |image22|
 
 8.6.10 如何解析网卡配置
 -----------------------
@@ -481,7 +483,7 @@ ubuntu 的网卡配置不是正常我们常见的 json 或者 yaml
    from cloudinit.net import eni
    config=eni.parse_deb_config('/etc/network/interfaces.d/50-cloud-init.cfg')
 
-|image22|
+|image23|
 
 8.6.11 低版本的日志输出
 -----------------------
@@ -491,7 +493,7 @@ ubuntu 的网卡配置不是正常我们常见的 json 或者 yaml
 
 经过排查，你可以在 ``cloudinit/log.py`` 中按下面的改法修改解决
 
-|image23|
+|image24|
 
 8.6.12 旧版本网络配置的三个巨坑
 -------------------------------
@@ -507,12 +509,12 @@ ubuntu 的网卡配置不是正常我们常见的 json 或者 yaml
 在 cloud-init 0.7.5中，网络信息的读取与配置都是在且仅能在 local
 阶段进行的，代码如下，只在 dsmode 为 local 时才会执行 on_first_boot。
 
-|image24|
+|image25|
 
 而如果是虚拟机重启的话，是在stages.py
 这边判断是否为新虚拟机的，这也和旧版本有所区别。
 
-|image25|
+|image26|
 
 为了让你能更加清晰的了解这个网络配置过程，我阅读了这块的源代码。
 
@@ -529,12 +531,12 @@ ubuntu 的网卡配置不是正常我们常见的 json 或者 yaml
 
 如果是按照旧虚拟机创建新的快照镜像，然后使用这个镜像创建新的虚拟机，有可能会在同一块网卡上出现新旧两个ip，这是因为虚拟机在启动过程中，会先读取原网络配置配置ip，然后才会运行
 cloud-init 进行新ip的配置，而新ip的配置是使用 ``ifup``
-这个命令\ |image26|
+这个命令\ |image27|
 
-使用这种方式并不会将第一次配置的旧ip给清除掉。\ |image27|
+使用这种方式并不会将第一次配置的旧ip给清除掉。\ |image28|
 
 这个问题，目前我只在CentOS6 中遇到过。可以通过修改代码让其先 ``ifdown``
-再 ``ifup`` 就可以解决这个问题。\ |image28|
+再 ``ifup`` 就可以解决这个问题。\ |image29|
 
 **坑二**
 
@@ -544,7 +546,7 @@ NetworkManager
 
 具体的创建逻辑是在这
 
-|image29|
+|image30|
 
 **坑三**
 
@@ -565,12 +567,12 @@ NetworkManager
 
 一个是会自动DHCP获取到一个以ip命名的hostname，并将原来的覆盖掉。
 
-|image30|
+|image31|
 
 为了避免出现这些情况，请务必保证这些包都安装完整（左为 CentOS 7.2，右为
 CentOS 6.5）。
 
-|image31|
+|image32|
 
 8.6.13 网络是如何启动的？（新版本）
 -----------------------------------
@@ -585,16 +587,16 @@ CentOS 6.5）。
 
 在 local 阶段的时候，\ ``existing`` 是 ``check`` ，这是合理的。
 
-|image32|
-
 |image33|
+
+|image34|
 
 在local阶段，on_first_boot 的函数 network 是 False
 ，所以这里也不会写网卡配置文件，自然也不会配置。
 
-|image34|
-
 |image35|
+
+|image36|
 
 再往后面看，就可以发现，原来写配置文件的地方是在 ``cmd/main.py`` 里。
 
@@ -620,11 +622,11 @@ True，意思是会启用网卡，配置ip。
 2. 校正网卡名，以 ConfigDrive 的配置为准
 3. 将ip信息写入配置文件，并启动网卡
 
-|image36|
+|image37|
 
 那它是如何对网卡进行重命令的呢？看了代码，其实是用ip命令实现的。
 
-|image37|
+|image38|
 
 提取出来其实就三条命令，要注意的是，这三条命令执行是有顺序的
 
@@ -639,11 +641,11 @@ True，意思是会启用网卡，配置ip。
 目录下获取的。每个网卡一个目录，每个目录下都有相应的文件记录相应的信息，比如
 ``/sys/class/net/ens3/address`` 记录的是网卡的 mac 地址。
 
-|image38|
+|image39|
 
 接下来就要开始配置网络了，先写网络配置文件，再根据参数选择是否启用网络。
 
-|image39|
+|image40|
 
 如果是重启虚拟机或者 init 阶段进入这里呢，会不会又重复配置网络了呢？
 
@@ -652,7 +654,7 @@ True，意思是会启用网卡，配置ip。
 cloudinit 会根据缓存中的虚拟机的uuid来与ConfigDrive
 的对比，如果不一样，则认为这台虚拟机是新创建的虚拟机，只有新的虚拟机才会走入这里去配置网络。
 
-|image40|
+|image41|
 
 那问题又来了，虽然上面有个 bring_up 的参数，实际上，通过代码可以发现，在
 local 阶段，bring_up 为 False 不会去启用网卡，而在 init 阶段呢，虽然
@@ -710,45 +712,46 @@ cloudinit 允许通过 user_data 指定你想在虚拟机启动时，执行的�
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190430204707.png
-.. |image1| image:: http://image.python-online.cn/20190430204933.png
-.. |image2| image:: http://image.python-online.cn/20190430205449.png
-.. |image3| image:: http://image.python-online.cn/20190430211900.png
-.. |image4| image:: http://image.python-online.cn/20190430213012.png
-.. |image5| image:: http://image.python-online.cn/20190430213337.png
-.. |image6| image:: http://image.python-online.cn/20190430213429.png
-.. |image7| image:: http://image.python-online.cn/20190430213729.png
-.. |image8| image:: http://image.python-online.cn/20190430225605.png
-.. |image9| image:: http://image.python-online.cn/20190430225726.png
-.. |image10| image:: http://image.python-online.cn/20190430230214.png
-.. |image11| image:: http://image.python-online.cn/FpqcyL4hWwpaAGzsdreQwXvH4Rx8
-.. |image12| image:: http://image.python-online.cn/20190430230839.png
-.. |image13| image:: http://image.python-online.cn/20190430231108.png
-.. |image14| image:: http://image.python-online.cn/20190623091911.png
-.. |image15| image:: http://image.python-online.cn/20190708175813.png
-.. |image16| image:: http://image.python-online.cn/20190910160035.png
-.. |image17| image:: http://image.python-online.cn/20190910150305.png
-.. |image18| image:: http://image.python-online.cn/20190910142222.png
-.. |image19| image:: http://image.python-online.cn/20190910153637.png
-.. |image20| image:: http://image.python-online.cn/20190910171359.png
-.. |image21| image:: http://image.python-online.cn/20190910171538.png
-.. |image22| image:: http://image.python-online.cn/20190906091102.png
-.. |image23| image:: http://image.python-online.cn/20190909172153.png
-.. |image24| image:: http://image.python-online.cn/20190429104357.png
-.. |image25| image:: http://image.python-online.cn/20190829141059.png
-.. |image26| image:: http://image.python-online.cn/Fp1TeHSiIMIQoZygbW9VSfAagB_d
-.. |image27| image:: http://image.python-online.cn/Fh-5SQ8qYjhJEKovI6LmIpabSy2c
-.. |image28| image:: http://image.python-online.cn/20190430231812.png
-.. |image29| image:: http://image.python-online.cn/20190430232309.png
-.. |image30| image:: http://image.python-online.cn/20190429205735.png
-.. |image31| image:: http://image.python-online.cn/20190430232911.png
-.. |image32| image:: http://image.python-online.cn/20190911175423.png
-.. |image33| image:: http://image.python-online.cn/20190911174648.png
-.. |image34| image:: http://image.python-online.cn/20190911173615.png
-.. |image35| image:: http://image.python-online.cn/20190911195024.png
-.. |image36| image:: http://image.python-online.cn/20190911202425.png
-.. |image37| image:: http://image.python-online.cn/20190911202551.png
-.. |image38| image:: http://image.python-online.cn/20190911203953.png
-.. |image39| image:: http://image.python-online.cn/20190911204805.png
-.. |image40| image:: http://image.python-online.cn/20190911205518.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190430204707.png
+.. |image2| image:: http://image.python-online.cn/20190430204933.png
+.. |image3| image:: http://image.python-online.cn/20190430205449.png
+.. |image4| image:: http://image.python-online.cn/20190430211900.png
+.. |image5| image:: http://image.python-online.cn/20190430213012.png
+.. |image6| image:: http://image.python-online.cn/20190430213337.png
+.. |image7| image:: http://image.python-online.cn/20190430213429.png
+.. |image8| image:: http://image.python-online.cn/20190430213729.png
+.. |image9| image:: http://image.python-online.cn/20190430225605.png
+.. |image10| image:: http://image.python-online.cn/20190430225726.png
+.. |image11| image:: http://image.python-online.cn/20190430230214.png
+.. |image12| image:: http://image.python-online.cn/FpqcyL4hWwpaAGzsdreQwXvH4Rx8
+.. |image13| image:: http://image.python-online.cn/20190430230839.png
+.. |image14| image:: http://image.python-online.cn/20190430231108.png
+.. |image15| image:: http://image.python-online.cn/20190623091911.png
+.. |image16| image:: http://image.python-online.cn/20190708175813.png
+.. |image17| image:: http://image.python-online.cn/20190910160035.png
+.. |image18| image:: http://image.python-online.cn/20190910150305.png
+.. |image19| image:: http://image.python-online.cn/20190910142222.png
+.. |image20| image:: http://image.python-online.cn/20190910153637.png
+.. |image21| image:: http://image.python-online.cn/20190910171359.png
+.. |image22| image:: http://image.python-online.cn/20190910171538.png
+.. |image23| image:: http://image.python-online.cn/20190906091102.png
+.. |image24| image:: http://image.python-online.cn/20190909172153.png
+.. |image25| image:: http://image.python-online.cn/20190429104357.png
+.. |image26| image:: http://image.python-online.cn/20190829141059.png
+.. |image27| image:: http://image.python-online.cn/Fp1TeHSiIMIQoZygbW9VSfAagB_d
+.. |image28| image:: http://image.python-online.cn/Fh-5SQ8qYjhJEKovI6LmIpabSy2c
+.. |image29| image:: http://image.python-online.cn/20190430231812.png
+.. |image30| image:: http://image.python-online.cn/20190430232309.png
+.. |image31| image:: http://image.python-online.cn/20190429205735.png
+.. |image32| image:: http://image.python-online.cn/20190430232911.png
+.. |image33| image:: http://image.python-online.cn/20190911175423.png
+.. |image34| image:: http://image.python-online.cn/20190911174648.png
+.. |image35| image:: http://image.python-online.cn/20190911173615.png
+.. |image36| image:: http://image.python-online.cn/20190911195024.png
+.. |image37| image:: http://image.python-online.cn/20190911202425.png
+.. |image38| image:: http://image.python-online.cn/20190911202551.png
+.. |image39| image:: http://image.python-online.cn/20190911203953.png
+.. |image40| image:: http://image.python-online.cn/20190911204805.png
+.. |image41| image:: http://image.python-online.cn/20190911205518.png
 

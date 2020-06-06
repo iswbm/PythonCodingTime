@@ -1,6 +1,8 @@
 8.7 OpenStack 实现GPU直通
 =========================
 
+|image0|
+
 8.7.1 环境准备
 --------------
 
@@ -8,11 +10,11 @@
 
 (若没有lspci命令，则安装 yum install pciutils -y)
 
-|image0|
+|image1|
 
 此时查看，驱动是 nvidia
 
-|image1|
+|image2|
 
 ::
 
@@ -39,15 +41,15 @@
 
 未创建虚拟机
 
-|image2|
+|image3|
 
 创建gpu虚拟机成功，driver 由 nvidia 变为 vfio-pci
 
-|image3|
+|image4|
 
 删除虚拟机成功
 
-|image4|
+|image5|
 
 8.7.2.2 隐藏虚拟机标识
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -59,7 +61,7 @@ id。
 
 （若没有cpuid，则安装 yum install -y cpuid）
 
-|image5|
+|image6|
 
 如何隐藏 hypervisor id，只需要在xml的feature加上这段。
 
@@ -71,7 +73,7 @@ id。
 
 然后destroy再start一下虚拟机，在虚拟机内部再次查看。
 
-|image6|
+|image7|
 
 在Pike 版本，OpenStack
 已经可以根据镜像里是否有\ ``img_hide_hypervisor_id=true``
@@ -92,16 +94,16 @@ Pike 版本自己修改OpenStack 的源码，在xml里加上这段。
 
 具体 Pike版的代码如何实现，主要函数是这段
 
-|image7|
+|image8|
 
 记得在镜像meta里添加 img_hide_hypervisor_id 的字段
 
-|image8|
+|image9|
 
 8.7.2.3. 是否直通成功
 ~~~~~~~~~~~~~~~~~~~~~
 
-在虚拟机内部执行 nvidia-smi\ |image9|
+在虚拟机内部执行 nvidia-smi\ |image10|
 
 8.7.2.4 称重器
 ~~~~~~~~~~~~~~
@@ -116,7 +118,7 @@ GPU 的宿主机上。
 设备数来决定）的宿主机的权重为最低，为了保证这点，这个称重器的权重系数应最大，暂定为200（可以通过配置项
 ws_gpu_weight_multiplier 设置）。
 
-|image10|
+|image11|
 
 8.7.3 使用说明
 --------------
@@ -153,15 +155,16 @@ GPU 作为一种硬件资源，同样需要在模板中配置，配置方式是�
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190419144135.png
-.. |image1| image:: http://image.python-online.cn/20190419144044.png
-.. |image2| image:: http://image.python-online.cn/20190422201117.png
-.. |image3| image:: http://image.python-online.cn/20190422201041.png
-.. |image4| image:: http://image.python-online.cn/20190422201117.png
-.. |image5| image:: http://image.python-online.cn/20190422205222.png
-.. |image6| image:: http://image.python-online.cn/20190422204755.png
-.. |image7| image:: http://image.python-online.cn/20190528105408.png
-.. |image8| image:: http://image.python-online.cn/20190528105021.png
-.. |image9| image:: http://image.python-online.cn/20190528114526.png
-.. |image10| image:: http://image.python-online.cn/20190606185531.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190419144135.png
+.. |image2| image:: http://image.python-online.cn/20190419144044.png
+.. |image3| image:: http://image.python-online.cn/20190422201117.png
+.. |image4| image:: http://image.python-online.cn/20190422201041.png
+.. |image5| image:: http://image.python-online.cn/20190422201117.png
+.. |image6| image:: http://image.python-online.cn/20190422205222.png
+.. |image7| image:: http://image.python-online.cn/20190422204755.png
+.. |image8| image:: http://image.python-online.cn/20190528105408.png
+.. |image9| image:: http://image.python-online.cn/20190528105021.png
+.. |image10| image:: http://image.python-online.cn/20190528114526.png
+.. |image11| image:: http://image.python-online.cn/20190606185531.png
 

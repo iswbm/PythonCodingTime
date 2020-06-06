@@ -1,6 +1,8 @@
 6.5 绘制酷炫的gif动态图
 =======================
 
+|image0|
+
 --------------
 
 6.5.1 准备工作
@@ -137,7 +139,7 @@ matplotlib 给我们提供了一个函数，\ ``animation.FuncAnimation``
    # 将 gif 图展示在页面上
    Image(url='./ming.gif')
 
-绘制出来的结果如下： |image0|
+绘制出来的结果如下： |image1|
 
 --------------
 
@@ -146,5 +148,6 @@ matplotlib 给我们提供了一个函数，\ ``animation.FuncAnimation``
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: https://i.loli.net/2018/12/25/5c2226078799b.gif
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: https://i.loli.net/2018/12/25/5c2226078799b.gif
 

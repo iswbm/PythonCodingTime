@@ -1,6 +1,8 @@
 4.4 Jupyter NoteBook 使用指南
 =============================
 
+|image0|
+
 --------------
 
 今天来安利一款 Python开发
@@ -38,7 +40,7 @@ Anaconda
 4.4.1 下载安装
 --------------
 
-到官网下载 `Anaconda <https://www.anaconda.com/download/>`__ |image0|
+到官网下载 `Anaconda <https://www.anaconda.com/download/>`__ |image1|
 我这里选择下载 Py3.6，下载下来是 exe 文件（600多M）。安装即可。
 
 安装完成后，还会提示你是否安装 VS Code，自行选择。不安装直接 Skip 就好。
@@ -47,18 +49,18 @@ Anaconda
 --------------
 
 点击打开 Anaconda 。会出现这个界面。第一眼，我看到了很多工具，包含
-NoteBook，qtconsole，VS Ccode等。 |image1|
+NoteBook，qtconsole，VS Ccode等。 |image2|
 
 这里就介绍一下，我最经常使用的 NoteBook 就好了。其他的大家自行尝试。
 
-选择 NoteBook，点击 Launch，会启动浏览器打开一个 web 页面。 |image2|
+选择 NoteBook，点击 Launch，会启动浏览器打开一个 web 页面。 |image3|
 
-点击右上角的new，就可以进入 Python3 的交互界面。 |image3|
+点击右上角的new，就可以进入 Python3 的交互界面。 |image4|
 
 来感受一下，如何使用这个工具。
 
 每一行的命令，都在一个可编辑的输入框。即使你的命令输入有误，你也不用从头写代码，直接编辑后重新执行即可。
-|image4|
+|image5|
 
 还有一点，命令的执行是可间断的，某个命令执行错误，不会导致整个程序中断，这将很方便我们调试代码，只要改完代码，再重新执行该行代码即可，而不用重新执行全部代码。
 
@@ -220,18 +222,18 @@ Markdown下快捷键
 
 其实以上快捷键，在非编辑模式下，按 h 就会出现快捷键帮助菜单。
 
-|image5| |image6|
+|image6| |image7|
 
 4.4.4 导出笔记文件
 ------------------
 
 NoteBook 既然支持 Markdown ，你已经也能想到它可以用来记录学习笔记。
 它提供多种常用的文件格式，md，rst，pdf等。如果你希望再次编辑，可以保存为ipynb，这是Jupyter的文件格式，可以再次打开进行编辑。
-|image7|
+|image8|
 
 以前我学习 Pandas
 的时候，也曾经使用它做过笔记，输出的是PDF文件，可以按目录导航，相当方便。
-|image8|
+|image9|
 
 好了，大概就是这些内容。
 
@@ -242,13 +244,14 @@ NoteBook 既然支持 Markdown ，你已经也能想到它可以用来记录学�
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190511163102.png
-.. |image1| image:: http://image.python-online.cn/20190511163123.png
-.. |image2| image:: http://image.python-online.cn/20190511163137.png
-.. |image3| image:: http://image.python-online.cn/20190511163145.png
-.. |image4| image:: http://image.python-online.cn/20190511163200.png
-.. |image5| image:: http://image.python-online.cn/20190511163245.png
-.. |image6| image:: http://image.python-online.cn/20190511163253.png
-.. |image7| image:: http://image.python-online.cn/20190511163304.png
-.. |image8| image:: http://image.python-online.cn/20190511163311.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190511163102.png
+.. |image2| image:: http://image.python-online.cn/20190511163123.png
+.. |image3| image:: http://image.python-online.cn/20190511163137.png
+.. |image4| image:: http://image.python-online.cn/20190511163145.png
+.. |image5| image:: http://image.python-online.cn/20190511163200.png
+.. |image6| image:: http://image.python-online.cn/20190511163245.png
+.. |image7| image:: http://image.python-online.cn/20190511163253.png
+.. |image8| image:: http://image.python-online.cn/20190511163304.png
+.. |image9| image:: http://image.python-online.cn/20190511163311.png
 

@@ -1,6 +1,8 @@
 1.27 全面学习 Python 包：包的构建与分发
 =======================================
 
+|image0|
+
    首发于公众号：Python编程时光
 
 1. 为什么需要对项目分发打包？
@@ -163,7 +165,7 @@ Python 包的分发可以分为两种：
 
 源码包的本质是一个压缩包，其常见的格式有：
 
-|image0|
+|image1|
 
 2. 以二进制包形式发布
 
@@ -173,7 +175,7 @@ Python 包的分发可以分为两种：
 
 二进制包的常见格式有：
 
-|image1|
+|image2|
 
 6. eggs 与 wheels 有什么区别？
 ------------------------------
@@ -478,7 +480,7 @@ setup.py
 的参数非常多，能够不借助文档写好一个setup.py好像没那么简单。为了备忘，我整理了
 setup 函数常用的一些参数：
 
-|image2|
+|image3|
 
 更多参数可见：https://setuptools.readthedocs.io/en/latest/setuptools.html
 
@@ -572,7 +574,7 @@ pypi.python.org/simple/
 
 创建一个压缩的tarball和一个zip文件。可用格式为：
 
-|image3|
+|image4|
 
 对以上的格式，有几点需要注意一下：
 
@@ -688,8 +690,9 @@ Index）上，它是 Python
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20191218202833.png
-.. |image1| image:: http://image.python-online.cn/20191218203005.png
-.. |image2| image:: http://image.python-online.cn/20191218203255.png
-.. |image3| image:: http://image.python-online.cn/20191218203517.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20191218202833.png
+.. |image2| image:: http://image.python-online.cn/20191218203005.png
+.. |image3| image:: http://image.python-online.cn/20191218203255.png
+.. |image4| image:: http://image.python-online.cn/20191218203517.png
 

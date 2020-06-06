@@ -1,6 +1,8 @@
 3.5 源码解读：Flask上下文与代理模式
 ===================================
 
+|image0|
+
 在上一节中，我跟大家一起深入了解了一下Python的「上下文管理器
 」。而今天呢，还是和上下文有关的话题。只不过这里的上下文和上一节的内容有点不一样，上下文管理器是管理代码块级别的上下文，而今天要讲的上下文是工程项目中的上下文。
 
@@ -139,11 +141,11 @@ wangbm，然后开始一个线程，做的事就是将这个 name 属性改为 w
 
 如果要用图来表示，最开始的Local对象就是一个空盒子
 
-|image0|
+|image1|
 
 当有不同的线程往里写数据时，Local 对象为每个线程分配了一个 micro-box。
 
-|image1|
+|image2|
 
 local 是需要被 ``localmanager`` 管理的，在请求结束后，会调用
 ``localmanager.cleanup()`` 函数，其实是调用 ``local.__release_local__``
@@ -216,7 +218,7 @@ local 是需要被 ``localmanager`` 管理的，在请求结束后，会调用
 
 同样用一张图来表示
 
-|image2|
+|image3|
 
 栈结构的特性，无非就是后进先出。这里就不说了，这里的重点是线程隔离的特性如何体现，还是以上面的例子，稍微做了下修改。
 
@@ -503,7 +505,8 @@ app 的上下文信息是否已经 push 进去了，如果没有的话，就会�
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/Fuhww2CZdUv4mGqx-N0YqAuXUWlX
-.. |image1| image:: http://image.python-online.cn/FgI6y-_Ka-S20VCjyufsCIczKjup
-.. |image2| image:: http://image.python-online.cn/FimULzWaeZWS2KJx_EQLAK_yRZ4A
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/Fuhww2CZdUv4mGqx-N0YqAuXUWlX
+.. |image2| image:: http://image.python-online.cn/FgI6y-_Ka-S20VCjyufsCIczKjup
+.. |image3| image:: http://image.python-online.cn/FimULzWaeZWS2KJx_EQLAK_yRZ4A
 

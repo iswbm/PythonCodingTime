@@ -1,6 +1,8 @@
 7.12 Linux 包管理工具：yum 和 rpm
 =================================
 
+|image0|
+
 yum
 ---
 
@@ -102,7 +104,7 @@ yum-utils 使用
 
 经常在安装一个包的时候，会报如下的错误，找不到某 so 文件
 
-|image0|
+|image1|
 
 如果是缺一个包，那我们安装它就行了，缺 so 文件，那咋弄？
 
@@ -130,7 +132,7 @@ yum-utils 使用
    # 只能查已安装的包的安装日期。截图中，之所以存在两个包，是因为该机器上存在两个版本的包
    $ rpm -qa --last | grep python-nova-tests
 
-|image1|
+|image2|
 
 查看安装某个包是如何安装的，从哪安装
 
@@ -138,7 +140,7 @@ yum-utils 使用
 
    $ yumdb info python-nova-tests
 
-|image2|
+|image3|
 
 查看rpm包的版本
 
@@ -211,7 +213,8 @@ rpm
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20191219152328.png
-.. |image1| image:: http://image.python-online.cn/20191225173340.png
-.. |image2| image:: http://image.python-online.cn/20191225175350.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20191219152328.png
+.. |image2| image:: http://image.python-online.cn/20191225173340.png
+.. |image3| image:: http://image.python-online.cn/20191225175350.png
 

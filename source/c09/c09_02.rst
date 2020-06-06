@@ -1,6 +1,8 @@
 9.2 没有这 50 个APP，我的 Mac 将只是一块铁
 ==========================================
 
+|image0|
+
 1. 效率神器
 -----------
 
@@ -26,7 +28,7 @@ Mac 中必不可少的APP，没有它 Mac 基本也就『残废』了。
 
 NewFileMenu 可以解决你的烦恼
 
-|image0|
+|image1|
 
 3. Magnet/Moon
 ~~~~~~~~~~~~~~
@@ -157,5 +159,6 @@ iMazing，最佳 iOS 备份及管理软件，完美替代 iTunes。
 
 Macs Fan Control：控制风扇转速，加快散热
 
-.. |image0| image:: http://image.iswbm.com/image-20200524183640630.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/image-20200524183640630.png
 

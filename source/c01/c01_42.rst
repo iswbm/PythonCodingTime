@@ -1,6 +1,8 @@
 1.42 Python 炫技操作：海象运算符的三种用法
 ==========================================
 
+|image0|
+
 Python 版本发展非常快，如今最新的版本已经是 Pyhton
 3.9，即便如此，有很多人甚至还停留在 3.6 或者 3.7，连 3.8 还没用上。
 
@@ -12,7 +14,7 @@ Python 版本发展非常快，如今最新的版本已经是 Pyhton
 它的英文原名叫 ``Assignment Expressions``\ ，翻译过来也就是
 ``赋值表达式``\ ，不过现在大家更普遍地称之为海象运算符，就是因为它长得真的太像海象了。
 
-|image0|
+|image1|
 
 1. 第一个用法：if/else
 ----------------------
@@ -178,5 +180,6 @@ Golang，那这里要注意，Golang 中的 ``:=``
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.iswbm.com/image-20200418122739417.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/image-20200418122739417.png
 

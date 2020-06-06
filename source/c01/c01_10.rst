@@ -1,6 +1,8 @@
 1.10 Python 黑魔法指南 50 例
 ============================
 
+|image0|
+
 --------------
 
    作者：王炳明，微信公众号《Python编程时光》。版权归个人所有，欢迎分享，仅用于学习交流，但勿用作商业用途，违者必究。
@@ -471,7 +473,7 @@ Python 中的 def
 的时候，会先生成这个可变对象的内存地址，然后将这个默认参数 item_list
 会与这个内存地址绑定。在后面的函数调用中，如果调用方指定了新的默认值，就会将原来的默认值覆盖。如果调用方没有指定新的默认值，那就会使用原来的默认值。
 
-|image0|
+|image1|
 
 12. 访问类中的私有方法
 ----------------------
@@ -887,7 +889,7 @@ SimpleHTTPServer是Python
    # python3
    python3 -m http.server 8888
 
-|image1|
+|image2|
 
 SimpleHTTPServer有一个特性，如果待共享的目录下有index.html，那么index.html文件会被视为默认主页；如果不存在index.html文件，那么就会显示整个目录列表。
 
@@ -990,7 +992,7 @@ break，不抛出异常，就可以走else。
 
 因此 对于 ``aabb`` 这个字符串在 Python 来看应该是这样的
 
-|image2|
+|image3|
 
 理解了这个“**缝隙**” 的概念后，以下这些就好理解了。
 
@@ -1149,7 +1151,7 @@ import 是 Python 导包的方式。
 
    >>> import antigravity
 
-就会自动打开一个网页。 |image3|
+就会自动打开一个网页。 |image4|
 
 30. 局部/全局变量傻傻分不清
 ---------------------------
@@ -1230,11 +1232,11 @@ import 是 Python 导包的方式。
 
 什么？没有截图你不信？
 
-|image4|
+|image5|
 
 如果你在自己的电脑上尝试一下，结果可能是这样的
 
-|image5|
+|image6|
 
 **怎么又好了呢？**
 
@@ -1710,7 +1712,7 @@ heapq.merge，因为它采用堆排序，效率非常高。但若你不希望得
 
 示例如下
 
-|image6|
+|image7|
 
 如果\ ``clean()``\ 函数有参数，那么你可以不用装饰器，而是直接调用\ ``atexit.register(clean_1, 参数1, 参数2, 参数3='xxx')``\ 。
 
@@ -2096,7 +2098,7 @@ Python 功力。
 稍微接触过 linux 的人都知道 ``/usr/bin/python`` 就是我们执行 ``python``
 进入console 模式里的 ``python``
 
-|image7|
+|image8|
 
 而当你在可执行文件头里使用 ``#!`` + ``/usr/bin/python``
 ，意思就是说你得用哪个软件 （python）来执行这个文件。
@@ -2105,20 +2107,20 @@ Python 功力。
 
 不加的话，你每次执行这个脚本时，都得这样： ``python xx.py`` ，
 
-|image8|
+|image9|
 
 有没有一种方式？可以省去每次都加 ``python`` 呢？
 
 当然有，你可以文件头里加上\ ``#!/usr/bin/python``
 ，那么当这个文件有可执行权限 时，只直接写这个脚本文件，就像下面这样。
 
-|image9|
+|image10|
 
 明白了这个后，再来看看 ``!/usr/bin/env python`` 这个 又是什么意思 ？
 
 当我执行 ``env python`` 时，自动进入了 python console 的模式。
 
-|image10|
+|image11|
 
 这是为什么？和 直接执行 python 好像没什么区别呀
 
@@ -2133,7 +2135,7 @@ Python 功力。
 
 具体演示过程，你可以看下面。
 
-|image11|
+|image12|
 
 那么对于这两者，我们应该使用哪个呢？
 
@@ -2324,16 +2326,17 @@ python 解释器都是 ``/usr/bin/python`` 。
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190511165650.png
-.. |image1| image:: http://image.python-online.cn/20190511165716.png
-.. |image2| image:: http://image.iswbm.com/20200509172331.png
-.. |image3| image:: http://image.python-online.cn/20190511165735.png
-.. |image4| image:: http://image.iswbm.com/20200509122954.png
-.. |image5| image:: http://image.iswbm.com/20200509123107.png
-.. |image6| image:: http://image.iswbm.com/20200510112133.png
-.. |image7| image:: http://image.python-online.cn/20200331184021.png
-.. |image8| image:: http://image.python-online.cn/20200331185034.png
-.. |image9| image:: http://image.python-online.cn/20200331184755.png
-.. |image10| image:: http://image.python-online.cn/20200331185741.png
-.. |image11| image:: http://image.python-online.cn/20200331190224.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190511165650.png
+.. |image2| image:: http://image.python-online.cn/20190511165716.png
+.. |image3| image:: http://image.iswbm.com/20200509172331.png
+.. |image4| image:: http://image.python-online.cn/20190511165735.png
+.. |image5| image:: http://image.iswbm.com/20200509122954.png
+.. |image6| image:: http://image.iswbm.com/20200509123107.png
+.. |image7| image:: http://image.iswbm.com/20200510112133.png
+.. |image8| image:: http://image.python-online.cn/20200331184021.png
+.. |image9| image:: http://image.python-online.cn/20200331185034.png
+.. |image10| image:: http://image.python-online.cn/20200331184755.png
+.. |image11| image:: http://image.python-online.cn/20200331185741.png
+.. |image12| image:: http://image.python-online.cn/20200331190224.png
 

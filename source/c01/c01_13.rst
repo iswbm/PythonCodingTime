@@ -1,6 +1,8 @@
 1.13 Python几个高阶函数
 =======================
 
+|image0|
+
 --------------
 
 1.13.1 lambda 表达式
@@ -162,5 +164,6 @@ Pythonic ，在某一程度上代码看起来更加的简洁。
 
    关注公众号，获取最新干货！
 
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |reduce 逻辑演示| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyx6i8q3anj208c04u3yu.jpg
 

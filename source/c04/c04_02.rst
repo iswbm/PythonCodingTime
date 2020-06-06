@@ -1,9 +1,11 @@
 4.2 Xshell的高效使用手册
 ========================
 
+|image0|
+
 --------------
 
-|image0|
+|image1|
 
 做为一名开发人员，我们难免都会与服务器打交道。
 
@@ -25,11 +27,11 @@
 
 查看 -> 快速命令
 
-双击底部自定义快速命令。 |image1|
+双击底部自定义快速命令。 |image2|
 
 **使用收藏栏**
 
-点击最左侧按按钮添加收藏。 |image2|
+点击最左侧按按钮添加收藏。 |image3|
 
 **快捷设置**
 
@@ -37,13 +39,13 @@
 
 ① 右键粘贴 ② 双击分隔符 ③ 选中即复制
 
-|image3|
+|image4|
 
 **设置Meta键**
 
 文件 -> 属性 -> 键盘
 
-一定要打钩，这是后面诸多快捷使用的前提。 |image4|
+一定要打钩，这是后面诸多快捷使用的前提。 |image5|
 
 移动光标
 --------
@@ -171,9 +173,10 @@
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190511162815.png
-.. |image1| image:: http://image.python-online.cn/20190511162524.png
-.. |image2| image:: http://image.python-online.cn/20190511162607.png
-.. |image3| image:: http://image.python-online.cn/20190511162716.png
-.. |image4| image:: http://image.python-online.cn/20190511162730.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190511162815.png
+.. |image2| image:: http://image.python-online.cn/20190511162524.png
+.. |image3| image:: http://image.python-online.cn/20190511162607.png
+.. |image4| image:: http://image.python-online.cn/20190511162716.png
+.. |image5| image:: http://image.python-online.cn/20190511162730.png
 

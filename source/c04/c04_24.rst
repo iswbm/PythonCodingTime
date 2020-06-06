@@ -1,6 +1,8 @@
 4.24 Python “用户环境”的一次完美应用
 ====================================
 
+|image0|
+
 在之前写过一篇关于虚拟环境使用的文章 ：\ `Python
 虚拟环境使用指南 <http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485049&idx=1&sn=c16383d6cc91a7ed8254e344d994f101&chksm=e886669bdff1ef8d82aae3a231ef0651f82d5e97cf1e64aceda00e686119900518c202dc9b1b&scene=21#wechat_redirect>`__.
 
@@ -21,11 +23,11 @@
 Python 来实现，这个 Python 脚本里有一些依赖库（比如 之前介绍过的
 paramiko 这个神器），在跳板机上中并没有安装。
 
-|image0|
+|image1|
 
 做为普通用户的你，是没有权限安装第三方包的。
 
-|image1|
+|image2|
 
 问题就来了，我如何才能在跳板机中使用 paramiko 这个包呢？
 
@@ -48,7 +50,7 @@ paramiko 这个包不就好了。
 
 3、 使用 console 模式调试的话，进入很不方便
 
-|image2|
+|image3|
 
 就算你不使用 console 模式，你调用脚本的方式，也会很奇怪，你得这样
 
@@ -182,15 +184,16 @@ Python 如何确定应该从哪个路径进行导入呢？
 然后直接使用 python 进入 console 模式，现在已经可以直接使用 paramiko
 这个包了。
 
-|image3|
+|image4|
 
 .. figure:: http://image.python-online.cn/image-20200320125724880.png
    :alt: 关注公众号，获取最新干货！
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.iswbm.com/20200427180207.png
-.. |image1| image:: http://image.iswbm.com/20200427180042.png
-.. |image2| image:: http://image.iswbm.com/20200427182334.png
-.. |image3| image:: http://image.iswbm.com/20200427185854.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200427180207.png
+.. |image2| image:: http://image.iswbm.com/20200427180042.png
+.. |image3| image:: http://image.iswbm.com/20200427182334.png
+.. |image4| image:: http://image.iswbm.com/20200427185854.png
 

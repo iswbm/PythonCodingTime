@@ -1,29 +1,31 @@
 8.15 Neutron 源码解读
 =====================
 
-neutron api 的入口是在这里\ |image0|
+|image0|
 
-在这里会校验并打印请求的信息\ |image1|
+neutron api 的入口是在这里\ |image1|
 
-而对网络、子网、port操作的逻辑处理代码的入口都是从这里开始的\ |image2|
+在这里会校验并打印请求的信息\ |image2|
+
+而对网络、子网、port操作的逻辑处理代码的入口都是从这里开始的\ |image3|
 
 8.15.1 创建Port
 ---------------
 
-从 neutron api 请求过来后，就会经过这里\ |image3|
+从 neutron api 请求过来后，就会经过这里\ |image4|
 
-把 port 信息打印一下\ |image4|
+把 port 信息打印一下\ |image5|
 
 点进上面的\ ``self._create_port_db()``\ ，可以看到这里先是创建了一个空壳的port
 
-|image5|
+|image6|
 
-再分配ip\ |image6|
+再分配ip\ |image7|
 
 上图有一个函数
 ``_allocate_ips_for_port``\ ，相当重要，一般人只要从这里关注即可
 
-|image7|
+|image8|
 
 它会先根据port创建请求里的内容，去数据库中一一比对，找出符合条件的子网，当然在找的过程中，会校验请求参数的准确性，比如它是指定ip和subnet创建的port，那么会检查这个ip是否在subnet内。
 
@@ -33,9 +35,9 @@ neutron api 的入口是在这里\ |image0|
 里。如果指定了ip，这个list里的元素就会有 ip_address，否则就只有
 subnet_id。
 
-|image8|
-
 |image9|
+
+|image10|
 
 --------------
 
@@ -43,27 +45,28 @@ subnet_id。
 有ipv4 的子网也有ipv6的子网，这时候 neutron
 会去创建一个既有ipv4也有ipv6的port，只要有一个version的子网里没有可用ip，都会失败。
 
-|image10|
+|image11|
 
 这里是遍历一个version的所有的子网列表，只要能找到一个子网有可用ip，就返回，如果遍历完都没有找到ip，那就要抛出异常了。
 
-|image11|
+|image12|
 
 .. code:: python
 
    class IpAddressGenerationFailureAllSubnets(IpAddressGenerationFailure):
        message = _("No more IP addresses available.")
 
-.. |image0| image:: http://image.python-online.cn/20190804111844.png
-.. |image1| image:: http://image.python-online.cn/20190804111715.png
-.. |image2| image:: http://image.python-online.cn/20190803181706.png
-.. |image3| image:: http://image.python-online.cn/20190803182042.png
-.. |image4| image:: http://image.python-online.cn/20190803182223.png
-.. |image5| image:: http://image.python-online.cn/20190804091016.png
-.. |image6| image:: http://image.python-online.cn/20190804091226.png
-.. |image7| image:: http://image.python-online.cn/20190804094131.png
-.. |image8| image:: http://image.python-online.cn/20190804092214.png
-.. |image9| image:: http://image.python-online.cn/20190804091911.png
-.. |image10| image:: http://image.python-online.cn/20190809213209.png
-.. |image11| image:: http://image.python-online.cn/20190809213223.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190804111844.png
+.. |image2| image:: http://image.python-online.cn/20190804111715.png
+.. |image3| image:: http://image.python-online.cn/20190803181706.png
+.. |image4| image:: http://image.python-online.cn/20190803182042.png
+.. |image5| image:: http://image.python-online.cn/20190803182223.png
+.. |image6| image:: http://image.python-online.cn/20190804091016.png
+.. |image7| image:: http://image.python-online.cn/20190804091226.png
+.. |image8| image:: http://image.python-online.cn/20190804094131.png
+.. |image9| image:: http://image.python-online.cn/20190804092214.png
+.. |image10| image:: http://image.python-online.cn/20190804091911.png
+.. |image11| image:: http://image.python-online.cn/20190809213209.png
+.. |image12| image:: http://image.python-online.cn/20190809213223.png
 

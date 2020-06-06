@@ -1,6 +1,8 @@
 4.1 虚拟环境：virtualenv
 ========================
 
+|image0|
+
 --------------
 
 1.0 什么是虚拟环境？
@@ -146,7 +148,7 @@ virtualenv 虽然已经相当好用了，可是功能还是不够完善。
 
 若是 windows 则新增环境变量：\ ``WORKON_HOME``
 
-|image0|
+|image1|
 
 **基本语法**\ ：
 
@@ -221,7 +223,7 @@ https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
 先对比下，全局环境和虚拟环境的区别，全局环境中有requests包，而虚拟环境中并未安装。
 当我们敲入
 ``workon my_env01``\ ，前面有\ ``my_env01``\ 的标识，说明我们已经处在虚拟环境中。后面所有的操作，都将在虚拟环境下执行。
-|image1|
+|image2|
 
 4.2 工程项目中
 ~~~~~~~~~~~~~~
@@ -254,14 +256,14 @@ https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
 
    $ ./ming.py
 
-发现和预期一样，真的报错了。说明我们指定的虚拟环境有效果。 |image2|
+发现和预期一样，真的报错了。说明我们指定的虚拟环境有效果。 |image3|
 
 4.3 PyCharm中
 ~~~~~~~~~~~~~
 
-点击 File - Settings - Project - Interpreter |image3|
+点击 File - Settings - Project - Interpreter |image4|
 点击小齿轮。如图点击添加，按提示添加一个虚拟环境。然后点 OK
-就可以使用这个虚拟环境，之后的项目都会在这个虚拟环境下运行。 |image4|
+就可以使用这个虚拟环境，之后的项目都会在这个虚拟环境下运行。 |image5|
 
 --------------
 
@@ -270,9 +272,10 @@ https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20200209161935.png
-.. |image1| image:: https://i.loli.net/2018/06/11/5b1e7d36ce8ad.png
-.. |image2| image:: https://i.loli.net/2018/06/11/5b1e7f140be6a.png
-.. |image3| image:: https://i.loli.net/2018/06/11/5b1e805c996c8.png
-.. |image4| image:: https://i.loli.net/2018/06/11/5b1e812db603f.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20200209161935.png
+.. |image2| image:: https://i.loli.net/2018/06/11/5b1e7d36ce8ad.png
+.. |image3| image:: https://i.loli.net/2018/06/11/5b1e7f140be6a.png
+.. |image4| image:: https://i.loli.net/2018/06/11/5b1e805c996c8.png
+.. |image5| image:: https://i.loli.net/2018/06/11/5b1e812db603f.png
 

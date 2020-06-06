@@ -1,6 +1,8 @@
 1.34 每日一库：sh，最优雅的命令调用方式
 =======================================
 
+|image0|
+
 在编写 Python
 脚本的时候，很经常需要我们去调用系统的命令，方法有很多种，比如
 os.popen，os.system，commands，还有 subprocess。
@@ -21,7 +23,7 @@ Python 3 为例。
 Windows 使用，它推荐你使用它的 兄弟库 - ``pbs``
 (https://pypi.org/project/pbs/)。
 
-|image0|
+|image1|
 
 安装完成后，就可以直接使用它了，以下几个示例，非常简单，简单到我感觉只要
 demo ，而不需要任何的中文解释就可以让你知道他是如何使用的。
@@ -93,5 +95,6 @@ demo ，而不需要任何的中文解释就可以让你知道他是如何使用
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20200227201644.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20200227201644.png
 

@@ -1,6 +1,8 @@
 4.11 不能不会的远程调试技巧
 ===========================
 
+|image0|
+
 这一篇文章是以前的文章，有的朋友已经看过，但是没有关系，因为这次我准备介绍这几大调试工具都是如何调试，又该如何选择。
 
 一般情况下，我们开发调试都是在个人PC上完成，遇到问题，开一下 ``Pycharm``
@@ -29,14 +31,14 @@ Debug 。而远程调试需要不少前置步骤，这些设置过程，也是�
 首先，要在Pycharm中新建一个空的项目，后面我们拉服务器上的项目代码就会放置在这个项目目录下。我这边的名字是
 NOVA，你可以自己定义。
 
-|image0|
+|image1|
 
 4.11.2 配置连接服务器
 ~~~~~~~~~~~~~~~~~~~~~
 
 Tools -> Deployment -> configuration
 
-|image1|
+|image2|
 
 添加一个\ ``Server``
 
@@ -44,7 +46,7 @@ Tools -> Deployment -> configuration
 
 -  Type：设定为SFTP
 
-|image2|
+|image3|
 
 点击\ ``OK``\ 后，进入如下界面，你可以按我的备注，填写信息：
 
@@ -57,37 +59,37 @@ Tools -> Deployment -> configuration
 
 这里请注意，要确保你的电脑可以ssh连接到你的服务器，不管是密钥登陆还是密码登陆，如果开启了白名单限制要先解除。
 
-|image3|
+|image4|
 
 填写完成后，切换到\ ``Mappings``\ 选项卡，在箭头位置，填写\ ``\``
 
-|image4|
+|image5|
 
 以上服务器信息配置，全部正确填写完成后，点击\ ``OK``
 
 接下来，我们要连接远程服务器了。 Tools -> Deployment -> Browse Remote
 Host
 
-|image5|
+|image6|
 
 4.11.3 下载项目代码
 ~~~~~~~~~~~~~~~~~~~
 
 如果之前填写的服务器登陆信息准确无误的话，现在就可以看到远程的项目代码。
 
-|image6|
+|image7|
 
 选择下载远程代码要本地。
 
-|image7|
+|image8|
 
 下载完成提示。
 
-|image8|
+|image9|
 
 现在的IDE界面应该是这样子的。
 
-|image9|
+|image10|
 
 4.11.4 下载远程解释器
 ~~~~~~~~~~~~~~~~~~~~~
@@ -98,11 +100,11 @@ Host
 
 进入 File -> Settings 按图示，添加远程解释器。
 
-|image10|
+|image11|
 
 填写远程服务器信息，跟之前的一样，不再赘述。
 
-|image11|
+|image12|
 
 点击\ ``OK``\ 后，会自动下载远程解释器。如果你的项目比较大，这个时间可能会比较久，请耐心等待。
 
@@ -137,19 +139,19 @@ Host
 看到那个\ ``ExecStart``\ 没有？那个就是我们程序的入口。
 我们只要将其拷贝至我们的Pycharm中，并向远程同步该文件。
 
-|image12|
+|image13|
 
 4.11.6 调试前设置
 ~~~~~~~~~~~~~~~~~
 
 开启代码自动同步，这样，我们对代码的修改Pycharm都能识别，并且为我们提交到远程服务器。
 
-|image13|
+|image14|
 
 开启
 ``Gevent compatible``\ ，如果不开启，在调试过程中，很可能出现无法调试，或者无法追踪/查看变量等问题。
 
-|image14|
+|image15|
 
 4.11.7 开始调试代码
 ~~~~~~~~~~~~~~~~~~~
@@ -158,11 +160,11 @@ Host
 
 如果你的程序入口，需要引入参数，这是经常有的事，可以的这里配置。
 
-|image15|
+|image16|
 
 配置完点击保存即可。
 
-|image16|
+|image17|
 
 4.11.8 友情提醒
 ~~~~~~~~~~~~~~~
@@ -178,21 +180,22 @@ Host
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190113104817.png
-.. |image1| image:: http://image.python-online.cn/20190113105512.png
-.. |image2| image:: http://image.python-online.cn/20190113105858.png
-.. |image3| image:: http://image.python-online.cn/20190113105931.png
-.. |image4| image:: http://image.python-online.cn/20190113110928.png
-.. |image5| image:: http://image.python-online.cn/20190113111042.png
-.. |image6| image:: http://image.python-online.cn/20190113111151.png
-.. |image7| image:: http://image.python-online.cn/20190113111217.png
-.. |image8| image:: http://image.python-online.cn/20190113111248.png
-.. |image9| image:: http://image.python-online.cn/20190113111307.png
-.. |image10| image:: http://image.python-online.cn/20190113111747.png
-.. |image11| image:: http://image.python-online.cn/20190113111828.png
-.. |image12| image:: http://image.python-online.cn/20190113112004.png
-.. |image13| image:: http://image.python-online.cn/20190113112055.png
-.. |image14| image:: http://image.python-online.cn/20190113113211.png
-.. |image15| image:: http://image.python-online.cn/20190113112456.png
-.. |image16| image:: http://image.python-online.cn/20190113112649.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190113104817.png
+.. |image2| image:: http://image.python-online.cn/20190113105512.png
+.. |image3| image:: http://image.python-online.cn/20190113105858.png
+.. |image4| image:: http://image.python-online.cn/20190113105931.png
+.. |image5| image:: http://image.python-online.cn/20190113110928.png
+.. |image6| image:: http://image.python-online.cn/20190113111042.png
+.. |image7| image:: http://image.python-online.cn/20190113111151.png
+.. |image8| image:: http://image.python-online.cn/20190113111217.png
+.. |image9| image:: http://image.python-online.cn/20190113111248.png
+.. |image10| image:: http://image.python-online.cn/20190113111307.png
+.. |image11| image:: http://image.python-online.cn/20190113111747.png
+.. |image12| image:: http://image.python-online.cn/20190113111828.png
+.. |image13| image:: http://image.python-online.cn/20190113112004.png
+.. |image14| image:: http://image.python-online.cn/20190113112055.png
+.. |image15| image:: http://image.python-online.cn/20190113113211.png
+.. |image16| image:: http://image.python-online.cn/20190113112456.png
+.. |image17| image:: http://image.python-online.cn/20190113112649.png
 

@@ -1,6 +1,8 @@
 1.14 with 与 上下文管理器
 =========================
 
+|image0|
+
    提示：前面的内容较为基础，重点知识在后半段。
 
 ``with`` 这个关键字，对于每一学习Python的人，都不会陌生。
@@ -199,7 +201,7 @@ open）的上下文管理器。
 
 代码是这样的
 
-|image0|
+|image1|
 
 总结起来，使用上下文管理器有三个好处：
 
@@ -214,5 +216,6 @@ open）的上下文管理器。
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190310172800.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190310172800.png
 

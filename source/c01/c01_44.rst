@@ -1,6 +1,8 @@
 1.44 详解 Python 中的编码问题
 =============================
 
+|image0|
+
 Python 中编码问题，一直是很多 Python 开发者的噩梦，尽管你是工作多年的
 Python
 开发者，也肯定会经常遇到令人神烦的编码问题，好不容易花了半天搞明白了。
@@ -190,7 +192,7 @@ KOI8-R 编码。
 chardet
 支持多国的语言，从官方文档中可以看到支持如下这些语言(https://chardet.readthedocs.io/en/latest/supported-encodings.html)
 
-|image0|
+|image1|
 
 4. 编码与解码的区别
 -------------------
@@ -202,7 +204,7 @@ chardet
 
 -  **解码**\ ：decode 方法，把二进制字节序列转化为字符串对象
 
-|image1|
+|image2|
 
 那么假如我们真知道了其编码格式，如何来转成 unicode 呢？
 
@@ -289,6 +291,7 @@ sys.setdefaultencoding 这个方法。
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.iswbm.com/20200423185819.png
-.. |image1| image:: http://image.iswbm.com/20200423190331.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200423185819.png
+.. |image2| image:: http://image.iswbm.com/20200423190331.png
 

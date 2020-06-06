@@ -1,6 +1,8 @@
 5.1 图解九大经典排序算法
 ========================
 
+|image0|
+
 --------------
 
 排序算法，可谓是算法中的基础，在面试中，也是面试官最喜欢考察的。经常会让你手写一个选择排序、冒泡排序，如果能在最短的时间内顺畅地写出来，一定会让面试官眼前一亮。
@@ -78,7 +80,7 @@
 **排序原理**
 ：遍历n趟（n为数组的长度），每一趟都从「待排序」的元素中排出最小（或最大）的元素。
 
-**原理图解** ： |image2|
+**原理图解** ： |image3|
 
 代码实现：
 
@@ -109,7 +111,7 @@
 **排序原理**
 ：每次将一个待排序的元素与已排序的元素进行逐一比较，直到找到合适的位置按大小插入。通俗地说，就类似我们打牌的时候，给牌进行排序。
 
-**原理图解** ： |image3|
+**原理图解** ： |image4|
 
 代码实现：
 
@@ -158,7 +160,7 @@
 
 **原理图解**\ ：
 
-|image4| |希尔排序|
+|image5| |希尔排序|
 
 **代码实现**\ ：
 
@@ -288,7 +290,7 @@
 **原理图解**\ ： |分而治之思想|
 
 重点其实是这个“治”的过程，如何实现将两个有序数组合并起来？思路大概是这样的。
-|image8| |合并两个有序数组|
+|image9| |合并两个有序数组|
 
 **代码实现**\ ： 这里只实现正序，感兴趣的同学，可以试倒序。
 
@@ -424,15 +426,16 @@ sgnificant digital)，LSD 的排序方式由键值的最右边开始，而 MSD
 
    关注公众号，获取最新干货！
 
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |快速排序| image:: http://image.python-online.cn/Fpj4DFN_YCtfmJwb_85QnsuIVLqk
 .. |\|冒泡排序\|| image:: http://image.python-online.cn/FvbrVECeq58hY8TptG4ilkL5Owcc
-.. |image2| image:: http://image.python-online.cn/FmZ_24t62gF32Dg3AgtZe-U5OuLY
-.. |image3| image:: http://image.python-online.cn/FmLrNuhfNcnYnLGoYJv-YbpBPV7n
-.. |image4| image:: http://image.python-online.cn/Fm44FD0KE9Y4RM7MF3knlGVCJba4
+.. |image3| image:: http://image.python-online.cn/FmZ_24t62gF32Dg3AgtZe-U5OuLY
+.. |image4| image:: http://image.python-online.cn/FmLrNuhfNcnYnLGoYJv-YbpBPV7n
+.. |image5| image:: http://image.python-online.cn/Fm44FD0KE9Y4RM7MF3knlGVCJba4
 .. |希尔排序| image:: http://image.python-online.cn/FqTP6YjNoM52fA-bA8pSPdbLgcZh
 .. |堆排序| image:: http://image.python-online.cn/FgRFOfPhrL0yeUuGzly5309APCnD
 .. |分而治之思想| image:: http://image.python-online.cn/FjQebwFfa2tDYS78_CUxy1rXmufj
-.. |image8| image:: http://image.python-online.cn/FjP-_a66OUAZtTpU1ytqZ66My80C
+.. |image9| image:: http://image.python-online.cn/FjP-_a66OUAZtTpU1ytqZ66My80C
 .. |合并两个有序数组| image:: http://image.python-online.cn/FnCZ-3Pj39T_ELROSsGRDN31yWtY
 .. |桶排序| image:: http://image.python-online.cn/FljGa3F3wM_YGACETeuRHCiERXKb
 .. |基数排序| image:: http://image.python-online.cn/FhwWVp4LVABIMPHqNo_cpjJA9kHV

@@ -1,6 +1,8 @@
 1.32 在 CentOS 7.2 上安装 Python3.7
 ===================================
 
+|image0|
+
 首先下载 python3.7的源码包，然后解压
 
 .. code:: shell
@@ -35,3 +37,6 @@ requests.get(“https://www.baidu.com”)
    :alt: 关注公众号，获取最新干货！
 
    关注公众号，获取最新干货！
+
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+

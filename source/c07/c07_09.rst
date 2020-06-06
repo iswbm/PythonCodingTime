@@ -1,6 +1,8 @@
 7.9 Ansible 入门指南使用手册
 ============================
 
+|image0|
+
 1. 有用的小技巧
 ---------------
 
@@ -239,3 +241,6 @@
 
 1. `Ansible
    配置全解 <https://docs.ansible.com/ansible/2.6/reference_appendices/config.html#ansible-configuration-settings>`__
+
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+

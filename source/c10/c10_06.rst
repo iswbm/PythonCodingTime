@@ -1,6 +1,8 @@
 10.6 通过比较，学习 TCP 与 UDP
 ==============================
 
+|image0|
+
 1. TCP 与 UDP 的区别
 --------------------
 
@@ -35,3 +37,6 @@ TCP 首部长度较长，且是可变长的，会有一定的开销。
 UDP 首部固定只有 8 个字节，开销较小。
 
 `面向报文（UDP）和面向字节流（TCP）的区别 <https://blog.csdn.net/ce123_zhouwei/article/details/8976006>`__
+
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+

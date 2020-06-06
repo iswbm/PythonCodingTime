@@ -1,6 +1,8 @@
 8.1 OpenStack 运维命令
 ======================
 
+|image0|
+
 --------------
 
 一、OpenStack
@@ -448,3 +450,6 @@ aggregate管理
    :alt: 关注公众号，获取最新干货！
 
    关注公众号，获取最新干货！
+
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+

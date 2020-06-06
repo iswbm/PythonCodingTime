@@ -1,6 +1,8 @@
 1.4 什么是猴子补丁?
 ===================
 
+|image0|
+
 也许你没用过猴子补丁，但是你必须知道，在Python/Ruby
 这类脚本语言中，有一种用法叫 Monkey Patch 。
 
@@ -62,7 +64,7 @@
 
 在openstack中的例子
 
-|image0|
+|image1|
 
 还有就是gevent中也有用到。
 
@@ -120,5 +122,6 @@
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190404215330.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190404215330.png
 

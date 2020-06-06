@@ -1,6 +1,8 @@
 1.33 如何调试已经运行中的程序
 =============================
 
+|image0|
+
 官方原始wiki：https://wiki.python.org/moin/DebuggingWithGdb
 
 在CentOS 下，安装包过程，官方给的不够详细。这里记录一下
@@ -48,3 +50,6 @@
    :alt: 关注公众号，获取最新干货！
 
    关注公众号，获取最新干货！
+
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+

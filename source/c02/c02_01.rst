@@ -1,6 +1,8 @@
 2.1 从性能角度初探并发编程
 ==========================
 
+|image0|
+
 --------------
 
 作为进阶系列的一个分支「\ ``并发编程``\ 」，我觉得这是每个程序员都应该会的。
@@ -39,11 +41,11 @@
 
 -  ``多线程``\ ，交替执行，另一种意义上的串行。
 
-.\ |image1|
+.\ |image2|
 
 -  ``多进程``\ ，并行执行，真正意义上的并发。
 
-.\ |image2|
+.\ |image3|
 
 2.1.2 单线程VS多线程VS多进程
 ----------------------------
@@ -52,7 +54,7 @@
 
 首先，我的实验环境配置如下
 
-|image3|
+|image4|
 
 **注意** 以下代码，若要理解，对小白有如下知识点要求:
 
@@ -230,7 +232,7 @@
 
 将结果汇总一下，制成表格。
 
-|image4|
+|image5|
 
 我们来分析下这个表格。
 
@@ -253,9 +255,10 @@
 
    关注公众号，获取最新干货！
 
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |课程大纲| image:: https://i.loli.net/2018/05/27/5b0a1523a0730.png
-.. |image1| image:: https://i.loli.net/2018/05/08/5af1781dbad7c.jpg
-.. |image2| image:: https://i.loli.net/2018/05/08/5af1781f05c29.jpg
-.. |image3| image:: http://image.python-online.cn/20190112205155.png
-.. |image4| image:: http://image.python-online.cn/20190112204930.png
+.. |image2| image:: https://i.loli.net/2018/05/08/5af1781dbad7c.jpg
+.. |image3| image:: https://i.loli.net/2018/05/08/5af1781f05c29.jpg
+.. |image4| image:: http://image.python-online.cn/20190112205155.png
+.. |image5| image:: http://image.python-online.cn/20190112204930.png
 

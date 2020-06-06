@@ -1,6 +1,8 @@
 4.18 详细的 Mac 使用指南
 ========================
 
+|image0|
+
 4.18.1 iTerm2
 -------------
 
@@ -101,7 +103,7 @@
 
 finder的显示
 
-|image0|
+|image1|
 
 `防止电脑温度过高 <https://mp.weixin.qq.com/s/qKQO616vxADFp1cVtA62Cw>`__
 
@@ -117,7 +119,7 @@ finder的显示
 
    3. 打开「活动监视器」（Alfred就可以打开），杀掉暂没用且cpu使用率最高的程序
 
-      |image1|
+      |image2|
 
    4. MacBook Pro CPU 温度在 5、60℃
       的时候，风扇会转到两三千转每分钟，只有 CPU 温度达到 70
@@ -332,6 +334,7 @@ finder的显示
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190810161513.png
-.. |image1| image:: http://image.python-online.cn/20190810162315.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190810161513.png
+.. |image2| image:: http://image.python-online.cn/20190810162315.png
 

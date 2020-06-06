@@ -1,6 +1,8 @@
 7.4 Docker：关于镜像
 ====================
 
+|image0|
+
 --------------
 
 一、镜像的基本内容
@@ -39,7 +41,7 @@ hub下载的image可以在这里搜索\ `dockerfile <https://hub.docker.com/expl
 
 而hello的内容，也很简单就是打印这样一段内容
 
-|image0|
+|image1|
 
 三、理解base镜像
 ----------------
@@ -51,7 +53,7 @@ hub下载的image可以在这里搜索\ `dockerfile <https://hub.docker.com/expl
 
 这个怎么理解呢？很重要。 比如说，我们下载的CentOS镜像
 
-|image1|
+|image2|
 
 你一定很纳闷。怎么才200M不到？我们平时下载的都几个G的。
 
@@ -77,7 +79,7 @@ hub下载的image可以在这里搜索\ `dockerfile <https://hub.docker.com/expl
    CMD ["/bin/bash"]
 
 对于容器来说，他底层使用的Host的kernel，所以假如我们的容器是CentOS的版本（内核是3.x），当我们把容器放到Ubuntu（内核是4.x）上使用是，他实际上使用的是Ubuntu的内核。
-|image2|
+|image3|
 
 容器只能使用 Host 的 kernel，并且不能修改。 所有容器都共用 host 的
 kernel，在容器中没办法对 kernel 升级。如果容器对 kernel
@@ -134,7 +136,7 @@ kernel，在容器中没办法对 kernel 升级。如果容器对 kernel
 
    $ docker build -t centos-tree .
 
-|image3| 第四步，在原始的Dockerfile上添加内容
+|image4| 第四步，在原始的Dockerfile上添加内容
 
 ::
 
@@ -148,7 +150,7 @@ kernel，在容器中没办法对 kernel 升级。如果容器对 kernel
 
    docker build -t centos-tree-testfile .
 
-|image4|
+|image5|
 
 注意点，镜像的缓存要求构建的命令顺序要严格一致，只要有一行命令不同，缓存就会失效，即使最后的容器内容完全一致，也无法使用缓存。
 比如，我们把第二次的Dockerfile改成如下，也是需要重新构建
@@ -165,13 +167,13 @@ kernel，在容器中没办法对 kernel 升级。如果容器对 kernel
 当我们build一个新的镜像，也许会有很多的很复杂的步骤，如果一次性build很有可能遇到各种意外情况，导致build失败，这时候，我们就需要进行调试，找出失败原因，修改Dockerfile，最终成功。
 
 那么如何调试？在我们build镜像的时候，每一步都会有一个镜像id，通过这个id我们就可以进入该层镜像。
-|image5| 先来看看第二步的结果，\ ``/``\ 目录下没有testfile文件
+|image6| 先来看看第二步的结果，\ ``/``\ 目录下没有testfile文件
 
 ::
 
    $ docker run -it e316b390cf2a
 
-再来看看第三步，\ ``/``\ 目录下已经有testfile文件 |image6|
+再来看看第三步，\ ``/``\ 目录下已经有testfile文件 |image7|
 
 友情提示
 
@@ -253,7 +255,7 @@ CMD：两个功能
        exec：CMD ["/bin/echo", "hello world"]
        bash：CMD echo "hello world"
 
-|image7|
+|image8|
 
 ::
 
@@ -261,7 +263,7 @@ CMD：两个功能
      - 若run时，指定了参数，CMD传递的参数同样被覆盖，而ENTRYPOINT永远不会被覆盖。
      - 注意：如果要传递参数，必须使用exec格式，诸如CMD [""]
 
-|image8|
+|image9|
 
 **推荐用法**
 
@@ -363,13 +365,14 @@ CMD：两个功能
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/17-12-23/49304868.jpg
-.. |image1| image:: http://image.python-online.cn/17-12-23/36753853.jpg
-.. |image2| image:: http://image.python-online.cn/17-12-23/70731434.jpg
-.. |image3| image:: http://image.python-online.cn/17-12-24/39646473.jpg
-.. |image4| image:: http://image.python-online.cn/17-12-24/85625734.jpg
-.. |image5| image:: http://image.python-online.cn/17-12-24/21127582.jpg
-.. |image6| image:: http://image.python-online.cn/17-12-24/42825662.jpg
-.. |image7| image:: http://image.python-online.cn/17-12-24/80077038.jpg
-.. |image8| image:: http://image.python-online.cn/17-12-24/98318652.jpg
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/17-12-23/49304868.jpg
+.. |image2| image:: http://image.python-online.cn/17-12-23/36753853.jpg
+.. |image3| image:: http://image.python-online.cn/17-12-23/70731434.jpg
+.. |image4| image:: http://image.python-online.cn/17-12-24/39646473.jpg
+.. |image5| image:: http://image.python-online.cn/17-12-24/85625734.jpg
+.. |image6| image:: http://image.python-online.cn/17-12-24/21127582.jpg
+.. |image7| image:: http://image.python-online.cn/17-12-24/42825662.jpg
+.. |image8| image:: http://image.python-online.cn/17-12-24/80077038.jpg
+.. |image9| image:: http://image.python-online.cn/17-12-24/98318652.jpg
 

@@ -1,6 +1,8 @@
 7.10 Ansible API 最全使用文档（中文）
 =====================================
 
+|image0|
+
 大家都知道 Ansible 是一个轻量级的部署工具，这里的轻量体现在哪里呢？
 
 master 与
@@ -14,7 +16,7 @@ master 与
 
 无意中使用 pip search 进行搜索，还真的有 ansible-api
 
-|image0|
+|image1|
 
 这是 2018 年10月份才开始的项目，目前来说成熟度还不够。
 
@@ -128,7 +130,7 @@ ansible-api 会调用 ansible 库的命令，这个过程不能指定 ansible.cf
 然后由于原生的 ansible-api
 的bug，需要修改代码，在如下函数位置（\ ``/usr/local/python3/lib/python3.7/site-packages/ansible_api/callback.py``\ ）添加一个参数
 
-|image1|
+|image2|
 
 通过执行命令，即可开启 ansible server
 
@@ -173,14 +175,14 @@ ansible-api 会调用 ansible 库的命令，这个过程不能指定 ansible.cf
 
 发送了请求后，返回的结果如下
 
-|image2|
+|image3|
 
 rc 为0，表示所有节点都没有出现 fatal 致命错误（有设置 ignore_errors
 的错误也会返回0）.
 
 rc 为非0，表示有 fatal 致命错误，说明有部分节点部署/升级失败。
 
-|image3|
+|image4|
 
 --------------
 
@@ -189,8 +191,9 @@ rc 为非0，表示有 fatal 致命错误，说明有部分节点部署/升级�
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190716111523.png
-.. |image1| image:: http://image.python-online.cn/20190716112113.png
-.. |image2| image:: http://image.python-online.cn/20190716112824.png
-.. |image3| image:: http://image.python-online.cn/20190716112838.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190716111523.png
+.. |image2| image:: http://image.python-online.cn/20190716112113.png
+.. |image3| image:: http://image.python-online.cn/20190716112824.png
+.. |image4| image:: http://image.python-online.cn/20190716112838.png
 

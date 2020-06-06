@@ -1,6 +1,8 @@
 7.11 K8S：基础入门
 ==================
 
+|image0|
+
 一些基础命令
 
 ::
@@ -61,7 +63,7 @@
 
 K8s 角色详解
 
-|image0|
+|image1|
 
 其中 Controller 还分为几种：
 
@@ -80,5 +82,6 @@ K8s 角色详解
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190907162015.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190907162015.png
 

@@ -1,6 +1,8 @@
 9.1 情人节来了，教你使用 Python 来表白
 ======================================
 
+|image0|
+
 **作者**\ ：@明哥 **公众号**\ ：Python编程时光
 
 --------------
@@ -47,11 +49,11 @@
 
 这里我以一张高圆圆的图来做一下演示，原图是这样的（分辨率是：2000*1328）。
 
-|image0|
+|image1|
 
 使用我写好的脚本运行后，就生成了这样一张图，请你点击，放大再放大。（惊喜？
 
-|image1|
+|image2|
 
 然后将这张图片发给你的女神，具体话术你自己想咯。
 
@@ -75,7 +77,7 @@
 用 Excel 画了个图，每一方格代表一个像素，其中若我的字体的大小设置
 5（非字号5，而是每个字占用5个像素），效果大概就是如下这样子。
 
-|image2|
+|image3|
 
 我只要每个像素取出一个像素值，并使用这个像素做为该字的颜色即可，在像素量够多的情况下，从远处看，是能看到我们原来图像的轮廓的。
 
@@ -155,7 +157,8 @@
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20200214104413.png
-.. |image1| image:: http://image.python-online.cn/save.jpeg
-.. |image2| image:: http://image.python-online.cn/20200214104646.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20200214104413.png
+.. |image2| image:: http://image.python-online.cn/save.jpeg
+.. |image3| image:: http://image.python-online.cn/20200214104646.png
 

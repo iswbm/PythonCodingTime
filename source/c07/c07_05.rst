@@ -1,6 +1,8 @@
 7.5 Docker：网络通信
 ====================
 
+|image0|
+
 --------------
 
 7.5.1 三种local网络
@@ -141,7 +143,7 @@ key-vlaue 软件，我们这里使用 Consul。
    # 这里的 eth1 是可以和 192.168.2.55 通信的网卡
    --cluster-store=consul://192.168.2.55:8500 --cluster-advertise=eth1:2376
 
-|image0|
+|image1|
 
 然后重启
 
@@ -150,7 +152,7 @@ key-vlaue 软件，我们这里使用 Consul。
    systemctl daemon-reload               # 刷新配置，不然修改的配置不会生效
    systemctl restart docker.service
 
-在浏览器上输入地址 |image1|
+在浏览器上输入地址 |image2|
 
 至此，\ ``Consul`` 安装成功。
 
@@ -177,7 +179,7 @@ Consul 进行同步了。
    # bm-docker-02
    docker run -itd --name bbox2 --network ov_net1 busybox
 
-试着ping一下在两台 host 上的网络是否可通 |image2|
+试着ping一下在两台 host 上的网络是否可通 |image3|
 
 查看一下ip网卡信息。
 
@@ -185,7 +187,7 @@ Consul 进行同步了。
 
    docker exec bbox2 ip r
 
-|image3|
+|image4|
 
 会发现使用 ``overlay`` 网络会有两张网卡。这是为什么呢？
 
@@ -322,8 +324,9 @@ Socket发些“奇怪”的数据。
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/18-1-28/92519416.jpg
-.. |image1| image:: http://image.python-online.cn/18-1-28/37395940.jpg
-.. |image2| image:: https://i.loli.net/2018/01/28/5a6de8702428c.png
-.. |image3| image:: https://i.loli.net/2018/01/28/5a6de73776390.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/18-1-28/92519416.jpg
+.. |image2| image:: http://image.python-online.cn/18-1-28/37395940.jpg
+.. |image3| image:: https://i.loli.net/2018/01/28/5a6de8702428c.png
+.. |image4| image:: https://i.loli.net/2018/01/28/5a6de73776390.png
 

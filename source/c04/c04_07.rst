@@ -1,6 +1,8 @@
 4.7 Hexo 搭建博客教程
 =====================
 
+|image0|
+
 --------------
 
 现在越来越多的人喜欢利用Github搭建静态网站，原因不外乎简单省钱。本人也利用hexo+github搭建了本博客，用于分享一些心得。在此过程中，折腾博客的各种配置以及功能占具了我一部分时间，在此详细记录下我是如何利用hexo+github搭建静态博客以及一些配置相关问题，以免过后遗忘，且当备份之用。
@@ -16,7 +18,7 @@
 -  下载安装hexo。方法：打开终端
    运行\ ``npm install -g hexo``\ （要翻墙）
 
-|image0|
+|image1|
 
 1.2 初始化项目
 ~~~~~~~~~~~~~~
@@ -24,7 +26,7 @@
 -  新创建一个目录，比如叫做 ``iswbm-blog``
 -  使用终端进入该文件夹内，执行\ ``hexo init`` （初始化项目）
 
-|image1|
+|image2|
 
 -  运行你的博客项目（用于调试），查看生成的文章是否符合自己的预期。
 
@@ -47,7 +49,7 @@
 -  在Github上创建名字为XXX.github.io的项目，XXX为自己的github用户名。然后
    clone 到你的本地电脑上。
 
-   |image2|
+   |image3|
 
 -  打开该文件夹内的\ ``_config.yml``\ 配置文件，将其中的type设置为git，其他配置如下
 
@@ -76,7 +78,7 @@
 
 在第一次部署后，请到 github 后台，补充你的 网站信息，否则无法访问。
 
-|image3|
+|image4|
 
 一切完成之后，你就可以通过上面的网址来访问我的博客了。
 
@@ -88,9 +90,9 @@
 我们可以自己去阿里云购买一个域名（我的是 iswbm.com），然后将其 CNAME
 到你的博客地址上。
 
--  去阿里云 域名云解析 |image4|
+-  去阿里云 域名云解析 |image5|
 
--  然后到对应的GitHub仓库，绑定我的个性域名 |image5|
+-  然后到对应的GitHub仓库，绑定我的个性域名 |image6|
 
 -  然后再在你本地的项目里的 ``source`` 目录下新建
    ``CNAME``\ 文件，内容就是我的域名
@@ -143,7 +145,7 @@
    Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.
    {% endblockquote %}
 
-效果如下 |image6|
+效果如下 |image7|
 
 3.2 一键生成md头格式
 ~~~~~~~~~~~~~~~~~~~~
@@ -407,7 +409,7 @@ next主题集成leanCloud，我只需稍微配置下(在主题配置文件)
    </div>
 
 接着打开\ ``themes/next/layout/_macro/post.swig``\ 文件，添加如下下代码，注意位置
-|image7| 代码如下：
+|image8| 代码如下：
 
 ::
 
@@ -550,7 +552,7 @@ Next 主题的配置文件有一个原生
 bug，就是菜单项后面会多一个空格，这会导致你在页面访问
 about，tags等页面时，会报 404，原因是地址后面多了个空格。
 
-|image8|
+|image9|
 
 五、其他实用功能
 ----------------
@@ -756,7 +758,7 @@ about，tags等页面时，会报 404，原因是地址后面多了个空格。
 在web界面新建分支，命名为\ ``hexo``
 
 在web界面设置 ``hexo`` 为默认分支，因为我们只会在这个分支上进行操作。
-|image9|
+|image10|
 
 6.2 本地PC操作
 ~~~~~~~~~~~~~~
@@ -785,7 +787,7 @@ clone项目到本地：
    git push origin hexo
 
 将博客原始文件添加进来，但是有一些是没必要放的，具体要放哪些文件，看图片。
-|image10|
+|image11|
 
 ::
 
@@ -894,15 +896,16 @@ bash窗口，不然会提示找不到npm命令）
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/image-20200321163152876.png
-.. |image1| image:: http://image.python-online.cn/image-20200321163746032.png
-.. |image2| image:: http://image.python-online.cn/image-20200321165634287.png
-.. |image3| image:: http://image.python-online.cn/image-20200321171008622.png
-.. |image4| image:: http://image.python-online.cn/image-20200321171939919.png
-.. |image5| image:: http://image.python-online.cn/image-20200321171821683.png
-.. |image6| image:: http://image.python-online.cn/17-9-10/85269241.jpg
-.. |image7| image:: http://image.python-online.cn/17-9-9/63041495.jpg
-.. |image8| image:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200321210014963.png
-.. |image9| image:: http://image.python-online.cn/image-20200321193444320.png
-.. |image10| image:: https://i.loli.net/2018/04/15/5ad31888232e9.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/image-20200321163152876.png
+.. |image2| image:: http://image.python-online.cn/image-20200321163746032.png
+.. |image3| image:: http://image.python-online.cn/image-20200321165634287.png
+.. |image4| image:: http://image.python-online.cn/image-20200321171008622.png
+.. |image5| image:: http://image.python-online.cn/image-20200321171939919.png
+.. |image6| image:: http://image.python-online.cn/image-20200321171821683.png
+.. |image7| image:: http://image.python-online.cn/17-9-10/85269241.jpg
+.. |image8| image:: http://image.python-online.cn/17-9-9/63041495.jpg
+.. |image9| image:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200321210014963.png
+.. |image10| image:: http://image.python-online.cn/image-20200321193444320.png
+.. |image11| image:: https://i.loli.net/2018/04/15/5ad31888232e9.png
 

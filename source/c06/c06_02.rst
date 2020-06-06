@@ -1,6 +1,8 @@
 6.2 详解六种可视化图表
 ======================
 
+|image0|
+
 --------------
 
 可视化图表，有相当多种，但常见的也就下面几种，其他比较复杂一点，大都也是基于如下几种进行组合，变换出来的。对于初学者来说，很容易被这官网上众多的图表类型给吓着了，由于种类太多，几种图表的绘制方法很有可能会混淆起来。
@@ -36,7 +38,7 @@
 
 show image
 
-|image0|
+|image1|
 
 02. 散点图
 ----------
@@ -56,7 +58,7 @@ show image
    plt.plot(x, x, 'r--', x, x**2, 'bs', x, x**3, 'g^')
    plt.show()
 
-show image |image1|
+show image |image2|
 
 03. 直方图
 ----------
@@ -98,7 +100,7 @@ show image |image1|
 
 show image
 
-|image2|
+|image3|
 
 04. 柱状图
 ----------
@@ -134,7 +136,7 @@ show image
 
 show image
 
-|image3|
+|image4|
 
 4.2 叠加柱状图
 ~~~~~~~~~~~~~~
@@ -161,7 +163,7 @@ show image
    plt.grid(True)
    plt.show()
 
-show image |image4|
+show image |image5|
 
 05. 饼图
 --------
@@ -187,7 +189,7 @@ show image |image4|
 
    plt.show()
 
-show image |image5|
+show image |image6|
 
 5.2 嵌套饼图
 ~~~~~~~~~~~~
@@ -221,7 +223,7 @@ show image |image5|
    plt.axis('equal') 
    plt.show()
 
-show image |image6|
+show image |image7|
 
 5.3 极轴饼图
 ~~~~~~~~~~~~
@@ -253,7 +255,7 @@ show image |image6|
 
    plt.show()
 
-show image |image7|
+show image |image8|
 
 06. 三维图
 ----------
@@ -281,7 +283,7 @@ show image |image7|
    ax.set_xlabel('X')
    plt.show()
 
-show image |image8|
+show image |image9|
 
 6.2 绘制三维平面图
 ~~~~~~~~~~~~~~~~~~
@@ -305,7 +307,7 @@ show image |image8|
 
    plt.show()
 
-show image |image9|
+show image |image10|
 
 --------------
 
@@ -314,14 +316,15 @@ show image |image9|
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190511164738.png
-.. |image1| image:: http://image.python-online.cn/20190511164753.png
-.. |image2| image:: http://image.python-online.cn/20190511164802.png
-.. |image3| image:: http://image.python-online.cn/20190511164814.png
-.. |image4| image:: http://image.python-online.cn/20190511164825.png
-.. |image5| image:: http://image.python-online.cn/20190511164835.png
-.. |image6| image:: http://image.python-online.cn/20190511164843.png
-.. |image7| image:: http://image.python-online.cn/20190511164852.png
-.. |image8| image:: http://image.python-online.cn/20190511164900.png
-.. |image9| image:: http://image.python-online.cn/20190511164915.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190511164738.png
+.. |image2| image:: http://image.python-online.cn/20190511164753.png
+.. |image3| image:: http://image.python-online.cn/20190511164802.png
+.. |image4| image:: http://image.python-online.cn/20190511164814.png
+.. |image5| image:: http://image.python-online.cn/20190511164825.png
+.. |image6| image:: http://image.python-online.cn/20190511164835.png
+.. |image7| image:: http://image.python-online.cn/20190511164843.png
+.. |image8| image:: http://image.python-online.cn/20190511164852.png
+.. |image9| image:: http://image.python-online.cn/20190511164900.png
+.. |image10| image:: http://image.python-online.cn/20190511164915.png
 

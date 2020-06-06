@@ -1,6 +1,8 @@
 6.6 自动生成图像视频
 ====================
 
+|image0|
+
 6.6.1 准备工作
 --------------
 
@@ -14,7 +16,7 @@
 ，我需要将其安装到我的环境中。首先打开我们的命令行（注意不是一般的CMD），使用windows
 的查找入口：
 
-|image0|
+|image1|
 
 然后执行如下命令安装
 
@@ -142,5 +144,6 @@ Jupyter NoteBook 里观察整个变化的过程。
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190511165315.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190511165315.png
 

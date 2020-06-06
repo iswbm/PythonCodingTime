@@ -1,6 +1,8 @@
 8.4 云计算与虚拟化入门通识
 ==========================
 
+|image0|
+
 经常有朋友问我，你是做什么的呢？
 
 我回答说，云计算。
@@ -11,7 +13,7 @@
 
 为了让你多了解一些云计算的内容，我想着写这么一篇文章，介绍一下我从事的领域，同时也对云计算和虚拟化这块入门级知识做一个梳理，如果刚好你也想进入这个领域，这份入门通识指南，应该挺适合你的。
 
-|image0|
+|image1|
 
 8.4.1 云计算是什么？
 --------------------
@@ -25,7 +27,7 @@ computing**\ ），是一种基于\ `互联网 <https://zh.wikipedia.org/wiki/�
 
 云，就是将这些零散实体资源变成一个巨大无比的资源池子，有了这个池子，做为个人用户，你不再需要自己你买一个电脑放在家里，做为小型公司，你不需要自己整一个机房，花很多的人力和设备成本去运营这些基础设施。一旦你需要，你就向池子拥有者申请即可。这极大的提高了资源的利用率，以及分配的灵活性。
 
-|image1|
+|image2|
 
 还有人说，云就像是天上的云一样，聚焦的水汽多了就会下雨，落到地面的雨水又会蒸发到天上，继续等待下一次下雨。云计算里的云，正如大自然里的云一样，可以实现资源的循环利用。你在公有云提供商那里，购买了一年的云主机，一年后资源被回收，可以再分配给其他人使用。
 
@@ -130,7 +132,7 @@ kernel的一个模块。可以用命令modprobe去加载KVM模块。加载了模
 说到了QEMU，其实它也是一个虚拟化软件。作用是什么呢，它相当于一个路由器，当Guest
 OS的内核想要操作物理硬件时，必须先经由Qemu转发，将操作指令转给真实的硬件。由于所有的指令都要从Qemu里面过一手，因而性能比较差。
 
-|image2|
+|image3|
 
 **总结**
 
@@ -156,7 +158,7 @@ OS的内核想要操作物理硬件时，必须先经由Qemu转发，将操作�
 目前，libvirt
 已经成为使用最为广泛的对各种虚拟机进行管理的工具和应用程序接口（API），而且一些常用的虚拟机管理工具（如virsh、virt-install、virt-manager等）和云计算框架平台（如OpenStack、OpenNebula、Eucalyptus等）都在底层使用libvirt的应用程序接口。
 
-|image3|
+|image4|
 
 8.4.5 虚拟化分类
 ----------------
@@ -199,7 +201,7 @@ OS能够调用接口访问虚拟硬件。而条件是，Guest OS
 根据虚拟化层是直接位于硬件之上还是位于操作系统之上，可以分为 Type 1
 虚拟化和 Type 2 虚拟化。
 
-|image4|
+|image5|
 
 Type 1：Xen，VMWare ESX
 
@@ -253,7 +255,7 @@ KVM这种流行的虚拟化技术里，既有软件虚拟化，也有硬件虚�
 -  libguestfs-tools：一组 Linux 下的 C 语言的 API
    ，用来访问/修改虚拟机的磁盘映像文件。
 
-|image5|
+|image6|
 
 8.4.7 创建虚拟机
 ----------------
@@ -488,10 +490,11 @@ OpenStck，你可能不太明白它是做什么的。这里引用我昨天看到
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190714161353.png
-.. |image1| image:: http://image.python-online.cn/20190716004341.png
-.. |image2| image:: http://image.python-online.cn/FjlPaQLTiYCde92WhurWsRx6z8CK
-.. |image3| image:: http://image.python-online.cn/20190716005951.png
-.. |image4| image:: http://image.python-online.cn/20190714141644.png
-.. |image5| image:: https://i.loli.net/2019/02/25/5c73e6160764a.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190714161353.png
+.. |image2| image:: http://image.python-online.cn/20190716004341.png
+.. |image3| image:: http://image.python-online.cn/FjlPaQLTiYCde92WhurWsRx6z8CK
+.. |image4| image:: http://image.python-online.cn/20190716005951.png
+.. |image5| image:: http://image.python-online.cn/20190714141644.png
+.. |image6| image:: https://i.loli.net/2019/02/25/5c73e6160764a.png
 

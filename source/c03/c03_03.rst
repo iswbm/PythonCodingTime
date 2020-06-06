@@ -1,6 +1,8 @@
 3.3 Socket编程实现在线聊天
 ==========================
 
+|image0|
+
 --------------
 
 3.3.1 什么是socket？
@@ -104,7 +106,7 @@
 3.3.4 socket工作流程
 --------------------
 
-|image0|
+|image1|
 
 3.3.5 socket公共函数汇总
 ------------------------
@@ -288,7 +290,7 @@
        cs = ChatServer(port=9999)
        cs.main()
 
-将服务端程序跑起来，然后运行客户端，看下效果。 |image1|
+将服务端程序跑起来，然后运行客户端，看下效果。 |image2|
 
 --------------
 
@@ -297,6 +299,7 @@
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: https://i.loli.net/2018/04/30/5ae6c303c870c.png
-.. |image1| image:: https://i.loli.net/2018/04/30/5ae6c31b2d1c8.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: https://i.loli.net/2018/04/30/5ae6c303c870c.png
+.. |image2| image:: https://i.loli.net/2018/04/30/5ae6c31b2d1c8.png
 

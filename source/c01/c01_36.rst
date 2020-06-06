@@ -1,12 +1,14 @@
 1.36 每日一库：pretty_errors 解决bug 洁癖
 =========================================
 
+|image0|
+
 当我们写的一个脚本或程序发生各种不可预知的异常时，如果我们没有进行捕获处理的时候，通常都会致使程序崩溃退出，并且会在终端打印出一堆
 **密密麻麻** 的 traceback 堆栈信息来告诉我们，是哪个地方出了问题。
 
 就像这样子，天呐，密集恐惧症要犯了都
 
-|image0|
+|image1|
 
 上面这段 traceback
 
@@ -45,18 +47,18 @@
 
 随便写一个没有使用 pretty-errors ，并且报错了的程序，是这样子的。
 
-|image1|
+|image2|
 
 而使用了 pretty_errors 后，报错信息被美化成这样了。
 
-|image2|
+|image3|
 
 是不是感觉清楚了不少，那种密密麻麻带来的焦虑感是不是都消失了呢？
 
 当然这段代码少，你可能还没感受到，那就来看下 该项目在
 Github上的一张效果对比图吧
 
-|image3|
+|image4|
 
 3. 配置全局可用
 ---------------
@@ -79,23 +81,23 @@ traceback 输出都自动美化。
 
    $ python3 -m pretty_errors
 
-|image4|
+|image5|
 
 配置完成后，你再运行任何脚本，traceback 都会自动美化了。
 
 不仅是在我的 iTerm 终端下
 
-|image5|
+|image6|
 
 在 PyCharm 中也会
 
-|image6|
+|image7|
 
 唯一的缺点就是，原先在 PyCharm 中的 traceback 可以直接点击 ``文件路径``
 直接跳转到对应错误文件代码行，而你如果是在 VSCode 可以使用
 下面自定义配置的方案解决这个问题（下面会讲到，参数是：\ ``display_link``\ ）。
 
-|image7|
+|image8|
 
 因此，有些情况下，你并不想设置 ``pretty_errors`` 全局可用。
 
@@ -103,7 +105,7 @@ traceback 输出都自动美化。
 
 只需要再次输出 ``python -m pretty_errors``\ ，输出入 ``C`` 即可清除。
 
-|image8|
+|image9|
 
 4. 单文件中使用
 ---------------
@@ -177,7 +179,7 @@ traceback 输出都自动美化。
 在你像上面这样使用 ``pretty_errrs.configure``
 进行配置时，抛出的的异常信息就变成这样了。
 
-|image9|
+|image10|
 
 当然了，\ ``pretty_errors.configure()``
 还可以接收很多的参数，你可以根据你自己的需要进行配置。
@@ -210,7 +212,7 @@ traceback 输出都自动美化。
 
 其中，\ ``_BACKGROUND`` 用于设置背景色，举个例子如下。
 
-|image10|
+|image11|
 
 5.2 设置显示内容
 ~~~~~~~~~~~~~~~~
@@ -271,15 +273,16 @@ PEP8
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/image-20200307210853246.png
-.. |image1| image:: http://image.python-online.cn/image-20200307212823345.png
-.. |image2| image:: http://image.python-online.cn/image-20200307213534278.png
-.. |image3| image:: https://warehouse-camo.cmh1.psfhosted.org/31399c5a034c3989b9e99b35249e8f2f0d40e102/68747470733a2f2f692e696d6775722e636f6d2f306a7045716f622e706e67
-.. |image4| image:: http://image.python-online.cn/image-20200307214742135.png
-.. |image5| image:: http://image.python-online.cn/image-20200307213534278.png
-.. |image6| image:: http://image.python-online.cn/image-20200307215530270.png
-.. |image7| image:: http://image.python-online.cn/image-20200307215834623.png
-.. |image8| image:: http://image.python-online.cn/image-20200307214600749.png
-.. |image9| image:: http://image.python-online.cn/image-20200308121949011.png
-.. |image10| image:: http://image.python-online.cn/image-20200308125431779.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/image-20200307210853246.png
+.. |image2| image:: http://image.python-online.cn/image-20200307212823345.png
+.. |image3| image:: http://image.python-online.cn/image-20200307213534278.png
+.. |image4| image:: https://warehouse-camo.cmh1.psfhosted.org/31399c5a034c3989b9e99b35249e8f2f0d40e102/68747470733a2f2f692e696d6775722e636f6d2f306a7045716f622e706e67
+.. |image5| image:: http://image.python-online.cn/image-20200307214742135.png
+.. |image6| image:: http://image.python-online.cn/image-20200307213534278.png
+.. |image7| image:: http://image.python-online.cn/image-20200307215530270.png
+.. |image8| image:: http://image.python-online.cn/image-20200307215834623.png
+.. |image9| image:: http://image.python-online.cn/image-20200307214600749.png
+.. |image10| image:: http://image.python-online.cn/image-20200308121949011.png
+.. |image11| image:: http://image.python-online.cn/image-20200308125431779.png
 

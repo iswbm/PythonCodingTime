@@ -1,6 +1,8 @@
 9.3 明哥的在线工具集
 ====================
 
+|image0|
+
 文档
 ----
 
@@ -40,3 +42,6 @@ ai-art（自拍照生成为名画艺术品）：https://ai-art.tokyo/en
 ------
 
 码力全开：https://www.maliquankai.com/
+
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+

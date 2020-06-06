@@ -1,6 +1,8 @@
 1.1 13条Python2.x和3.x的区别？
 ==============================
 
+|image0|
+
 --------------
 
 从今天开始，小明将和你一起过一下，那些在面试「Python开发」岗位时面试官喜欢问的问题。内容基础，但是你不一定会噢。
@@ -23,10 +25,10 @@
 那当然是官网啦：https://www.python.org/downloads/
 
 这个地址里，有所有Python历史版本(2.0+)。 点击左边，Release Version栏目
-对应的版本。 |image0|
+对应的版本。 |image1|
 
 进入对应详情页后，找到如图 ``what's new in Python xx``
-就可以查看此版本的新特性。 |image1|
+就可以查看此版本的新特性。 |image2|
 
 网页是全英文的，需要你有一定的英文阅读能力。快去感觉一下吧。
 
@@ -319,6 +321,7 @@ Python3.x 没有经典类，只有新式类，而且有三种写法
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: http://image.python-online.cn/20190511165542.png
-.. |image1| image:: http://image.python-online.cn/20190511165551.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.python-online.cn/20190511165542.png
+.. |image2| image:: http://image.python-online.cn/20190511165551.png
 

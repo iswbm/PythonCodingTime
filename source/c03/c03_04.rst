@@ -1,6 +1,8 @@
 3.4 Django+Uwsgi部署网站
 ========================
 
+|image0|
+
 本文是先前自己使用django写过一个个人博客时的部署过程记录。
 
 涉及的工具有：Django+Nginx+Uwsgi+Supervisor
@@ -27,7 +29,7 @@
    sudo apt-get update
    sudo apt-get upgrade
 
-更新时，会让你选择是否安装新版软件，输入Y安装 |image0|
+更新时，会让你选择是否安装新版软件，输入Y安装 |image1|
 
 更新安装完成后，系统就会给我们预装了Python2.7.12和Python3.5.2
 
@@ -149,17 +151,17 @@
 
 **外网连接** 使用navicat进行测试连接
 
-|image1|
+|image2|
 
 连接上后就可以新建数据库
 
-|image2|
+|image3|
 
 如果有备份数据要还原，可以使用数据传输。
 数据传输功能，不能确保一次就能将数据传输完整，要多传输几次。
 实在无法完整传输，就要导出导入的方式。
 
-|image3|
+|image4|
 
 三、项目上传
 ------------
@@ -391,7 +393,7 @@
 
    vim /etc/supervisord.conf
 
-直接跳到最后，填入红框内容 |image4|
+直接跳到最后，填入红框内容 |image5|
 
 5.3 启动项目
 ~~~~~~~~~~~~
@@ -406,7 +408,7 @@
    myblog: stopped
    myblog: updated process group
 
-通过\ ``supervisorctl status``\ 查看启动状态 |image5|
+通过\ ``supervisorctl status``\ 查看启动状态 |image6|
 
 5.4 supervisor其他命令
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -515,10 +517,11 @@
 
    关注公众号，获取最新干货！
 
-.. |image0| image:: https://i.loli.net/2017/08/20/599982f513b7e.png
-.. |image1| image:: https://i.loli.net/2017/08/20/59998b33265d9.png
-.. |image2| image:: https://i.loli.net/2017/08/20/59998b91d16dd.png
-.. |image3| image:: https://i.loli.net/2017/08/20/59998bdf36c79.png
-.. |image4| image:: https://i.loli.net/2017/08/25/59a0236def497.png
-.. |image5| image:: https://i.loli.net/2017/08/25/59a0244d239f0.png
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: https://i.loli.net/2017/08/20/599982f513b7e.png
+.. |image2| image:: https://i.loli.net/2017/08/20/59998b33265d9.png
+.. |image3| image:: https://i.loli.net/2017/08/20/59998b91d16dd.png
+.. |image4| image:: https://i.loli.net/2017/08/20/59998bdf36c79.png
+.. |image5| image:: https://i.loli.net/2017/08/25/59a0236def497.png
+.. |image6| image:: https://i.loli.net/2017/08/25/59a0244d239f0.png
 
