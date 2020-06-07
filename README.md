@@ -1,4 +1,4 @@
-![](http://image.iswbm.com/20200607133552.png)
+![](http://image.iswbm.com/image-20200607140915244.png)
 
 <p align="center">
     <img src='https://img.shields.io/badge/language-Python-blue.svg' alt="Build Status">
@@ -7,6 +7,7 @@
     <a href='https://juejin.im/user/5b08d982f265da0db3502c55'><img src='https://img.shields.io/badge/掘金-2481-blue'></a>
     <a href='http://image.iswbm.com/20200607114246.png'><img src='http://img.shields.io/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-30k+-brightgreen'></a>
 </p>
+
 
 ## [项目主页](http://python.iswbm.com/)
 
@@ -20,16 +21,10 @@
 
 
 
-## 我的微信
+## 欢迎交流
 
-对文章有什么疑问，对项目有什么建议，可以加这个微信与我交流。
+对文章有什么疑问，对项目有什么建议，可以添加微信与我交流，同时欢迎关注我的个人微信公众号。
 
-![](http://image.iswbm.com/20200607134035.png)
-
-## 欢迎关注
-
-本项目的文章首发于我的个人微信公众号 ，扫描下方二维码，可以关注。
-
-![](http://image.iswbm.com/20200607133315.png)
+![](http://image.iswbm.com/20200607140327.png)
 
 
