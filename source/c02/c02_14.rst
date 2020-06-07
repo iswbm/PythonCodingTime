@@ -193,10 +193,10 @@ https://zhuanlan.zhihu.com/p/34150765
 
 https://juejin.im/post/5b129a1be51d45068a6c91d4#comment
 
-.. figure:: http://image.python-online.cn/image-20200320125724880.png
-   :alt: 关注公众号，获取最新干货！
+.. figure:: http://image.iswbm.com/20200607174235.png
+   :alt:
 
-   关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/20200506080445.png

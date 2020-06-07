@@ -84,10 +84,10 @@ ConfigDrive 是一个 iso9660 格式的文件，只读。
    # 硬重启，重新生成 xml，如果有必要的话
    $ nova reboot --hard <instance_uuid>
 
-.. figure:: http://image.python-online.cn/image-20200320125724880.png
-   :alt: 关注公众号，获取最新干货！
+.. figure:: http://image.iswbm.com/20200607174235.png
+   :alt:
 
-   关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190530175817.png

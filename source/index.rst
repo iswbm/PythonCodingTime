@@ -22,4 +22,4 @@ Contents:
 
 --------------
 
-.. figure:: http://image.python-online.cn/image-20200320125724880.png
+.. figure:: http://image.iswbm.com/20200607174235.png

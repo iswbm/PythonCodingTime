@@ -118,9 +118,9 @@
 --------------
 
 .. figure:: http://image.python-online.cn/20191117142849.png
-   :alt: 关注公众号，获取最新干货！
+   :alt:
 
-   关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190404215330.png

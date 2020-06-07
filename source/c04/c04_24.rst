@@ -186,10 +186,10 @@ Python 如何确定应该从哪个路径进行导入呢？
 
 |image4|
 
-.. figure:: http://image.python-online.cn/image-20200320125724880.png
-   :alt: 关注公众号，获取最新干货！
+.. figure:: http://image.iswbm.com/20200607174235.png
+   :alt:
 
-   关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/20200427180207.png

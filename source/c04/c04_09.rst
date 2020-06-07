@@ -712,10 +712,10 @@ SO，如果是提交的是英文的话，不会有冲突。因为都是一个字
 
 --------------
 
-.. figure:: http://image.python-online.cn/image-20200320125724880.png
-   :alt: 关注公众号，获取最新干货！
+.. figure:: http://image.iswbm.com/20200607174235.png
+   :alt:
 
-   关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: https://i.loli.net/2017/08/25/599feabef31a6.png

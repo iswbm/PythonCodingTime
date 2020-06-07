@@ -31,6 +31,6 @@
 
 ------------------------------
 
-.. figure:: http://image.python-online.cn/image-20200320125724880.png
+.. figure:: http://image.iswbm.com/20200607174235.png
 
 .. _博客构建教程: http://python-online.cn/zh_CN/latest/c04/c04_03.html

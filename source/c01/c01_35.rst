@@ -395,10 +395,10 @@ Windows，这里就有一件好事，一件坏事了，。
 -  https://www.liujiangblog.com/blog/15/
 -  http://docs.paramiko.org/en/stable/
 
-.. figure:: http://image.python-online.cn/image-20200320125724880.png
-   :alt: 关注公众号，获取最新干货！
+.. figure:: http://image.iswbm.com/20200607174235.png
+   :alt:
 
-   关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20200228085749.png

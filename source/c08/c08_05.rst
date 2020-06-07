@@ -732,10 +732,10 @@ stevedore 这个模块去动态加载，然后还会校验这些资源是否都�
 
 --------------
 
-.. figure:: http://image.python-online.cn/image-20200320125724880.png
-   :alt: 关注公众号，获取最新干货！
+.. figure:: http://image.iswbm.com/20200607174235.png
+   :alt:
 
-   关注公众号，获取最新干货！
+
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190526144846.png
