@@ -168,10 +168,7 @@
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image6|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190511162815.png
@@ -179,4 +176,5 @@
 .. |image3| image:: http://image.python-online.cn/20190511162607.png
 .. |image4| image:: http://image.python-online.cn/20190511162716.png
 .. |image5| image:: http://image.python-online.cn/20190511162730.png
+.. |image6| image:: http://image.iswbm.com/20200607174235.png
 

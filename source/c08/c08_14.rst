@@ -325,10 +325,7 @@ centos 6.x 配置网络是在 on_first_boot 函数里，这是 local
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image15|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190716175250.png
@@ -345,4 +342,5 @@ centos 6.x 配置网络是在 on_first_boot 函数里，这是 local
 .. |image12| image:: http://image.python-online.cn/20190829111917.png
 .. |image13| image:: http://image.python-online.cn/20190829161243.png
 .. |image14| image:: http://image.python-online.cn/20190926171038.png
+.. |image15| image:: http://image.iswbm.com/20200607174235.png
 

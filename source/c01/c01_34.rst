@@ -90,11 +90,9 @@ demo ，而不需要任何的中文解释就可以让你知道他是如何使用
     
    innodb: foreign key constraint system tables created
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image2|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20200227201644.png
+.. |image2| image:: http://image.iswbm.com/20200607174235.png
 

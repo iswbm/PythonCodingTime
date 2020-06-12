@@ -538,10 +538,7 @@ limit子句：限制返回数据的量。
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image25|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: https://ooo.0o0.ooo/2017/08/26/59a1429722061.png
@@ -568,4 +565,5 @@ limit子句：限制返回数据的量。
 .. |image22| image:: https://i.loli.net/2017/08/27/59a2756c66952.png
 .. |image23| image:: https://i.loli.net/2017/08/27/59a27651cd78e.png
 .. |image24| image:: https://i.loli.net/2017/08/27/59a2784f6562d.png
+.. |image25| image:: http://image.iswbm.com/20200607174235.png
 

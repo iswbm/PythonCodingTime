@@ -784,10 +784,7 @@ rpc server 和rpc client 的四个重要方法
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image22|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190623185008.png
@@ -811,4 +808,5 @@ rpc server 和rpc client 的四个重要方法
 .. |image19| image:: http://image.python-online.cn/20190526175100.png
 .. |image20| image:: http://image.python-online.cn/20190526180708.png
 .. |image21| image:: http://image.python-online.cn/20190526181433.png
+.. |image22| image:: http://image.iswbm.com/20200607174235.png
 

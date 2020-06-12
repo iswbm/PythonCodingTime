@@ -176,10 +176,7 @@ pdb，可能你还不知道它，为了讲解这个神器，我写了这篇文�
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image6|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190118000111.png
@@ -187,4 +184,5 @@ pdb，可能你还不知道它，为了讲解这个神器，我写了这篇文�
 .. |image3| image:: http://image.python-online.cn/20190118000557.png
 .. |image4| image:: http://image.python-online.cn/20190118083809.png
 .. |image5| image:: http://image.python-online.cn/20190118005507.png
+.. |image6| image:: http://image.iswbm.com/20200607174235.png
 

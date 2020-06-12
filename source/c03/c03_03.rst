@@ -294,12 +294,10 @@
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image3|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: https://i.loli.net/2018/04/30/5ae6c303c870c.png
 .. |image2| image:: https://i.loli.net/2018/04/30/5ae6c31b2d1c8.png
+.. |image3| image:: http://image.iswbm.com/20200607174235.png
 

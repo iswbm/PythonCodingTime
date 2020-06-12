@@ -224,10 +224,8 @@ Python 里对于生成列表、集合、字典，有一套非常 Pythonnic 的�
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image1|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200607174235.png
 

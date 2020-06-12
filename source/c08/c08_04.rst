@@ -485,10 +485,7 @@ OpenStck，你可能不太明白它是做什么的。这里引用我昨天看到
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image7|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190714161353.png
@@ -497,4 +494,5 @@ OpenStck，你可能不太明白它是做什么的。这里引用我昨天看到
 .. |image4| image:: http://image.python-online.cn/20190716005951.png
 .. |image5| image:: http://image.python-online.cn/20190714141644.png
 .. |image6| image:: https://i.loli.net/2019/02/25/5c73e6160764a.png
+.. |image7| image:: http://image.iswbm.com/20200607174235.png
 

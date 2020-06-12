@@ -170,10 +170,7 @@ DjangoWebBlog 是我们的项目目录，进入这个目录下创建虚拟环境
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image9|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/Fk6WZ2xbqg2DM3AvnYCpsiKQ4xOn
@@ -184,4 +181,5 @@ DjangoWebBlog 是我们的项目目录，进入这个目录下创建虚拟环境
 .. |image6| image:: http://image.python-online.cn/20190612211925.png
 .. |image7| image:: http://image.python-online.cn/20190614000336.png
 .. |image8| image:: http://image.python-online.cn/20190612215924.png
+.. |image9| image:: http://image.iswbm.com/20200607174235.png
 

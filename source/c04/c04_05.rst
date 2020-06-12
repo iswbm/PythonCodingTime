@@ -159,10 +159,7 @@ ubuntu的启动设备。就它了，选择进入系统。接下来，就是选�
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image18|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190511163441.png
@@ -182,4 +179,5 @@ ubuntu的启动设备。就它了，选择进入系统。接下来，就是选�
 .. |image15| image:: http://image.python-online.cn/20190511163750.png
 .. |image16| image:: http://image.python-online.cn/20190511163757.png
 .. |image17| image:: http://image.python-online.cn/20190511163805.png
+.. |image18| image:: http://image.iswbm.com/20200607174235.png
 

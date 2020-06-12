@@ -512,10 +512,7 @@
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image7|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: https://i.loli.net/2017/08/20/599982f513b7e.png
@@ -524,4 +521,5 @@
 .. |image4| image:: https://i.loli.net/2017/08/20/59998bdf36c79.png
 .. |image5| image:: https://i.loli.net/2017/08/25/59a0236def497.png
 .. |image6| image:: https://i.loli.net/2017/08/25/59a0244d239f0.png
+.. |image7| image:: http://image.iswbm.com/20200607174235.png
 

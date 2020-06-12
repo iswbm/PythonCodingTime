@@ -80,10 +80,8 @@ comprehension），会产生整个列表，对大量数据的迭代会产生负�
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image1|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200607174235.png
 

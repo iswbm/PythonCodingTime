@@ -891,10 +891,7 @@ bash窗口，不然会提示找不到npm命令）
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image12|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/image-20200321163152876.png
@@ -908,4 +905,5 @@ bash窗口，不然会提示找不到npm命令）
 .. |image9| image:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200321210014963.png
 .. |image10| image:: http://image.python-online.cn/image-20200321193444320.png
 .. |image11| image:: https://i.loli.net/2018/04/15/5ad31888232e9.png
+.. |image12| image:: http://image.iswbm.com/20200607174235.png
 

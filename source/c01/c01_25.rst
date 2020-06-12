@@ -107,10 +107,8 @@
 
 因此，在生产环境中可能需要避免重新加载模块。而在调试模式中，它会提供一定的便利，但你要知道这个重载的弊端，以免掉入坑里。
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image1|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200607174235.png
 

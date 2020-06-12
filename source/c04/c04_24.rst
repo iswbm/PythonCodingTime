@@ -186,14 +186,12 @@ Python 如何确定应该从哪个路径进行导入呢？
 
 |image4|
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image5|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/20200427180207.png
 .. |image2| image:: http://image.iswbm.com/20200427180042.png
 .. |image3| image:: http://image.iswbm.com/20200427182334.png
 .. |image4| image:: http://image.iswbm.com/20200427185854.png
+.. |image5| image:: http://image.iswbm.com/20200607174235.png
 

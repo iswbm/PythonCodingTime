@@ -219,11 +219,9 @@ wsrep_flow_control_sent 和 wsrep_local_recv_queue_avg
 -  http://www.360doc.com/content/13/0817/15/834950_307820923.shtml
 -  http://blog.itpub.net/30126024/viewspace-2221483/
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image2|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20191213162259.png
+.. |image2| image:: http://image.iswbm.com/20200607174235.png
 

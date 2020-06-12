@@ -480,10 +480,7 @@ Python 3.x ，所以这里的代码也要对应修改。
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image19|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190511160523.png
@@ -504,4 +501,5 @@ Python 3.x ，所以这里的代码也要对应修改。
 .. |image16| image:: http://image.python-online.cn/20191016205653.png
 .. |image17| image:: http://image.python-online.cn/20191015225652.png
 .. |image18| image:: http://image.python-online.cn/20191016211012.png
+.. |image19| image:: http://image.iswbm.com/20200607174235.png
 

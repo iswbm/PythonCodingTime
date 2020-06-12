@@ -289,12 +289,10 @@ namespace 有下面六种
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image3|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/17-12-23/44035514.jpg
 .. |image2| image:: http://image.python-online.cn/17-12-23/20133481.jpg
+.. |image3| image:: http://image.iswbm.com/20200607174235.png
 

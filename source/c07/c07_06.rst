@@ -328,13 +328,11 @@ centos的配置文件路径如下，ubuntu的有所不同
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image4|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: https://i.loli.net/2017/12/30/5a473ba8f374f.png
 .. |image2| image:: https://i.loli.net/2018/01/03/5a4ce6eeaff7d.png
 .. |image3| image:: https://i.loli.net/2018/01/03/5a4ce964d3e73.png
+.. |image4| image:: http://image.iswbm.com/20200607174235.png
 

@@ -62,10 +62,8 @@
    [root@linux ~]# echo ' A BC ' | awk '{sub(/^ */, "");sub(/ *$/, "")}1'
    A BC
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image1|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200607174235.png
 

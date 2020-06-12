@@ -721,10 +721,8 @@ n\ ``==``\ ，这种方式要求你所编辑的文件的扩展名是被vim所识
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image1|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200607174235.png
 

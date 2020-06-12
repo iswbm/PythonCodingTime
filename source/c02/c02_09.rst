@@ -246,13 +246,11 @@ emmm，和上面的结果是一样的。nice
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image4|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |普通函数中 不能使用 await| image:: https://i.loli.net/2018/05/26/5b09794f45340.png
 .. |async 中 不能使用yield| image:: https://i.loli.net/2018/05/26/5b0978b646230.png
 .. |验证通过| image:: https://i.loli.net/2018/05/26/5b09814dc4714.png
+.. |image4| image:: http://image.iswbm.com/20200607174235.png
 

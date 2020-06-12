@@ -77,11 +77,9 @@ K8s 角色详解
 里可以运行一个容器（最常用），也可以运行多个容器，若运行多个容器，那这几个容器的工作必定有着紧密的联系，而且需要直接
 **共享资源**\ 。
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image2|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190907162015.png
+.. |image2| image:: http://image.iswbm.com/20200607174235.png
 

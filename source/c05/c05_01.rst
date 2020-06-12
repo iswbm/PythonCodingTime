@@ -421,10 +421,7 @@ sgnificant digital)，LSD 的排序方式由键值的最右边开始，而 MSD
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image13|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |快速排序| image:: http://image.python-online.cn/Fpj4DFN_YCtfmJwb_85QnsuIVLqk
@@ -439,4 +436,5 @@ sgnificant digital)，LSD 的排序方式由键值的最右边开始，而 MSD
 .. |合并两个有序数组| image:: http://image.python-online.cn/FnCZ-3Pj39T_ELROSsGRDN31yWtY
 .. |桶排序| image:: http://image.python-online.cn/FljGa3F3wM_YGACETeuRHCiERXKb
 .. |基数排序| image:: http://image.python-online.cn/FhwWVp4LVABIMPHqNo_cpjJA9kHV
+.. |image13| image:: http://image.iswbm.com/20200607174235.png
 

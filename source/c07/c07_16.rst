@@ -83,14 +83,12 @@
 
    result=`random_range 1 60`
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image5|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20191220202103.png
 .. |image2| image:: http://image.python-online.cn/20191220203403.png
 .. |image3| image:: http://image.python-online.cn/20191220202408.png
 .. |image4| image:: http://image.python-online.cn/20191220203205.png
+.. |image5| image:: http://image.iswbm.com/20200607174235.png
 

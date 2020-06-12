@@ -884,10 +884,7 @@ response 进行初步封装。
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image24|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190607131728.png
@@ -913,4 +910,5 @@ response 进行初步封装。
 .. |image21| image:: http://image.python-online.cn/20190602220511.png
 .. |image22| image:: http://image.python-online.cn/20190602220700.png
 .. |image23| image:: http://image.python-online.cn/20190605203016.png
+.. |image24| image:: http://image.iswbm.com/20200607174235.png
 

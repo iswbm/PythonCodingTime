@@ -117,10 +117,8 @@ ansible 的 api 开发出来的吗？
 -  v2_runner_on_skipped：部署任务跳过时，会调用
 -  v2_playbook_on_stats：所有的部署任务完成时，调用
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image1|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200607174235.png
 

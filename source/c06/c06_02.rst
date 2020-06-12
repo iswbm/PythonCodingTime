@@ -311,10 +311,7 @@ show image |image10|
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image11|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190511164738.png
@@ -327,4 +324,5 @@ show image |image10|
 .. |image8| image:: http://image.python-online.cn/20190511164852.png
 .. |image9| image:: http://image.python-online.cn/20190511164900.png
 .. |image10| image:: http://image.python-online.cn/20190511164915.png
+.. |image11| image:: http://image.iswbm.com/20200607174235.png
 

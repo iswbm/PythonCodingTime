@@ -360,10 +360,7 @@ CMD：两个功能
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image10|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/17-12-23/49304868.jpg
@@ -375,4 +372,5 @@ CMD：两个功能
 .. |image7| image:: http://image.python-online.cn/17-12-24/42825662.jpg
 .. |image8| image:: http://image.python-online.cn/17-12-24/80077038.jpg
 .. |image9| image:: http://image.python-online.cn/17-12-24/98318652.jpg
+.. |image10| image:: http://image.iswbm.com/20200607174235.png
 

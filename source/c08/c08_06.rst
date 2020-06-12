@@ -707,10 +707,7 @@ cloudinit 允许通过 user_data 指定你想在虚拟机启动时，执行的�
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image42|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190430204707.png
@@ -754,4 +751,5 @@ cloudinit 允许通过 user_data 指定你想在虚拟机启动时，执行的�
 .. |image39| image:: http://image.python-online.cn/20190911203953.png
 .. |image40| image:: http://image.python-online.cn/20190911204805.png
 .. |image41| image:: http://image.python-online.cn/20190911205518.png
+.. |image42| image:: http://image.iswbm.com/20200607174235.png
 

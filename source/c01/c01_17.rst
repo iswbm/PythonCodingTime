@@ -579,14 +579,12 @@ super 的实现原理，就交由你来自己完成。
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image5|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190425221322.png
 .. |image2| image:: http://image.python-online.cn/20190425221322.png
 .. |image3| image:: http://image.python-online.cn/20190425221233.png
 .. |image4| image:: http://image.python-online.cn/20190519001930.png
+.. |image5| image:: http://image.iswbm.com/20200607174235.png
 

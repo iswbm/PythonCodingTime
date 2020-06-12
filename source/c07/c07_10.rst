@@ -186,14 +186,12 @@ rc 为非0，表示有 fatal 致命错误，说明有部分节点部署/升级�
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image5|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190716111523.png
 .. |image2| image:: http://image.python-online.cn/20190716112113.png
 .. |image3| image:: http://image.python-online.cn/20190716112824.png
 .. |image4| image:: http://image.python-online.cn/20190716112838.png
+.. |image5| image:: http://image.iswbm.com/20200607174235.png
 

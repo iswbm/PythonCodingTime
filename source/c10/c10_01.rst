@@ -332,10 +332,7 @@ Linux
    # 服务器或者路由器使用DNSMASQ
    $ sudo dnsmasq restart
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image15|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/464291-20170703113844956-354755333.jpg
@@ -352,4 +349,5 @@ Linux
 .. |image12| image:: http://image.iswbm.com/image-20200531171905345.png
 .. |image13| image:: http://image.iswbm.com/image-20200531145109182.png
 .. |image14| image:: http://image.iswbm.com/image-20200531145449577.png
+.. |image15| image:: http://image.iswbm.com/20200607174235.png
 

@@ -500,13 +500,11 @@ app 的上下文信息是否已经 push 进去了，如果没有的话，就会�
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image4|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/Fuhww2CZdUv4mGqx-N0YqAuXUWlX
 .. |image2| image:: http://image.python-online.cn/FgI6y-_Ka-S20VCjyufsCIczKjup
 .. |image3| image:: http://image.python-online.cn/FimULzWaeZWS2KJx_EQLAK_yRZ4A
+.. |image4| image:: http://image.iswbm.com/20200607174235.png
 

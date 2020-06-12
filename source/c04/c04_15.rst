@@ -1086,10 +1086,7 @@ Debug ，而远程调试需要不少前置步骤。
 
 --------------
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image104|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190323164120.png
@@ -1195,4 +1192,5 @@ Debug ，而远程调试需要不少前置步骤。
 .. |image101| image:: http://image.iswbm.com/20200420085524.png
 .. |image102| image:: http://image.iswbm.com/20200420090117.png
 .. |image103| image:: http://image.iswbm.com/20200420090428.png
+.. |image104| image:: http://image.iswbm.com/20200607174235.png
 

@@ -13,10 +13,8 @@ https://blog.oddbit.com/post/2019-04-25-writing-ansible-filter-plugins/
 
 https://www.jianshu.com/p/ae74f5f39828
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image1|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200607174235.png
 

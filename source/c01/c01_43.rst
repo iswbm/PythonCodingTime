@@ -381,13 +381,11 @@ json.dumps 的关键参数有两个：
 
 以上。希望此文能对你有帮助。
 
-.. figure:: http://image.iswbm.com/20200607174235.png
-   :alt:
-
-
+|image4|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/20200507171451.png
 .. |image2| image:: http://image.iswbm.com/20200507174459.png
 .. |image3| image:: http://image.iswbm.com/20200507174802.png
+.. |image4| image:: http://image.iswbm.com/20200607174235.png
 
