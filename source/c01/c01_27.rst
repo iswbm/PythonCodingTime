@@ -476,6 +476,15 @@ Python
 
 详细了解可参考：https://docs.python.org/3.6/distutils/setupscript.html#preprocessor-options
 
+**指定release**
+
+setup.py 里只能指定 version，而不能指定
+release，如果你需要变更版本号，可以使用 ``--release`` 参数进行指定
+
+.. code:: shell
+
+   python setup.py bdist_rpm --release=20200617
+
 setup.py
 的参数非常多，能够不借助文档写好一个setup.py好像没那么简单。为了备忘，我整理了
 setup 函数常用的一些参数：
