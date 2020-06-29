@@ -38,5 +38,7 @@ UDP 首部固定只有 8 个字节，开销较小。
 
 `面向报文（UDP）和面向字节流（TCP）的区别 <https://blog.csdn.net/ce123_zhouwei/article/details/8976006>`__
 
+`TCP缓存区与窗口的关系 <https://blog.csdn.net/yxccc_914/article/details/52515558>`__
+
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 

@@ -58,39 +58,55 @@ add/commit 前撤销对文件的修改
 1.4 远程仓库
 ~~~~~~~~~~~~
 
-添加远程仓库
+origin 并不是指得是远程的仓库，而是指得是远程仓库在本地的一个指针。
+
+为什么是这个名字呢？仅仅是因为 git
+用它做为默认名被广泛使用，一个习惯而已，你也可以叫其他名字。
+
+对一个在本地创建的仓库，如果添加远程仓库？
 
 .. code:: shell
 
    $ git remote add [shortname] [url] 
    # shortname是你命名的远程仓库名字，url格式如下：git@github.com:github_account/repository_name.git
 
-   $ git remote add learn_git git@github.com:wongbingming/my_repository.git  #注意记得先在GitHub上先新建仓库，my_repository，不然后面推送会出错
+   #注意记得先在GitHub上先新建仓库，my_repository，不然后面 push 会出错
+   $ git remote add learn_git git@github.com:wongbingming/my_repository.git  
 
 推送/克隆
 
 .. code:: shell
 
    $ git push -u learn_git master #learn_git是之前命名的远程仓库名，master是你要推送到的远程仓库的分支名字
+   $ git push -u learn-git master:master
 
    $ git clone [github url]
    # 举例
-   $ git clone git@github.com:BingmingWong/test.git
+   $ git clone git@github.com:iswbm/test.git
 
-   # 更改远程仓库地址
-   git  remote set-url origin git@<new_server>:you_repo.git
+更改远程仓库地址
+
+.. code:: shell
+
+   $ git  remote set-url origin git@<new_server>:you_repo.git
+
+upstream 和 downstream
+
+Git中的upstream和downstream的概念是相对的。
+
+如果A库中的分支x被push到B库中的分支y，则y就是x的upstream，而x就是y的downstream。
 
 1.5 GitHub合并至本地
 ~~~~~~~~~~~~~~~~~~~~
 
-::
+.. code:: shell
 
    $ git merge origin/master
 
 1.6 创建SSHkeys
 ~~~~~~~~~~~~~~~
 
-::
+.. code:: shell
 
    $ ssh-keygen -t rsa -C "youremail@example.com"
 
@@ -103,7 +119,7 @@ add/commit 前撤销对文件的修改
 
 建完成后，使用如下命令查找位置
 
-::
+.. code:: shell
 
    $ find / -name id_rsa.pub
 
@@ -113,7 +129,7 @@ add/commit 前撤销对文件的修改
 2.1 文件状态
 ~~~~~~~~~~~~
 
-::
+.. code:: shell
 
    $ git status #如果修改了文件，状态会提示你有文件被修改（但不能告诉你哪里被修改），提示你要commit
    $ cat readme.txt #查看实体文件的内容 
@@ -121,7 +137,7 @@ add/commit 前撤销对文件的修改
 
 查看当前目录下有哪些远程仓库
 
-::
+.. code:: shell
 
    $ git remote     # 远程仓库名字
    $ git remote -v  # verbose的缩写，显示详细信息，包括项目url
@@ -129,13 +145,13 @@ add/commit 前撤销对文件的修改
 
 查看提交的历史
 
-::
+.. code:: shell
 
    $ git log --pretty=oneline --abbrev-commit
 
 查看不同的地方（修改）
 
-::
+.. code:: shell
 
    $ git diff           # 工作区(work dict)和暂存区(stage)的比较
    $ git diff --cached  # 是暂存区(stage)和分支(master)的比较
@@ -167,12 +183,14 @@ add/commit 前撤销对文件的修改
 2.2 Git日志
 ~~~~~~~~~~~
 
-::
+.. code:: shell
 
    $ git log # 可以查看who在when修改了文件（会写出版本说明），但是这个看着眼花缭乱
    $ git log --pretty=online # 这样，每行只显示一次修改，修改信息只有：commitid + 版本说明
 
    $ git reflog # 显示所有修改的日志
+
+   $ git log --graph --all --decorate # 以可视化图的形式展示 
 
 2.3 查看修改
 ~~~~~~~~~~~~
@@ -183,7 +201,7 @@ add/commit 前撤销对文件的修改
 
 查看两个 commit 之间的修改
 
-::
+.. code:: shell
 
    $ git diff commit_id1 commit_id2
    $ git diff commit_id^!
@@ -193,14 +211,14 @@ add/commit 前撤销对文件的修改
 
 查看某个 commit 的改动
 
-::
+.. code:: shell
 
-   git show commit_id
-   git show --stat commit_id
+   $ git show commit_id
+   $ git show --stat commit_id
 
 查看两个分支之间的差异
 
-::
+.. code:: shell
 
    # 查看两个分支有哪些文件发生改变了
    git diff stable/2.2.9 stable/2.3.0 --stat
