@@ -1,13 +1,10 @@
-7.12 Linux 包管理工具：yum 和 rpm
-=================================
+7.12 yum 命令使用指南及问题排查方法
+===================================
 
 |image0|
 
-yum
----
-
 安装
-~~~~
+----
 
 加个 ``-y`` 可以在安装包时代替用户自动响应 yes
 
@@ -29,7 +26,7 @@ yum
    $ yum reinstall -y xxx 
 
 下载
-~~~~
+----
 
 只下载安装包
 
@@ -45,7 +42,7 @@ yum
    yumdownloader --resolve --destdir /home/test/ systemd-devel-219-62.el7_6.2.x86_64
 
 查看
-~~~~
+----
 
 查看具体包的信息
 
@@ -65,13 +62,13 @@ yum
 
    $ yum list updates
 
-查询一个文件在什么包里
+查询一个命令是由哪个包提供的
 
 .. code:: shell
 
    $ yum provides xxx
 
-查询一个命令是哪个包提供的
+查询一个模块/共享库/文件是哪个包提供的
 
 .. code:: shell
 
@@ -96,7 +93,7 @@ yum
    $ yum deplist httpd
 
 搜索
-~~~~
+----
 
 在配置并启用的仓库中搜索包
 
@@ -105,21 +102,21 @@ yum
    $ yum search zabbix-agent
 
 升级
-~~~~
+----
 
 .. code:: shell
 
    $ yum update xxx
 
 删除
-~~~~
+----
 
 .. code:: shell
 
    $ yum remove -y xxx
 
 清理
-~~~~
+----
 
 清理已下载的软件文件
 
@@ -140,7 +137,7 @@ yum
    $ yum clean all
 
 分组
-~~~~
+----
 
 查看分组
 
@@ -167,14 +164,14 @@ yum
    $ yum groupremove <group_name>
 
 历史
-~~~~
+----
 
 .. code:: shell
 
    $ yum history
 
 语言
-~~~~
+----
 
 列出已安装的语言
 
@@ -195,7 +192,7 @@ yum
    $ yum langremove
 
 其他
-~~~~
+----
 
 执行事务
 
@@ -216,7 +213,7 @@ yum
    $ yum shell
 
 选项
-~~~~
+----
 
 .. code:: shell
 
@@ -347,6 +344,9 @@ yum-utils 使用
    # 将上面列出的包卸载
    $ rpm -e glibc-common-2.17-196.el7_4.2.x86_64
 
+问题排查记录
+------------
+
 查找一个 so 文件是属于哪个 rpm 包
 
 经常在安装一个包的时候，会报如下的错误，找不到某 so 文件
@@ -388,135 +388,6 @@ yum-utils 使用
    $ yumdb info python-nova-tests
 
 |image3|
-
-查看rpm包的版本
-
-.. code:: bash
-
-   # 查看软件包的详细信息
-   rpm -qpi xxx.rpm
-
-   # 查看软件包所包含的目录和文件
-   rpm -qpl xxx.rpm 
-
-   # 查看软件包的文档所在的位置
-   rpm -qpd xxx.rpm
-
-   # 查看软件包的配置文件
-   rpm -qpc rpm
-
-   # 查看软件包的依赖关系
-   rpm -qpR xxx.rpm
-
-rpm
----
-
-.. code:: shell
-
-   rpm -ivh xxx.rpm-------安装软件
-
-   　　 -e-----------------卸载指定软件，不能是安装包名称
-
-   　　 -q-----------------查询指定软件是否安装，跟软件名称
-
-   　　 -qi----------------查询已经安装的软件的信息
-
-   　　-ql-----------------查询已经安装的软件中包含什么样的内容
-
-   　　-qf /etc/fstab　----查询这个文件是由哪个安装包产生的
-
-   　　-qc-----------------查询已经安装的软件中包含的配置文件
-
-   　　-qd-----------------查询已经安装的软件中包含的doc文件
-
-   　　-q --scripts　------查询软件的脚本内容
-
-   　　-Uvh----------------升级软件
-
-   　　-Fvh----------------刷新
-
-   　　-p------------------对于未安装的软件包查询信息，需要额外加此选项
-
-   　　-qip----------------查询一个尚款安装的安装包的信息
-
-   　　-qpc----------------查询一个尚未安装的安装包的配置文件
-
-   　　-qpd----------------查询一个尚未安装的安装包的doc文件
-
-   　　-qpl----------------查询一个尚未安装的安装包包含的信息
-
-重建 rpmdb
-
-.. code:: shell
-
-   # 删除rpm数据文件
-   rm -f /var/lib/rpm/__db.00*   
-
-   # 重建rpm数据文件
-   rpm –rebuilddb                
-
-查看一个包的安装时间
-
-::
-
-   [root@ws_compute01 ~]# rpm -qi|grep zlib-1.2.7-17.el7.i686
-   rpm: no arguments given for query
-   [root@ws_compute01 ~]# rpm -qi zlib-1.2.7-17.el7.i686
-   Name        : zlib
-   Version     : 1.2.7
-   Release     : 17.el7
-   Architecture: i686
-   Install Date: Tue 13 Aug 2019 10:22:41 AM CST
-   Group       : System Environment/Libraries
-   Size        : 184798
-   License     : zlib and Boost
-   Signature   : RSA/SHA256, Mon 21 Nov 2016 05:05:03 AM CST, Key ID 24c6a8a7f4a80eb5
-   Source RPM  : zlib-1.2.7-17.el7.src.rpm
-   Build Date  : Sun 06 Nov 2016 02:07:22 AM CST
-   Build Host  : worker1.bsys.centos.org
-   Relocations : (not relocatable)
-   Packager    : CentOS BuildSystem <http://bugs.centos.org>
-   Vendor      : CentOS
-   URL         : http://www.zlib.net/
-   Summary     : The compression and decompression library
-   Description :
-   Zlib is a general-purpose, patent-free, lossless data compression
-   library which is used by many different programs.
-
-查看一个包在系统已配的源里都有哪些版本
-
-::
-
-   [root@ws_compute01 ~]# yum provides 
-   Loaded plugins: fastestmirror, versionlock
-   Loading mirror speeds from cached hostfile
-    * epel: hkg.mirror.rackspace.com
-   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
-   Repo        : ansible-master
-
-
-   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
-   Repo        : libvirt-3.9.0
-
-
-   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
-   Repo        : wsbase
-
-
-   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
-   Repo        : ansible-master
-
-
-   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
-   Repo        : libvirt-4.5.0
-
-
-   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
-   Repo        : wsupdates
-
-
-   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
-   Repo        : @libvirt-4.5.0
 
 |image4|
 
