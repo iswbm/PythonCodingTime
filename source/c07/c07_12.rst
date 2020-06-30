@@ -6,6 +6,31 @@
 yum
 ---
 
+安装
+~~~~
+
+加个 ``-y`` 可以在安装包时代替用户自动响应 yes
+
+.. code:: shell
+
+   $ yum install -y xxx
+
+加个 ``--installroot=/usr/local/`` 指定将软件安装在 /usr/local
+目录下，而不安装在默认路径下
+
+.. code:: shell
+
+   $ yum install --installroot=/usr/local/ -y xxx
+
+重新安装 == 卸载再安装
+
+.. code:: shell
+
+   $ yum reinstall -y xxx 
+
+下载
+~~~~
+
 只下载安装包
 
 .. code:: shell
@@ -19,68 +44,290 @@ yum
    yumdownloader --resolve --destdir /home/wangbm/ perl-Sys-Virt.x86_64
    yumdownloader --resolve --destdir /home/test/ systemd-devel-219-62.el7_6.2.x86_64
 
-查看一个包的安装时间
+查看
+~~~~
 
-::
+查看具体包的信息
 
-   [root@ws_compute01 ~]# rpm -qi|grep zlib-1.2.7-17.el7.i686
-   rpm: no arguments given for query
-   [root@ws_compute01 ~]# rpm -qi zlib-1.2.7-17.el7.i686
-   Name        : zlib
-   Version     : 1.2.7
-   Release     : 17.el7
-   Architecture: i686
-   Install Date: Tue 13 Aug 2019 10:22:41 AM CST
-   Group       : System Environment/Libraries
-   Size        : 184798
-   License     : zlib and Boost
-   Signature   : RSA/SHA256, Mon 21 Nov 2016 05:05:03 AM CST, Key ID 24c6a8a7f4a80eb5
-   Source RPM  : zlib-1.2.7-17.el7.src.rpm
-   Build Date  : Sun 06 Nov 2016 02:07:22 AM CST
-   Build Host  : worker1.bsys.centos.org
-   Relocations : (not relocatable)
-   Packager    : CentOS BuildSystem <http://bugs.centos.org>
-   Vendor      : CentOS
-   URL         : http://www.zlib.net/
-   Summary     : The compression and decompression library
-   Description :
-   Zlib is a general-purpose, patent-free, lossless data compression
-   library which is used by many different programs.
+.. code:: shell
 
-查看一个包在系统已配的源里都有哪些版本
+   $ yum info zabbix-agent
 
-::
+查看配置并启用的仓库中有哪些包，包括已安装和未安装的
 
-   [root@ws_compute01 ~]# yum provides 
-   Loaded plugins: fastestmirror, versionlock
-   Loading mirror speeds from cached hostfile
-    * epel: hkg.mirror.rackspace.com
-   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
-   Repo        : ansible-master
+.. code:: shell
+
+   $ yum list
+
+查看有哪些包可以升级的
+
+.. code:: shell
+
+   $ yum list updates
+
+查询一个文件在什么包里
+
+.. code:: shell
+
+   $ yum provides xxx
+
+查询一个命令是哪个包提供的
+
+.. code:: shell
+
+   $ yum whatprovides xxx
+
+列出所有的容器
+
+.. code:: shell
+
+   $ yum repolist all
+
+查询某个仓库下的所有包
+
+.. code:: shell
+
+   $ yum repo-pkgs <repo-name> list
+
+查看一个包的所有依赖项
+
+.. code:: shell
+
+   $ yum deplist httpd
+
+搜索
+~~~~
+
+在配置并启用的仓库中搜索包
+
+.. code:: shell
+
+   $ yum search zabbix-agent
+
+升级
+~~~~
+
+.. code:: shell
+
+   $ yum update xxx
+
+删除
+~~~~
+
+.. code:: shell
+
+   $ yum remove -y xxx
+
+清理
+~~~~
+
+清理已下载的软件文件
+
+.. code:: shell
+
+   $ yum clean packages
+
+清理已下载的软件文件头
+
+.. code:: shell
+
+   $ yum clean headers
+
+清理下载过的容器相关数据
+
+.. code:: shell
+
+   $ yum clean all
+
+分组
+~~~~
+
+查看分组
+
+.. code:: shell
+
+   $ yum grouplist
+
+查看分组信息
+
+.. code:: shell
+
+   $ yum groupinfo <group_name>
+
+安装一整组软件
+
+.. code:: shell
+
+   $ yum groupinstall <group_name>
+
+删除某个组
+
+.. code:: shell
+
+   $ yum groupremove <group_name>
+
+历史
+~~~~
+
+.. code:: shell
+
+   $ yum history
+
+语言
+~~~~
+
+列出已安装的语言
+
+.. code:: shell
+
+   $ yum langlist
+
+为语言安装适当的语言包
+
+.. code:: shell
+
+   $ yum langinstall
+
+删除语言的已安装语言包
+
+.. code:: shell
+
+   $ yum langremove
+
+其他
+~~~~
+
+执行事务
+
+.. code:: shell
+
+   $ yum load-transaction /tmp/yum_save_tx.xxx.n0EVjx.yumtx
+
+生成元数据缓存
+
+.. code:: shell
+
+   $ yum makecache
+
+进入交互式模式
+
+.. code:: shell
+
+   $ yum shell
+
+选项
+~~~~
+
+.. code:: shell
+
+   -h， - help显示此帮助消息并退出
+   -t， - 容忍错误
+   -C，--cacheonly完全从系统缓存运行，不更新缓存
+
+   -q， - 安静的操作
+   -v， - verbose详细操作
+   -y， - assumeyes对所有问题都回答是
+
+   --assumeno对所有问题都回答否
+   --version显示Yum版本并退出
+   --installroot = [path]设置安装root
+
+   --obsoletes在更新期间启用过时处理
+   --noplugins禁用Yum插件
+   --nogpgcheck禁用gpg签名检查
 
 
-   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
-   Repo        : libvirt-3.9.0
+   -skip-broken 跳过没有解决问题的包
+   --color = COLOR控制是否使用颜色
 
+   --downloadonly不更新，只需下载
+   --downloaddir = DLDIR指定存储包的备用目录
+   --setopt = SETOPTS设置任意配置和repo选项
+   --bugfix在更新中包含bugfix相关包
+   --security在更新中包含安全相关的包
+   --advisory = ADVS， - advisories = ADVS 更新包括修复给定建议所需的包
+   --bzs = BZS 更新包括修复给定BZ所需的包
+   --cves = CVES 更新包括修复给定CVE所需的包
+   --sec-severity = SEVS， - secseverity = SEVS
 
-   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
-   Repo        : wsbase
+配置文件位置
 
+.. code:: shell
 
-   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
-   Repo        : ansible-master
+   -c [config file]， - config = [config file]
 
+最大命令等待时间
 
-   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
-   Repo        : libvirt-4.5.0
+.. code:: shell
 
+   -R [minute]， - randomwait = [minute]
 
-   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
-   Repo        : wsupdates
+调试输出级别
 
+.. code:: shell
 
-   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
-   Repo        : @libvirt-4.5.0
+   -d [debug level]， - debug level = [debug level]
+
+在repos中，在list / search命令中显示重复项
+
+.. code:: shell
+
+   --showduplicates
+
+错误输出级别
+
+.. code:: shell
+
+   -e [error level]， - errorlevel = [error level]
+
+调试rpm的输出级别
+
+.. code:: shell
+
+   --rpmverbosity = [debug level name]
+
+启用/禁用仓库（允许使用通配符）
+
+.. code:: shell
+
+   --enablerepo = [repo]
+   --disablerepo = [repo]
+
+按名称或glob排除包
+
+.. code:: shell
+
+   -x [package]， - exclude = [package]
+
+禁用从main，repo或所有内容的排除
+
+.. code:: shell
+
+   --disableexcludes = [plugin] 
+
+禁用包含repo或所有内容的includepkgs
+
+.. code:: shell
+
+   --disableincludes = [plugin]
+
+按名称禁用插件
+
+.. code:: shell
+
+   --disableplugin = [plugin]
+
+按名称启用插件
+
+.. code:: shell
+
+   --enableplugin = [plugin]
+
+在yum config和repo文件中设置$ releasever的值
+
+.. code:: shell
+
+   --releasever = RELEASEVER
 
 yum-utils 使用
 
@@ -207,6 +454,69 @@ rpm
 
    # 重建rpm数据文件
    rpm –rebuilddb                
+
+查看一个包的安装时间
+
+::
+
+   [root@ws_compute01 ~]# rpm -qi|grep zlib-1.2.7-17.el7.i686
+   rpm: no arguments given for query
+   [root@ws_compute01 ~]# rpm -qi zlib-1.2.7-17.el7.i686
+   Name        : zlib
+   Version     : 1.2.7
+   Release     : 17.el7
+   Architecture: i686
+   Install Date: Tue 13 Aug 2019 10:22:41 AM CST
+   Group       : System Environment/Libraries
+   Size        : 184798
+   License     : zlib and Boost
+   Signature   : RSA/SHA256, Mon 21 Nov 2016 05:05:03 AM CST, Key ID 24c6a8a7f4a80eb5
+   Source RPM  : zlib-1.2.7-17.el7.src.rpm
+   Build Date  : Sun 06 Nov 2016 02:07:22 AM CST
+   Build Host  : worker1.bsys.centos.org
+   Relocations : (not relocatable)
+   Packager    : CentOS BuildSystem <http://bugs.centos.org>
+   Vendor      : CentOS
+   URL         : http://www.zlib.net/
+   Summary     : The compression and decompression library
+   Description :
+   Zlib is a general-purpose, patent-free, lossless data compression
+   library which is used by many different programs.
+
+查看一个包在系统已配的源里都有哪些版本
+
+::
+
+   [root@ws_compute01 ~]# yum provides 
+   Loaded plugins: fastestmirror, versionlock
+   Loading mirror speeds from cached hostfile
+    * epel: hkg.mirror.rackspace.com
+   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
+   Repo        : ansible-master
+
+
+   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
+   Repo        : libvirt-3.9.0
+
+
+   1:libguestfs-tools-1.28.1-1.55.el7.centos.noarch : System administration tools for virtual machines
+   Repo        : wsbase
+
+
+   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
+   Repo        : ansible-master
+
+
+   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
+   Repo        : libvirt-4.5.0
+
+
+   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
+   Repo        : wsupdates
+
+
+   1:libguestfs-tools-1.38.2-12.el7.noarch : System administration tools for virtual machines
+   Repo        : @libvirt-4.5.0
 
 |image4|
 
