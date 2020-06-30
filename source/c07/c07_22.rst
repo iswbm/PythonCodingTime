@@ -1,0 +1,185 @@
+7.22 rpm 命令详细用法
+=====================
+
+安装
+----
+
+-  ``-i``\ ：表示安装
+-  ``-v``\ ：查看更详细的安装信息
+-  ``-h``\ ：以安装信息栏显示安装进度
+
+.. code:: shell
+
+   $ rpm -ivh xxx.rpm
+
+也可以指定 rpm 包的在线网址直接安装
+
+.. code:: shell
+
+   $ rpm -ivh http://website.com/path/xxx.rpm
+
+更新
+----
+
+直接更新安装 rpm 包，不管你之前有没有安装过
+
+.. code:: shell
+
+   $ rpm -Uvh xxx.rpm
+
+只更新已安装过的包
+
+.. code:: shell
+
+   $ rpm -Fvh xxx.rpm
+
+查询
+----
+
+查询软件是否安装
+
+.. code:: shell
+
+   $ rpm -q xxx
+
+查询已安装的软件
+
+.. code:: shell
+
+   $ rpm -qa 
+
+查询已经安装的软件的信息
+
+.. code:: shell
+
+   $ rpm -qi xxx
+
+查询已经安装的软件中包含什么样的内容
+
+.. code:: shell
+
+   $ rpm -ql 
+
+查询这个文件是由哪个安装包产生的
+
+.. code:: shell
+
+   $ rpm -qf /etc/nova/nova.conf
+
+查询已经安装的软件中包含的doc文件
+
+.. code:: shell
+
+   $ rpm -qc xxx
+
+查询已经安装的软件中包含的doc文件
+
+.. code:: shell
+
+   $ rpm -qd 
+
+查询软件的脚本内容
+
+.. code:: shell
+
+   $ rpm -q --scripts xxx
+
+查询一个软件有关的依赖软件所包含的文件
+
+.. code:: shell
+
+   $ rpm -qR xxx
+
+以上都是查询已安装软件参数
+
+如果要查询未安装的软件，只需要加 ``-p`` 即可
+
+查询一个尚款安装的安装包的信息
+
+.. code:: shell
+
+   $ rpm -qip xxx
+
+查询一个尚未安装的安装包的配置文件
+
+.. code:: shell
+
+   $ rpm -qpc xxx
+
+查询一个尚未安装的安装包的doc文件
+
+.. code:: shell
+
+   $ rpm -qpd xxx
+
+查询一个尚未安装的安装包包含的信息
+
+.. code:: shell
+
+   $ rpm -qpl xxx
+
+卸载
+----
+
+卸载指定软件
+
+.. code:: shell
+
+   $ rpm -e xxx
+
+验证
+----
+
+查看一个软件里所包含的文件是否被修改过，只有被修改过才会被列出来
+
+.. code:: shell
+
+   $ rpm -V xxx
+
+加 ``-a`` 就表示查看所有的软件，后面不用再跟软件名
+
+.. code:: shell
+
+   $ rpm -Va
+
+加 ``-p`` 表示查看未安装软件，因此后面跟 rpm 包文件名
+
+.. code:: shell
+
+   $ rpm -Vp xxx.rpm
+
+查看某个文件是否被修改过
+
+.. code:: shell
+
+   $ rpm -Vf /etc/path/file
+
+rpmdb
+-----
+
+重建 rpmdb
+
+.. code:: shell
+
+   # 删除rpm数据文件
+   rm -f /var/lib/rpm/__db.00*   
+
+   # 重建rpm数据文件
+   rpm –rebuilddb                
+
+可选参数
+--------
+
+-  ``--nodeps``\ ：当软件由于依赖问题而导致无法安装和卸载时，可以加上这个参数强制进行安装或卸载
+-  ``--replacefiles``\ ：当某些文件（是由该软件提供的）已经存在于机器上时，再次安装时，会提示文件已存在，此时加上这个参数
+   就可以直接覆盖。
+-  ``--replacepkgs``\ ：当你使用 rpm -ivh \*.rpm
+   一批软件时，如果有的包已经安装过了，此时加上这个参数就会直接重新安装，而不会因失败而退出
+-  ``--force``\ ：–replacefiles 和 –replacepkgs 的综合体。
+-  ``--test``\ ：测试一下能不能安装，有没有依赖问题，而不会真正去安装它。
+-  ``--justdb``\ ：当 RPM
+   数据库损坏或者某些原因产生错误时，可使用这个参数
+   更新软件在数据库中的相关信息
+-  ``--nosignature``\ ：跳过数字证书的检查，直接安装
+-  ``--prefix 新路径``\ ：将软件安装在指定的路径
+-  ``--noscripts``\ ：安装时，忽略某些命令的执行
