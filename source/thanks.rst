@@ -23,6 +23,7 @@
 @魏朝阳：提出在《并发编程》中三处笔误，现已更正！
 
 ..  disqus ::
+    ：disqus_identifier： thanks
 
 --------------
 
