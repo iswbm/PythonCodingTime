@@ -92,6 +92,30 @@
    直接拖动图片
    如果不仍想让访达窗口保持在最前面，就按住 command 键
 
+设置我自定义的系统偏好设置
+
+|image1|
+
+设置打开访达快捷键
+
+1. 打开 『自动操作』
+2. 新建文稿
+3. 选择『服务』 或者 『自动操作』（因为不同版本的 macOS名字不同）
+4. 进行如下设置
+
+|image2|
+
+5. 取消勾选：因为我要设置的快捷键与它冲突
+
+.. figure:: http://image.iswbm.com/image-20200704195011274.png
+   :alt: 、
+
+   、
+
+6. 设置快捷键
+
+|image3|
+
 4.18.4 系统设置
 ---------------
 
@@ -103,7 +127,7 @@
 
 finder的显示
 
-|image1|
+|image4|
 
 `防止电脑温度过高 <https://mp.weixin.qq.com/s/qKQO616vxADFp1cVtA62Cw>`__
 
@@ -119,7 +143,7 @@ finder的显示
 
    3. 打开「活动监视器」（Alfred就可以打开），杀掉暂没用且cpu使用率最高的程序
 
-      |image2|
+      |image5|
 
    4. MacBook Pro CPU 温度在 5、60℃
       的时候，风扇会转到两三千转每分钟，只有 CPU 温度达到 70
@@ -261,6 +285,15 @@ finder的显示
    # 在指定目录打开
    open ~/Code
 
+搜索时，优先搜索当前文件夹：访达的偏好设置
+
+|image6|
+
+此时如果你想要搜索电脑全局，那么有两种方法
+
+1. Command + option + 空格
+2. command + 空格
+
 4.18.7 使用小鹤双拼
 -------------------
 
@@ -329,10 +362,14 @@ finder的显示
 
 --------------
 
-|image3|
+|image7|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190810161513.png
-.. |image2| image:: http://image.python-online.cn/20190810162315.png
-.. |image3| image:: http://image.iswbm.com/20200607174235.png
+.. |image1| image:: http://image.iswbm.com/image-20200704192441091.png
+.. |image2| image:: http://image.iswbm.com/image-20200704194215498.png
+.. |image3| image:: http://image.iswbm.com/image-20200704195122336.png
+.. |image4| image:: http://image.python-online.cn/20190810161513.png
+.. |image5| image:: http://image.python-online.cn/20190810162315.png
+.. |image6| image:: http://image.iswbm.com/image-20200704192031119.png
+.. |image7| image:: http://image.iswbm.com/20200607174235.png
 

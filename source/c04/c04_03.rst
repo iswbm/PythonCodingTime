@@ -3,7 +3,7 @@
 
 |image0|
 
---------------
+《网络是怎样连接的》 豆瓣评分：9.1
 
 10个优秀的程序员里，有9个人都有写博客的习惯。这是非常好的习惯，值得每个程序员，投入时间和精力去坚持做下去。
 
@@ -28,7 +28,7 @@
 4.3.1 成品展示
 --------------
 
-以我的博客(\ ``python-online.cn``)为例，先给大家展示一下。
+以我的博客(\ ``python.iswbm.com``)为例，先给大家展示一下。
 
 这是首页。显示了你所有的文章索引。 |image1|
 
@@ -276,7 +276,7 @@ source:raw-latex:`\index`.rst，千万要注意中间的空行不可忽略。
 4.3.7 自定义插件
 ----------------
 
-之前有不少同学看过我的个人博客（http://python-online.cn），也根据我写的搭建教程，完成了自己的个人站点。
+之前有不少同学看过我的个人博客（http://python.iswbm.com），也根据我写的搭建教程，完成了自己的个人站点。
 
 使用这个方法搭建的站点，一直有一个痛点，就是无法自定义页面，自由度非常的低（和
 WordPress 真的是没法比，因为这两种产品定位本身就不一样。）
@@ -471,6 +471,32 @@ Python 3.x ，所以这里的代码也要对应修改。
 
 数据真的非常全面，你可以知道，访客都是从哪里访问（直接访问，Google等），每篇文章的点击量（你就知道哪篇是爆款？），每天有多少老访问客，多少新访客等等，更多维度的数据你可以自己去体验一下。
 
+##第三个插件：评论系统
+
+先到这个\ `网站 <http://disqus.com/admin/create>`__\ 去注册一个 disqus
+帐号，我使用了 gmail 帐号进行注册
+
+|image19|
+
+然后根据指引填写好资料
+
+.. figure:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200704154846176.png
+   :alt: image-20200704154846176
+
+   image-20200704154846176
+
+选择基础版
+
+.. figure:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200704155335679.png
+   :alt: image-20200704155335679
+
+   image-20200704155335679
+
+.. figure:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200704155410411.png
+   :alt: image-20200704155410411
+
+   image-20200704155410411
+
 附录：参考文档
 --------------
 
@@ -480,7 +506,7 @@ Python 3.x ，所以这里的代码也要对应修改。
 
 --------------
 
-|image19|
+|image20|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190511160523.png
@@ -501,5 +527,6 @@ Python 3.x ，所以这里的代码也要对应修改。
 .. |image16| image:: http://image.python-online.cn/20191016205653.png
 .. |image17| image:: http://image.python-online.cn/20191015225652.png
 .. |image18| image:: http://image.python-online.cn/20191016211012.png
-.. |image19| image:: http://image.iswbm.com/20200607174235.png
+.. |image19| image:: http://image.iswbm.com/image-20200704154427375.png
+.. |image20| image:: http://image.iswbm.com/20200607174235.png
 

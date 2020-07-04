@@ -37,10 +37,44 @@ Django Web 框架
 
 |image5|
 
+Python3 源码剖析
+----------------
+
+网站链接：https://flaggo.github.io/python3-source-code-analysis/
+
+|image6|
+
+Linux 手册
+----------
+
+网站链接：https://man.linuxde.net/
+
+|image7|
+
+每天一个linux命令
+-----------------
+
+网站链接：www.cnblogs.com/peida/archive/2012/12/05/2803591.html
+
+实验楼：Linux 基础入门
+----------------------
+
+网站链接：https://www.shiyanlou.com/courses/1
+
+|image8|
+
+网站链接：https://www.shiyanlou.com/courses/68
+
+|image9|
+
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20200104144109.png
 .. |image2| image:: http://image.python-online.cn/20200112210558.png
 .. |image3| image:: http://image.iswbm.com/20200508201333.png
 .. |image4| image:: http://image.iswbm.com/20200525080531.png
 .. |image5| image:: http://image.iswbm.com/20200525080715.png
+.. |image6| image:: http://image.iswbm.com/image-20200701123010074.png
+.. |image7| image:: http://image.iswbm.com/image-20200704204307530.png
+.. |image8| image:: http://image.iswbm.com/20200704204506.png
+.. |image9| image:: http://image.iswbm.com/20200704204558.png
 
