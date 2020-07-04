@@ -136,7 +136,7 @@ with open("/home/docs/checkouts/readthedocs.org/user_builds/pythoncodingtime/env
     content = file.read()
     content=content.replace("sphinx.application", "sphinx.errors")
 
-with open("/home/docs/checkouts/readthedocs.org/user_builds/pythoncodingtime/envs/latest/lib/python3.7/site-packages/sphinxcontrib/disqus.py", "r") as file:
+with open("/home/docs/checkouts/readthedocs.org/user_builds/pythoncodingtime/envs/latest/lib/python3.7/site-packages/sphinxcontrib/disqus.py", "w") as file:
     file.write(content)
 
 author = '王炳明'
