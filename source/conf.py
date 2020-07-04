@@ -132,6 +132,13 @@ html_js_files = [
 ]
 
 # General configuration.
+with open("/home/docs/checkouts/readthedocs.org/user_builds/pythoncodingtime/envs/latest/lib/python3.7/site-packages/sphinxcontrib/disqus.py", "r") as file:
+    content = file.read()
+    content=content.replace("sphinx.application", "sphinx.errors")
+
+with open("/home/docs/checkouts/readthedocs.org/user_builds/pythoncodingtime/envs/latest/lib/python3.7/site-packages/sphinxcontrib/disqus.py", "r") as file:
+    file.write(content)
+
 author = '王炳明'
 copyright = '2020, Go编程时光'
 exclude_patterns = ['_build']
