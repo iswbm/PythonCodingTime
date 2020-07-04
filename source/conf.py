@@ -130,3 +130,16 @@ html_js_files = [
     'js/readmore.js',
     'js/baidutongji.js',
 ]
+
+# General configuration.
+author = '王炳明'
+copyright = '2020, Go编程时光'
+exclude_patterns = ['_build']
+extensions = ['sphinxcontrib.disqus']  # Add to this list.
+master_doc = 'index'
+project = 'GolangCodingTime'
+release = '1.0'
+version = '1.0'
+
+# Options for extensions.
+disqus_shortname = 'iswbm'  # Add this line to conf.py.
