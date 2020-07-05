@@ -197,15 +197,20 @@ JWT 是本篇文章最重要的知识点，内容也不少，下面我会详细�
 
 1. 用户以 Web表单 的形式，将自己的用户名和密码 POST 到后端的接口。
 2. 后端核对用户名和密码成功后，会计算生成JWT Payload
-   字符串（具体计算方法，后续会讲），然后返回 response
-   给浏览器（包含Set-Cookie: HttpOnly）；
-3. 浏览器收到 JWT 后，将其保存在 cookie 里（为什么保存在 cookie
-   里，后续会讲）。
+   字符串（具体计算方法，后续会讲），然后返回 response 给浏览器。
+3. 浏览器收到 JWT 后，将其保存在 cookie 里或者 localStorage 或者
+   sessionStorage 里（具体如何选，后面会说）。
 4. 后续在该域上发出的请求，都会将 JWT放入HTTP Header 中的 Authorization
    字段。
 5. 后端收到新请求后，会使用密钥验证 JWT 签名。
 6. 验证通过后后端使用 JWT
    中包含的用户信息进行其他相关操作，返回相应结果。
+
+.. figure:: https://miro.medium.com/max/2960/1*tW-8Y2edq04b4__zF0Jm9Q.png
+   :alt: JSON Web Token (JWT) — The right way of implementing, with
+   Node.js
+
+   JSON Web Token (JWT) — The right way of implementing, with Node.js
 
 5. JWT 如何生成？
 -----------------
@@ -305,8 +310,8 @@ SHA256），按照下面的公式产生签名。
 算出签名以后，把 Header、Payload、Signature
 三个部分拼成一个字符串，每个部分之间用“点”（\ ``.``\ ）分隔，就可以返回给用户。
 
-6. 手动生成 JWT
----------------
+6. 如何手动生成 JWT？
+---------------------
 
 如果你想手动生成一个 JWT 用于测试，可以使用
 ``https://jwt.io/``\ 这个网站 。
@@ -346,19 +351,13 @@ storage，因为这样，第三方的脚本就能直接获取到。
 
 作者推荐的做法是，将 JWT 保存在 cookie 里，并设置 HttpOnly。
 
-.. figure:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200705233446534.png
-   :alt: image-20200705233446534
-
-   image-20200705233446534
+|image10|
 
 再比如这一篇帖子（\ `JWT(JSON Web Token) : Implementation with
 Node <https://medium.com/@am_pra_veen/jwt-json-web-token-implementation-with-node-d0661d4c7cbb>`__\ ）提到了要把
 JWT 保存到 local-storage。
 
-.. figure:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200705233925900.png
-   :alt: image-20200705233925900
-
-   image-20200705233925900
+|image11|
 
 因此，我决定不再看网络上关于 『应将 JWT
 保存的哪？』的文章。而是自己思考，以下是我个人观点，不代表一定正确，仅供参考
@@ -391,10 +390,7 @@ CSRF 攻击风险。
 
 如此看来，好像不管哪一种都有弊端，没有一种完美的解决方案。
 
-.. figure:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200706001903273.png
-   :alt: image-20200706001903273
-
-   image-20200706001903273
+|image12|
 
 是的，事实也确实如此。
 
@@ -480,11 +476,11 @@ CSRF 的产生的，最后引出解决 CSRF 的完美方案 ：JWT ，并详细�
 
 -  `JWT 超详细分析 <https://www.cnblogs.com/DeadBoy/p/11481146.html>`__
 
-|image10|
+|image13|
 ---------
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.iswbm.com/20200705214412.png
+.. |image1| image:: http://image.iswbm.com/20200706005937.png
 .. |image2| image:: http://image.iswbm.com/20200705171112.png
 .. |image3| image:: http://image.iswbm.com/20200705172457.png
 .. |image4| image:: http://image.iswbm.com/20200705193118.png
@@ -493,5 +489,8 @@ CSRF 的产生的，最后引出解决 CSRF 的完美方案 ：JWT ，并详细�
 .. |image7| image:: http://image.iswbm.com/20200705212820.png
 .. |image8| image:: http://image.iswbm.com/20200705215033.png
 .. |image9| image:: http://image.iswbm.com/20200706005103.png
-.. |image10| image:: http://image.iswbm.com/20200607174235.png
+.. |image10| image:: http://image.iswbm.com/image-20200705233446534.png
+.. |image11| image:: http://image.iswbm.com/image-20200705233925900.png
+.. |image12| image:: http://image.iswbm.com/image-20200706001903273.png
+.. |image13| image:: http://image.iswbm.com/20200607174235.png
 
