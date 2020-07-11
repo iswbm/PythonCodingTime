@@ -143,7 +143,7 @@ aggregate管理
     public 172.20.20.0/24
 
    # 创建子网，更多选项可以查看 neutron subnet-create -h
-   neutron subnet-create --name 192.168.2.0/24 --allocation-pool start=192.168.2.200,end=192.168.2.230 --gateway 192.168.2.253 --dns-nameserver 114.114.114.114 --disable-dhcp private 192.168.2.0/24
+   neutron subnet-create --name private --allocation-pool start=192.168.2.200,end=192.168.2.230 --gateway 192.168.2.253 --dns-nameserver 114.114.114.114 --disable-dhcp public 192.168.2.0/24
 
    # 查看网络
    $ neutron net-show <net_name>

@@ -199,6 +199,35 @@ DSCP 是以集群为粒度，一个集群只要创建一个就行，需要的时
 2. bandwidth_limit 带宽限速
 ---------------------------
 
+华云 QoS
+：https://support.huawei.com/enterprise/zh/doc/EDOC1100055155/101c0e7b
+
+http://blog.chinaunix.net/uid-20530497-id-2490382.html
+
+https://www.zhihu.com/question/21053403
+
+qos 查询命令
+
+.. code:: shell
+
+   $ neutron qos-policy-list 
+   $ neutron qos-bandwidth-limit-rule-list 16fbb0c2-b7ac-4053-a85f-75fb72c3ab55
+
+在 dpdk 宿主机上查询限速
+
+.. code:: shell
+
+   # 查询 ingress（宿主机角度）
+   $ virsh dumpxml 4f6a0708-aeb8-4208-bea8-2c51e6a94948
+
+   # 查询 egress（虚拟机角度）
+   $ ovs-vsctl list interface vhu198063e9-97
+
+   # 查询 ingress（虚拟机角度）
+   $ ovs-appctl -t ovs-vswitchd qos/show vhu198063e9-97
+
+|image6|
+
 3. 参考文章
 -----------
 
@@ -210,7 +239,7 @@ DSCP 是以集群为粒度，一个集群只要创建一个就行，需要的时
 
 --------------
 
-|image6|
+|image7|
 
 .. |image0| image:: http://image.iswbm.com/20200701155207.png
 .. |image1| image:: http://img.wandouip.com/crawler/article/2019411/546f47120fa14a2a1cfc44c9e8a48e71
@@ -218,5 +247,6 @@ DSCP 是以集群为粒度，一个集群只要创建一个就行，需要的时
 .. |003：：每天五分钟入门TCP/IP协议栈：：IP协议之TOS字段说明| image:: https://s4.51cto.com/images/blog/201804/25/3c42c64b7240ef12b991f69644a145ac.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=
 .. |003：：每天五分钟入门TCP/IP协议栈：：IP协议之TOS字段说明| image:: https://s4.51cto.com/images/blog/201804/25/4f03b09e8081d8fc7073f29870bc1c95.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=
 .. |image5| image:: http://image.iswbm.com/20200701155207.png
-.. |image6| image:: http://image.iswbm.com/20200607174235.png
+.. |image6| image:: http://image.iswbm.com/20200709171517.png
+.. |image7| image:: http://image.iswbm.com/20200607174235.png
 

@@ -215,11 +215,7 @@ JWT 是本篇文章重要知识点之一，下面我会详细说说关于 JWT �
 6. 验证通过后后端使用 JWT
    中包含的用户信息进行其他相关操作，返回相应结果。
 
-.. figure:: http://image.iswbm.com/1*tW-8Y2edq04b4__zF0Jm9Q.png
-   :alt: JSON Web Token (JWT) — The right way of implementing, with
-   Node.js
-
-   JSON Web Token (JWT) — The right way of implementing, with Node.js
+|image5|
 
 JWT 的诞生并不是解决 CSRF 跨域攻击，而是解决跨域认证的难题。
 
@@ -246,13 +242,13 @@ JWT 其实就是一个字符串，比如下面这样
 仔细观察，会发现它里面有三个 ``.`` ，以 ``.`` 为分界，可以将 JWT
 分为三部分。
 
-|image5|
+|image6|
 
 1. **第一部分**\ ：头部（Header）
 2. **第二部分**\ ：载荷（Payload）
 3. **第三部分**\ ：签名（Signature）
 
-|image6|
+|image7|
 
 5.1 头部（Header）
 ~~~~~~~~~~~~~~~~~~
@@ -271,8 +267,7 @@ JWT 的头部承载两部分信息：
      "alg": "HS256"
    }
 
-然后将头部进行 Base64URL
-算法加密（该加密是可以对称解密的)，构成了第一部分
+然后将头部进行 Base64URL 算法编码转换，构成了第一部分
 
 .. code:: shell
 
@@ -307,7 +302,7 @@ JWT 规定了7个官方字段，供选用：
      "admin": true
    }
 
-然后将其进行 Base64URL 算法加密，得到 JWT 的第二部分。
+然后将其进行 Base64URL 算法转换，得到 JWT 的第二部分。
 
 .. code:: shell
 
@@ -335,8 +330,9 @@ SHA256），按照下面的公式产生签名。
 6. 如何手动生成 JWT？
 ---------------------
 
-如果你想手动生成一个 JWT 用于测试，可以使用
-``https://jwt.io/``\ 这个网站 。
+如果你想手动生成一个 JWT 用于测试，有两种方法
+
+**第一种：使用 https://jwt.io/ 这个网站 。**
 
 我使用前面的 header 和 payload，然后使用 secret 密钥：\ ``Python``
 
@@ -346,7 +342,48 @@ SHA256），按照下面的公式产生签名。
 
    eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.3wGDum3_A8tAt1bdal5CpYbIUlpHfPQxs96Ijx883kI
 
-|image7|
+|image8|
+
+**第二种：使用 Python 代码生成**
+
+首先安装一下 pyjwt 这个库
+
+.. code:: shell
+
+   $ pip install pyjwt
+
+然后就可以在代码中使用它
+
+.. code:: python
+
+   import jwt
+   import datetime
+   import uuid
+
+   salt = 'minggezuishuai'
+
+   # 构造header ， 这里不写默认的也是
+   headers = {
+       'typ': 'JWT',
+       'alg': 'HS256'
+   }
+
+   # 构造payload
+   payload = {
+       'user_id': str(uuid.uuid4()),  # 自定义用户ID
+       'username': "wangbm",  # 自定义用户名
+       'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=5)  # 超时时间，取现在时间，五分钟后token失效
+   }
+   token = jwt.encode(payload=payload, key=salt, algorithm="HS256", headers=headers).decode('utf-8')
+
+   # token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiODg4ZjIwZDktMDdlZC00MWJkLWIzMjktMTdjNmYwNThhMTRlIiwidXNlcm5hbWUiOiJ3YW5nYm0iLCJleHAiOjE1OTQ0MzQzMjZ9.kkEMhSx732lO6HWWNPNVQDHR9WuCEVxKgNol-LTbCP8
+
+如果你只是测试使用，完全不用写那么多代码，用命令行即可
+
+.. code:: shell
+
+   $ pyjwt --key="minggezuishuai" encode user_id=888f20d9-07ed-41bd-b329-17c6f058a14e username=wangbm exp=+120
+   eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiODg4ZjIwZDktMDdlZC00MWJkLWIzMjktMTdjNmYwNThhMTRlIiwidXNlcm5hbWUiOiJ3YW5nYm0iLCJleHAiOjE1OTQ0MzQ4NTl9.A792th12kY1YnBWyVgbr5l6OQ5emRiETIjsnmIl4Ji8
 
 7. Base64URL 算法
 -----------------
@@ -373,13 +410,13 @@ storage，因为这样，第三方的脚本就能直接获取到。
 
 作者推荐的做法是，将 JWT 保存在 cookie 里，并设置 HttpOnly。
 
-|image8|
+|image9|
 
 再比如这一篇帖子（\ `JWT(JSON Web Token) : Implementation with
 Node <https://medium.com/@am_pra_veen/jwt-json-web-token-implementation-with-node-d0661d4c7cbb>`__\ ）提到了要把
 JWT 保存到 local-storage。
 
-|image9|
+|image10|
 
 因此，我决定不再看网络上关于 『应将 JWT
 保存的哪？』的文章。而是自己思考，以下是我个人观点，不代表一定正确，仅供参考
@@ -412,7 +449,7 @@ CSRF 攻击风险。
 
 如此看来，好像不管哪一种都有弊端，没有一种完美的解决方案。
 
-|image10|
+|image11|
 
 是的，事实也确实如此。
 
@@ -471,7 +508,71 @@ payload 中，有 Token 的过期时间，可以通过它来检查 Token 是否�
 payload
 里同时还有用户的相关信息，有了这些信息后，后端就可以知道这是哪个用户的请求了，到这里一切都验证通过，就可以执行相关的业务逻辑了。
 
-11. 总结写在最后
+前面我使用了 ``pyjwt`` 这个来生成 JWT ，事实上，这个库也可以用来验证
+token。
+
+使用 jwt 的 decode 会先验签再解码取得 payload 的信息。
+
+.. code:: python
+
+   >>> import jwt
+   >>> token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiODg4ZjIwZDktMDdlZC00MWJkLWIzMjktMTdjNmYwNThhMTRlIiwidXNlcm5hbWUiOiJ3YW5nYm0iLCJleHAiOjE1OTQ0MzQzMjZ9.kkEMhSx732lO6HWWNPNVQDHR9WuCEVxKgNol-LTbCP8"
+   >>> jwt.decode(token, 'minggezuishuai', algorithms=['HS256'])
+   {'user_id': '888f20d9-07ed-41bd-b329-17c6f058a14e', 'username': 'wangbm', 'exp': 1594434326}
+   >>>
+
+验签同样也可以使用命令行
+
+.. code:: shell
+
+   $ pyjwt --key="minggezuishuai" decode eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiODg4ZjIwZDktMDdlZC00MWJkLWIzMjktMTdjNmYwNThhMTRlIiwidXNlcm5hbWUiOiJ3YW5nYm0iLCJleHAiOjE1OTQ0MzQ4NTl9.A792th12kY1YnBWyVgbr5l6OQ5emRiETIjsnmIl4Ji8
+   {"user_id": "888f20d9-07ed-41bd-b329-17c6f058a14e", "username": "wangbm", "exp": 1594434859}
+
+如果不想验证签名及有效期，而只是想取下payload，只需加个\ ``--no-verify``
+参数即可
+
+.. code:: shell
+
+   $ pyjwt --key="minggezuishuai" decode --no-verify {token}
+
+更的详细使用方法，可以执行 ``pyjwt --help``
+学习或者前往官方文档：https://pyjwt.readthedocs.io/en/latest/index.html
+
+11. JWT 的最佳搭配
+------------------
+
+在真正的业务中，是有可能使用 payload 来存放一些用户的敏感信息的，由于
+payload 是采用 Base64URL 转换而成，它是可逆的，因此当你在 payload
+存放敏感信息时，需要保证 JWT 的安全性，不能让其暴露在 『阳光』下。
+
+为此，JWT 最好与 HTTPS 配合使用，利用 HTTPS 的非对称加密来保证 JWT
+的安全。
+
+具体是如何保障的呢？
+
+HTTPS 是基于 SSL/TLS 的非对称加密算法工作的。
+
+在非对称加密算法的规则下，服务器会拥有一个叫做『私钥』的东西，它是私有的，除了服务器之外，不能再有第二个人知道它。
+
+而相对的，所有的客户端（浏览器）同时也会有一个叫做『公钥』的东西，它是对所有人公开的，任何人都可以拥有它。它与『私钥』合称为一个密钥对。
+
+公钥和私钥的规则是：
+
+-  **公钥加密的东西，只有私钥能解。**\ 因此如果 JWT 的 payload
+   里有你的敏感信息，那也不要紧，只要把 JWT
+   用公钥（\ **前提是这个公钥得是正确的，下面会说到**\ ）加密一下，那黑客就算拿到了这个密文，也无法解密，因为私钥只有服务器才有。
+-  **私钥加密的东西，所有的公钥也都能解。**\ 因此服务器发给客户端的 JWT
+   的payload 尽量不要有敏感信息。
+
+|image12|
+
+那么问题又来了，如果客户端拿到的公钥，是黑客伪造的，客户端拿着这个假公钥加密自己的敏感信息，然后发出去，黑客在拿到这个用自己伪造的公钥加密的数据，非常开心，因为这个公钥对应的私钥在自己手里，自己是可以解密得到里面的数据的。
+
+因此如何保证服务器发给客户端（浏览器）的公钥是正确的呢？
+
+答案是通过\ **数字证书**\ 来保证。但是由于这个不是本文的重点，因此我将这块内容放在后面的文章详细解释。
+
+12. 总结写在最后
 ----------------
 
 最后，我总结一下，本文的要点：
@@ -493,7 +594,7 @@ payload
    HTTPS 协议搭配使用，避免数据泄露。
 8. JWT 的保存位置与方式，没有绝对的方案，具体如何选择要视情况而定。
 
-12. 参考文章
+13. 参考文章
 ------------
 
 -  `咱妈说别乱点链接之浅谈CSRF攻击 <https://cloud.tencent.com/developer/article/1004943>`__
@@ -504,18 +605,20 @@ payload
 
 -  `JWT 超详细分析 <https://www.cnblogs.com/DeadBoy/p/11481146.html>`__
 
-|image11|
+|image13|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.iswbm.com/20200708223651.png
+.. |image1| image:: http://image.iswbm.com/20200711143644.png
 .. |image2| image:: http://image.iswbm.com/20200705171112.png
 .. |image3| image:: http://image.iswbm.com/image-20200707221742925.png
 .. |image4| image:: http://image.iswbm.com/image-20200707222024941.png
-.. |image5| image:: http://image.iswbm.com/20200705212820.png
-.. |image6| image:: http://image.iswbm.com/20200705215033.png
-.. |image7| image:: http://image.iswbm.com/20200706005103.png
-.. |image8| image:: http://image.iswbm.com/image-20200705233446534.png
-.. |image9| image:: http://image.iswbm.com/image-20200705233925900.png
-.. |image10| image:: http://image.iswbm.com/image-20200706001903273.png
-.. |image11| image:: http://image.iswbm.com/20200607174235.png
+.. |image5| image:: http://image.iswbm.com/20200711144042.png
+.. |image6| image:: http://image.iswbm.com/20200705212820.png
+.. |image7| image:: http://image.iswbm.com/20200705215033.png
+.. |image8| image:: http://image.iswbm.com/20200706005103.png
+.. |image9| image:: http://image.iswbm.com/image-20200705233446534.png
+.. |image10| image:: http://image.iswbm.com/image-20200705233925900.png
+.. |image11| image:: http://image.iswbm.com/image-20200706001903273.png
+.. |image12| image:: http://image.iswbm.com/20200711141903.png
+.. |image13| image:: http://image.iswbm.com/20200607174235.png
 

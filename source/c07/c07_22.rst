@@ -183,3 +183,8 @@ rpmdb
 -  ``--nosignature``\ ：跳过数字证书的检查，直接安装
 -  ``--prefix 新路径``\ ：将软件安装在指定的路径
 -  ``--noscripts``\ ：安装时，忽略某些命令的执行
+
+|image0|
+
+.. |image0| image:: http://image.iswbm.com/20200607174235.png
+

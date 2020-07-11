@@ -252,6 +252,14 @@ network_info 对象。
 
 |image21|
 
+上面是创建虚拟机时，创建 network_info 对象的过程。
+
+如果虚拟机已存在，那么如果获取呢，可以用这个函数
+
+.. code:: python
+
+   network_info = compute_utils.get_nw_info_for_instance(instance)
+
 8.5.8 手动引入上下文环境
 ------------------------
 

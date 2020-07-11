@@ -30,10 +30,16 @@ NewFileMenu 可以解决你的烦恼
 
 |image1|
 
-3. Magnet/Moon
-~~~~~~~~~~~~~~
+3. Magnet/Moon/Rectangle
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 分屏工作几乎是办公必备技能。
+
+Magnet：收费
+
+Moon：收费
+
+Rectangle：\ `官网 <https://rectangleapp.com>`__\ 免费下载，支持拖动分屏
 
 4. 快贴
 ~~~~~~~
@@ -41,6 +47,14 @@ NewFileMenu 可以解决你的烦恼
 https://clipber.com/
 
 用于多设备间剪切板同步共享
+
+CopyLess
+~~~~~~~~
+
+剪切板工具，免费可支持 100
+个剪切项目，但是双击粘贴需要在偏好设置里额外安装一个插件（具体打开设置后有步骤指引）。
+
+有批量复制粘贴功能。
 
 GoodSync
 ~~~~~~~~
@@ -88,10 +102,14 @@ ShortCat：在系统栏也可以搜索聚焦
 
 TouchBarServer：在外接屏幕上调出 touchbar
 
+Hazeover：干扰调节神器，把活动窗口除久的其他范围调暗
+
 4. 图片影音
 -----------
 
-Snipaste：截图工具
+Snipaste：截图工具，支持钉图
+
+iShot：截图工具，支持长截图/滚动截图，钉图
 
 Capture Gif：Gif 录制（不推荐）
 
