@@ -140,11 +140,11 @@ with open("/home/docs/checkouts/readthedocs.org/user_builds/pythoncodingtime/env
     file.write(content)
 
 author = '王炳明'
-copyright = '2020, Go编程时光'
+copyright = '2020, Python编程时光'
 exclude_patterns = ['_build']
 extensions = ['sphinxcontrib.disqus']  # Add to this list.
 master_doc = 'index'
-project = 'GolangCodingTime'
+project = 'Python编程时光'
 release = '1.0'
 version = '1.0'
 
