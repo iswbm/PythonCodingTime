@@ -1075,6 +1075,34 @@ Debug ，而远程调试需要不少前置步骤。
 
 |image103|
 
+4.15.37 快速输入自定义代码片段
+------------------------------
+
+在 PyCharm 中有一个功能叫 Live
+Template，它可以用来自定义一些常用的代码片段。
+
+比如下面这段，几乎是写 Python 脚本必备的
+
+.. code:: python
+
+   if __name__ == '__main__':
+
+当你在PyCharm 中编码 python 代码时，只要输入 main ，PyCharm 就会在 Live
+Template
+里找到定义过的代码片段，然后只要直接键入回车，就可以生成这段代码。
+
+再比如说，我通常会定义简单的装饰器代码
+
+|image104|
+
+这样当我要定义一个最简单的装饰器时，只要输入 ``deco``
+再直接敲入回车就行啦。
+
+|image105|
+
+`PyCharm
+使用技巧 <https://blog.csdn.net/xiemanr/category_6928127.html>`__
+
 附录
 ----
 
@@ -1086,7 +1114,7 @@ Debug ，而远程调试需要不少前置步骤。
 
 --------------
 
-|image104|
+|image106|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.python-online.cn/20190323164120.png
@@ -1192,5 +1220,7 @@ Debug ，而远程调试需要不少前置步骤。
 .. |image101| image:: http://image.iswbm.com/20200420085524.png
 .. |image102| image:: http://image.iswbm.com/20200420090117.png
 .. |image103| image:: http://image.iswbm.com/20200420090428.png
-.. |image104| image:: http://image.iswbm.com/20200607174235.png
+.. |image104| image:: http://image.iswbm.com/20200723161209.png
+.. |image105| image:: http://image.iswbm.com/20200723161307.png
+.. |image106| image:: http://image.iswbm.com/20200607174235.png
 

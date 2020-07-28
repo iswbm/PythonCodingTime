@@ -1,29 +1,390 @@
-8.16 修改 KVM 镜像文件的三种方法
-================================
+9.16 详解 Neutron 的 QoS
+========================
 
-如下工具的更多说明，请查看官方文档：http://libguestfs.org/guestfs-recipes.1.html
+QoS 的全称是 Quality of Service，也就是服务质量。
 
-8.16.1 使用 guestfish
----------------------
+Neutron 支持的
+`QoS <https://docs.openstack.org/neutron/latest/admin/config-qos.html>`__
+类型有
+
+-  bandwidth_limit（带宽限速）：实现带宽速速
+-  DSCP（差分服务代码点）：给网络流量包添加一个 DSCP
+   标记，以此实现流量的优先级
+-  minimum_bandwidth：暂时没用过
+
+1. 开户 QoS 支持
+----------------
+
+在控制节点上执行两条命令修改配置
+
+.. code:: shell
+
+   $ openstack-config --set /etc/neutron/neutron.conf DEFAULT service_plugins neutron.services.qos.qos_plugin.QoSPlugin
+
+   $ openstack-config --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 extension_drivers port_security,qos
+
+然后重启 neutron-server
+
+.. code:: shell
+
+   $ crm resource cleanup openstack-neutron-server-clone
+
+在计算节点上执行命令修改配置
+
+.. code:: shell
+
+   $ openstack-config --set /etc/neutron/plugins/ml2/openvswitch_agent.ini agent extensions qos
+
+然后重启对应的 neutron-agent 服务
+
+.. code:: shell
+
+   $ systemctl restart neutron-openvswitch-agent  
+
+DSCP 差分服务代码点
+-------------------
+
+DSCP 大小为 6 个 bit，也就是最大可表示 64 个分类。
+
+但在 Neutron 里可用的标记只有这些
+
+::
+
+   0, 8, 10, 12, 14, 16, 18, 20, 
+   22, 24, 26, 28, 30, 32, 34, 36, 
+   38, 40, 46, 48, 56
+
+可以看到，它们都是0-56 间的偶数，但是排除 2-6, 42, 44 和 50-54。
 
 |image0|
 
-guestfish 里的命令有限，大概会 600 多个，不能
-cd，操作文件时，需要使用绝对路径。
+原理
+~~~~
 
-8.16.2 使用 guestmount
-----------------------
+在 IP 协议分组里有一个 ToS（服务类型） 的字段，就是用来表示 ToS 的。
+
+ToS 字段，总共 8 个 bit
 
 |image1|
 
-使用完后，记得 umount /home/wangbm/mount
+**前面 3 个 bit**
 
-8.16.3 使用 virt-\* 命令
-------------------------
+为优选权子字段，现在已经废弃，这个字段默认值是000，从wireshark抓包结果看，表示的是：
 
 |image2|
 
-.. |image0| image:: http://image.python-online.cn/20191111112221.png
-.. |image1| image:: http://image.python-online.cn/20191111112421.png
-.. |image2| image:: http://image.python-online.cn/20191111112548.png
+但是在某些协议中仍然是有用的，比如 OSPFv2 协议
+
+|image3|
+
+关于 Precedence （优先级），有如下几种
+
+.. code:: shell
+
+   111 - Network Control
+   110 - Internetwork Control
+   101 - CRITIC/ECP
+   100 - Flash Override
+   011 - Flash
+   010 - Immediate
+   001 - Priority
+   000 – Routine
+
+**中间 4 个bit**
+
+这四个 bit
+组合在一起，表示了该数据报对应的服务类别，这个应用层的服务类别是不同的。这里所说的服务类别，是指：
+
+::
+
+   1000 -- minimize delay          最小延迟
+   0100 -- maximize throughput     最大吞吐量
+   0010 -- maximize reliability    最高可靠性 
+   0001 -- minimize monetary cost  最小费用 
+   0000 -- normal service          一般服务
+
+IP首部中的ToS字段，只能表示一种服务类别，也就是：这4bit字段中，最多只能有一个bit字段为1。
+
+看下不同应用下该4bit字段对应的值： |image4| 翻译过来就是： |image5|
+**最小延迟**\ ，对应于对延迟敏感的应用，如telnet和人login等。
+**最大吞吐量**\ ，对应于对吞吐量要求比较高的应用，如FTP文件应用，对文件传输吞吐量有比较高的要求。
+**最高可靠性**\ ，对网络传输可靠性要求高的应用，如使用SNMP的应用、路由协议等等。
+**最小费用**\ ，如NNTP这种用户网络新闻等。
+
+**最后 1 个bit**
+
+这个1bit末尾，没有被使用，必须强制设置为0
+
+最后，很重要的一点，只有当\ **网络设备（如交换机等）能够支持**\ （能够识别IP首部中的ToS字段）识别ToS字段时，这给字段设置才有意义。
+
+创建 policy
+~~~~~~~~~~~
+
+.. code:: shell
+
+   $ neutron qos-policy-create qos-dscp --shared
+   Created a new policy:
+   +-----------------+--------------------------------------+
+   | Field           | Value                                |
+   +-----------------+--------------------------------------+
+   | created_at      | 2020-07-01T06:43:23Z                 |
+   | description     |                                      |
+   | id              | ee7e7a83-c67d-4f27-b77c-3345553e5abe |
+   | name            | qos-dscp                             |
+   | project_id      | 2ac17c7c792d45eaa764c30bac37fad9     |
+   | revision_number | 1                                    |
+   | rules           |                                      |
+   | shared          | True                                 |
+   | tenant_id       | 2ac17c7c792d45eaa764c30bac37fad9     |
+   | updated_at      | 2020-07-01T06:43:23Z                 |
+   +-----------------+--------------------------------------+
+
+创建 rule
+~~~~~~~~~
+
+创建时需要指定 QOS_POLICY，创建完后，就会自动添加到 QOS_POLICY
+
+.. code:: shell
+
+   $ neutron  qos-dscp-marking-rule-create --dscp-mark 14 ee7e7a83-c67d-4f27-b77c-3345553e5abe
+   Created a new dscp_marking_rule:
+   +-----------+--------------------------------------+
+   | Field     | Value                                |
+   +-----------+--------------------------------------+
+   | dscp_mark | 14                                   |
+   | id        | 1d045cf3-eb31-440b-9a74-a9d5fea6a7e0 |
+   +-----------+--------------------------------------+
+
+绑定policy到 port
+~~~~~~~~~~~~~~~~~
+
+.. code:: shell
+
+   $ neutron port-update <port_id> --qos-policy qos-dscp
+
+关闭 QoS
+~~~~~~~~
+
+.. code:: shell
+
+   $ neutron port-update <port_id> --no-qos-policy
+
+查看规则
+~~~~~~~~
+
+过滤出 tos 后就能看到 ToS（Type of Service） 的值
+
+.. code:: shell
+
+   $ ovs-ofctl dump-flows br-int | grep tos
+
+然后再对照这个表，找到对应的 DSCP 的 decimal ，如果 tos 是 64，那么 DSCP
+mark 就是 16，其实除以 4 就可以了，也不用对照表。其中这个 16
+需要跟交换上支持的一样。
+
+|image6|
+
+其他
+~~~~
+
+DSCP 是以集群为粒度，一个集群只要创建一个就行，需要的时候将其绑定到 port
+上就可以。
+
+2. bandwidth_limit 带宽限速
+---------------------------
+
+华云 QoS
+：https://support.huawei.com/enterprise/zh/doc/EDOC1100055155/101c0e7b
+
+http://blog.chinaunix.net/uid-20530497-id-2490382.html
+
+https://www.zhihu.com/question/21053403
+
+qos 查询命令
+
+.. code:: shell
+
+   $ neutron qos-policy-list 
+   $ neutron qos-bandwidth-limit-rule-list 16fbb0c2-b7ac-4053-a85f-75fb72c3ab55
+
+在 dpdk 宿主机上查询限速
+
+.. code:: shell
+
+   # 查询 ingress（宿主机角度）
+   $ virsh dumpxml 4f6a0708-aeb8-4208-bea8-2c51e6a94948
+
+   # 查询 egress（虚拟机角度）
+   $ ovs-vsctl list interface vhu198063e9-97
+
+   # 查询 ingress（虚拟机角度）
+   $ ovs-appctl -t ovs-vswitchd qos/show vhu198063e9-97
+
+|image7|
+
+测试限速
+
+average: 100M
+
+.. code:: shell
+
+   # burst：50
+   $ nova meta b1575f81-0a33-4872-995e-2c2dd48d52c8 set __system__vif_inbound_average=12500 __system__vif_inbound_burst=7500 __system__vif_outbound_average=12500 __system__vif_outbound_burst=6000
+
+
+   # burst：60
+   $ nova meta b1575f81-0a33-4872-995e-2c2dd48d52c8 set __system__vif_inbound_average=12500 __system__vif_inbound_burst=7500 __system__vif_outbound_average=12500 __system__vif_outbound_burst=7500
+
+   # burst：70
+   $ nova meta b1575f81-0a33-4872-995e-2c2dd48d52c8 set __system__vif_inbound_average=12500 __system__vif_inbound_burst=8750 __system__vif_outbound_average=12500 __system__vif_outbound_burst=8750
+
+   # burst：80
+   $ nova meta b1575f81-0a33-4872-995e-2c2dd48d52c8 set __system__vif_inbound_average=12500 __system__vif_inbound_burst=10000 __system__vif_outbound_average=12500 __system__vif_outbound_burst=10000
+
+3. 带宽单位换算
+---------------
+
+带宽，英文名
+Bandwidth，在不同领域的含义各不相同，而在网络服务中，带宽是指单位时间内的流经数据量。
+
+数据量的单位一般有两种：bit 和 Byte。
+
+因此，带宽的单位即为，b/s 或者 B/s，如果数值较大，可以使用 K
+表示千（Kb/s 或者 KB/s），M 表示 百万（Mb/s 或者 MB/s）。
+
+-  Mb/s：Million bits per
+   second的缩写，是一种传输速率单位，指每秒传输的位（比特）数量。通常用于运营商带宽速率的计量。
+
+-  MB/s：Million Bytes per
+   second的缩写，是一种传输速率单位，指每秒传输的字节数量。即是我们平时说的下载速度。
+
+Byte 和 bit 是不一样的，Byte = 8
+bit，而不同的地方单位不同，需要进行换算，下表整理了在 VMP
+中的各个位置的单位
+
++------+-------+------+------+----------+----------------------+
+| type | cloud | meta | xml  | qos rule | ovs-vsctl/ovs-appctl |
++======+=======+======+======+==========+======================+
+| ovs  | bit   | Byte | Byte |          |                      |
++------+-------+------+------+----------+----------------------+
+| dpdk | bit   | Byte |      | bit      | bit                  |
++------+-------+------+------+----------+----------------------+
+
+4. 带宽限制效果
+---------------
+
+CentOS 安装 iperf3
+~~~~~~~~~~~~~~~~~~
+
+源码编译安装 iperf3
+
+.. code:: shell
+
+   yum -y install gcc make wget
+   cd /tmp
+   wget https://iperf.fr/download/source/iperf-3.1.3-source.tar.gz
+   tar zxvf iperf-3.1.3-source.tar.gz
+   cd iperf-3.1.3
+   ./configure
+   make
+   make install
+
+使用 rpm 包安装（更简单，推荐）
+
+.. code:: shell
+
+   $ rpm -ih ftp://ftp.pbone.net/mirror/archive.fedoraproject.org/fedora/linux/updates/24/x86_64/i/iperf3-3.1.3-1.fc24.x86_64.rpm
+
+Windows 安装 iperf3
+~~~~~~~~~~~~~~~~~~~
+
+所有的 windows 可用的 iperf3
+安装包都可以从这个页面下载：https://iperf.fr/iperf-download.php
+
+这里直接给出两个 windows 常用的
+
+-  windows 10
+   64位：https://iperf.fr/download/windows/iperf-3.1.3-win64.zip
+-  windows 10 32
+   位：https://iperf.fr/download/windows/iperf-3.1.3-win32.zip
+
+下载到电脑到，并解压后，会得到两个文件：\ ``cygwin1.dll`` 和
+``iperf3.exe``\ ，将这两个文件拷贝到 ``c:\windows`` 目录下。
+
+最后打开 cmd，执行 ``iperf3 --version`` ，若安装成功，会打印出版本信息。
+
+iperf3 使用前关闭防火墙
+~~~~~~~~~~~~~~~~~~~~~~~
+
+CentOS 关闭防火墙，只要一条命令
+
+.. code:: shell
+
+   $ systemctl stop firewalld
+   $ systemctl stop iptables
+
+windows 10 手动设置一下
+
+|image8|
+
+iperf3 的使用
+~~~~~~~~~~~~~
+
+iperf3 有客户端 和 服务端之别：
+
+-  服务端：收包，使用 ``-s`` 参数指定
+
+.. code:: shell
+
+   $ iperf3 -s
+
+-  客户端：发包，使用 ``-c xx.xx.xx.xx`` 来指定要往哪个服务端发包
+
+.. code:: shell
+
+   $ iperf3 -c 172.20.20.200
+
+iperf3
+还有更多的参数，其中有一些是客户端专用的，有一些是服务端专用的，也有一些是二者共用的。
+
+具体可以前往这个地址，进行查阅：https://www.cnblogs.com/yingsong/p/5682080.html
+
+常用的参数有
+
+-  ``-u``\ ：发送 UDP 包，仅客户端 可用
+-  ``-p``\ ：后接服务端监听的端口
+-  ``-i``\ ：设置带宽报告的时间间隔，单位为秒
+-  ``-t``\ ：设置测试的时长，单位为秒
+-  ``-w``\ ：设置tcp窗口大小，一般可以不用设置，默认即可
+
+5. 注意事项
+-----------
+
+1、vm 在 host1 上，从host2 上 iperf 比在 host1 上限速效果更好
+
+2、udp 包限速效果差异很大。
+
+3. 参考文章
+-----------
+
+-  https://blog.51cto.com/mangguostudy/2107799
+
+-  https://www.jianshu.com/p/4b5cc3845f2c
+
+-  https://blog.csdn.net/u011641885/article/details/45640313
+
+--------------
+
+|image9|
+
+.. |image0| image:: http://image.iswbm.com/20200701155207.png
+.. |image1| image:: http://img.wandouip.com/crawler/article/2019411/546f47120fa14a2a1cfc44c9e8a48e71
+.. |image2| image:: http://image.iswbm.com/20200723155027.png
+.. |image3| image:: http://image.iswbm.com/20200701170223.png
+.. |image4| image:: http://image.iswbm.com/20200723154704.png
+.. |image5| image:: http://image.iswbm.com/20200723154742.png
+.. |image6| image:: http://image.iswbm.com/20200701155207.png
+.. |image7| image:: http://image.iswbm.com/20200709171517.png
+.. |image8| image:: http://image.iswbm.com/20200716112516.png
+.. |image9| image:: http://image.iswbm.com/20200607174235.png
 

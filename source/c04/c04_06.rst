@@ -387,6 +387,18 @@ Git中的upstream和downstream的概念是相对的。
    # 回退一个版本
    $ git push origin HEAD --force
 
+3.7 删除版本库里的文件
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: shell
+
+   # 加了 --cached 就不会删除工作区的文件
+   $ git rm --cached file1.txt
+
+   $ git commit -m "remove file1.txt"
+
+   $ git push origin branch_name
+
 四、分支管理
 ------------
 
