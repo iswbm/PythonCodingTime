@@ -58,5 +58,7 @@ JSON：http://www.yyyweb.com/demo/inner-show/json-generator.html
 
 生成 Markdwon 目录：https://ecotrust-canada.github.io/markdown-toc/
 
+代码分享：https://paste.ubuntu.com/
+
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 

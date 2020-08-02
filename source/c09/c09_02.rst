@@ -1,5 +1,5 @@
-9.2 没有这 50 个APP，我的 Mac 将只是一块铁
-==========================================
+9.2 我在Mac 上使用哪些APP？
+===========================
 
 |image0|
 
@@ -133,6 +133,8 @@ GIF Brewery 3，视频转Gif动图。Mac App Store 免费下载
 
 PhotoBulk，图片批处理修改大小、格式、加水印 Mac App Store 购买下载
 
+PDFGuru：PDF 阅读器
+
 5. 文件管理
 -----------
 
@@ -160,13 +162,15 @@ Keta：解压缩软件
 
 PicGo：图床上传
 
-Typora/Bear：Markdown写作工具
+Typora/Bear/MWeb：Markdown写作工具
 
 WPS：Office套件
 
 TeamViewer：远程控制工具
 
 iText，精准的 OCR 文字识别工具。
+
+思维导图：MindNode，Xmind
 
 7. 系统管理
 -----------
