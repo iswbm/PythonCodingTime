@@ -162,22 +162,22 @@ ubuntu的启动设备。就它了，选择进入系统。接下来，就是选�
 |image18|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190511163441.png
-.. |image2| image:: http://image.python-online.cn/20190511163457.png
-.. |image3| image:: http://image.python-online.cn/20190511163510.png
-.. |image4| image:: http://image.python-online.cn/20190511163520.png
-.. |image5| image:: http://image.python-online.cn/20190511163531.png
-.. |image6| image:: http://image.python-online.cn/20190511163542.png
-.. |image7| image:: http://image.python-online.cn/20190511163550.png
-.. |image8| image:: http://image.python-online.cn/20190511163559.png
-.. |image9| image:: http://image.python-online.cn/20190511163612.png
-.. |image10| image:: http://image.python-online.cn/20190511163633.png
-.. |image11| image:: http://image.python-online.cn/20190511163700.png
-.. |image12| image:: http://image.python-online.cn/20190511163711.png
-.. |image13| image:: http://image.python-online.cn/20190511163722.png
-.. |image14| image:: http://image.python-online.cn/20190511163731.png
-.. |image15| image:: http://image.python-online.cn/20190511163750.png
-.. |image16| image:: http://image.python-online.cn/20190511163757.png
-.. |image17| image:: http://image.python-online.cn/20190511163805.png
+.. |image1| image:: http://image.iswbm.com/20190511163441.png
+.. |image2| image:: http://image.iswbm.com/20190511163457.png
+.. |image3| image:: http://image.iswbm.com/20190511163510.png
+.. |image4| image:: http://image.iswbm.com/20190511163520.png
+.. |image5| image:: http://image.iswbm.com/20190511163531.png
+.. |image6| image:: http://image.iswbm.com/20190511163542.png
+.. |image7| image:: http://image.iswbm.com/20190511163550.png
+.. |image8| image:: http://image.iswbm.com/20190511163559.png
+.. |image9| image:: http://image.iswbm.com/20190511163612.png
+.. |image10| image:: http://image.iswbm.com/20190511163633.png
+.. |image11| image:: http://image.iswbm.com/20190511163700.png
+.. |image12| image:: http://image.iswbm.com/20190511163711.png
+.. |image13| image:: http://image.iswbm.com/20190511163722.png
+.. |image14| image:: http://image.iswbm.com/20190511163731.png
+.. |image15| image:: http://image.iswbm.com/20190511163750.png
+.. |image16| image:: http://image.iswbm.com/20190511163757.png
+.. |image17| image:: http://image.iswbm.com/20190511163805.png
 .. |image18| image:: http://image.iswbm.com/20200607174235.png
 

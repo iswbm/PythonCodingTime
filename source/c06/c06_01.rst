@@ -137,6 +137,6 @@ ticks（由Locator对象定义），还有ticklabel（由Formatter对象定义�
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: https://i.loli.net/2018/08/12/5b6ff3716fdc0.png
-.. |image2| image:: http://image.python-online.cn/20190511164650.png
+.. |image2| image:: http://image.iswbm.com/20190511164650.png
 .. |image3| image:: http://image.iswbm.com/20200607174235.png
 

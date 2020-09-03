@@ -322,8 +322,8 @@ Socket发些“奇怪”的数据。
 |image5|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/18-1-28/92519416.jpg
-.. |image2| image:: http://image.python-online.cn/18-1-28/37395940.jpg
+.. |image1| image:: http://image.iswbm.com/18-1-28/92519416.jpg
+.. |image2| image:: http://image.iswbm.com/18-1-28/37395940.jpg
 .. |image3| image:: https://i.loli.net/2018/01/28/5a6de8702428c.png
 .. |image4| image:: https://i.loli.net/2018/01/28/5a6de73776390.png
 .. |image5| image:: http://image.iswbm.com/20200607174235.png

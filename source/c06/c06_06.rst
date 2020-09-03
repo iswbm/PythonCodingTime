@@ -142,6 +142,6 @@ Jupyter NoteBook 里观察整个变化的过程。
 |image2|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190511165315.png
+.. |image1| image:: http://image.iswbm.com/20190511165315.png
 .. |image2| image:: http://image.iswbm.com/20200607174235.png
 

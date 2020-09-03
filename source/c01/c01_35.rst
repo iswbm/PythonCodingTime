@@ -398,8 +398,8 @@ Windows，这里就有一件好事，一件坏事了，。
 |image4|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20200228085749.png
-.. |image2| image:: http://image.python-online.cn/20200228093627.png
-.. |image3| image:: http://image.python-online.cn/20200228111654.png
+.. |image1| image:: http://image.iswbm.com/20200228085749.png
+.. |image2| image:: http://image.iswbm.com/20200228093627.png
+.. |image3| image:: http://image.iswbm.com/20200228111654.png
 .. |image4| image:: http://image.iswbm.com/20200607174235.png
 

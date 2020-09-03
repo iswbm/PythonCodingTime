@@ -2324,17 +2324,17 @@ python 解释器都是 ``/usr/bin/python`` 。
 |image13|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190511165650.png
-.. |image2| image:: http://image.python-online.cn/20190511165716.png
+.. |image1| image:: http://image.iswbm.com/20190511165650.png
+.. |image2| image:: http://image.iswbm.com/20190511165716.png
 .. |image3| image:: http://image.iswbm.com/20200509172331.png
-.. |image4| image:: http://image.python-online.cn/20190511165735.png
+.. |image4| image:: http://image.iswbm.com/20190511165735.png
 .. |image5| image:: http://image.iswbm.com/20200509122954.png
 .. |image6| image:: http://image.iswbm.com/20200509123107.png
 .. |image7| image:: http://image.iswbm.com/20200510112133.png
-.. |image8| image:: http://image.python-online.cn/20200331184021.png
-.. |image9| image:: http://image.python-online.cn/20200331185034.png
-.. |image10| image:: http://image.python-online.cn/20200331184755.png
-.. |image11| image:: http://image.python-online.cn/20200331185741.png
-.. |image12| image:: http://image.python-online.cn/20200331190224.png
+.. |image8| image:: http://image.iswbm.com/20200331184021.png
+.. |image9| image:: http://image.iswbm.com/20200331185034.png
+.. |image10| image:: http://image.iswbm.com/20200331184755.png
+.. |image11| image:: http://image.iswbm.com/20200331185741.png
+.. |image12| image:: http://image.iswbm.com/20200331190224.png
 .. |image13| image:: http://image.iswbm.com/20200607174235.png
 

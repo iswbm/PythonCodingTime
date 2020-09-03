@@ -129,6 +129,10 @@ Permute 3，精致小巧的视频格式转换工具。
 
 PP 鸭，好用的多格式图片压缩软件。
 
+Squash for Mac：图片压缩（不能压缩GIF）
+
+ImageOptim：用过最好用的图片压缩软件（支持 Gif ）
+
 GIF Brewery 3，视频转Gif动图。Mac App Store 免费下载
 
 PhotoBulk，图片批处理修改大小、格式、加水印 Mac App Store 购买下载
@@ -171,6 +175,9 @@ TeamViewer：远程控制工具
 iText，精准的 OCR 文字识别工具。
 
 思维导图：MindNode，Xmind
+
+`KeyCastr <https://github.com/keycastr/keycastr/releases>`__\ ：在录制视频或者
+Gif 时显示你所按的键位
 
 7. 系统管理
 -----------

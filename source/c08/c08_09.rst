@@ -543,7 +543,7 @@ messaging也对RPC API 进行了重新设计，对多种 transport
 2. oslo.messaging.notify（实现了事件的通知机制）
 
 因为 notify
-实现是太简单了，所以这里我就不多说了，如果有人想要看这方面内容，可以收藏我的博客(http://python-online.cn)
+实现是太简单了，所以这里我就不多说了，如果有人想要看这方面内容，可以收藏我的博客(http://iswbm.com)
 ，我会更新补充 notify 的内容。
 
 OpenStack RPC 模块提供了 rpc.call，rpc.cast, rpc.fanout_cast 三种 RPC
@@ -787,26 +787,26 @@ rpc server 和rpc client 的四个重要方法
 |image22|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190623185008.png
-.. |image2| image:: http://image.python-online.cn/20190623165341.png
-.. |image3| image:: http://image.python-online.cn/20190623171138.png
-.. |image4| image:: http://image.python-online.cn/20190623155955.png
-.. |image5| image:: http://image.python-online.cn/20190623162725.png
-.. |image6| image:: http://image.python-online.cn/20190623191042.png
-.. |image7| image:: http://image.python-online.cn/20190630160025.png
-.. |image8| image:: http://image.python-online.cn/20190623201427.png
-.. |image9| image:: http://image.python-online.cn/20190526182125.png
-.. |image10| image:: http://image.python-online.cn/20190526184854.png
-.. |image11| image:: http://image.python-online.cn/20190526185217.png
-.. |image12| image:: http://image.python-online.cn/20190526221219.png
-.. |image13| image:: http://image.python-online.cn/20190526220809.png
-.. |image14| image:: http://image.python-online.cn/20190527220820.png
-.. |image15| image:: http://image.python-online.cn/20190527220012.png
-.. |image16| image:: http://image.python-online.cn/20190526172514.png
-.. |image17| image:: http://image.python-online.cn/20190526172725.png
-.. |image18| image:: http://image.python-online.cn/20190526173314.png
-.. |image19| image:: http://image.python-online.cn/20190526175100.png
-.. |image20| image:: http://image.python-online.cn/20190526180708.png
-.. |image21| image:: http://image.python-online.cn/20190526181433.png
+.. |image1| image:: http://image.iswbm.com/20190623185008.png
+.. |image2| image:: http://image.iswbm.com/20190623165341.png
+.. |image3| image:: http://image.iswbm.com/20190623171138.png
+.. |image4| image:: http://image.iswbm.com/20190623155955.png
+.. |image5| image:: http://image.iswbm.com/20190623162725.png
+.. |image6| image:: http://image.iswbm.com/20190623191042.png
+.. |image7| image:: http://image.iswbm.com/20190630160025.png
+.. |image8| image:: http://image.iswbm.com/20190623201427.png
+.. |image9| image:: http://image.iswbm.com/20190526182125.png
+.. |image10| image:: http://image.iswbm.com/20190526184854.png
+.. |image11| image:: http://image.iswbm.com/20190526185217.png
+.. |image12| image:: http://image.iswbm.com/20190526221219.png
+.. |image13| image:: http://image.iswbm.com/20190526220809.png
+.. |image14| image:: http://image.iswbm.com/20190527220820.png
+.. |image15| image:: http://image.iswbm.com/20190527220012.png
+.. |image16| image:: http://image.iswbm.com/20190526172514.png
+.. |image17| image:: http://image.iswbm.com/20190526172725.png
+.. |image18| image:: http://image.iswbm.com/20190526173314.png
+.. |image19| image:: http://image.iswbm.com/20190526175100.png
+.. |image20| image:: http://image.iswbm.com/20190526180708.png
+.. |image21| image:: http://image.iswbm.com/20190526181433.png
 .. |image22| image:: http://image.iswbm.com/20200607174235.png
 

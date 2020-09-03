@@ -314,7 +314,7 @@ port-update命令不支持，只能使用curl，需要修改port-id及binding:pr
 .. |image4| image:: https://i.loli.net/2018/01/19/5a61c1cf51b58.png
 .. |image5| image:: https://i.loli.net/2018/01/19/5a61c1faac447.png
 .. |image6| image:: https://i.loli.net/2018/01/19/5a61c246451e7.png
-.. |image7| image:: http://image.python-online.cn/20190529202132.png
-.. |image8| image:: http://image.python-online.cn/20190529202440.png
+.. |image7| image:: http://image.iswbm.com/20190529202132.png
+.. |image8| image:: http://image.iswbm.com/20190529202440.png
 .. |image9| image:: http://image.iswbm.com/20200607174235.png
 

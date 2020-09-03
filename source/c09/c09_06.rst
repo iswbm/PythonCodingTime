@@ -1,0 +1,176 @@
+9.6 学习编程的好网站
+====================
+
+|image0|
+
+学习 Python
+-----------
+
+Python 中文学习大本营
+~~~~~~~~~~~~~~~~~~~~~
+
+网站连接：http://www.pythondoc.com/
+
+|image1|
+
+Python Cookbook
+~~~~~~~~~~~~~~~
+
+网站链接：https://python3-cookbook.readthedocs.io/zh_CN/latest/preface.html
+
+|image2|
+
+Scrapy Cookbook
+~~~~~~~~~~~~~~~
+
+网站链接：https://scrapy-cookbook.readthedocs.io/zh_CN/latest/
+
+|image3|
+
+PyCrumbs
+~~~~~~~~
+
+搜集了各种免费Python的资料。
+
+网站链接：https://github.com/kirang89/pycrumbs
+
+|image4|
+
+实验楼：Python
+~~~~~~~~~~~~~~
+
+网站链接：https://www.shiyanlou.com/
+
+|image5|
+
+魔法学院：Python
+~~~~~~~~~~~~~~~~
+
+网站链接：http://www.nowamagic.net/academy/category/13/
+
+|image6|
+
+Python 3 标准库实例教程
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**网站链接**\ ：https://learnku.com/docs/pymotw
+
+|image7|
+
+Django Web 框架
+~~~~~~~~~~~~~~~
+
+网站链接：https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django
+
+该网站可以让你从0开始学习Web，包括前端（HTML,CSS,JS）、后端（Django）
+
+|image8|
+
+在服务端网页编程里，重点介绍了 Django
+
+|image9|
+
+Python3 源码剖析
+~~~~~~~~~~~~~~~~
+
+网站链接：https://flaggo.github.io/python3-source-code-analysis/
+
+|image10|
+
+书栈网：Python
+~~~~~~~~~~~~~~
+
+网站链接：https://www.bookstack.cn/explore?cid=13&tab=popular
+
+|image11|
+
+追梦人物：DRF 实战教程
+~~~~~~~~~~~~~~~~~~~~~~
+
+专栏链接：https://zhuanlan.zhihu.com/djstudyteam
+
+|image12|
+
+Python Tips 刷题挑战
+~~~~~~~~~~~~~~~~~~~~
+
+网站链接：http://www.pythontip.com/coding/code_oj
+
+|image13|
+
+Python Tips 设计模式
+~~~~~~~~~~~~~~~~~~~~
+
+网站链接：http://www.pythontip.com/python-patterns/detail/abstract_factory
+
+|image14|
+
+综合性网站
+----------
+
+书栈网
+~~~~~~
+
+在这个网站里，收录了很多优秀的技术书籍，你想要，想找的，基本上都能搜得出来。
+
+**网站链接**\ ：https://www.bookstack.cn/rank?tab=popular
+
+|image15|
+
+魔法学院
+~~~~~~~~
+
+**网站链接**\ ：http://www.nowamagic.net/academy/
+
+|image16|
+
+学习 Linux
+----------
+
+Linux 手册
+~~~~~~~~~~
+
+网站链接：https://man.linuxde.net/
+
+|image17|
+
+每天一个linux命令
+~~~~~~~~~~~~~~~~~
+
+网站链接：www.cnblogs.com/peida/archive/2012/12/05/2803591.html
+
+实验楼：Linux 基础入门
+~~~~~~~~~~~~~~~~~~~~~~
+
+网站链接：https://www.shiyanlou.com/courses/1
+
+|image18|
+
+网站链接：https://www.shiyanlou.com/courses/68
+
+|image19|
+
+|image20|
+
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200802110436.png
+.. |image2| image:: http://image.iswbm.com/20200802111158.png
+.. |image3| image:: http://image.iswbm.com/20200802111532.png
+.. |image4| image:: http://image.iswbm.com/20200802113311.png
+.. |image5| image:: http://image.iswbm.com/20200802113658.png
+.. |image6| image:: http://image.iswbm.com/20200802114241.png
+.. |image7| image:: http://image.iswbm.com/20200508201333.png
+.. |image8| image:: http://image.iswbm.com/20200525080531.png
+.. |image9| image:: http://image.iswbm.com/20200525080715.png
+.. |image10| image:: http://image.iswbm.com/image-20200701123010074.png
+.. |image11| image:: http://image.iswbm.com/20200802114734.png
+.. |image12| image:: http://image.iswbm.com/20200802120804.png
+.. |image13| image:: http://image.iswbm.com/20200802121125.png
+.. |image14| image:: http://image.iswbm.com/20200802121331.png
+.. |image15| image:: http://image.iswbm.com/20200104144109.png
+.. |image16| image:: http://image.iswbm.com/20200112210558.png
+.. |image17| image:: http://image.iswbm.com/image-20200704204307530.png
+.. |image18| image:: http://image.iswbm.com/20200704204506.png
+.. |image19| image:: http://image.iswbm.com/20200704204558.png
+.. |image20| image:: http://image.iswbm.com/20200607174235.png
+

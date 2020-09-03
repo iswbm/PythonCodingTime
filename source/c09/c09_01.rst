@@ -25,14 +25,14 @@
 
 前段时间，在微博上刷到了一条推荐。内容是这样的
 
-.. figure:: http://image.python-online.cn/20200211211522.png
+.. figure:: http://image.iswbm.com/20200211211522.png
    :alt: 微博截图
 
    微博截图
 
 出于好奇，我点开了，放大再放大，emmm，有点意思吖…
 
-.. figure:: http://image.python-online.cn/20200211211657.png
+.. figure:: http://image.iswbm.com/20200211211657.png
    :alt: img
 
    img
@@ -155,8 +155,8 @@
 |image4|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20200214104413.png
-.. |image2| image:: http://image.python-online.cn/save.jpeg
-.. |image3| image:: http://image.python-online.cn/20200214104646.png
+.. |image1| image:: http://image.iswbm.com/20200214104413.png
+.. |image2| image:: http://image.iswbm.com/save.jpeg
+.. |image3| image:: http://image.iswbm.com/20200214104646.png
 .. |image4| image:: http://image.iswbm.com/20200607174235.png
 

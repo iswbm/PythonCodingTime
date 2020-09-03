@@ -225,7 +225,7 @@ cloudinit-local 之后启动才可正常从配置文件中读取 ip
 并配置。而当你在镜像里安装
 NetworkManager后，默认情况下它的启动顺序是会在 cloudinit-local 之前的。
 
-.. figure:: http://image.python-online.cn/20190430211900.png
+.. figure:: http://image.iswbm.com/20190430211900.png
    :alt: img
 
    img
@@ -254,12 +254,12 @@ setup_dhcp_port()，从这个函数里可以知道，dhcp-port的创建顺序：
 |image8|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190514202013.png
-.. |image2| image:: http://image.python-online.cn/20190514202442.png
-.. |image3| image:: http://image.python-online.cn/20190514202736.png
-.. |image4| image:: http://image.python-online.cn/20190514203612.png
-.. |image5| image:: http://image.python-online.cn/20190430204707.png
-.. |image6| image:: http://image.python-online.cn/20190430204933.png
-.. |image7| image:: http://image.python-online.cn/20190430205449.png
+.. |image1| image:: http://image.iswbm.com/20190514202013.png
+.. |image2| image:: http://image.iswbm.com/20190514202442.png
+.. |image3| image:: http://image.iswbm.com/20190514202736.png
+.. |image4| image:: http://image.iswbm.com/20190514203612.png
+.. |image5| image:: http://image.iswbm.com/20190430204707.png
+.. |image6| image:: http://image.iswbm.com/20190430204933.png
+.. |image7| image:: http://image.iswbm.com/20190430205449.png
 .. |image8| image:: http://image.iswbm.com/20200607174235.png
 

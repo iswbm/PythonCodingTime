@@ -363,14 +363,14 @@ CMD：两个功能
 |image10|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/17-12-23/49304868.jpg
-.. |image2| image:: http://image.python-online.cn/17-12-23/36753853.jpg
-.. |image3| image:: http://image.python-online.cn/17-12-23/70731434.jpg
-.. |image4| image:: http://image.python-online.cn/17-12-24/39646473.jpg
-.. |image5| image:: http://image.python-online.cn/17-12-24/85625734.jpg
-.. |image6| image:: http://image.python-online.cn/17-12-24/21127582.jpg
-.. |image7| image:: http://image.python-online.cn/17-12-24/42825662.jpg
-.. |image8| image:: http://image.python-online.cn/17-12-24/80077038.jpg
-.. |image9| image:: http://image.python-online.cn/17-12-24/98318652.jpg
+.. |image1| image:: http://image.iswbm.com/17-12-23/49304868.jpg
+.. |image2| image:: http://image.iswbm.com/17-12-23/36753853.jpg
+.. |image3| image:: http://image.iswbm.com/17-12-23/70731434.jpg
+.. |image4| image:: http://image.iswbm.com/17-12-24/39646473.jpg
+.. |image5| image:: http://image.iswbm.com/17-12-24/85625734.jpg
+.. |image6| image:: http://image.iswbm.com/17-12-24/21127582.jpg
+.. |image7| image:: http://image.iswbm.com/17-12-24/42825662.jpg
+.. |image8| image:: http://image.iswbm.com/17-12-24/80077038.jpg
+.. |image9| image:: http://image.iswbm.com/17-12-24/98318652.jpg
 .. |image10| image:: http://image.iswbm.com/20200607174235.png
 

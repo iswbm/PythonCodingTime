@@ -25,7 +25,7 @@
 
 ::
 
-   Python冷知识 site:python-online.cn
+   Python冷知识 site:iswbm.com
 
 5、链接中包含字符串 加inurl
 

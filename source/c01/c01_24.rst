@@ -798,6 +798,6 @@ sys.path）查找器
 |image2|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20191027192949.png
+.. |image1| image:: http://image.iswbm.com/20191027192949.png
 .. |image2| image:: http://image.iswbm.com/20200607174235.png
 

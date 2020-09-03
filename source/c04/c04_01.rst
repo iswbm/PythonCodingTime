@@ -270,7 +270,7 @@ https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
 |image6|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20200209161935.png
+.. |image1| image:: http://image.iswbm.com/20200209161935.png
 .. |image2| image:: https://i.loli.net/2018/06/11/5b1e7d36ce8ad.png
 .. |image3| image:: https://i.loli.net/2018/06/11/5b1e7f140be6a.png
 .. |image4| image:: https://i.loli.net/2018/06/11/5b1e805c996c8.png

@@ -1940,8 +1940,8 @@ url** 即可。
 |image4|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/17-9-20/47469030.jpg
-.. |image2| image:: http://image.python-online.cn/20190705182629.png
-.. |image3| image:: http://image.python-online.cn/17-10-15/97911325.jpg
+.. |image1| image:: http://image.iswbm.com/17-9-20/47469030.jpg
+.. |image2| image:: http://image.iswbm.com/20190705182629.png
+.. |image3| image:: http://image.iswbm.com/17-10-15/97911325.jpg
 .. |image4| image:: http://image.iswbm.com/20200607174235.png
 

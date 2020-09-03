@@ -147,7 +147,7 @@ finder的显示
 
 2. 不将电脑放在软的地方，如沙发，枕头等，可以买个散热支架。
 
-   .. figure:: http://image.python-online.cn/20190810162000.png
+   .. figure:: http://image.iswbm.com/20190810162000.png
       :alt: 来自Mac派
 
       来自Mac派
@@ -379,8 +379,8 @@ finder的显示
 .. |image1| image:: http://image.iswbm.com/image-20200704192441091.png
 .. |image2| image:: http://image.iswbm.com/image-20200704194215498.png
 .. |image3| image:: http://image.iswbm.com/image-20200704195122336.png
-.. |image4| image:: http://image.python-online.cn/20190810161513.png
-.. |image5| image:: http://image.python-online.cn/20190810162315.png
+.. |image4| image:: http://image.iswbm.com/20190810161513.png
+.. |image5| image:: http://image.iswbm.com/20190810162315.png
 .. |image6| image:: http://image.iswbm.com/image-20200704192031119.png
 .. |image7| image:: http://image.iswbm.com/20200607174235.png
 

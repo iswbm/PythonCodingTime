@@ -120,6 +120,6 @@
 |image2|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190404215330.png
-.. |image2| image:: http://image.python-online.cn/20191117142849.png
+.. |image1| image:: http://image.iswbm.com/20190404215330.png
+.. |image2| image:: http://image.iswbm.com/20191117142849.png
 

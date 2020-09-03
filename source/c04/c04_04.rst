@@ -242,14 +242,14 @@ NoteBook 既然支持 Markdown ，你已经也能想到它可以用来记录学�
 |image10|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190511163102.png
-.. |image2| image:: http://image.python-online.cn/20190511163123.png
-.. |image3| image:: http://image.python-online.cn/20190511163137.png
-.. |image4| image:: http://image.python-online.cn/20190511163145.png
-.. |image5| image:: http://image.python-online.cn/20190511163200.png
-.. |image6| image:: http://image.python-online.cn/20190511163245.png
-.. |image7| image:: http://image.python-online.cn/20190511163253.png
-.. |image8| image:: http://image.python-online.cn/20190511163304.png
-.. |image9| image:: http://image.python-online.cn/20190511163311.png
+.. |image1| image:: http://image.iswbm.com/20190511163102.png
+.. |image2| image:: http://image.iswbm.com/20190511163123.png
+.. |image3| image:: http://image.iswbm.com/20190511163137.png
+.. |image4| image:: http://image.iswbm.com/20190511163145.png
+.. |image5| image:: http://image.iswbm.com/20190511163200.png
+.. |image6| image:: http://image.iswbm.com/20190511163245.png
+.. |image7| image:: http://image.iswbm.com/20190511163253.png
+.. |image8| image:: http://image.iswbm.com/20190511163304.png
+.. |image9| image:: http://image.iswbm.com/20190511163311.png
 .. |image10| image:: http://image.iswbm.com/20200607174235.png
 

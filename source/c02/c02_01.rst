@@ -256,7 +256,7 @@
 .. |课程大纲| image:: https://i.loli.net/2018/05/27/5b0a1523a0730.png
 .. |image2| image:: https://i.loli.net/2018/05/08/5af1781dbad7c.jpg
 .. |image3| image:: https://i.loli.net/2018/05/08/5af1781f05c29.jpg
-.. |image4| image:: http://image.python-online.cn/20190112205155.png
-.. |image5| image:: http://image.python-online.cn/20190112204930.png
+.. |image4| image:: http://image.iswbm.com/20190112205155.png
+.. |image5| image:: http://image.iswbm.com/20190112204930.png
 .. |image6| image:: http://image.iswbm.com/20200607174235.png
 

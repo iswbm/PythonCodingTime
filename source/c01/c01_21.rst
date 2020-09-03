@@ -91,6 +91,16 @@
    >>> sum([bin(int(x)).count("1") for x in netmask.split(".")])
    24
 
+7. 在网页上为所欲为
+-------------------
+
+.. code:: javascript
+
+   document.body.contentEditable='true'
+
+在知乎上的回答设置了禁止转载后，就算你执行了上面的命令，也是无法复制，但是可以剪切，剪切完后你再
+Ctrl+Z 后退 。
+
 |image1|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png

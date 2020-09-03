@@ -153,16 +153,16 @@ GPU 作为一种硬件资源，同样需要在模板中配置，配置方式是�
 |image12|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190419144135.png
-.. |image2| image:: http://image.python-online.cn/20190419144044.png
-.. |image3| image:: http://image.python-online.cn/20190422201117.png
-.. |image4| image:: http://image.python-online.cn/20190422201041.png
-.. |image5| image:: http://image.python-online.cn/20190422201117.png
-.. |image6| image:: http://image.python-online.cn/20190422205222.png
-.. |image7| image:: http://image.python-online.cn/20190422204755.png
-.. |image8| image:: http://image.python-online.cn/20190528105408.png
-.. |image9| image:: http://image.python-online.cn/20190528105021.png
-.. |image10| image:: http://image.python-online.cn/20190528114526.png
-.. |image11| image:: http://image.python-online.cn/20190606185531.png
+.. |image1| image:: http://image.iswbm.com/20190419144135.png
+.. |image2| image:: http://image.iswbm.com/20190419144044.png
+.. |image3| image:: http://image.iswbm.com/20190422201117.png
+.. |image4| image:: http://image.iswbm.com/20190422201041.png
+.. |image5| image:: http://image.iswbm.com/20190422201117.png
+.. |image6| image:: http://image.iswbm.com/20190422205222.png
+.. |image7| image:: http://image.iswbm.com/20190422204755.png
+.. |image8| image:: http://image.iswbm.com/20190528105408.png
+.. |image9| image:: http://image.iswbm.com/20190528105021.png
+.. |image10| image:: http://image.iswbm.com/20190528114526.png
+.. |image11| image:: http://image.iswbm.com/20190606185531.png
 .. |image12| image:: http://image.iswbm.com/20200607174235.png
 

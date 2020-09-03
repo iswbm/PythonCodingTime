@@ -80,6 +80,6 @@ K8s 角色详解
 |image2|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190907162015.png
+.. |image1| image:: http://image.iswbm.com/20190907162015.png
 .. |image2| image:: http://image.iswbm.com/20200607174235.png
 

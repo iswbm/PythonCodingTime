@@ -210,10 +210,10 @@ show image |image5|
 |image6|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190511164936.png
-.. |image2| image:: http://image.python-online.cn/20190511164949.png
-.. |image3| image:: http://image.python-online.cn/20190511165003.png
-.. |image4| image:: http://image.python-online.cn/20190511165013.png
-.. |image5| image:: http://image.python-online.cn/20190511165020.png
+.. |image1| image:: http://image.iswbm.com/20190511164936.png
+.. |image2| image:: http://image.iswbm.com/20190511164949.png
+.. |image3| image:: http://image.iswbm.com/20190511165003.png
+.. |image4| image:: http://image.iswbm.com/20190511165013.png
+.. |image5| image:: http://image.iswbm.com/20190511165020.png
 .. |image6| image:: http://image.iswbm.com/20200607174235.png
 

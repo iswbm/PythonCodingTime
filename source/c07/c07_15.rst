@@ -222,6 +222,6 @@ wsrep_flow_control_sent 和 wsrep_local_recv_queue_avg
 |image2|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20191213162259.png
+.. |image1| image:: http://image.iswbm.com/20191213162259.png
 .. |image2| image:: http://image.iswbm.com/20200607174235.png
 

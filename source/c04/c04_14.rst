@@ -173,13 +173,13 @@ DjangoWebBlog 是我们的项目目录，进入这个目录下创建虚拟环境
 |image9|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/Fk6WZ2xbqg2DM3AvnYCpsiKQ4xOn
-.. |image2| image:: http://image.python-online.cn/FjuJ8yZsgjkzVuBRZHxK1ZnnzaEX
-.. |image3| image:: http://image.python-online.cn/20190612211330.png
-.. |image4| image:: http://image.python-online.cn/20190612213015.png
-.. |image5| image:: http://image.python-online.cn/20190612213950.png
-.. |image6| image:: http://image.python-online.cn/20190612211925.png
-.. |image7| image:: http://image.python-online.cn/20190614000336.png
-.. |image8| image:: http://image.python-online.cn/20190612215924.png
+.. |image1| image:: http://image.iswbm.com/Fk6WZ2xbqg2DM3AvnYCpsiKQ4xOn
+.. |image2| image:: http://image.iswbm.com/FjuJ8yZsgjkzVuBRZHxK1ZnnzaEX
+.. |image3| image:: http://image.iswbm.com/20190612211330.png
+.. |image4| image:: http://image.iswbm.com/20190612213015.png
+.. |image5| image:: http://image.iswbm.com/20190612213950.png
+.. |image6| image:: http://image.iswbm.com/20190612211925.png
+.. |image7| image:: http://image.iswbm.com/20190614000336.png
+.. |image8| image:: http://image.iswbm.com/20190612215924.png
 .. |image9| image:: http://image.iswbm.com/20200607174235.png
 

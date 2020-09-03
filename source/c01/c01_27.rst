@@ -223,7 +223,7 @@ wheel 包可以通过 pip 来安装，只不过需要先安装 wheel 模块，�
        description="Learn to Pack Python Module  -->公众号：Python编程时光",
        
        # 项目主页
-       url="http://python-online.cn/", 
+       url="http://iswbm.com/",
        
        # 你要安装的包，通过 setuptools.find_packages 找到当前目录下有哪些包
        packages=find_packages()
@@ -282,7 +282,7 @@ wheel 包可以通过 pip 来安装，只不过需要先安装 wheel 模块，�
        author="wangbm",
        author_email="wongbingming@163.com",
        description="Learn to Pack Python Module",
-       url="http://python-online.cn/", 
+       url="http://iswbm.com/",
        packages=find_packages(),
        
        # 安装过程中，需要安装的静态文件，如配置文件、service文件、图片等
@@ -406,7 +406,7 @@ Python
        author="wangbm",
        author_email="wongbingming@163.com",
        description="Learn to Pack Python Module",
-       url="http://python-online.cn/", 
+       url="http://iswbm.com/",
        packages=find_packages(),
       
        # 用来支持自动生成脚本，安装后会自动生成 /usr/bin/foo 的可执行文件
@@ -697,9 +697,9 @@ Index）上，它是 Python
 |image5|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20191218202833.png
-.. |image2| image:: http://image.python-online.cn/20191218203005.png
-.. |image3| image:: http://image.python-online.cn/20191218203255.png
-.. |image4| image:: http://image.python-online.cn/20191218203517.png
+.. |image1| image:: http://image.iswbm.com/20191218202833.png
+.. |image2| image:: http://image.iswbm.com/20191218203005.png
+.. |image3| image:: http://image.iswbm.com/20191218203255.png
+.. |image4| image:: http://image.iswbm.com/20191218203517.png
 .. |image5| image:: http://image.iswbm.com/20200607174235.png
 

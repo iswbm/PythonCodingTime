@@ -424,17 +424,17 @@ sgnificant digital)，LSD 的排序方式由键值的最右边开始，而 MSD
 |image13|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |快速排序| image:: http://image.python-online.cn/Fpj4DFN_YCtfmJwb_85QnsuIVLqk
-.. |\|冒泡排序\|| image:: http://image.python-online.cn/FvbrVECeq58hY8TptG4ilkL5Owcc
-.. |image3| image:: http://image.python-online.cn/FmZ_24t62gF32Dg3AgtZe-U5OuLY
-.. |image4| image:: http://image.python-online.cn/FmLrNuhfNcnYnLGoYJv-YbpBPV7n
-.. |image5| image:: http://image.python-online.cn/Fm44FD0KE9Y4RM7MF3knlGVCJba4
-.. |希尔排序| image:: http://image.python-online.cn/FqTP6YjNoM52fA-bA8pSPdbLgcZh
-.. |堆排序| image:: http://image.python-online.cn/FgRFOfPhrL0yeUuGzly5309APCnD
-.. |分而治之思想| image:: http://image.python-online.cn/FjQebwFfa2tDYS78_CUxy1rXmufj
-.. |image9| image:: http://image.python-online.cn/FjP-_a66OUAZtTpU1ytqZ66My80C
-.. |合并两个有序数组| image:: http://image.python-online.cn/FnCZ-3Pj39T_ELROSsGRDN31yWtY
-.. |桶排序| image:: http://image.python-online.cn/FljGa3F3wM_YGACETeuRHCiERXKb
-.. |基数排序| image:: http://image.python-online.cn/FhwWVp4LVABIMPHqNo_cpjJA9kHV
+.. |快速排序| image:: http://image.iswbm.com/Fpj4DFN_YCtfmJwb_85QnsuIVLqk
+.. |\|冒泡排序\|| image:: http://image.iswbm.com/FvbrVECeq58hY8TptG4ilkL5Owcc
+.. |image3| image:: http://image.iswbm.com/FmZ_24t62gF32Dg3AgtZe-U5OuLY
+.. |image4| image:: http://image.iswbm.com/FmLrNuhfNcnYnLGoYJv-YbpBPV7n
+.. |image5| image:: http://image.iswbm.com/Fm44FD0KE9Y4RM7MF3knlGVCJba4
+.. |希尔排序| image:: http://image.iswbm.com/FqTP6YjNoM52fA-bA8pSPdbLgcZh
+.. |堆排序| image:: http://image.iswbm.com/FgRFOfPhrL0yeUuGzly5309APCnD
+.. |分而治之思想| image:: http://image.iswbm.com/FjQebwFfa2tDYS78_CUxy1rXmufj
+.. |image9| image:: http://image.iswbm.com/FjP-_a66OUAZtTpU1ytqZ66My80C
+.. |合并两个有序数组| image:: http://image.iswbm.com/FnCZ-3Pj39T_ELROSsGRDN31yWtY
+.. |桶排序| image:: http://image.iswbm.com/FljGa3F3wM_YGACETeuRHCiERXKb
+.. |基数排序| image:: http://image.iswbm.com/FhwWVp4LVABIMPHqNo_cpjJA9kHV
 .. |image13| image:: http://image.iswbm.com/20200607174235.png
 

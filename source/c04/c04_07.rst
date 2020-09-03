@@ -168,7 +168,7 @@
 然后使用
 ``hexo new``\ 就可以一键生成新文章的头格式了，不用手动去搬运或者书写。相当方便。
 
-.. figure:: http://image.python-online.cn/image-20200321201555321.png
+.. figure:: http://image.iswbm.com/image-20200321201555321.png
    :alt: image-20200321201555321
 
    image-20200321201555321
@@ -245,7 +245,7 @@
      GitHub: https://github.com/iswbm || github
      E-Mail: mailto:wongbingming@163.com || envelope-o
      微博: http://weibo.com/942663728 || weibo
-     WeChat: http://image.python-online.cn/17-9-9/58657236.jpg || weixin
+     WeChat: http://image.iswbm.com/17-9-9/58657236.jpg || weixin
      知乎: https://www.zhihu.com/people/wongbingming/activities || chain-broken
      CnBlog: http://www.cnblogs.com/wongbingming/ || file-text-o
      
@@ -894,16 +894,16 @@ bash窗口，不然会提示找不到npm命令）
 |image12|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/image-20200321163152876.png
-.. |image2| image:: http://image.python-online.cn/image-20200321163746032.png
-.. |image3| image:: http://image.python-online.cn/image-20200321165634287.png
-.. |image4| image:: http://image.python-online.cn/image-20200321171008622.png
-.. |image5| image:: http://image.python-online.cn/image-20200321171939919.png
-.. |image6| image:: http://image.python-online.cn/image-20200321171821683.png
-.. |image7| image:: http://image.python-online.cn/17-9-10/85269241.jpg
-.. |image8| image:: http://image.python-online.cn/17-9-9/63041495.jpg
+.. |image1| image:: http://image.iswbm.com/image-20200321163152876.png
+.. |image2| image:: http://image.iswbm.com/image-20200321163746032.png
+.. |image3| image:: http://image.iswbm.com/image-20200321165634287.png
+.. |image4| image:: http://image.iswbm.com/image-20200321171008622.png
+.. |image5| image:: http://image.iswbm.com/image-20200321171939919.png
+.. |image6| image:: http://image.iswbm.com/image-20200321171821683.png
+.. |image7| image:: http://image.iswbm.com/17-9-10/85269241.jpg
+.. |image8| image:: http://image.iswbm.com/17-9-9/63041495.jpg
 .. |image9| image:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200321210014963.png
-.. |image10| image:: http://image.python-online.cn/image-20200321193444320.png
+.. |image10| image:: http://image.iswbm.com/image-20200321193444320.png
 .. |image11| image:: https://i.loli.net/2018/04/15/5ad31888232e9.png
 .. |image12| image:: http://image.iswbm.com/20200607174235.png
 

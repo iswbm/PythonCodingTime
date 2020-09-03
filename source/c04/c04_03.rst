@@ -3,8 +3,6 @@
 
 |image0|
 
-《网络是怎样连接的》 豆瓣评分：9.1
-
 10个优秀的程序员里，有9个人都有写博客的习惯。这是非常好的习惯，值得每个程序员，投入时间和精力去坚持做下去。
 
 写博客的平台有很多，CSDN，博客园，51CTO，还有人会使用Hexo+GitHub，WordPress，比较会折腾的人还会自己使用Java，Python搭建，我就干过这样的事，不过每年还要支付域名和服务器，比较麻烦而且浪费钱。
@@ -509,24 +507,24 @@ Python 3.x ，所以这里的代码也要对应修改。
 |image20|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190511160523.png
-.. |image2| image:: http://image.python-online.cn/20190511161056.png
-.. |image3| image:: http://image.python-online.cn/20190511161130.png
-.. |image4| image:: http://image.python-online.cn/20190511161147.png
-.. |image5| image:: http://image.python-online.cn/20190511161212.png
-.. |image6| image:: http://image.python-online.cn/20190511161240.png
-.. |image7| image:: http://image.python-online.cn/20190511161255.png
-.. |image8| image:: http://image.python-online.cn/20190511161311.png
-.. |image9| image:: http://image.python-online.cn/20190511161334.png
-.. |image10| image:: http://image.python-online.cn/20190511161414.png
-.. |image11| image:: http://image.python-online.cn/20190511161426.png
-.. |image12| image:: http://image.python-online.cn/20191015230346.png
-.. |image13| image:: http://image.python-online.cn/20191015230502.png
-.. |image14| image:: http://image.python-online.cn/20191015234452.png
-.. |image15| image:: http://image.python-online.cn/20191016205336.png
-.. |image16| image:: http://image.python-online.cn/20191016205653.png
-.. |image17| image:: http://image.python-online.cn/20191015225652.png
-.. |image18| image:: http://image.python-online.cn/20191016211012.png
+.. |image1| image:: http://image.iswbm.com/20190511160523.png
+.. |image2| image:: http://image.iswbm.com/20190511161056.png
+.. |image3| image:: http://image.iswbm.com/20190511161130.png
+.. |image4| image:: http://image.iswbm.com/20190511161147.png
+.. |image5| image:: http://image.iswbm.com/20190511161212.png
+.. |image6| image:: http://image.iswbm.com/20190511161240.png
+.. |image7| image:: http://image.iswbm.com/20190511161255.png
+.. |image8| image:: http://image.iswbm.com/20190511161311.png
+.. |image9| image:: http://image.iswbm.com/20190511161334.png
+.. |image10| image:: http://image.iswbm.com/20190511161414.png
+.. |image11| image:: http://image.iswbm.com/20190511161426.png
+.. |image12| image:: http://image.iswbm.com/20191015230346.png
+.. |image13| image:: http://image.iswbm.com/20191015230502.png
+.. |image14| image:: http://image.iswbm.com/20191015234452.png
+.. |image15| image:: http://image.iswbm.com/20191016205336.png
+.. |image16| image:: http://image.iswbm.com/20191016205653.png
+.. |image17| image:: http://image.iswbm.com/20191015225652.png
+.. |image18| image:: http://image.iswbm.com/20191016211012.png
 .. |image19| image:: http://image.iswbm.com/image-20200704154427375.png
 .. |image20| image:: http://image.iswbm.com/20200607174235.png
 

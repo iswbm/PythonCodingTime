@@ -6,7 +6,7 @@
 上一篇文章，讲的是 Pycharm
 的远程调试，若你还没学会，可以点击这里进行查看。
 
-`不能不会的远程调试技巧 <http://python-online.cn/zh_CN/latest/c04/c04_11.html>`__
+`不能不会的远程调试技巧 <http://iswbm.com/zh_CN/latest/c04/c04_11.html>`__
 
 Pycharm 的图形化界面虽然好用，但是在某些场景中，是无法使用的。而 Python
 本身已经给我们提供了一个调试神器 –
@@ -179,10 +179,10 @@ pdb，可能你还不知道它，为了讲解这个神器，我写了这篇文�
 |image6|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190118000111.png
-.. |image2| image:: http://image.python-online.cn/20190118000234.png
-.. |image3| image:: http://image.python-online.cn/20190118000557.png
-.. |image4| image:: http://image.python-online.cn/20190118083809.png
-.. |image5| image:: http://image.python-online.cn/20190118005507.png
+.. |image1| image:: http://image.iswbm.com/20190118000111.png
+.. |image2| image:: http://image.iswbm.com/20190118000234.png
+.. |image3| image:: http://image.iswbm.com/20190118000557.png
+.. |image4| image:: http://image.iswbm.com/20190118083809.png
+.. |image5| image:: http://image.iswbm.com/20190118005507.png
 .. |image6| image:: http://image.iswbm.com/20200607174235.png
 

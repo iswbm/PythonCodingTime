@@ -709,12 +709,12 @@ n\ ``==``\ ，这种方式要求你所编辑的文件的扩展名是被vim所识
 你可以\ **关注本公众号「Python编程时光」**\ ，在后台回复“**vim**”
 ，即可获取高清大图。
 
-.. figure:: http://image.python-online.cn/20190804222221.png
+.. figure:: http://image.iswbm.com/20190804222221.png
    :alt: 图1
 
    图1
 
-.. figure:: http://image.python-online.cn/20190804222247.png
+.. figure:: http://image.iswbm.com/20190804222247.png
    :alt: 图2
 
    图2

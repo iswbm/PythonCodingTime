@@ -110,9 +110,9 @@ self.jump了，因为首参不是 self，而如果使用@staticmethod
 |image5|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.python-online.cn/20190630111243.png
-.. |image2| image:: http://image.python-online.cn/20190630104956.png
-.. |image3| image:: http://image.python-online.cn/20190630105735.png
-.. |image4| image:: http://image.python-online.cn/20190630105600.png
+.. |image1| image:: http://image.iswbm.com/20190630111243.png
+.. |image2| image:: http://image.iswbm.com/20190630104956.png
+.. |image3| image:: http://image.iswbm.com/20190630105735.png
+.. |image4| image:: http://image.iswbm.com/20190630105600.png
 .. |image5| image:: http://image.iswbm.com/20200607174235.png
 
