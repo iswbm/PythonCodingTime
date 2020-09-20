@@ -187,7 +187,7 @@ Condition和Event 是类似的，并没有多大区别。
 从一个线程向另一个线程发送数据最安全的方式可能就是使用 queue
 库中的队列了。创建一个被多个线程共享的 Queue
 对象，这些线程通过使用\ ``put()`` 和 ``get()``
-操作来向队列中添加或者删除元素。
+操作来向队列中发送和获取元素。
 
 同样，对于Queue，我们也只需要掌握几个函数即可。
 
@@ -198,24 +198,27 @@ Condition和Event 是类似的，并没有多大区别。
    # 一旦>0，而消息数又达到限制，q.put()也将阻塞
    q = Queue(maxsize=0)
 
-   # 阻塞程序，等待队列消息。
-   q.get()
+   # 默认阻塞程序，等待队列消息，可设置超时时间
+   q.get(block=True, timeout=None)
 
-   # 获取消息，设置超时时间
-   q.get(timeout=5.0)
-
-   # 发送消息
-   q.put()
+   # 发送消息：默认会阻塞程序至队列中有空闲位置放入数据
+   q.put(item, block=True, timeout=None)
 
    # 等待所有的消息都被消费完
    q.join()
 
-   # 以下三个方法，知道就好，代码中不要使用
+
+   # 通知队列任务处理已经完成，当所有任务都处理完成时，join() 阻塞将会解除
+   q.task_done()
+
+以下三个方法，知道就好，一般不需要使用
+
+.. code:: python
 
    # 查询当前队列的消息个数
    q.qsize()
 
-   # 队列消息是否都被消费完，True/False
+   # 队列消息是否都被消费完，返回 True/False
    q.empty()
 
    # 检测队列里消息是否已满
@@ -227,46 +230,86 @@ Condition和Event 是类似的，并没有多大区别。
 
 .. code:: python
 
+   # coding=utf-8
+   # /usr/bin/env python
+
+   '''
+   Author: wangbm
+   Email: wongbingming@163.com
+   Wechat: mrbensonwon
+   Blog: python-online.cn
+   公众号：Python编程时光
+
+
+   date: 2020/9/20 下午7:30
+   desc: 
+   '''
+
+   __author__ = 'wangbm'
+
+
    from queue import Queue
    from threading import Thread
    import time
 
-   class Student(Thread):
-       def __init__(self, name, queue):
-           super().__init__()
+   class Student:
+       def __init__(self, name):
            self.name = name
-           self.queue = queue
 
-       def run(self):
-           while True:
-               # 阻塞程序，时刻监听老师，接收消息
-               msg = self.queue.get()
-               # 一旦发现点到自己名字，就赶紧答到
-               if msg == self.name:
-                   print("{}：到！".format(self.name))
+       def speak(self):
+           print("{}：到！".format(self.name))
 
 
    class Teacher:
        def __init__(self, queue):
+           super().__init__()
            self.queue=queue
 
        def call(self, student_name):
-           print("老师：{}来了没？".format(student_name))
-           # 发送消息，要点谁的名
+           if student_name == "exit":
+               print("点名结束，开始上课..")
+           else:
+               print("老师：{}来了没？".format(student_name))
+               # 发送消息，要点谁的名
            self.queue.put(student_name)
 
+   class CallManager(Thread):
+       def __init__(self, queue):
+           super().__init__()
+           self.students = {}
+           self.queue = queue
+
+       def put(self, student):
+           self.students.setdefault(student.name, student)
+
+       def run(self):
+           while True:
+               # 阻塞程序，时刻监听老师，接收消息
+               student_name = queue.get()
+               if student_name == "exit":
+                   break
+               elif student_name in self.students:
+                   self.students[student_name].speak()
+               else:
+                   print("老师，咱班，没有 {} 这个人".format(student_name))
 
    queue = Queue()
    teacher = Teacher(queue=queue)
-   s1 = Student(name="小明", queue=queue)
-   s2 = Student(name="小亮", queue=queue)
-   s1.start()
-   s2.start()
+
+   s1 = Student(name="小明")
+   s2 = Student(name="小亮")
+
+   cm = CallManager(queue)
+   cm.put(s1)
+   cm.put(s2)
+   cm.start()
 
    print('开始点名~')
    teacher.call('小明')
    time.sleep(1)
    teacher.call('小亮')
+   time.sleep(1)
+   teacher.call("exit")
 
 运行结果如下
 
@@ -277,6 +320,7 @@ Condition和Event 是类似的，并没有多大区别。
    小明：到！
    老师：小亮来了没？
    小亮：到！
+   点名结束，开始上课..
 
 其实 queue 还有一个很重要的方法，Queue.task_done()
 
