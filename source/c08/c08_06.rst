@@ -533,7 +533,9 @@ ubuntu 的网卡配置不是正常我们常见的 json 或者 yaml
 cloud-init 进行新ip的配置，而新ip的配置是使用 ``ifup``
 这个命令\ |image27|
 
-使用这种方式并不会将第一次配置的旧ip给清除掉。\ |image28|
+使用这种方式并不会将第一次配置的旧ip给清除掉。
+
+|image28|
 
 这个问题，目前我只在CentOS6 中遇到过。可以通过修改代码让其先 ``ifdown``
 再 ``ifup`` 就可以解决这个问题。\ |image29|
@@ -690,7 +692,84 @@ cloudinit 允许通过 user_data 指定你想在虚拟机启动时，执行的�
 但这仅仅只是写入，若要执行这些命令，还需要你在 /etc/cloud/cloud.cfg
 中配置 ``scripts_user``\ ，这样 cloud-init 才会去执行它。
 
-8.6.15 相关命令
+8.6.5 如何读取修改缓存数据
+--------------------------
+
+当虚拟机启动时，cloudinit 会将 configdrive
+里的数据读取并缓存，缓存文件是一个被序列化的二进制文件，名字固定为
+``obj.pkl``\ 。
+
+序列化的函数存在于 stages.py 文件
+
+-  ``_pkl_store()``\ ：序列化
+-  ``_pkl_load()``\ ：反序列化
+
+|image42|
+
+读取演示
+
+::
+
+   >>> from cloudinit import stages;
+   >>> file=stages._pkl_load("/var/lib/cloud/instances/1242171a-bf72-4a3a-acb0-9e5393e97865/obj.pkl")
+   >>> file.network_json
+   >>> file.metadata
+
+写入演示
+
+::
+
+   >>> file.metadata["vhost_queues"]=1
+   >>> stages._pkl_store(file, "/home/obj.pkl")
+   True
+
+8.6.16 如何判断是新虚拟机
+-------------------------
+
+在 stages.py 下有一个函数 ``is_new_instance()``
+
+|image43|
+
+其中 ``previous`` 和 ``nw_timestramp`` 都是从
+``/var/lib/cloud/instances/[instance_uud]/``
+目录下直接读取的，导致旧虚拟机的信息。
+
+而在 ``/var/lib/cloud/instance`` 目录下的信息，都是从 ``/dev/sr0``
+从读取的最新信息。
+
+通过二者对比，就可以知道该虚拟机是否是一台新的虚拟机。
+
+8.6.17 CentOS 6.x 如何更改网卡名
+--------------------------------
+
+参考文章：\ `Changing the ethX to Ethernet Device Mapping in
+EL6 <https://www.alteeve.com/w/Changing_the_ethX_to_Ethernet_Device_Mapping_in_EL6>`__
+
+关闭network
+
+.. code:: shell
+
+   $ /etc/init.d/network stop
+
+修改ifcfg 文件里的 device 和 hwaddr
+
+.. code:: shell
+
+   $ vim /etc/sysconfig/network-scripts/ifcfg-eth*
+
+修改 udev 网卡规则文件
+
+.. code:: shell
+
+   vim /etc/udev/rules.d/70-persistent-net.rules
+
+重新加载 udev，启动 network
+
+.. code:: shell
+
+   $ start_udev && /etc/init.d/network start
+
+8.6.18 相关命令
 ---------------
 
 .. code:: shell
@@ -707,7 +786,7 @@ cloudinit 允许通过 user_data 指定你想在虚拟机启动时，执行的�
 
 --------------
 
-|image42|
+|image44|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/20190430204707.png
@@ -751,5 +830,7 @@ cloudinit 允许通过 user_data 指定你想在虚拟机启动时，执行的�
 .. |image39| image:: http://image.iswbm.com/20190911203953.png
 .. |image40| image:: http://image.iswbm.com/20190911204805.png
 .. |image41| image:: http://image.iswbm.com/20190911205518.png
-.. |image42| image:: http://image.iswbm.com/20200607174235.png
+.. |image42| image:: http://image.iswbm.com/20200807135831.png
+.. |image43| image:: http://image.iswbm.com/20200807161244.png
+.. |image44| image:: http://image.iswbm.com/20200607174235.png
 

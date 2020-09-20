@@ -69,14 +69,6 @@ dir() 返回当前作用域中的名称。让我们将 dir() 函数应用于 key
 
 |image6|
 
-\__doc_\_
-~~~~~~~~~
-
-使用 ``__doc__`` 这个魔法方法，可以查询该模块的文档，它输出的内容和
-help() 一样。
-
-|image7|
-
 2. 应用到实际开发中
 -------------------
 
@@ -182,7 +174,133 @@ callable()
    True
    >>>
 
+模块（Modules）
+---------------
+
+\__doc_\_
+~~~~~~~~~
+
+使用 ``__doc__`` 这个魔法方法，可以查询该模块的文档，它输出的内容和
+help() 一样。
+
+|image7|
+
+\__name_\_
+~~~~~~~~~~
+
+始终是定义时的模块名；即使你使用import .. as
+为它取了别名，或是赋值给了另一个变量名。
+
+.. code:: python
+
+   >>> import json
+   >>> json.__name__
+   'json'
+   >>>
+   >>> import json as js
+   >>> js.__name__
+   'json'
+
+\__file_\_
+~~~~~~~~~~
+
+包含了该模块的文件路径。需要注意的是内建的模块没有这个属性，访问它会抛出异常！
+
+.. code:: python
+
+   >>> import json
+   >>> json.__file__
+   '/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/__init__.py'
+
+\__dict_\_
+~~~~~~~~~~
+
+包含了模块里可用的属性名-属性的字典；也就是可以使用模块名.属性名访问的对象。
+
+类（Class）
+-----------
+
+.. _doc__-1:
+
+\__doc_\_
+~~~~~~~~~
+
+文档字符串。如果类没有文档，这个值是None。
+
+.. code:: python
+
+   >>> class People:
+   ...     '''
+   ...     people class
+   ...     '''
+   ...
+   >>> p = People()
+   >>>
+   >>> print(p.__doc__)
+
+       people class
+
+   >>>
+
+.. _name__-1:
+
+\__name_\_
+~~~~~~~~~~
+
+始终是定义时的类名。
+
+.. code:: python
+
+   >>> People.__name__
+   'People'
+
+.. _dict__-1:
+
+\__dict_\_
+~~~~~~~~~~
+
+包含了类里可用的属性名-属性的字典；也就是可以使用类名.属性名访问的对象。
+
+.. code:: python
+
+   >>> People.__dict__
+   mappingproxy({'__module__': '__main__', '__doc__': '\n    people class\n    ', '__dict__': <attribute '__dict__' of 'People' objects>, '__weakref__': <attribute '__weakref__' of 'People' objects>})
+
+\__module_\_
+~~~~~~~~~~~~
+
+包含该类的定义的模块名；需要注意，是字符串形式的模块名而不是模块对象。
+
+由于我是在 交互式命令行的环境下，所以模块是 ``__main__``
+
+.. code:: python
+
+   >>> People.__module__
+   '__main__'
+
+如果将上面的代码放入 demo.py，并且从 people 模块导入 People 类，其值就是
+people 模块
+
 |image8|
+
+\__bases_\_
+~~~~~~~~~~~
+
+直接父类对象的元组；但不包含继承树更上层的其他类，比如父类的父类。
+
+.. code:: python
+
+   >>> class People: pass
+   ...
+   >>> class Teenager: pass
+   ...
+   >>> class Student(Teenager): pass
+   ...
+   >>> Student.__bases__
+   (<class '__main__.Teenager'>,)
+   >>>
+
+|image9|
 
 .. |image0| image:: http://image.iswbm.com/image-20200606121047415.png
 .. |image1| image:: http://image.iswbm.com/image-20200606121544062.png
@@ -192,5 +310,6 @@ callable()
 .. |image5| image:: http://image.iswbm.com/image-20200606123145109.png
 .. |image6| image:: http://image.iswbm.com/image-20200606134519352.png
 .. |image7| image:: http://image.iswbm.com/image-20200606134858285.png
-.. |image8| image:: http://image.iswbm.com/20200607174235.png
+.. |image8| image:: http://image.iswbm.com/image-20200905115039771.png
+.. |image9| image:: http://image.iswbm.com/20200607174235.png
 

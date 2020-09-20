@@ -11,9 +11,18 @@
 
 2、过滤关键字 用减号
 
+谷歌搜索 ``python parse 库`` ，出现的都是
+``urllib.parse``\ ，可我实际想要找是 parse 库的相关资料。
+
+|image1|
+
+那我可以使用 ``-`` ，过滤掉 urllib 的搜索结果
+
 ::
 
-   Python协程 -CSDN
+   python parse -urllib
+
+|image2|
 
 3、必须包含某关键字 用加号
 
@@ -40,4 +49,6 @@
    "装饰器进阶用法详解"
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
+.. |image1| image:: http://image.iswbm.com/20200826102731.png
+.. |image2| image:: http://image.iswbm.com/20200826102136.png
 
