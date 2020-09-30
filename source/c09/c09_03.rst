@@ -60,5 +60,10 @@ JSON：http://www.yyyweb.com/demo/inner-show/json-generator.html
 
 代码分享：https://paste.ubuntu.com/
 
+黑科技
+------
+
+果核剥壳（破解工具）：https://www.ghpym.com/special/softlist
+
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 

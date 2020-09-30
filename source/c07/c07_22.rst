@@ -165,7 +165,7 @@ rpmdb
    rm -f /var/lib/rpm/__db.00*   
 
    # 重建rpm数据文件
-   rpm –rebuilddb                
+   rpm -rebuilddb                
 
 可选参数
 --------

@@ -287,6 +287,103 @@ IP 安全选择选为 ``始终信任``\ 。
 
 |image22|
 
+5. 宝塔申请证书
+---------------
+
+注册并登陆宝塔（https://bt.cn），然后进入控制面板。
+
+|image23|
+
+点击申请证书
+
+|image24|
+
+选择免费的就好
+
+|image25|
+
+填写你的域名后，支付订单（其实不要钱）。
+
+|image26|
+
+然后登陆我的阿里去域名解析，根据如下提示去添加 DNS解析规则
+
+|image27|
+
+然后静待一段时间验证成功了，就可以点击如下按钮进行下载 |image28|
+
+下载到本地后，你会得到一个 zip 包，解压一下，就可以看到证书文件及私钥。
+
+|image29|
+
+因为我的博客使用的是 Nginx，因此我该 Nginx
+下的两个文件上传到我的服务器上的 nginx 目录下.
+
+具体怎么上传呢？你可以使用远程拷贝软件，例如 WinSCP，也可以使用
+``lrzsz`` （推荐使用）。
+
+传到哪个目录下呢？
+
+先使用 find 命令查找一下你的 nginx.conf 路径
+
+.. code:: shell
+
+   $ find / -name nginx.conf
+   /usr/local/nginx/conf/nginx.conf
+
+你的证书文件可以和 nginx.conf 放在同一目录下
+
+.. code:: shell
+
+   /usr/local/nginx/conf
+
+接下来使用 vim 编辑该文件，找到 server，添加如下行（ server 原本的内容
+我使用 ``...`` 表示，意思是不需要去动。 ）
+
+.. code:: shell
+
+   server
+       {
+           listen 443 ssl;
+           # 注释掉该行
+                   # listen 80 default_server reuseport;
+                   
+           #证书文件名称
+           ssl_certificate 1_iswbm.com_bundle.pem;
+           #私钥文件名称
+           ssl_certificate_key 0_iswbm.com.key;
+
+                   ...
+       }
+
+尝试着登陆一下
+
+6. 七牛去图床开启https
+----------------------
+
+登陆七牛云
+
+然后进入 `证书管理 <https://portal.qiniu.com/certificate/ssl>`__
+上传证书。
+
+|image30|
+
+进入对象存储 -> 域名管理，找到 HTTPS 配置的位置，点击 ``修改配置``\ 。
+
+|image31|
+
+将按钮置为开启状态，选择我们刚刚上传的证书。
+
+|image32|
+
+设置完后，并不能立马使用
+
+|image33|
+
+域名的升级需要一定时间，等待即可。
+
+|image34|
+
 参考文档
 --------
 
@@ -295,7 +392,7 @@ IP 安全选择选为 ``始终信任``\ 。
 -  `自签名 SSL
    证书 <https://docs.rancher.cn/rancher2x/install-prepare/self-signed-ssl.html#_2-3-%E6%89%A9%E5%B1%95%E5%90%8D>`__
 
-|image23|
+|image35|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/20200728233602.png
@@ -320,5 +417,17 @@ IP 安全选择选为 ``始终信任``\ 。
 .. |image20| image:: http://image.iswbm.com/20200730222700.png
 .. |image21| image:: http://image.iswbm.com/20200730222827.png
 .. |image22| image:: http://image.iswbm.com/20200730222928.png
-.. |image23| image:: http://image.iswbm.com/20200607174235.png
+.. |image23| image:: http://image.iswbm.com/image-20200929123223096.png
+.. |image24| image:: http://image.iswbm.com/image-20200929123355037.png
+.. |image25| image:: http://image.iswbm.com/image-20200929123418789.png
+.. |image26| image:: http://image.iswbm.com/image-20200929123459545.png
+.. |image27| image:: http://image.iswbm.com/image-20200929123956070.png
+.. |image28| image:: http://image.iswbm.com/image-20200929194100905.png
+.. |image29| image:: http://image.iswbm.com/image-20200929201114297.png
+.. |image30| image:: http://image.iswbm.com/image-20200929210645477.png
+.. |image31| image:: http://image.iswbm.com/image-20200929205400898.png
+.. |image32| image:: http://image.iswbm.com/image-20200929205611442.png
+.. |image33| image:: http://image.iswbm.com/image-20200929210431735.png
+.. |image34| image:: http://image.iswbm.com/image-20200929210900562.png
+.. |image35| image:: http://image.iswbm.com/20200607174235.png
 

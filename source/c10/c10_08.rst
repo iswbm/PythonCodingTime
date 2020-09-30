@@ -395,10 +395,7 @@ OpenSSL 命令，这下你再也不用自己拼凑参数啦，真的太方便了
 
 将这三者结合起来，就是 TLS/SSL 做的事情
 
-.. figure:: https://img2018.cnblogs.com/blog/1169376/201910/1169376-20191008172456510-1302410435.png
-   :alt: img
-
-   img
+|image6|
 
 1、客户端（浏览器）向服务端发出请求，服务端返回证书给客户端。
 
@@ -412,7 +409,7 @@ OpenSSL 命令，这下你再也不用自己拼凑参数啦，真的太方便了
 
 -  `HTTPS中CA证书的签发及使用过程 <https://www.cnblogs.com/xdyixia/p/11610102.html>`__
 
-|image6|
+|image7|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/image-20200723233619429.png
@@ -420,5 +417,6 @@ OpenSSL 命令，这下你再也不用自己拼凑参数啦，真的太方便了
 .. |image3| image:: http://image.iswbm.com/20200724124502.png
 .. |image4| image:: http://image.iswbm.com/20200717222206.png
 .. |image5| image:: http://image.iswbm.com/20200718100052.png
-.. |image6| image:: http://image.iswbm.com/20200607174235.png
+.. |image6| image:: http://image.iswbm.com/1169376-20191008172456510-1302410435.png
+.. |image7| image:: http://image.iswbm.com/20200607174235.png
 
