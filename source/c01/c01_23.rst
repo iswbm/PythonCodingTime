@@ -1,5 +1,7 @@
-1.48 Python 炫技操作：模块重载的五种方法
+1.23 Python 炫技操作：模块重载的五种方法
 ========================================
+
+|image0|
 
 环境准备
 --------
@@ -149,3 +151,6 @@ sys.modules 来重载模块这种方法是失效的。
    >>> del sys.modules['foo.bar']
    >>> from foo import bar
    >>>
+
+.. |image0| image:: http://image.iswbm.com/20200602135014.png
+

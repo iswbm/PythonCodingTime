@@ -12,11 +12,6 @@
 
 |image2|
 
-你可以在按照如下方法，后台发送『黑魔法』就可以获取精美排版的 PDF
-电子书。
-
-|image3|
-
 1. 如何在运行状态查看源代码？
 -----------------------------
 
@@ -424,7 +419,7 @@ print 的内容输出到日志文件中
 
 示例如下
 
-|image4|
+|image3|
 
 如果\ ``clean()``\ 函数有参数，那么你可以不用装饰器，而是直接调用\ ``atexit.register(clean_1, 参数1, 参数2, 参数3='xxx')``\ 。
 
@@ -547,6 +542,5 @@ print 的内容输出到日志文件中
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/20200617084208.png
 .. |image2| image:: http://image.iswbm.com/20200617085313.png
-.. |image3| image:: http://image.iswbm.com/20200617085001.png
-.. |image4| image:: http://image.iswbm.com/20200510112133.png
+.. |image3| image:: http://image.iswbm.com/20200510112133.png
 

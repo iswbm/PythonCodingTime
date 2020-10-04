@@ -40,8 +40,8 @@ request。这是它们之间的对应关系。
 这就意味着我们可以直接在自己的项目中使用它们，而不用依托于 Flask
 的环境。
 
-3.5.1 Local
------------
+1. Local
+--------
 
 首先是 ``Local`` ，记得在以前的「并发编程系列」的第五篇线程的
 ``信息隔离`` 的时候，提过了 ``threading.local``
@@ -206,8 +206,8 @@ local 是需要被 ``localmanager`` 管理的，在请求结束后，会调用
            except KeyError:
                raise AttributeError(name)
 
-3.5.2 LocalStack
-----------------
+2. LocalStack
+-------------
 
 通过对 Local 的介绍，可以知道 Local
 其实是通过封装了字典的，以此实现了线程隔离。
@@ -295,8 +295,8 @@ local 是需要被 ``localmanager`` 管理的，在请求结束后，会调用
    request = LocalProxy(partial(_lookup_req_object, 'request'))
    session = LocalProxy(partial(_lookup_req_object, 'session'))
 
-3.5.3 LocalProxy
-----------------
+3. LocalProxy
+-------------
 
 通过上面的代码，你可以发现，我们访问LocalStack里的元素的时候，都是通过\ ``LocalProxy``
 来进行的有没有？
@@ -394,8 +394,8 @@ local 是需要被 ``localmanager`` 管理的，在请求结束后，会调用
 
 这样就能实现每次对栈顶元素的操作，都是面对最新元素执行的。
 
-3.5.4 经典错误
---------------
+4. 经典错误
+-----------
 
 在 Flask 中经常会遇到的一个错误是：
 
