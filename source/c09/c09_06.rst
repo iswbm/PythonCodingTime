@@ -1,5 +1,5 @@
-9.6 学习编程的好网站
-====================
+9.6 赶紧收藏！学习 Python 的好网站
+==================================
 
 |image0|
 
@@ -77,33 +77,39 @@ Python3 源码剖析
 
 |image10|
 
+参考学习地址：https://realpython.com/cpython-source-code-guide/
+
+基于 Python 3.6 的源码分析：https://he11olx.com/
+
+|image11|
+
 书栈网：Python
 ~~~~~~~~~~~~~~
 
 网站链接：https://www.bookstack.cn/explore?cid=13&tab=popular
 
-|image11|
+|image12|
 
 追梦人物：DRF 实战教程
 ~~~~~~~~~~~~~~~~~~~~~~
 
 专栏链接：https://zhuanlan.zhihu.com/djstudyteam
 
-|image12|
+|image13|
 
 Python Tips 刷题挑战
 ~~~~~~~~~~~~~~~~~~~~
 
 网站链接：http://www.pythontip.com/coding/code_oj
 
-|image13|
+|image14|
 
 Python Tips 设计模式
 ~~~~~~~~~~~~~~~~~~~~
 
 网站链接：http://www.pythontip.com/python-patterns/detail/abstract_factory
 
-|image14|
+|image15|
 
 综合性网站
 ----------
@@ -115,14 +121,14 @@ Python Tips 设计模式
 
 **网站链接**\ ：https://www.bookstack.cn/rank?tab=popular
 
-|image15|
+|image16|
 
 魔法学院
 ~~~~~~~~
 
 **网站链接**\ ：http://www.nowamagic.net/academy/
 
-|image16|
+|image17|
 
 学习 Linux
 ----------
@@ -132,7 +138,7 @@ Linux 手册
 
 网站链接：https://man.linuxde.net/
 
-|image17|
+|image18|
 
 每天一个linux命令
 ~~~~~~~~~~~~~~~~~
@@ -144,13 +150,13 @@ Linux 手册
 
 网站链接：https://www.shiyanlou.com/courses/1
 
-|image18|
+|image19|
 
 网站链接：https://www.shiyanlou.com/courses/68
 
-|image19|
-
 |image20|
+
+|image21|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/20200802110436.png
@@ -163,14 +169,15 @@ Linux 手册
 .. |image8| image:: http://image.iswbm.com/20200525080531.png
 .. |image9| image:: http://image.iswbm.com/20200525080715.png
 .. |image10| image:: http://image.iswbm.com/image-20200701123010074.png
-.. |image11| image:: http://image.iswbm.com/20200802114734.png
-.. |image12| image:: http://image.iswbm.com/20200802120804.png
-.. |image13| image:: http://image.iswbm.com/20200802121125.png
-.. |image14| image:: http://image.iswbm.com/20200802121331.png
-.. |image15| image:: http://image.iswbm.com/20200104144109.png
-.. |image16| image:: http://image.iswbm.com/20200112210558.png
-.. |image17| image:: http://image.iswbm.com/image-20200704204307530.png
-.. |image18| image:: http://image.iswbm.com/20200704204506.png
-.. |image19| image:: http://image.iswbm.com/20200704204558.png
-.. |image20| image:: http://image.iswbm.com/20200607174235.png
+.. |image11| image:: http://image.iswbm.com/20201004150826.png
+.. |image12| image:: http://image.iswbm.com/20200802114734.png
+.. |image13| image:: http://image.iswbm.com/20200802120804.png
+.. |image14| image:: http://image.iswbm.com/20200802121125.png
+.. |image15| image:: http://image.iswbm.com/20200802121331.png
+.. |image16| image:: http://image.iswbm.com/20200104144109.png
+.. |image17| image:: http://image.iswbm.com/20200112210558.png
+.. |image18| image:: http://image.iswbm.com/image-20200704204307530.png
+.. |image19| image:: http://image.iswbm.com/20200704204506.png
+.. |image20| image:: http://image.iswbm.com/20200704204558.png
+.. |image21| image:: http://image.iswbm.com/20200607174235.png
 

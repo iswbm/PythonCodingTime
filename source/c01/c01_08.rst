@@ -5,8 +5,8 @@
 
 --------------
 
-2.8.1 版本支持 / 写法差异
--------------------------
+1. 版本支持 / 写法差异
+----------------------
 
 在Python 2.x 中
 
@@ -45,8 +45,8 @@
    class Ming(object):
        pass
 
-2.8.2 使用方法 / 独特属性
--------------------------
+2. 使用方法 / 独特属性
+----------------------
 
 经典类无法使用super() |image1| 经典类的类型是 classobj |image2|
 
@@ -85,8 +85,8 @@
        kls01.name
    AttributeError: Kls01 instance has no attribute 'name'
 
-2.8.3 MRO 查找算法的演变
-------------------------
+3. MRO 查找算法的演变
+---------------------
 
 **经典类中**
 
@@ -274,11 +274,11 @@ C 搜索顺序中 X 和 Y 互换仍然不能解决问题，这时候它又会和
 |image7|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi765tblqj20cy05cwfx.jpg
-.. |image2| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi76mgwcbj20b708cmyo.jpg
-.. |image3| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi77urc3lj206108n74e.jpg
-.. |image4| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi78drp24j20680bjaaa.jpg
-.. |image5| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi78odu23j20740bomxh.jpg
-.. |image6| image:: https://ws1.sinaimg.cn/large/8f640247gy1fyi78xuzibj20940ayq39.jpg
+.. |image1| image:: http://image.iswbm.com/20201004123025.png
+.. |image2| image:: http://image.iswbm.com/20201004123036.png
+.. |image3| image:: http://image.iswbm.com/20201004123106.png
+.. |image4| image:: http://image.iswbm.com/20201004123056.png
+.. |image5| image:: http://image.iswbm.com/20201004123115.png
+.. |image6| image:: http://image.iswbm.com/20201004123126.png
 .. |image7| image:: http://image.iswbm.com/20200607174235.png
 

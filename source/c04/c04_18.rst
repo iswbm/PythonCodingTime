@@ -1,386 +1,197 @@
-4.18 详细的 Mac 使用指南
-========================
+4.18 如何用好 Python的用户环境？
+================================
 
 |image0|
 
-4.18.1 iTerm2
--------------
+在之前写过一篇关于虚拟环境使用的文章 ：\ `Python
+虚拟环境使用指南 <http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485049&idx=1&sn=c16383d6cc91a7ed8254e344d994f101&chksm=e886669bdff1ef8d82aae3a231ef0651f82d5e97cf1e64aceda00e686119900518c202dc9b1b&scene=21#wechat_redirect>`__.
 
-介绍一下快捷键
+但是还没有好好的介绍一下 Python 的用户环境，原因是自己一直没遇到要使用
+``用户环境`` 的使用场景，所以就一直懒得写。
 
-::
+恰巧这两天，自己遇到了一个使用用户环境的体验可以完爆虚拟环境的案例，就拿出来分享一下。
 
-   # 分窗口操作
-   shift + command + d（横切）command + d（竖切） 
-
-   2、历史信息查找和粘贴：command + f，呼出查找功能，找到后 tab 键可以选中找到的文本，通过option + 回车粘贴。 
-
-   3、自动完成：command + ; ，呼出自动完成窗口，根据上下文提供内容选择项 
-   # 粘贴历史
-   shift + command + h 
-
-   # 回放功能
-   option + command + b 
-
-   # 光标去哪了？
-   command + / 
-
-   # 在所有的窗口中搜索
-   option + command + e 
-
-4.18.2 截图工具
+1. 我的使用背景
 ---------------
 
-1. Xnip：取色+丰富的标注功能+滚动截屏；
-2. `Snip <https://snip.qq.com/>`__\ ：小巧轻量+滚动截屏(不能从App
-   Store下载，亲测已经失效)；
-3. QQ：截屏+录屏+OCR文字识别；
-4. Snipaste：贴屏功能；
-5. ScreenShot PSD：psd 文件，每种元素都有单独的图层。
+公司有数以万计的服务器，为了对实现对访问记录进行集中管理以及出于安全考虑，每台服务器都有访问限制，必须使用公司的跳板机才能登陆。
 
-4.18.3 快捷操作
----------------
+每个公司的员工在跳板机上都有自己的用户、 家目录，对于很多需要 root
+权限的操作，是高度受限制的。
 
-::
-
-   # 查看桌面，并不是返回桌面，再按一下就还原原来的窗口了
-   fn + f11  # 通常情况下
-   f11  # 在外接键盘下，请先设置 F1，F2 这些键为标准功能键，偏好设置->键盘
-
-   # 最大化窗口与取消
-   command + ctrl + f
-
-   # 最小化/隐藏窗口
-   command + h
-
-   # 最小化除了当前active窗口之外的所有窗口
-   comand + option + h
-
-   # 隐藏除当前窗口外的其他所有窗口
-   command + opthon + h
-
-   # 关闭除访达外的其他程序
-   command + q
-
-   # 在不同的程序间切换
-   command + tab
-   command + shift + tab
-
-   # 在一个程序的不同窗口切换
-   command + ~
-
-   # 强制退出程序
-   command + option + esc
-
-   # 删除光标处到行首
-   command + backspace(删除键)
-
-   # 新建窗口打开页面
-   command + 鼠标左键
-
-查询汇率
-
-::
-
-   command + space
-   输入 1港币或者1美元
-
-将网页图片保存到本地
-
-::
-
-   直接拖动图片
-   如果不仍想让访达窗口保持在最前面，就按住 command 键
-
-显示控制台
-
-::
-
-   原生：ctrl+shift+L
-   由于与 MWeb 的插入链接冲突，而Mweb 又没有修改快捷键的入口，所以我将启动台的快捷键改成：ctrl+option+L
-
-   要卸载 app 的话
-   1. ctrl+option+L 显示启动台
-   2. 再按 ctrl+option（默认，不需要设置） 就会出现抖动效果，点击 x 就可以卸载了。
-
-设置我自定义的系统偏好设置
+比如我现在我要在跳板机上实现远程登陆大批量的机器进行一些维护工作，当然我这里使用的还是
+Python 来实现，这个 Python 脚本里有一些依赖库（比如 之前介绍过的
+paramiko 这个神器），在跳板机上中并没有安装。
 
 |image1|
 
-设置打开访达快捷键
-
-1. 打开 『自动操作』
-2. 新建文稿
-3. 选择『服务』 或者 『自动操作』（因为不同版本的 macOS名字不同）
-4. 进行如下设置
+做为普通用户的你，是没有权限安装第三方包的。
 
 |image2|
 
-5. 取消勾选：因为我要设置的快捷键与它冲突
+问题就来了，我如何才能在跳板机中使用 paramiko 这个包呢？
 
-.. figure:: http://image.iswbm.com/image-20200704195011274.png
-   :alt: 、
+2. 为何不使用虚拟环境？
+-----------------------
 
-   、
+既然不能对全局的 Python
+环境进行更改，那我完全可以自己再创建一个环境，只要这个环境里事先装好
+paramiko 这个包不就好了。
 
-6. 设置快捷键
+因此，使用虚拟环境是一种解决方案，但它并不是一个完美的解决方案。
+
+**原因有以下几点**\ ：
+
+1、
+创建虚拟环境的过程，步骤较多，比较复杂。这里的复杂是相对于我后面要使用的用户环境而言。
+
+2、 虚拟环境是包含一整个 Python
+解释器，存在大量与系统重复的包，size比较大，并不轻便。
+
+3、 使用 console 模式调试的话，进入很不方便
 
 |image3|
 
-4.18.4 系统设置
+就算你不使用 console 模式，你调用脚本的方式，也会很奇怪，你得这样
+
+.. code:: python
+
+   $ zabbix_env/bin/python demo.py
+
+如果你不想使用这样，可以给这个脚本加个可执行权限，并在脚本的第一行指定你的解释器，省去了一点点麻烦，可即便如此，我仍然感觉很别扭。
+
+.. code:: shell
+
+   [wangbm@35ha02 ~]$ cat demo.py 
+   #!/home/wangbm/zabbix_env/bin/python
+
+   import zabbix_api
+   [wangbm@35ha02 ~]$ 
+   [wangbm@35ha02 ~]$ 
+   [wangbm@35ha02 ~]$ chmod +x demo.py
+   [wangbm@35ha02 ~]$ 
+   [wangbm@35ha02 ~]$ ./demo.py     # 可以执行，没有报错
+   [wangbm@35ha02 ~]$ 
+
+你可能会问我：为什么不使用 virtualenv + virtualenvwrapper ，这样可以使用
+workon 进入虚拟环境。
+
+原因是跳板机里的都是很古老的包，你看上面的 Python 还是 2.7.5
+呢，所以你所说的那些工具通通没有。
+
+3. 用户环境原理
 ---------------
 
-关闭仪表盘
+这里要介绍的这种方案（\ **用户环境**\ ），可能很多人都没有使用过，甚至没有听过，它算是一个冷门但是非常好用的功能。
 
-::
+操作之前 ，先简单介绍一下它。
 
-   点击系统偏好设置 -> 调度中心 -> 仪表盘 -> 关闭
+先提一个问题，Python 在查找导入包时，如果我们多个路径都有这个包，那
+Python 如何确定应该从哪个路径进行导入呢？
 
-finder的显示
+答案是， 搜索导入路径是有优先级的，你可以通过 sys.path 进行查看。
+
+.. code:: python
+
+   >>> import sys
+   >>> from pprint import pprint
+   >>> pprint(sys.path)
+   ['',
+    '/usr/lib64/python27.zip',
+    '/usr/lib64/python2.7',
+    '/usr/lib64/python2.7/plat-linux2',
+    '/usr/lib64/python2.7/lib-tk',
+    '/usr/lib64/python2.7/lib-old',
+    '/usr/lib64/python2.7/lib-dynload',
+    '/home/wangbm/.local/lib/python2.7/site-packages',
+    '/usr/lib64/python2.7/site-packages',
+    '/usr/lib64/python2.7/site-packages/gtk-2.0',
+    '/usr/lib/python2.7/site-packages',
+    '/usr/lib/python2.7/site-packages/pip-18.1-py2.7.egg',
+    '/usr/lib/python2.7/site-packages/lockfile-0.12.2-py2.7.egg']
+   >>>
+
+可以看到路径 ``/home/wangbm/.local/lib/python2.7/site-packages``
+是优先于 ``/usr/lib64/python2.7/site-packages`` 路径的。
+
+这就是 **用户环境**
+的原理，只要我们将包装在自己家目录下，就可以优先于全局环境中进行查找。
+
+使用起来，可以做到用户无感知，跟使用原生的全局环境并没有区别。
+
+4. 具体操作方法
+---------------
+
+创建一个用户环境，并安装上你所需要的包，一条命令就能搞定，这可比虚拟环境简单方便多了。
+
+那么怎么操作呢？
+
+只要你在使用 pip 安装包时，加上 ``--user`` 参数，pip
+就会将其安装在当前用户的 ``~/.local/lib/python2.x/site-packages``
+下，而其他用户的 python 则不会受影响。
+
+.. code:: shell
+
+   $ pip install --user pkg
+
+这里要注意的是，不能使用这种方式，亲测它会将包装到全局环境下，具体原因我还没有深究。
+
+.. code:: shell
+
+   $ python -m pip install --user pkg
+
+为了让你理解这个过程，我这里来举个例子，并且验证其是否可以做到用户隔离。
+
+.. code:: shell
+
+   # 在全局环境中未安装 requests
+   [root@localhost ~]$ pip list | grep requests
+   [root@localhost ~]$ su - wangbm
+
+   # 由于用户环境继承自全局环境，这里也未安装
+   [wangbm@localhost ~]$ pip list | grep requests
+   [wangbm@localhost ~]$ pip install --user requests
+   [wangbm@localhost ~]$ pip list | grep requests
+   requests (2.22.0)
+   [wangbm@localhost ~]$
+
+   # 从 Location 属性可发现 requests 只安装在当前用户环境中
+   [wangbm@localhost ~]$ pip show requests
+   ---
+   Metadata-Version: 2.1
+   Name: requests
+   Version: 2.22.0
+   Summary: Python HTTP for Humans.
+   Home-page: http://python-requests.org
+   Author: Kenneth Reitz
+   Author-email: me@kennethreitz.org
+   Installer: pip
+   License: Apache 2.0
+   Location: /home/wangbm/.local/lib/python2.7/site-packages
+   [wangbm@localhost ~]$ exit
+   logout
+
+   # 退出 wangbm 用户，在 root 用户环境中发现 requests 未安装
+   [root@localhost ~]$ pip list | grep requests
+   [root@localhost ~]$
+
+有了这个思路，我就可以先在其他机器（前提自己必须拥有管理员权限
+）上，创建一个用户环境，并且安装上 paramiko 这个包。
+
+然后将这个用户环境，压缩拷贝至跳板机自己的家目录下的 ``.local/lib``
+目录下并解压。
+
+然后直接使用 python 进入 console 模式，现在已经可以直接使用 paramiko
+这个包了。
 
 |image4|
 
-`防止电脑温度过高 <https://mp.weixin.qq.com/s/qKQO616vxADFp1cVtA62Cw>`__
-
-1. 不使用 Adobe Flash 播放器（改用
-   HTML5播放器），因为其效能极低，会耗费大量的系统资源，导致电脑温度快速上升。
-
-2. 不将电脑放在软的地方，如沙发，枕头等，可以买个散热支架。
-
-   .. figure:: http://image.iswbm.com/20190810162000.png
-      :alt: 来自Mac派
-
-      来自Mac派
-
-   3. 打开「活动监视器」（Alfred就可以打开），杀掉暂没用且cpu使用率最高的程序
-
-      |image5|
-
-   4. MacBook Pro CPU 温度在 5、60℃
-      的时候，风扇会转到两三千转每分钟，只有 CPU 温度达到 70
-      多度或更高时，才会高速运转降温。但这时 Mac 已经很热了。
-
-      我们可以借用软件，手动让散热风扇全速运转，这样就能更快的散热。常用的软件有
-      Macs Fan Control、TG Pro、smcFanControl，三个用下来我比较推荐 Macs
-      Fan Control。
-
-      Macs Fan Control 可以查看各 CPU
-      核心的温度、主板、电池、内存温度等。可以分别调节两个风扇的转速，也可以设定条件自动调整转速。安装后就可以在系统状态栏看到电脑目前的温度和转速。
-
-      风扇转得快了，散热自然也快了，但是风扇声音也更大了。建议只在非常烫（超过60℃？）的时候开启。
-
-4.18.5 brew 的使用
-------------------
-
-设置国内源
-
-.. code:: shell
-
-   git -C "$(brew --repo)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
-
-   git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
-
-   git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
-
-   brew update
-
-如果要还原
-
-.. code:: shell
-
-   git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew.git
-
-   git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core.git
-
-   git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask.git
-
-   brew update
-
-安装docker
-
-.. code:: shell
-
-   brew cask install docker
-
-4.18.6 访达使用技巧
--------------------
-
-详细请看这篇文章（\ `MacOS实用技巧之Finder(访达)的使用 <https://www.jianshu.com/p/3666e6954e8a>`__\ ），非常好的教程。
-
-**跳转技巧**
-
-.. code:: shell
-
-   # 快速打开访达：先打开搜索，再打开个人家目录
-   打开搜索：command + option(alt) + space
-   关闭标签页：command + shift + h
-
-   # 返回父级文件夹
-   command + ↑ 
-
-   # 进入文件夹
-   command + ↓
-
-   # 前进 后退
-   command + [ 
-   comand + ]
-
-   # 快速跳转至第一个文件或最后一个文件
-   option + ↑
-   option + ↓
-
-
-   # 打开指定路径（前提访达得是激活状态的窗口）
-   # 注意在这里，可以使用 tab 补全
-   shift + command + g
-
-**操作文件与文件夹**
-
-.. code:: shell
-
-   # enter
-   重命名文件夹
-
-   # 选中所有文件，并将这些文件归档入一个新的文件夹
-   右键 -> 用所选项目新建的文件夹（Ctrl+Command+n） -> 回车，重命名
-
-
-   # 选择
-   点击 -> 拖拽
-   如果想要取消选中，就 command + 点击
-
-
-   # 打开最近使用过的文件夹
-   comand + shift + f
-
-   # 显示/隐藏文件
-   command + shift + .
-
-   # 查看文件/夹 详情
-   command + i
-
-   # mac 中拷贝和复制不一样
-   command + c 拷贝
-   command + d 复制（会多出一个副本），或者使用鼠标拖动，但是记住要按option
-   command + v 粘贴
-   command + option + v 称动  ，或者使用鼠标拖动
-
-   # 可以设置搜索的范围
-   command + f
-
-   # 新建文件夹
-   command + shift + n
-
-   # 关闭访达标签页，如果是最后一个标签页，则关闭访达
-   command + w
-
-**定制服务(复制文件路径)**
-
-.. code:: shell
-
-   # 复制文件路径，有两种方法
-   # 【第一种】：快捷键
-   command + option + c
-   # 若你使用 alfred ，快捷键会冲突，解决方法：先右键，再 option，选择将 xx 拷贝为路径名称 
-
-   # 第二种：使用服务
-   参考 https://sspai.com/post/33422
-
-**在 iTerm2中打开访达**
-
-.. code:: shell
-
-   # 在当前目录打开
-   open .
-
-   # 在指定目录打开
-   open ~/Code
-
-搜索时，优先搜索当前文件夹：访达的偏好设置
-
-|image6|
-
-此时如果你想要搜索电脑全局，那么有两种方法
-
-1. Command + option + 空格
-2. command + 空格
-
-4.18.7 使用小鹤双拼
--------------------
-
-2018 款的 MBP 系统是 10.13.6
-，这个系统支持的双拼是自然码，若想使用小鹤双拼，可以使用如下命令
-
-.. code:: shell
-
-   defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 4
-
-同样的，还有更多的方案，都可以使用命令来修改
-
-.. code:: shell
-
-   全拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 0
-
-   智能 ABC：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 1
-
-   微软双拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 2
-
-   紫光双拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 3
-
-   小鹤双拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 4
-
-   自然码：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 5
-
-   拼音加加：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 6
-
-   搜狗双拼：defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 7
-
-练习的话，可以使用这两个网站：
-
-练习单字：https://api.ihint.me/shuang/
-
-练习文章：https://api.ihint.me/zi/
-
-对应的 github：https://github.com/BlueSky-07/Shuang
-
-4.18.8 输入法切换 BUG
----------------------
-
-问题是由 ``TISwitcher`` 引起的。
-
-当你按住 ``control`` 键，不停的敲 ``空格`` 就可了看到这个进程的面貌了。
-
-对于使用 ``command + space`` 切换输入法的， ``control`` 换成 ``command``
-即可。 ``TISwitcher``
-干掉没有任何影响。顶多就是切换输入法时，看不到切换状态而已。
-
-解决方法如下：
-
-1. 打开 ``Activity Monitor``
-2. 找到 ``TISwitcher`` 这个进程，干掉就 OK 了
-3. 为了防止重启后，这个进程再次启动， 直接删掉
-   ``/System/Library/CoreServices/Menu Extras/TextInput.menu/Contents/SharedSupport/TISwitcher.app``
-
-参考文章
---------
-
-1. `Mac
-   上值得推荐的录屏软件 <https://mp.weixin.qq.com/s/cvS6BLI53JFQY2P3rvg9Xw>`__
-2. `Mac
-   连显示器或电视需要买什么线？ <https://mp.weixin.qq.com/s/V8A_1GBxtlN2WZrcTsi-YQ>`__
-3. `新手如何快速入门 Mac
-   的使用？ <https://mp.weixin.qq.com/s/55_R1xJ5fv8F8P9Nin93Ww>`__
-
---------------
-
-|image7|
+|image5|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
-.. |image1| image:: http://image.iswbm.com/image-20200704192441091.png
-.. |image2| image:: http://image.iswbm.com/image-20200704194215498.png
-.. |image3| image:: http://image.iswbm.com/image-20200704195122336.png
-.. |image4| image:: http://image.iswbm.com/20190810161513.png
-.. |image5| image:: http://image.iswbm.com/20190810162315.png
-.. |image6| image:: http://image.iswbm.com/image-20200704192031119.png
-.. |image7| image:: http://image.iswbm.com/20200607174235.png
+.. |image1| image:: http://image.iswbm.com/20200427180207.png
+.. |image2| image:: http://image.iswbm.com/20200427180042.png
+.. |image3| image:: http://image.iswbm.com/20200427182334.png
+.. |image4| image:: http://image.iswbm.com/20200427185854.png
+.. |image5| image:: http://image.iswbm.com/20200607174235.png
 
