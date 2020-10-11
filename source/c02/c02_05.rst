@@ -8,7 +8,7 @@
 上一篇我们说，线程与线程之间要通过消息通信来控制程序的执行。
 
 讲完了消息通信，今天就来探讨下线程里的\ ``信息隔离``\ 是如何做到的。 ##
-2.5.1 初步认识信息隔离
+1. 初步认识信息隔离
 
 什么是\ ``信息隔离``\ ？
 
@@ -78,8 +78,8 @@
 
 所以如果想在当前线程保存一个全局值，并且各自线程（包括主线程）互不干扰，使用local类吧。
 
-2.5.2 信息隔离的意义何在
-------------------------
+2. 信息隔离的意义何在
+---------------------
 
 细心的你，一定已经发现了，上面那个例子，即使我们不用\ ``threading.local``\ 来做信息隔离，两个线程\ ``self.getName()``\ 本身就是隔离的，没有任何关系的。因为这两个线程是由一个class实例出的两个不同的实例对象。自然是可以不用做隔离，因为其本身就是隔离的。
 
@@ -143,119 +143,6 @@
    Got 513469 bytes
 
 如果是在这种场景下，要做到线程之间的状态信息的隔离，就肯定要借助\ ``threading.local``\ ，所以\ ``threading.local``\ 的存在是有存在的意义的。其他还有很多场景是必须借助\ ``threading.local``\ 才能实现的，而这些就要靠你们在真正的业务开发中去发现咯。
-
-2.5.3 消息队列的先进先出
-------------------------
-
-首先，要告诉大家的事，消息队列可不是只有\ ``queue.Queue``\ 这一个类，除它之外，还有\ ``queue.LifoQueue``\ 和\ ``queue.PriorityQueue``\ 这两个类。
-
-从名字上，对于他们之间的区别，你大概也能猜到一二吧。
-
-   ``queue.Queue``\ ：先进先出队列 ``queue.LifoQueue``\ ：后进先出队列
-   ``queue.PriorityQueue``\ ：优先级队列
-
-先来看看，我们的老朋友，\ ``queue.Queue``\ 。
-所谓的\ ``先进先出``\ （FIFO，First in First
-Out），就是先进入队列的消息，将优先被消费。
-这和我们日常排队买菜是一样的，先排队的人肯定是先买到菜。
-
-用代码来说明一下
-
-.. code:: python
-
-   import queue
-
-   q = queue.Queue()
-
-   for i in range(5):
-       q.put(i)
-
-   while not q.empty():
-       print q.get()
-
-看看输出，符合我们先进先出的预期。存入队列的顺序是\ ``01234``\ ，被消费的顺序也是\ ``01234``\ 。
-
-::
-
-   0
-   1
-   2
-   3
-   4
-
-再来看看\ ``Queue.LifoQueue``\ ，后进先出，就是后进入消息队列的，将优先被消费。
-
-这和我们羽毛球筒是一样的，最后放进羽毛球筒的球，会被第一个取出使用。
-
-用代码来看下
-
-.. code:: python
-
-   import queue
-
-   q = queue.LifoQueue()
-
-   for i in range(5):
-       q.put(i)
-
-   while not q.empty():
-       print q.get()
-
-来看看输出，符合我们后进后出的预期。存入队列的顺序是\ ``01234``\ ，被消费的顺序也是\ ``43210``\ 。
-
-::
-
-   4
-   3
-   2
-   1
-   0
-
-最后来看看\ ``Queue.PriorityQueue``\ ，优先级队列。
-这和我们日常生活中的会员机制有些类似，办了金卡的人比银卡的服务优先，办了银卡的人比不办卡的人服务优先。
-
-来用代码看一下
-
-.. code:: python
-
-   from queue import PriorityQueue
-
-   # 重新定义一个类，继承自PriorityQueue
-   class MyPriorityQueue(PriorityQueue):
-       def __init__(self):
-           PriorityQueue.__init__(self)
-           self.counter = 0
-
-       def put(self, item, priority):
-           PriorityQueue.put(self, (priority, self.counter, item))
-           self.counter += 1
-
-       def get(self, *args, **kwargs):
-           _, _, item = PriorityQueue.get(self, *args, **kwargs)
-           return item
-
-
-   queue = MyPriorityQueue()
-   queue.put('item2', 2)
-   queue.put('item5', 5)
-   queue.put('item3', 3)
-   queue.put('item4', 4)
-   queue.put('item1', 1)
-
-   while True:
-       print(queue.get())
-
-来看看输出，符合我们的预期。我们存入入队列的顺序是\ ``25341``\ ，对应的优先级也是\ ``25341``\ ，可是被消费的顺序丝毫不受传入顺序的影响，而是根据指定的优先级来消费。
-
-.. code:: python
-
-   item1
-   item2
-   item3
-   item4
-   item5
-
---------------
 
 |image1|
 
