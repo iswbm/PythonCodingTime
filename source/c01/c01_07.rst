@@ -2,20 +2,16 @@
 ==========================
 
 |image0|
-
---------------
-
 Python由于语言的简洁性，让我们以人类思考的方式来写代码，新手更容易上手，老鸟更爱不释手。
 
 要写出
-Pythonic（优雅的、地道的、整洁的）代码，还要平时多观察那些大牛代码，Github
-上有很多非常优秀的源代码值得阅读，比如：requests、flask、tornado，这里小明收集了一些常见的
+Pythonic（优雅的、地道的、整洁的）代码，还要平时多观察那些大牛代码，这里明哥收集了一些比较常见的
 Pythonic 写法，帮助你养成写优秀代码的习惯。
 
 01. 变量交换
 ------------
 
-Bad
+交换两个变量的值，正常都会想利用一个中间临时变量来过渡。
 
 .. code:: python
 
@@ -23,7 +19,7 @@ Bad
    a = b
    b = tmp
 
-Pythonic
+能用一行代码解决的（并且不影响可读性的），决不用三行代码。
 
 .. code:: python
 
@@ -32,7 +28,7 @@ Pythonic
 02. 列表推导
 ------------
 
-Bad
+下面是一个非常简单的 for 循环。
 
 .. code:: python
 
@@ -40,7 +36,8 @@ Bad
    for i in range(10):
        my_list.append(i*2)
 
-Pythonic
+在一个 for
+循环中，如果逻辑比较简单，不如试用一下列表的列表推导式，虽然只有一行代码，但也逻辑清晰。
 
 .. code:: python
 
@@ -49,30 +46,30 @@ Pythonic
 03. 单行表达式
 --------------
 
-虽然列表推导式由于其简洁性及表达性，被广受推崇。
+上面两个案例，都将多行代码用另一种方式写成了一行代码。
 
-但是有许多可以写成单行的表达式，并不是好的做法。
+这并不意味着，代码行数越少，就越 Pythonic 。
 
-Bad
+比如下面这样写，就不推荐。
 
 .. code:: python
 
-   print 'one'; print 'two'
+   print('hello'); print('world')
 
-   if x == 1: print 'one'
+   if x == 1: print('hello,world')
 
    if <complex comparison> and <other complex comparison>:
        # do something
 
-Pythonic
+建议还是按照如下的写法来
 
 .. code:: python
 
-   print 'one'
-   print 'two'
+   print（'hello'）
+   print（'world'）
 
    if x == 1:
-       print 'one'
+       print('hello,world')
 
    cond1 = <complex comparison>
    cond2 = <other complex comparison>
@@ -82,14 +79,14 @@ Pythonic
 04. 带索引遍历
 --------------
 
-Bad
+使用 for 循环时，如何取得对应的索引，初学者习惯使用 range + len 函数
 
 .. code:: python
 
    for i in range(len(my_list)):
        print(i, "-->", my_list[i])
 
-Pythonic
+更好的做法是利用 enumerate 这个内置函数
 
 .. code:: python
 
@@ -99,7 +96,7 @@ Pythonic
 05. 序列解包
 ------------
 
-Pythonic
+使用 ``*`` 可以对一个列表解包
 
 .. code:: python
 
@@ -112,7 +109,7 @@ Pythonic
 06. 字符串拼接
 --------------
 
-Bad
+如果一个列表（或者可迭代对象）中的所有元素都是字符串对象，想要将他们连接起来，通常做法是
 
 .. code:: python
 
@@ -121,7 +118,7 @@ Bad
    for let in letters:
        s += let
 
-Pythonic
+更推荐的做法是使用 join 函数
 
 .. code:: python
 
@@ -131,59 +128,57 @@ Pythonic
 07. 真假判断
 ------------
 
-Bad
+判断一个变量是否为真（假），新手习惯直接使用 ``==`` 与 True、False、None
+进行对比
 
 .. code:: python
 
    if attr == True:
-       print 'True!'
+       print('True!')
 
    if attr == None:
-       print 'attr is None!'
+       print('attr is None!')
 
-Pythonic
+实际上，\ ``""``\ 、\ ``[]``\ 、\ ``{}``
+这些没有任何元素的容器都是假值，可直接使用 ``if not xx`` 来判断。
 
 .. code:: python
 
    if attr:
-       print 'attr is truthy!'
+       print('attr is truthy!')
 
    if not attr:
-       print 'attr is falsey!'
-
-   if attr is None:
-       print 'attr is None!'
+       print('attr is falsey!')
 
 08. 访问字典元素
 ----------------
 
-Bad
+当直接使用 ``[]``
+来访问字典里的元素时，若key不存在，是会抛异常的，所以新会可能会先判断一下是否有这个
+key，有再取之。
 
 .. code:: python
 
    d = {'hello': 'world'}
    if d.has_key('hello'):
-       print d['hello']    # prints 'world'
+       print(d['hello'])    # prints 'world'
    else:
-       print 'default_value'
+       print('default_value')
 
-Pythonic
+更推荐的做法是使用 ``get`` 来取，如果没有该 key 会默认返回
+None（当然你也可以设置默认返回值）
 
 .. code:: python
 
    d = {'hello': 'world'}
 
-   print d.get('hello', 'default_value') # prints 'world'
-   print d.get('thingy', 'default_value') # prints 'default_value'
-
-   # Or:
-   if 'hello' in d:
-       print d['hello']
+   print(d.get('hello', 'default_value')) # prints 'world'
+   print(d.get('thingy', 'default_value')) # prints 'default_value'
 
 09. 操作列表
 ------------
 
-Bad
+下面这段代码，会根据条件过滤过列表中的元素
 
 .. code:: python
 
@@ -193,7 +188,7 @@ Bad
        if i > 4:
            b.append(i)
 
-Pythonic
+实际上可以使用列表推导或者高阶函数 filter 来实现
 
 .. code:: python
 
@@ -202,66 +197,65 @@ Pythonic
    # Or:
    b = filter(lambda x: x > 4, a)
 
-Bad
+除了 filter 之外，还有 map、reduce 这两个函数也很好用
 
 .. code:: python
 
    a = [3, 4, 5]
-   for i in range(len(a)):
-       a[i] += 3
-
-Pythonic
-
-.. code:: python
-
-   a = [3, 4, 5]
-   a = [i + 3 for i in a]
-   # Or:
-   a = map(lambda i: i + 3, a)
+   b = map(lambda i: i + 3, a)
+   # b: [6,7,8]
 
 10. 文件读取
 ------------
 
-Bad
+文件读取是非常常用的操作，在使用完句柄后，是需要手动调用 close
+函数来关闭句柄的
 
 .. code:: python
 
-   f = open('file.txt')
-   a = f.read()
-   print a
-   f.close()
+   fp = open('file.txt')
+   print(fp.read())
+   fp.close()
 
-Pythonic
+如果代码写得太长，即使你知道需要手动关闭句柄，却也会经常会漏掉。因此推荐养成习惯使用
+``with open`` 来读写文件，上下文管理器会自动执行关闭句柄的操作
 
 .. code:: python
 
-   with open('file.txt') as f:
-       for line in f:
-           print line
+   with open('file.txt') as fp:
+       for line in fp.readlines():
+           print(line)
 
 11. 代码续行
 ------------
 
-Bad
+将一个长度较长的字符串放在一行中，是很影响代码可读性的(下面代码可向左滑动)
 
 .. code:: python
 
-   my_very_big_string = """For a long time I used to go to bed early. Sometimes, \
-       when I had put out my candle, my eyes would close so quickly that I had not even \
-       time to say “I’m going to sleep.”"""
+   long_string = 'For a long time I used to go to bed early. Sometimes, when I had put out my candle, my eyes would close so quickly that I had not even time to say “I’m going to sleep.”'
 
-   from some.deep.module.inside.a.module import a_nice_function, another_nice_function, \
-       yet_another_nice_function
-
-Pythonic
+稍等注重代码可读性的人，会使用三个引号 ``\``\ 来续写
 
 .. code:: python
 
-   my_very_big_string = (
+   long_string = 'For a long time I used to go to bed early. ' \
+                 'Sometimes, when I had put out my candle, ' \
+                 'my eyes would close so quickly that I had not even time to say “I’m going to sleep.”'
+
+不过，对我来说，我更喜欢这样子写 使用括号包裹 ``()``
+
+.. code:: python
+
+   long_string = (
        "For a long time I used to go to bed early. Sometimes, "
        "when I had put out my candle, my eyes would close so quickly "
        "that I had not even time to say “I’m going to sleep.”"
    )
+
+导包的时候亦是如此
+
+.. code:: python
 
    from some.deep.module.inside.a.module import (
        a_nice_function, another_nice_function, yet_another_nice_function)
@@ -269,7 +263,7 @@ Pythonic
 12. 显式代码
 ------------
 
-Bad
+有时候出于需要，我们会使用一些特殊的魔法来使代码适应更多的场景不确定性。
 
 .. code:: python
 
@@ -277,7 +271,7 @@ Bad
        x, y = args
        return dict(**locals())
 
-Pythonic
+但若非必要，请不要那么做。无端增加代码的不确定性，会让原先本就动态的语言写出更加动态的代码。
 
 .. code:: python
 
@@ -287,7 +281,7 @@ Pythonic
 13. 使用占位符
 --------------
 
-Pythonic
+对于暂不需要，却又不得不接收的的变量，请使用占位符
 
 .. code:: python
 
@@ -297,21 +291,24 @@ Pythonic
 14. 链式比较
 ------------
 
-Bad
+对于下面这种写法
 
 .. code:: python
 
-   if age > 18 and age < 60:
-       print("young man")
+   score = 85
+   if score > 80 and score < 90:
+       print("良好")
 
-Pythonic
+其实还有更好的写法
 
 .. code:: python
 
-   if 18 < age < 60:
-       print("young man")
+   score = 85
+   if 80 < score < 90:
+       print("良好")
 
-理解了链式比较操作，那么你应该知道为什么下面这行代码输出的结果是 False
+如果你理解了上面的链式比较操作，那么你应该知道为什么下面这行代码输出的结果是
+False
 
 ::
 
@@ -321,26 +318,22 @@ Pythonic
 15. 三目运算
 ------------
 
-这个保留意见。随使用习惯就好。
-
-Bad
+对于简单的判断并赋值
 
 .. code:: python
 
-   if a > 2:
-       b = 2
+   age = 20
+   if age > 18:
+       type = "adult"
    else:
-       b = 1
-   #b = 2
+       type = "teenager"
 
-Pythonic
+其实是可以使用三目运算，一行搞定。
 
 .. code:: python
 
-   a = 3   
-    
-   b = 2 if a > 2 else 1
-   #b = 2
+   age = 20  
+   b = "adult" if age > 18 else "teenager"
 
 参考文档
 --------

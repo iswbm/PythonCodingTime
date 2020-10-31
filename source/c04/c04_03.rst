@@ -478,22 +478,13 @@ Python 3.x ，所以这里的代码也要对应修改。
 
 然后根据指引填写好资料
 
-.. figure:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200704154846176.png
-   :alt: image-20200704154846176
-
-   image-20200704154846176
+|image20|
 
 选择基础版
 
-.. figure:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200704155335679.png
-   :alt: image-20200704155335679
+|image21|
 
-   image-20200704155335679
-
-.. figure:: /Users/MING/Library/Application%20Support/typora-user-images/image-20200704155410411.png
-   :alt: image-20200704155410411
-
-   image-20200704155410411
+|image22|
 
 附录：参考文档
 --------------
@@ -504,7 +495,7 @@ Python 3.x ，所以这里的代码也要对应修改。
 
 --------------
 
-|image20|
+|image23|
 
 .. |image0| image:: http://image.iswbm.com/20200602135014.png
 .. |image1| image:: http://image.iswbm.com/20190511160523.png
@@ -526,5 +517,8 @@ Python 3.x ，所以这里的代码也要对应修改。
 .. |image17| image:: http://image.iswbm.com/20191015225652.png
 .. |image18| image:: http://image.iswbm.com/20191016211012.png
 .. |image19| image:: http://image.iswbm.com/image-20200704154427375.png
-.. |image20| image:: http://image.iswbm.com/20200607174235.png
+.. |image20| image:: http://image.iswbm.com/image-20200704154846176.png
+.. |image21| image:: http://image.iswbm.com/image-20200704155335679.png
+.. |image22| image:: http://image.iswbm.com/image-20200704155410411.png
+.. |image23| image:: http://image.iswbm.com/20200607174235.png
 

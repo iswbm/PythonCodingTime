@@ -35,16 +35,7 @@ Python 版本管理工具。 - ``Vex``\ ：可以在虚拟环境中执行命令�
 由于 virtualenvwrapper 是 virtualenv 的一组扩展，所以如果要使用
 virtualenvwrapper，就必须先安装 virtualenv。
 
-**安装**
-
-.. code:: bash
-
-   $ pip install virtualenv
-
-   # 检查版本
-   $ virtualenv --version
-
-**基本使用**
+**安装**\ \*基本使用*\*
 
 由于virtualenv创建虚拟环境是在当前环境下创建的。所以我们要准备一个专门存放虚拟环境的目录。（以下操作在Linux在完成，windows相对简单，请自行完成，有不明白的请微信与我联系。）
 
