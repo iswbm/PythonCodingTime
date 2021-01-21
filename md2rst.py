@@ -6,18 +6,16 @@ import platform
 
 from git import Repo
 
-
 osName = platform.system()
-repo_path ='.'
-if (osName == 'Windows'):
+repo_path = '.'
+if osName == 'Windows':
     repo_path = 'E:\\MING-Git\\PythonCodingTime'
     blog_path = 'E:\\MING-Git\\PythonCodingTime\\source'
     index_path = 'E:\\MING-Git\\PythonCodingTime\\README.md'
-elif (osName == 'Darwin'):
+elif osName == 'Darwin':
     repo_path = '/Users/MING/Github/PythonCodingTime/'
     blog_path = '/Users/MING/Github/PythonCodingTime/source'
     index_path = '/Users/MING/Github/PythonCodingTime/README.md'
-
 
 repo = Repo.init(path=repo_path)
 if not repo.is_dirty():
@@ -59,19 +57,21 @@ def get_file_info(filename):
         first_line = file.readline().replace("#", "").strip()
     return first_line.split(' ', 1)
 
+
 def make_line(chapter, file):
     page_name, _ = os.path.splitext(file)
     (index, title) = get_file_info(file)
-    url = base_link  + chapter + "/" + page_name + ".html"
+    url = base_link + chapter + "/" + page_name + ".html"
     item_list = ["-", index, "[{}]({})\n".format(title, url)]
     return " ".join(item_list)
 
+
 def render_index_page(index_info):
-    '''
+    """
     生成 readme.md 索引文件，包含所有文件目录
-    '''
+    """
     # 重新排序
-    index_info = sorted(index_info.items(), key=lambda item:item[0], reverse=False)
+    index_info = sorted(index_info.items(), key=lambda item: item[0], reverse=False)
 
     # 写入文件
     with open(index_path, 'w+', encoding="utf-8") as file:
@@ -84,13 +84,14 @@ def render_index_page(index_info):
             file.write("\n")
         file.write(readme_tooter)
 
+
 def convert_md5_to_rst(file):
-    '''
+    """
     转换格式：md5转换成rst
-    '''
+    """
     (filename, extension) = os.path.splitext(file)
     convert_cmd = 'pandoc -V mainfont="SimSun" -f markdown -t rst {md_file} -o {rst_file}'.format(
-        md_file=filename+'.md', rst_file=filename+'.rst'
+        md_file=filename + '.md', rst_file=filename + '.rst'
     )
     # status, output = commands.getstatusoutput(convert_cmd)
     status = subprocess.call(convert_cmd.split(" "))
@@ -102,10 +103,11 @@ def convert_md5_to_rst(file):
     else:
         print(file + '处理失败')
 
+
 def get_all_dir():
-    '''
+    """
     获取所有的目录
-    '''
+    """
     dir_list = []
     file_list = os.listdir(blog_path)
     for item in file_list:
@@ -116,9 +118,9 @@ def get_all_dir():
 
 
 def init_index_info():
-    '''
+    """
     初始化索引
-    '''
+    """
     index_info = {}
     chapter_dir = os.path.join(blog_path, "chapters")
     os.chdir(chapter_dir)
@@ -128,6 +130,7 @@ def init_index_info():
             chapter_name = f.readlines()[1].strip()
         index_info[name.replace("p", "")] = {"name": chapter_name, "contents": []}
     return index_info
+
 
 def main(index_info):
     for folder in get_all_dir():
@@ -143,7 +146,7 @@ def main(index_info):
 
 
 if __name__ == '__main__':
-    index_info = init_index_info()
-    main(index_info)
+    index_info_ = init_index_info()
+    main(index_info_)
     # render_index_page(index_info)
     print("OK")
