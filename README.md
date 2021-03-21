@@ -6,7 +6,7 @@
 
 
 
-目前目录更新内容至 2021/1/26 发的文章。
+目前目录更新内容至 2021/3/20 发的文章。
 
 ## 01. 基础系列
 
@@ -118,6 +118,18 @@
 
 12、[一学就会的 Python 时间转化总结（超全）](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247496446&idx=1&sn=98c71ceefb10fb049ec33c3c1aa2bc6c&chksm=e885921cdff21b0adf359a9b75e5a44033a6cfa86a05cb6ed9e19f07c6b73b6cf97c4e3cd3c1&scene=27#wechat_redirect)
 
+13、[适合新手的 SQLAlchemy 上手教程](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498470&idx=2&sn=d0ee4a5367ad5195bcb8377ea6fc6101&chksm=e8859a04dff21312e8172de1e1986d41b4cf60d653d923954f48e111258a0e6019fc1bb50c1a&scene=27#wechat_redirect)
+
+14、[不服不行，Python 操作 JSON 的门道也这么多~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498220&idx=1&sn=249796b68dadafc9f85600fb03f8b0ae&chksm=e885990edff21018ad853a24abcd4a7c6780cc1740daddcd622bb233cdaa6d4834468284ac96&scene=27#wechat_redirect)
+
+15、[没想到吧？这货比 open 更适合读取文件](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498035&idx=1&sn=66e076de5448b41f252127b1f12a6d7e&chksm=e88599d1dff210c7f6f470b7917cf6b099febc93af25740562b2e2e0ec1ea42968128d26186b&scene=27#wechat_redirect)
+
+16、[Python输出简洁美观的文本化表格](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497768&idx=2&sn=2c49bcdf0264481f75658db0c0dbc54c&chksm=e88598cadff211dc7f140bc8c0d59d88169fde365567c82bcd8f7a8dccb4081072da83d88df0&scene=27#wechat_redirect)
+
+17、[使用 Python 操作 MySQL，这篇文章别错过~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497264&idx=2&sn=b11ff1be91e3297575d9eb9de3465257&chksm=e88596d2dff21fc4e404e0df21d096426df4eae33d6143bd851244cbf00adc3dc9072e9ac1a6&scene=27#wechat_redirect)
+
+18、[一篇文章教你如何用 Python 记录日志](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497049&idx=2&sn=0bb3de6705dd1dcef5352c2ff37991d5&chksm=e88595bbdff21cad17c69ee31955572ff64fed9ea38a8ef0a63472e89c97bc027d89101b8b57&scene=27#wechat_redirect)
+
 ### 1.3 代码案例
 
 1、[15个Pythonic的代码示例](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485036&idx=1&sn=24de1996a63bf25b0c0deec782f688cf&scene=21#wechat_redirect)
@@ -146,6 +158,12 @@
 
 13、[再来 6 个例子教你重构 Python 代码](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247494838&idx=2&sn=eeaf56eeaf9cc72f1340233bcd88b5a7&chksm=e8858c54dff20542f4712be4bd185f2e27e78e09bb77acb97e2be2d4c1329553be4abe25a3e2&scene=27#wechat_redirect)
 
+14、[如何在Python里面实现链式调用？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498592&idx=2&sn=19b2f757b9887a67b0d2cfb8b0cb924e&chksm=e8859b82dff21294793e2b9a4eac9c375509796044d964aeb24c0448f9ec16b4cf3cad0102a9&scene=27#wechat_redirect)
+
+15、[Python 怎么捕获警告？（注意：不是捕获异常）](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498517&idx=1&sn=2540f928893ffecc88a7aa86c330de91&chksm=e8859bf7dff212e1d8425ccff1c2dd043b5d611b291c4a5db729d7416189571d99e2c8d4fdee&scene=27#wechat_redirect)
+
+16、[a is b 为 True，a == b 一定为 True 吗？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497362&idx=1&sn=993ad8a3f86d467db967ea13d52175cc&chksm=e8859670dff21f66c76d2c4e0c61db9adda56824eba878be40e8b4ed8409c6922c8526f818fc&scene=27#wechat_redirect)
+
 ## 02. 进阶系列
 
 ### 2.1 进阶必学
@@ -160,7 +178,7 @@
 
 5、[几个使用装饰器的小技巧](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247484930&idx=1&sn=ed731e32b6e95e7d83d74a544f97142a&scene=21#wechat_redirect)
 
-6、[围观大神是如何用 Python 处理文件的？](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247484905&idx=1&sn=7de0eaab0a4c9f8b44cba01d28ad7254&scene=21#wechat_redirect)
+6、[围观大神是如何用 Python 处理文件的？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497532&idx=1&sn=bed756631d9c94c2eb2d57e0b29f6ab6&chksm=e88597dedff21ec899e90126cbe219be5fc738229bf69a02c490435c4ed57cbe32636198bb44&scene=27#wechat_redirect)
 
 7、[Python进阶开发｜元类编程](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485080&idx=1&sn=45e6d9995e4469d8b7bce2f800ac0f9b&scene=21#wechat_redirect)
 
@@ -244,12 +262,14 @@
 
 47、[Python 从业十年的程序员，写的万字经验分享](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247494942&idx=1&sn=84efbced575838b9b8e169e8c59383b7&chksm=e8858dfcdff204eaf7d251ddf1ea69655bd5eb69da596a4970c845f912c2ac9e3f2f18e5e7b5&scene=27#wechat_redirect)
 
+48、[Python 优化机制 "常量折叠" 是究竟是怎么回事？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497951&idx=2&sn=e54c8412c056e98a34a4ce622915221d&chksm=e885983ddff2112b359c3e2a3856357a3fcccc24e5825fa0a6b972d0f5c64662df363c8d705e&scene=27#wechat_redirect)
+
 
 ### 2.2 包的管理
 
 1、[最全的 pip 使用指南，50% 你可能没用过](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247484827&idx=1&sn=df0923856c820e10baca20c9873b336b&scene=21#wechat_redirect)
 
-2、[全面学习 Python 包：包的构建与分发](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485349&idx=1&sn=8d6da555a2852a14506a491c4cf9a234&scene=21#wechat_redirect)
+2、[花了两天，终于把 Python 的 setup.py 给整明白了](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497217&idx=1&sn=acce69f1f39f2688056fd72a9d7044bf&chksm=e88596e3dff21ff5bf1c0e6f8a26e218458aa079d987810811f2d1ebd3704cdb1f35881229c8&scene=27#wechat_redirect)
 
 3、[深入探讨 Python 的import机制：实现远程导入模块](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247484838&idx=1&sn=1e6fbf5d7546902c6965c60383f7b639&scene=21#wechat_redirect)
 
@@ -281,6 +301,8 @@
 
 17、[解锁装包新姿势，这个场景下 pip 真的难用~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247494820&idx=1&sn=24ceaa11376cbfa5a4d48adc076603db&chksm=e8858c46dff20550d0124ef1bf1e481e14ffcf485e8c49aa77f6f9541f6163850538e4af05f9&scene=27#wechat_redirect)
 
+18、[Python 的 import 居然这么有料](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497490&idx=1&sn=8667466d2dcaee300e990b0d4462e485&chksm=e88597f0dff21ee6787df0506a0c4b354df6b960c2c8dbf349ead6e43557230ae81fa0c661d7&scene=27#wechat_redirect)
+
 ### 2.3 性能优化
 
 1、[Python高效代码实践：性能、内存和可用性](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485161&idx=1&sn=07625f06db330897bc8bfee880ceac18&scene=21#wechat_redirect)
@@ -308,6 +330,8 @@
 12、[程序运行慢？你怕是写的假 Python](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247495235&idx=1&sn=816c6de9e1d23d65fe8c1db458426f68&chksm=e8858ea1dff207b749b64461bb06bf8818883644a4450b6400efda4d7e54d4832162448e9f68&scene=27#wechat_redirect)
 
 13、[超干分享！如何提高Python的运行速度？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247494621&idx=2&sn=00c8aa00a85f8710fada38d35b2c8388&chksm=e8858b3fdff2022991a0024757c64faaed81da830cbbf1fa62b6b218d7271b0837b11922c1f0&scene=27#wechat_redirect)
+
+14、[快亦有道！让 Python 变快的 5个方案](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497409&idx=2&sn=12667ea2e03ecb9db03478b17778ffea&chksm=e8859623dff21f358e56375becfa2ea8873235c2f25a216c36ffbd7a76ce2f13c7cbc269d58d&scene=27#wechat_redirect)
 
 ### 2.4 并发编程
 
@@ -411,6 +435,8 @@
 
 11、[别去送死了，你这样写爬虫，早晚得进去~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247495216&idx=2&sn=648a296205fb3310287d95907d5126ef&chksm=e8858ed2dff207c4c42eb8b224bfe4f68186108642afd8ad7dfddef2628ff2c8f93170dbd948&scene=27#wechat_redirect)
 
+12、[如何在 APP 上爬取数据？多图教程带你实操](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498688&idx=2&sn=4125d37e4f552bb0fd186fd066c07eb6&chksm=e8859b22dff21234d15301eeeaef6f61acce0f9c6020285029e61448357b6703a53a51984d12&scene=27#wechat_redirect)
+
 ### 2.9  实用系列
 
 1、[你抢不到的火车票，我帮你！](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247484972&idx=1&sn=19ac660b61f046c5d419acdae7f394a6&scene=21#wechat_redirect)
@@ -459,6 +485,20 @@
 
 23、[纯Python方案实现中英文全文搜索](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247494874&idx=2&sn=f515724a52613a875869e6aa31ae3e78&chksm=e8858c38dff2052ede9f42592fb59446b68bb3fff84870601c36ee64b864527d25cb9619ccae&scene=27#wechat_redirect)
 
+24、[两行 Python 代码，精准识别一张图片的格式](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497854&idx=2&sn=ca9066d3d7e4f3a0e8dfa18429683b30&chksm=e885989cdff2118a81ecd769cf1443e252d5347a7c76e7d5b2d9c494d0afa2dbda5fbe467897&scene=27#wechat_redirect)
+
+25、[明哥放大招！ 这下看你们还怎么搬运我的文章 ~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498344&idx=1&sn=c3707e3058f444fc42e373155f82c514&chksm=e8859a8adff2139c790e5240dd4339b5cf7493e959eba0ddff5738a2432ff287ba6488b59b18#rd)
+
+26、[如何在手机上配置 Python 环境](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497813&idx=2&sn=b4b09859f7b175e0a60ca7e61131d475&chksm=e88598b7dff211a124f85f82db20a3c7742dce30f7218dcd00ac393cc49ad7754b2401f8e1bd&scene=27#wechat_redirect)
+
+27、[在手机上运行 Python，这款工具比 QPython 还好用~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497684&idx=2&sn=62756dddcd6d8a8e29326d33b1d9e70e&chksm=e8859736dff21e20cf67f8c29e87cdcd2849f04bb9567dc2f5c2dcc6a00cbd8aeeecaace335f&scene=27#wechat_redirect)
+
+28、[情人节表白神器，v2.0 版本](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497554&idx=1&sn=032200c99fcb0841246cb5eed74dc73b&chksm=e88597b0dff21ea6b20f8301a3c2e2dfdf914d49f23155f81113c90b7b6135802f252481a318&scene=27#wechat_redirect)
+
+29、[5个无聊透顶的 Python 程序](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497441&idx=1&sn=a6e7b24b13cee4c7f580587f0303a579&chksm=e8859603dff21f158b9560b6b397b13a26d71ef6c72d47d220c65812f5c0f9d7f15a3c209fe5&scene=27#wechat_redirect)
+
+30、[怎样用Python制作好玩的GIF动图?](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497164&idx=2&sn=cfc237768c53716f4554ea89bbca3294&chksm=e885952edff21c381eb898a203bed86a1b96eba8e1cabecabf0c896489c5fc3a0022b0be8527&scene=27#wechat_redirect)
+
 
 ## 03. 数据分析
 
@@ -471,6 +511,14 @@
 3、[50题 讲透 matplotlib ：从入门到精通](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247486026&idx=1&sn=7b333759709c30fe442732b7a107e3c1&chksm=e8866aa8dff1e3be37f5169ac53bbcf71a76514e99fbbcbe458ec15aa1204d988ad44d689eb3&scene=27#wechat_redirect)
 
 4、[实用的 Pandas 技巧，估计 80% 的人不知道](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247496209&idx=2&sn=8f8db418261326c981cd27f57cc3fc5b&chksm=e88592f3dff21be543cc302a715ea39ae8a1adacb7342f45d5bcf2eca9c2b398b05955408597&scene=27#wechat_redirect)
+
+5、[用Python 操作 Excel，这篇文章别错过了!（超全总结）](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498065&idx=1&sn=5f2bb43d9d960c2a7330353c4ac926a8&chksm=e88599b3dff210a528c3e6aac2ea1708b7aa5e3d58c49d12d63492271396ccebee8f0a4a6eae&scene=27#wechat_redirect)
+
+6、[别找了，这是 Pandas 最详细教程了](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497846&idx=2&sn=9483146777ac86567e3933e6d5475e5f&chksm=e8859894dff2118208b517d0d9e753fbf8b1bb83995d36cf04694825972b6a82e195d706852d&scene=27#wechat_redirect)
+
+7、[再见 for 循环！pandas 提速 315 倍~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497472&idx=2&sn=df1089640d2beb3607518d0ea9f3e709&chksm=e88597e2dff21ef45a7c3b25e102bc665368f628d1b76decfbeeb18a4cd1a2605737c4c8fb21&scene=27#wechat_redirect)
+
+8、[Python 操作 Excel 库 xlwings 常用操作详解](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497164&idx=1&sn=281a25369e47ecba1951d4e92f01d5d0&chksm=e885952edff21c38f633910f3c2aac54f8e379707e70d9a70a1cdde5bfd4b7fde145315ea54f&scene=27#wechat_redirect)
 
 ### 3.2 数据可视化
 
@@ -520,6 +568,10 @@
 
 23、[吹爆了这个可视化神器，上手后直接开大~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247495182&idx=1&sn=d8e913a808796e6fa793d58df26d209f&chksm=e8858eecdff207fac878d4b27894b5a2c69812d6803262e430d2244443a2c23e38d91a697556&scene=27#wechat_redirect)
 
+24、[Pygal，可导出矢量图的Python可视化利器](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497951&idx=1&sn=7cce71d5c34fdeb89509e97817a5f0af&chksm=e885983ddff2112bc76bd9a4dbe14f407c5fe8b2ea0010b353e760b59c4476603f1d82a26eac&scene=27#wechat_redirect)
+
+25、[这可能是 Python里最强的绘制地图神器](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497813&idx=1&sn=c5034f6ecf03fe3ccb6771b39faa8230&chksm=e88598b7dff211a11145c44db19f50df244ab3c2b740e1d51ead51b25d7fa9643660ca5cc29a&scene=27#wechat_redirect)
+
 ### 3.3 工具使用
 
 1、[ 整理了 50个 IPython 的实用技巧](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485613&idx=1&sn=70f89faf2573b3025edc73f525f22a0a&chksm=e886684fdff1e159509d30fd0a24854da39fb5a6ae55e0ed6e40b7971d3219968006f80aad7b#rd)
@@ -541,6 +593,8 @@
 9、[8 个 Jupyter Notebook Tips，隐藏得太深了](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247494062&idx=2&sn=860539d7eae82c53791cd7a2eb005536&chksm=e885894cdff2005ae9169c7dfabe3760c19eded392ec18805f1d763ad8dce77c21150698178a&scene=27#wechat_redirect)
 
 10、[PyCaret：几行代码轻松搞定从数据处理到模型部署](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247495402&idx=2&sn=bb0664c6ac7995dfad4f4a1268e2e374&chksm=e8858e08dff2071e121d81fa564671ba4425814687fd2df3aa32898ffb3bdbe72d303bc9d66a&scene=27#wechat_redirect)
+
+11、[这个 Jupyter 插件，用起来就像 Excel 一样简单](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498500&idx=2&sn=672a1da1a9957c84a19802842df5b5d9&chksm=e8859be6dff212f0754dd0a3820241be3af34d72e6dc32e7d83d1f87198bd549ccfd66c55029&scene=27#wechat_redirect)
 
 
 ## 04. 开发工具
@@ -579,7 +633,9 @@
 
 17、[15 款Python编辑器的优缺点，别再问我“选什么编辑器”啦！](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247492759&idx=1&sn=6c6e6606fd9da9d2b951bda9e8a1b223&chksm=e8858475dff20d638f4b731a44dd48fe01a68f16480bcaed2516fc7d3d56c61cc6c62afccb9d&scene=27#wechat_redirect)
 
+18、[用了三年的 pdb，没想到还能这么调试](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498550&idx=1&sn=d2d0ba8987509a67ba40c19f7dcfd719&chksm=e8859bd4dff212c2f4d6f07c42ae81af046aeb8611c3c869143ed7e4ebac03fd011ddc8b88e6&scene=27#wechat_redirect)
 
+19、[调试 Python 代码，可别再用 Print了！](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497083&idx=1&sn=47fa23a2104c2e75ad71c56b6d89b84d&chksm=e8859599dff21c8f0f832e83f3e5220bef96fbba7514863e4e8fcd178818258f024744902806&scene=27#wechat_redirect)
 
 ### 4.1 PyCharm
 
@@ -609,6 +665,8 @@
 
 13、[装上后这 14 个插件后，PyCharm 真的是无敌的存在](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247495720&idx=1&sn=3233659fa9c975df9e95402a8c68b405&chksm=e88590cadff219dcd82f22d1d4684dda09a2db3469a0826ffe7605388fc37fb3a2c7cca49e0f&scene=27#wechat_redirect)
 
+14、[卸载 PyCharm！这才是 Python 小白的最理想的 IDE](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497739&idx=1&sn=2e4795f4ddc784cfa796fb59b3d0e707&chksm=e88598e9dff211ffbe2cea5f574c8ee6117f4e7cd5d4869a804422139360421e4803df270f19&scene=27#wechat_redirect)
+
 ### 4.2 VSCode
 
 1、[这 21 个VSCode 快捷键，能让你的代码飞起来](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247484893&idx=1&sn=421b544115efad388314ccd027761b40&scene=21#wechat_redirect)
@@ -632,6 +690,10 @@
 10、[有了这个VSCode神器，从此爱上调试代码](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497025&idx=2&sn=91734e86eb03b0ad8b299fa05fb89896&chksm=e88595a3dff21cb5638a874e6ea75aefa8539eb832e239d8103fd66584d1276edbe1d616c4fb&scene=27#wechat_redirect)
 
 11、[用 VS Code 写 Python，这几个插件是必装的](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247496552&idx=1&sn=ab85fc16d53f5d6bbcb0c030cae51402&chksm=e885938adff21a9ca75d485aab0980cb5cb7363d4eadaf0e1867dbb955c7296d1e16f7c7c367&scene=27#wechat_redirect)
+
+12、[出炉了！ 2021 年将火爆的 10款 VSCode 扩展插件](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497928&idx=1&sn=0ec6994930f1cf8bd3a1ed8d8404eb18&chksm=e885982adff2113c94ba7c0ddc989c174daeedd159359d9289b48006e0c6b1d0aa8b87980ef1&scene=27#wechat_redirect)
+
+13、[神器 VS Code，超详细Python配置使用指南](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497249&idx=1&sn=00a13cb6099f487ce3f88f27923d6a3b&chksm=e88596c3dff21fd504d3e469a0eddc00f8febdeb95b7b8c7483dfad7ef84382d2cc1f3b16f2c&scene=27#wechat_redirect)
 
 ### 4.3 好用的库
 
@@ -705,6 +767,10 @@
 
 35、[Python 算法模板库，Pythonista 找工作利器](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247495227&idx=2&sn=c7899ab854da814888ef853023d8b74c&chksm=e8858ed9dff207cf571d1819770952180f9c882b63e62025e819fe25538fe4f3a3148d73c228&scene=27#wechat_redirect)
 
+36、[终于把所有的Python库，都整理出来啦！](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498689&idx=1&sn=66743481223ff48bcb5c8ed257b95754&chksm=e8859b23dff212350492116b1cdc3527f969fbb62cac8309ef91932e02842f35b5f7f4d08661&scene=27#wechat_redirect)
+
+37、[Python 超级强大的模式匹配工具—Pampy](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498439&idx=1&sn=1613fd0fb2154bb3a9b5caefb1225b41&chksm=e8859a25dff21333272d75f14badb8491295351b0b3542db7cc1506a7462359ed297ce228710&scene=27#wechat_redirect)
+
 ## 05. 网络基础
 
 1、[点亮你的 HTTPS？原来这么简单！！](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247492265&idx=1&sn=46b095516bf3c0ebfc367ab64f8fd42c&chksm=e885824bdff20b5db2861a411a07653135ffbafaa1e772588bcf86cf9ad54433a0ff492355ad&scene=27#wechat_redirect)
@@ -753,6 +819,8 @@
 
 8、[不想装系统？这8个网站让你在线体验 Linux](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247486303&idx=1&sn=fc6c9b73fcb12c5c0c8257e223c8f657&chksm=e8866bbddff1e2ab5edf8b3d4783bcc65975c0385c140d1c954e7d4949e334b9d6ed92ae98a2&scene=27#wechat_redirect)
 
+9、[比虚拟机更轻量，比 Docker 和 WSL 更简单的 Linux 环境](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498054&idx=2&sn=1aa6a118f214f3488c1188cdb2471834&chksm=e88599a4dff210b273db8dffda010bca3f1eb15219b7c268ea941bf1d036cec3fed8fac9f3db&scene=27#wechat_redirect)
+
 ### 6.2 版本管理
 
 1、[关于 Git 和 GitHub，你所不知道的十件事](https://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485232&idx=2&sn=c3314e79af9029bdd76ae187f7b4eb19&scene=21#wechat_redirect)
@@ -778,6 +846,8 @@
 11、[连 Git 都玩不转，还写什么代码？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247493645&idx=2&sn=d9408f63f9afccd28482e41efe2ba11e&chksm=e88588efdff201f9d3cc513591ad0c7b791616e8ca10a7b091038094b8b52eb1f2585c22e799#rd)
 
 12、[5 个 Git 工作流，改善你的开发流程](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247494114&idx=2&sn=f75412a52b9c36e268decf013fffa6de&chksm=e8858900dff2001686dc51e3227a9565f7e97033539a1f2af3d9f38aad87b55a8b5d2ea6d405&scene=27#wechat_redirect)
+
+13、[提高国内访问 GitHub 的速度的 9 种方案](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498432&idx=2&sn=d7f398a5598e9dd6636961387a64860f&chksm=e8859a22dff21334695d1495ead5adaf9a8102d1ba85bdfe0cd8b51fc6a8db08742bec95819e&scene=27#wechat_redirect)
 
 
 ### 6.3 数据库
@@ -835,6 +905,10 @@
 9、[真神器！不用手写一行代码就能做网站~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247494412&idx=1&sn=6789d2aa73a05671c219db659d5ad739&chksm=e8858beedff202f880c3255210e7880bb7c56ad378a1f7b9b82f4e2f24126e4ef8ca7c435103&scene=27#wechat_redirect)
 
 10、[用 Python 使用 Google Colab？岂止是炫酷](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247494533&idx=2&sn=58e2fd5fc63936d89853c5d550293d00&chksm=e8858b67dff2027179fd492d796d537bad57caf830e0aa3fbd51061cd91bd7c7f3f2ce56eb80&scene=27#wechat_redirect)
+
+11、[自从用了这个神器，我再也不想写代码了...](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498473&idx=1&sn=448af801d90b29a69cb79b4089868f97&chksm=e8859a0bdff2131dd9fa0d6923fb8ae1de9e7311691a7558499cf995c0e4be8fd036031ee1c7&scene=27#wechat_redirect)
+
+12、[牛逼至极！用这个神器看代码太舒服了](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497577&idx=1&sn=d0061deb47fa2c6441eb7dd11272af5d&chksm=e885978bdff21e9d4bc0a8747d9b2f6b04288095c7a019cfe1214a4ae382de657076313387bf&scene=27#wechat_redirect)
 
 ## 07. 代码优化
 
@@ -1030,6 +1104,8 @@
 
 9、[Python这么慢，为啥大公司还在用？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247489132&idx=1&sn=55dda8a6a10429b3a7016393bc058493&chksm=e886768edff1ff981d67b2ecfe52ebf5b8dbc0085289e6bd3f8a6c6631ee6fc4a633fb6bc4b8&scene=27#wechat_redirect)
 
+10、[一个中科大差生的 8年 程序员工作总结](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497523&idx=1&sn=725c1167873927aea519f690f3c106ec&chksm=e88597d1dff21ec709eeba54a9fb35318afcac3cb3b235e0ab831fd40f9917dc2acb40d1bbb3&scene=27#wechat_redirect)
+
 ## 11. 通用文章
 
 1、[假如有人把支付宝存储服务器炸了，你的存款会怎样？](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247485171&idx=1&sn=d6e2e24f68f3c6eb35e880f32e12d4ab&chksm=e8866611dff1ef0791cf5aae05697592cb804010aecd783a8592f7a90a387645fe4b47a376ea&scene=27#wechat_redirect)
@@ -1043,6 +1119,10 @@
 5、[让许多 Python “老玩家”心寒的 10 大槽点](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497032&idx=1&sn=0347edefbb9fc47d13c58379130aa327&chksm=e88595aadff21cbc3a6c8ad6752a75ce708244ed517fd9a3230efa2eb783927033977ba26b82&scene=27#wechat_redirect)
 
 6、[别瞎学了，这几门语言要被淘汰了！](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247496522&idx=1&sn=1aaa60b8295378cfcbeaaaf528b13df0&chksm=e88593a8dff21abe290ee23821ed9cebb2aa68148548852319363b4de4663d0a5ab646451e5e&scene=27#wechat_redirect)
+
+7、[是的，Python是慢，但我不在乎](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247497752&idx=1&sn=0d207936a803b414b04d13bb167124ba&chksm=e88598fadff211ecd77676506b5f039c0fbd8bd32eb5f68df2c41a277526304dc89f3d6f7dad&scene=27#wechat_redirect)
+
+8、[当今全球最厉害的14位程序员，说没听过简直离谱~](http://mp.weixin.qq.com/s?__biz=MzIzMzMzOTI3Nw==&mid=2247498702&idx=1&sn=8b5a405de0649de1bf52235956840af7&chksm=e8859b2cdff2123a2f6168fb846781f2ba678ac4b70fd01513c2547b14b4d1a053ca0b67e5f6&scene=27#wechat_redirect)
 
 ## 12. 明哥的作品
 
