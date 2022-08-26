@@ -58,7 +58,7 @@ Shebang通常出现在类Unix系统的脚本中第一行，作为前两个字符
 
 找到一个就直接执行，上面我们的 python 路径是在 ``/usr/bin/python``
 里，在 ``PATH`` 列表里倒数第二个目录下，所以当我在 ``/usr/local/sbin``
-下创建一个名字也为 python 的可执行文件时，就会执行 ``/usr/bin/python``
+下创建一个名字也为 python 的可执行文件时，就会执行 ``/usr/local/sbin/python``
 了。
 
 具体演示过程，你可以看下面。
