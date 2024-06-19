@@ -28,7 +28,7 @@ import os
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['chinese_search','sphinx.ext.mathjax', 'sphinx_sitemap']
+extensions = ['chinese_search','sphinx.ext.mathjax', 'sphinx_sitemap', 'sphinx_multiversion']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -127,28 +127,25 @@ _exts = "../exts"
 sys.path.append(os.path.abspath(_exts))
 
 html_js_files = [
-    'js/readmore.js',
+   'js/readmore.js',
     'js/baidutongji.js',
 ]
 
-# General configuration.
-with open("/home/docs/checkouts/readthedocs.org/user_builds/pythoncodingtime/envs/latest/lib/python3.7/site-packages/sphinxcontrib/disqus.py", "r") as file:
-    content = file.read()
-    content=content.replace("sphinx.application", "sphinx.errors")
-
-with open("/home/docs/checkouts/readthedocs.org/user_builds/pythoncodingtime/envs/latest/lib/python3.7/site-packages/sphinxcontrib/disqus.py", "w") as file:
-    file.write(content)
 
 author = '王炳明'
-copyright = '2020, Python编程时光'
+copyright = '2020-2024, Python编程时光'
 exclude_patterns = ['_build']
-extensions = ['sphinxcontrib.disqus']  # Add to this list.
 master_doc = 'index'
 project = 'Python编程时光'
-release = '1.0'
-version = '1.0'
 
 # Options for extensions.
-disqus_shortname = 'iswbm'  # Add this line to conf.py.
-html_baseurl = 'http://pythontime.iswbm.com'
+html_baseurl = 'https://magic.iswbm.com'
 html_extra_path = ["robots.txt"]
+
+html_sidebars = {
+    '**': [
+        'versioning.html',
+    ],
+}
+smv_latest_version = 'master'
+sitemap_url_scheme = "{link}"
